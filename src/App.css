@@ -1,0 +1,40 @@
+.App {
+  padding-bottom: 40px;
+}
+
+.AppHeaderTitle {
+  margin-top: 40px;
+  color: #fff;
+  text-align: center;
+}
+
+h2.AppHeaderTitle {
+  font-size: 18px;
+}
+
+.read-the-docs {
+  color: #ccc;
+  text-align: center;
+}
+
+ul.Tools {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  text-align: center;
+}
+ul.Tools li {
+  display: inline-block;
+}
+ul.Tools li a .logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
+}
+ul.Tools li a .logo:hover {
+  filter: drop-shadow(0 0 2em #ffffffaa);
+}
+ul.Tools li a .logo.vanilla:hover {
+  filter: drop-shadow(0 0 2em #3178c6aa);
+}

@@ -1,0 +1,44 @@
+.AppExampleContent {
+  display: flex;
+  flex: 1;
+  flex-direction: row;
+  min-height: 50px;
+  width: 100%;
+}
+
+.AppExampleComponentPreview {
+  display: flex;
+  flex-direction: column;
+  background: #252a31;
+  flex-grow: 1;
+  flex-shrink: 1;
+  padding: 20px;
+  align-items: center;
+  justify-content: center;
+}
+.AppExampleComponentProperties {
+  display: flex;
+  background-color: #383e47;
+  flex-direction: column;
+  max-width: 300px;
+  padding: 20px;
+}
+
+.Example {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.ExampleMenu {
+  min-width: 240px;
+}
+
+.ExampleTable {
+  min-width: 100%;
+}
+
+.ExampleSchemaForm label {
+  margin: 0;
+  padding: 0;
+}

@@ -1,0 +1,16 @@
+html,
+body {
+  background: #172742;
+}
+
+.bp4-button {
+  user-select: none;
+}
+.bp4-collapse {
+  height: 0;
+  transition: min-height 0.5s ease-in-out;
+}
+.bp4-collapse-open {
+  height: auto;
+  transition: min-height 0.5s ease-in-out;
+}
