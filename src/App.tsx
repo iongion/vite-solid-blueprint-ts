@@ -283,7 +283,7 @@ const App: Component = () => {
         render={(props) => {
           return (
             <NonIdealState
-              icon={IconName.SEARCH}
+              icon={props.icon || IconName.SEARCH}
               iconSize={props.iconSize || NonIdealStateIconSize.SMALL}
               title={props.title || t("No search results")}
               description={
