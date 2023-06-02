@@ -12,9 +12,12 @@ export const NavbarDivider: Component<NavbarDividerProps> = (userProps) => {
     // props list
     "children",
     "class",
+    "disabled",
   ]);
   return (
-    <div class={classNames(Classes.NAVBAR_DIVIDER, props.class)} {...htmlProps}>
+    <div class={classNames(Classes.NAVBAR_DIVIDER,
+      // from props
+      { [Classes.DISABLED]: props.disabled }, props.class)} {...htmlProps}>
       {props.children}
     </div>
   );
@@ -29,9 +32,18 @@ export const NavbarHeading: Component<NavbarHeadingProps> = (userProps) => {
     // props list
     "children",
     "class",
+    "disabled",
   ]);
   return (
-    <div class={classNames(Classes.NAVBAR_HEADING, props.class)} {...htmlProps}>
+    <div
+      class={classNames(
+        Classes.NAVBAR_HEADING,
+        // from props
+        { [Classes.DISABLED]: props.disabled },
+        props.class
+      )}
+      {...htmlProps}
+    >
       {props.children}
     </div>
   );
@@ -43,23 +55,28 @@ interface INavbarGroupProps extends Props {
   align?: Alignment;
 }
 export type NavbarGroupProps = INavbarGroupProps;
+export const NavbarGroupPropsDefaults: NavbarGroupProps = {
+  align: Alignment.LEFT,
+};
 export const NavbarGroup: Component<NavbarGroupProps> = (userProps) => {
-  const [props, htmlProps] = splitProps(
-    mergeProps(
-      {
-        align: Alignment.LEFT,
-      },
-      userProps
-    ),
-    [
-      // props list
-      "align",
-      "children",
-      "class",
-    ]
-  );
+  const [props, htmlProps] = splitProps(mergeProps(NavbarGroupPropsDefaults, userProps), [
+    // props list
+    "align",
+    "children",
+    "class",
+    "disabled",
+  ]);
   return (
-    <div class={classNames(Classes.NAVBAR_GROUP, Classes.alignmentClass(props.align), props.class)} {...htmlProps}>
+    <div
+      class={classNames(
+        Classes.NAVBAR_GROUP,
+        Classes.alignmentClass(props.align),
+        // from props
+        { [Classes.DISABLED]: props.disabled },
+        props.class
+      )}
+      {...htmlProps}
+    >
       {props.children}
     </div>
   );
@@ -80,9 +97,18 @@ export function Navbar(userProps: NavbarProps = {}) {
     "fixedToTop",
     "children",
     "class",
+    "disabled",
   ]);
   return (
-    <div class={classNames(Classes.NAVBAR, { [Classes.FIXED_TOP]: props.fixedToTop }, props.class)} {...htmlProps}>
+    <div
+      class={classNames(
+        Classes.NAVBAR,
+        // from props
+        { [Classes.FIXED_TOP]: props.fixedToTop, [Classes.DISABLED]: props.disabled },
+        props.class
+      )}
+      {...htmlProps}
+    >
       {props.children}
     </div>
   );
