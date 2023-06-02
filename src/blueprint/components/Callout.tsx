@@ -3,7 +3,7 @@ import { mergeProps, splitProps, createMemo } from "solid-js";
 import type { Component } from "solid-js";
 
 import { DISPLAYNAME_PREFIX, Classes, Intent, MaybeElement, IntentProps, Props, intentClass } from "@blueprint/core";
-import { IconName } from "@blueprint/icons";
+import { Icon, IconName } from "@blueprint/icons";
 
 interface ICalloutProps extends IntentProps, Props {
   icon?: IconName | MaybeElement;
@@ -28,7 +28,7 @@ export const Callout: Component<CalloutProps> = (userProps: CalloutProps) => {
     "class",
   ]);
   const createIcon = createMemo(() => {
-    return local.icon ? <Icon icon={local.icon} /> : undefined;
+    return local.icon ? typeof local.icon === "string" ? <Icon icon={local.icon as IconName} /> : undefined : undefined;
   });
   return (
     <div
