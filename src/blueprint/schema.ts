@@ -48,6 +48,26 @@ export const ElevationPropsSchema = y.object({
     .optional(),
 });
 
+const IconSchema = y
+  .string<IconName>()
+  .oneOf([
+    // enum
+    IconName.REFRESH,
+    IconName.DUPLICATE,
+    IconName.DATABASE,
+    IconName.FUNCTION,
+    IconName.COG,
+    IconName.INFO_SIGN,
+    IconName.CARET_DOWN,
+    IconName.CARET_UP,
+    IconName.CARET_RIGHT,
+  ])
+  .optional();
+
+export const IconPropsSchema = y.object({
+  intent: IconSchema,
+});
+
 const IntentSchema = y
   .string<Intent>()
   .oneOf([
@@ -59,6 +79,7 @@ const IntentSchema = y
     Intent.WARNING,
   ])
   .optional();
+
 export const IntentPropsSchema = y.object({
   intent: IntentSchema,
 });
@@ -70,7 +91,7 @@ export const InteractivePropsSchema = y.object({
 // Components
 export const CalloutPropsSchema: y.ObjectSchema<Omit<CalloutProps, "children">> = y
   .object({
-    icon: y.string().optional().nullable().default(IconName.SEARCH),
+    icon: IconSchema.default(IconName.SEARCH as any),
     title: y.string().optional().nullable(),
     intent: IntentSchema.default(Intent.SUCCESS),
   })
@@ -139,9 +160,8 @@ export const NonIdealStatePropsSchema: y.ObjectSchema<Omit<NonIdealStateProps, "
       ])
       .default(NonIdealStatePropsDefaults.layout),
     iconSize: y.number().default(NonIdealStatePropsDefaults.iconSize),
-    icon: y.string<IconName>().optional().nullable(),
+    icon: IconSchema.default(IconName.SEARCH as any),
   })
-  .concat(IntentPropsSchema)
   .concat(PropsSchema);
 
 export const ProgressBarPropsSchema: y.ObjectSchema<Omit<ProgressBarProps, "children">> = y

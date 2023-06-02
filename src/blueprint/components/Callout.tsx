@@ -18,8 +18,7 @@ export const CalloutPropsDefaults: CalloutProps = {
 };
 
 export const Callout: Component<CalloutProps> = (userProps: CalloutProps) => {
-  const props = mergeProps(CalloutPropsDefaults, userProps);
-  const [local, htmlProps] = splitProps(props, [
+  const [props, htmlProps] = splitProps(mergeProps(CalloutPropsDefaults, userProps), [
     // props list
     "intent",
     "icon",
@@ -28,23 +27,23 @@ export const Callout: Component<CalloutProps> = (userProps: CalloutProps) => {
     "class",
   ]);
   const createIcon = createMemo(() => {
-    return local.icon ? typeof local.icon === "string" ? <Icon icon={local.icon as IconName} /> : undefined : undefined;
+    return props.icon ? typeof props.icon === "string" ? <Icon icon={props.icon as IconName} /> : undefined : undefined;
   });
   return (
     <div
       class={classNames(
         Classes.CALLOUT,
         {
-          [Classes.CALLOUT_ICON]: !!local.icon,
+          [Classes.CALLOUT_ICON]: !!props.icon,
         },
-        intentClass(local.intent),
+        intentClass(props.intent),
         // user
-        local.class
+        props.class
       )}
       {...htmlProps}
     >
       {createIcon()}
-      {local.children}
+      {props.children}
     </div>
   );
 };

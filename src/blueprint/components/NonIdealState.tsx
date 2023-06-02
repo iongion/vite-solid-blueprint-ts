@@ -1,5 +1,5 @@
 import classNames from "classnames";
-import { mergeProps, splitProps } from "solid-js";
+import { mergeProps, splitProps, createMemo } from "solid-js";
 import type { Component } from "solid-js";
 
 import { H4 } from "@blueprint/components";
@@ -37,33 +37,33 @@ export const NonIdealState: Component<NonIdealStateProps> = (userProps: NonIdeal
     "children",
     "class",
   ]);
-  const renderVisual = () => {
-    const renderIcon = () => {
-      return props.icon ? <Icon icon={props.icon} /> : undefined;
-    };
+  const renderIcon = createMemo(() => {
+    return props.icon ? <Icon icon={props.icon} /> : undefined;
+  });
+  const renderVisual = createMemo(() => {
     return (
       <div class={Classes.NON_IDEAL_STATE_VISUAL} style={`font-size: ${props.iconSize}px; line-height: ${props.iconSize}px`}>
         {renderIcon()}
       </div>
     );
-  };
-  const renderText = () => {
-    const renderTitle = () => {
-      return props.title ? <H4>{props.title}</H4> : undefined;
-    };
-    const renderDescription = () => {
-      return props.description ? <div>{props.description}</div> : undefined;
-    };
+  });
+  const renderTitle = createMemo(() => {
+    return props.title ? <H4>{props.title}</H4> : undefined;
+  });
+  const renderDescription = createMemo(() => {
+    return props.description ? <div>{props.description}</div> : undefined;
+  });
+  const renderText = createMemo(() => {
     return (
       <div class={Classes.NON_IDEAL_STATE_TEXT}>
         {renderTitle()}
         {renderDescription()}
       </div>
     );
-  };
-  const renderAction = () => {
+  });
+  const renderAction = createMemo(() => {
     return props.action ? props.action : undefined;
-  };
+  });
   return (
     <div class={classNames(Classes.NON_IDEAL_STATE, props.class)} {...htmlProps}>
       {renderVisual()}
