@@ -1,5 +1,5 @@
 import classNames from "classnames";
-import { mergeProps, splitProps } from "solid-js";
+import { mergeProps, splitProps, createMemo } from "solid-js";
 import type { Component } from "solid-js";
 
 import { DISPLAYNAME_PREFIX, Classes, Intent, MaybeElement, IntentProps, Props, intentClass } from "@blueprint/core";
@@ -11,14 +11,14 @@ interface ICalloutProps extends IntentProps, Props {
 }
 
 export type CalloutProps = ICalloutProps;
+export const CalloutPropsDefaults: CalloutProps = {
+  icon: IconName.SEARCH,
+  title: undefined,
+  intent: Intent.NONE,
+};
 
 export const Callout: Component<CalloutProps> = (userProps: CalloutProps) => {
-  const props = mergeProps(
-    {
-      intent: Intent.NONE,
-    },
-    userProps
-  );
+  const props = mergeProps(CalloutPropsDefaults, userProps);
   const [local, htmlProps] = splitProps(props, [
     // props list
     "intent",
@@ -27,6 +27,9 @@ export const Callout: Component<CalloutProps> = (userProps: CalloutProps) => {
     "children",
     "class",
   ]);
+  const createIcon = createMemo(() => {
+    return local.icon ? <Icon icon={local.icon} /> : undefined;
+  });
   return (
     <div
       class={classNames(
@@ -40,6 +43,7 @@ export const Callout: Component<CalloutProps> = (userProps: CalloutProps) => {
       )}
       {...htmlProps}
     >
+      {createIcon()}
       {local.children}
     </div>
   );

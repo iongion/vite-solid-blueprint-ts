@@ -7,15 +7,13 @@ import { DISPLAYNAME_PREFIX, Classes, Elevation, Props, ElevationProps, Interact
 interface ICardProps extends ElevationProps, InteractiveProps, Props {}
 
 export type CardProps = ICardProps;
+export const CardPropsDefaults: CardProps = {
+  elevation: Elevation.ONE,
+  interactive: true,
+};
 
 export const Card: Component<CardProps> = (userProps: CardProps) => {
-  const props = mergeProps(
-    {
-      elevation: Elevation.ONE,
-      interactive: true,
-    },
-    userProps
-  );
+  const props = mergeProps(CardPropsDefaults, userProps);
   const [local, htmlProps] = splitProps(props, [
     // props list
     "elevation",

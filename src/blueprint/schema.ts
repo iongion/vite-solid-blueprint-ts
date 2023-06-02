@@ -4,6 +4,8 @@ import * as y from "yup";
 import { IconName } from "@blueprint/icons";
 import { Props, Alignment, Elevation, Intent, Layout } from "@blueprint/core";
 import {
+  CalloutProps,
+  CardProps,
   CollapseProps,
   MenuProps,
   NavbarProps,
@@ -46,18 +48,19 @@ export const ElevationPropsSchema = y.object({
     .optional(),
 });
 
+const IntentSchema = y
+  .string<Intent>()
+  .oneOf([
+    // enum
+    Intent.NONE,
+    Intent.PRIMARY,
+    Intent.SUCCESS,
+    Intent.DANGER,
+    Intent.WARNING,
+  ])
+  .optional();
 export const IntentPropsSchema = y.object({
-  intent: y
-    .string<Intent>()
-    .oneOf([
-      // enum
-      Intent.NONE,
-      Intent.PRIMARY,
-      Intent.SUCCESS,
-      Intent.DANGER,
-      Intent.WARNING,
-    ])
-    .optional(),
+  intent: IntentSchema,
 });
 
 export const InteractivePropsSchema = y.object({
@@ -65,6 +68,21 @@ export const InteractivePropsSchema = y.object({
 });
 
 // Components
+export const CalloutPropsSchema: y.ObjectSchema<Omit<CalloutProps, "children">> = y
+  .object({
+    icon: y.string().optional().nullable().default(IconName.SEARCH),
+    title: y.string().optional().nullable(),
+    intent: IntentSchema.default(Intent.SUCCESS),
+  })
+  .concat(PropsSchema);
+
+export const CardPropsSchema: y.ObjectSchema<Omit<CardProps, "children">> = y
+  .object({
+    interactive: y.boolean().optional().nullable(),
+  })
+  .concat(ElevationPropsSchema)
+  .concat(PropsSchema);
+
 export const CollapsePropsSchema: y.ObjectSchema<Omit<CollapseProps, "children">> = y
   .object({
     isOpen: y.boolean().optional().nullable(),
@@ -95,7 +113,7 @@ export const HTMLTablePropsSchema: y.ObjectSchema<Omit<HTMLTableProps, "children
   .concat(PropsSchema);
 
 export const LayoutPropsSchema = y.object({
-  intent: y
+  layout: y
     .string<Layout>()
     .oneOf([
       // enum

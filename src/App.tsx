@@ -2,11 +2,13 @@ import { createSignal } from "solid-js";
 import type { Component } from "solid-js";
 import { useI18n } from "solid-i18n";
 
-import { Alignment, Classes, Elevation, Intent, Props } from "@blueprint/core";
+import { Alignment, Classes, Intent, Props } from "@blueprint/core";
 import {
   Button,
   ButtonGroup,
+  CalloutProps,
   Callout,
+  CardProps,
   Card,
   Code,
   CodeBlock,
@@ -38,6 +40,8 @@ import {
   Spinner,
 } from "@blueprint/components";
 import {
+  CalloutPropsSchema,
+  CardPropsSchema,
   CollapsePropsSchema,
   MenuPropsSchema,
   NavbarPropsSchema,
@@ -127,27 +131,37 @@ const App: Component = () => {
           <Button intent={Intent.NONE} icon={IconName.COG} text="None" />
         </ButtonGroup>
       </Example>
-      <Example example="Callout">
-        <Callout intent={Intent.SUCCESS} icon={IconName.REFRESH} title="Visually important content">
-          Long-form information about the important content. This text is styled as <br />
-          <a href="#">Running text</a>, so it may contain things like headers, links, lists, <Code>code</Code> etc.
-        </Callout>
-      </Example>
-      <Example example="Card">
-        <Card elevation={Elevation.FOUR} interactive>
-          We build products that make people better at their most important work.
-        </Card>
-      </Example>
+
+      <Example<CalloutProps>
+        example="Callout"
+        schema={CalloutPropsSchema}
+        render={(props) => {
+          return (
+            <Callout {...props}>
+              Long-form information about the important content. This text is styled as <br />
+              <a href="#">Running text</a>, so it may contain things like headers, links, lists, <Code>code</Code> etc.
+            </Callout>
+          );
+        }}
+      />
+
+      <Example<CardProps>
+        example="Card"
+        schema={CardPropsSchema}
+        render={(props) => {
+          return <Card {...props}>We build products that make people better at their most important work.</Card>;
+        }}
+      />
+
       <Example example="Code">
         <Code>{codeLines.join("\n")}</Code>
       </Example>
       <Example example="CodeBlock">
         <CodeBlock>{codeLines.join("\n")}</CodeBlock>
       </Example>
-      <Example example="Collapse"></Example>
 
       <Example<CollapseProps>
-        example="ProgressBar"
+        example="Collapse"
         schema={CollapsePropsSchema}
         render={(props, setProperty) => {
           return (
