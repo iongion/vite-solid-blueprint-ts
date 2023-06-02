@@ -10,6 +10,7 @@ import {
   Card,
   Code,
   CodeBlock,
+  CollapseProps,
   Collapse,
   // HTML Elements
   H1,
@@ -36,7 +37,15 @@ import {
   SpinnerProps,
   Spinner,
 } from "@blueprint/components";
-import { MenuPropsSchema, NavbarPropsSchema, HTMLTablePropsSchema, NonIdealStatePropsSchema, ProgressBarPropsSchema, SpinnerPropsSchema } from "@blueprint/schema";
+import {
+  CollapsePropsSchema,
+  MenuPropsSchema,
+  NavbarPropsSchema,
+  HTMLTablePropsSchema,
+  NonIdealStatePropsSchema,
+  ProgressBarPropsSchema,
+  SpinnerPropsSchema,
+} from "@blueprint/schema";
 import { IconName } from "@blueprint/icons";
 import { Example } from "./Example";
 
@@ -92,7 +101,6 @@ const codeLines = [
 const App: Component = () => {
   const { t } = useI18n();
   const [count, setCount] = createSignal(0);
-  const [collapsed, setCollapsed] = createSignal(true);
   // const [spinnerSize, setSpinnerSize] = createSignal(50);
   // const [spinnerIntent, setSpinnerIntent] = createSignal(Intent.NONE);
   return (
@@ -136,21 +144,30 @@ const App: Component = () => {
       <Example example="CodeBlock">
         <CodeBlock>{codeLines.join("\n")}</CodeBlock>
       </Example>
-      <Example example="Collapse">
-        <Button
-          text="Toggle collapse"
-          rightIcon={collapsed() ? IconName.CARET_UP : IconName.CARET_DOWN}
-          onClick={() => {
-            setCollapsed((collapsed) => !collapsed);
-          }}
-        />
-        <Collapse isOpen={collapsed()}>
-          <Card>
-            <CodeBlock>{codeLines.join("\n")}</CodeBlock>
-          </Card>
-        </Collapse>
-      </Example>
+      <Example example="Collapse"></Example>
 
+      <Example<CollapseProps>
+        example="ProgressBar"
+        schema={CollapsePropsSchema}
+        render={(props, setProperty) => {
+          return (
+            <>
+              <Button
+                text="Toggle collapse"
+                rightIcon={props.isOpen ? IconName.CARET_UP : IconName.CARET_DOWN}
+                onClick={() => {
+                  setProperty("isOpen", !props.isOpen);
+                }}
+              />
+              <Collapse isOpen={props.isOpen}>
+                <Card>
+                  <CodeBlock>{codeLines.join("\n")}</CodeBlock>
+                </Card>
+              </Collapse>
+            </>
+          );
+        }}
+      />
       <Example<MenuProps>
         example="Menu"
         schema={MenuPropsSchema}

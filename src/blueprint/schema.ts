@@ -3,7 +3,17 @@ import * as y from "yup";
 
 import { IconName } from "@blueprint/icons";
 import { Props, Alignment, Elevation, Intent, Layout } from "@blueprint/core";
-import { MenuProps, NavbarProps, HTMLTableProps, NonIdealStatePropsDefaults, NonIdealStateProps, SpinnerProps, SpinnerSize, ProgressBarProps } from "@blueprint/components";
+import {
+  CollapseProps,
+  MenuProps,
+  NavbarProps,
+  HTMLTableProps,
+  NonIdealStatePropsDefaults,
+  NonIdealStateProps,
+  SpinnerProps,
+  SpinnerSize,
+  ProgressBarProps,
+} from "@blueprint/components";
 
 export const PropsSchema: y.ObjectSchema<Omit<Props, "children">> = y.object({
   disabled: y.boolean().optional().nullable(),
@@ -53,6 +63,14 @@ export const IntentPropsSchema = y.object({
 export const InteractivePropsSchema = y.object({
   interactive: y.boolean().optional().nullable(),
 });
+
+// Components
+export const CollapsePropsSchema: y.ObjectSchema<Omit<CollapseProps, "children">> = y
+  .object({
+    isOpen: y.boolean().optional().nullable(),
+    keepChildrenMounted: y.boolean().optional().nullable(),
+  })
+  .concat(PropsSchema);
 
 export const MenuPropsSchema: y.ObjectSchema<Omit<MenuProps, "children">> = y
   .object({
