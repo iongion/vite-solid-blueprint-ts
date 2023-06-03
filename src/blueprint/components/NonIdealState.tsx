@@ -39,7 +39,7 @@ export const NonIdealState: Component<NonIdealStateProps> = (userProps: NonIdeal
     "disabled",
   ]);
   const renderIcon = createMemo(() => {
-    return props.icon ? <Icon icon={props.icon} /> : undefined;
+    return props.icon ? <Icon icon={props.icon} size={props.iconSize} /> : undefined;
   });
   const renderVisual = createMemo(() => {
     return (
