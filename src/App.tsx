@@ -110,9 +110,9 @@ const App: Component = () => {
             <AnchorButton
               {...props}
               intent={props.intent || Intent.PRIMARY}
-              icon={props.icon}
+              icon={props.icon || IconName.DUPLICATE}
               rightIcon={props.rightIcon || IconName.INFO_SIGN}
-              text={props.text || t("Go to RUL")}
+              text={props.text || t("Duplicate this page")}
             />
           );
         }}
