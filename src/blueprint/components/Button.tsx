@@ -14,6 +14,7 @@ import {
 } from "@blueprint/core";
 import { ActionProps } from "@blueprint/tools/actions";
 import { Icon, IconName } from "@blueprint/icons";
+import { Spinner } from "./Spinner";
 
 export type ButtonType = "submit" | "reset" | "button";
 
@@ -77,6 +78,7 @@ export const Button: Component<ButtonProps> = (userProps) => {
         [Classes.SMALL]: !!props.small,
         [Classes.LARGE]: !!props.large,
         [Classes.FILL]: !!props.fill,
+        [Classes.LOADING]: !!props.loading,
         [Classes.DISABLED]: !!props.disabled,
       },
       alignmentClass(props.alignText),
@@ -92,6 +94,18 @@ export const Button: Component<ButtonProps> = (userProps) => {
     return icon ? <Icon icon={icon} /> : undefined;
   };
   const createChildren = children(() => props.children);
+  const createContent = createMemo(() => {
+    return props.loading ? (
+      <Spinner />
+    ) : (
+      <>
+        {createIcon(props.icon)}
+        {createText()}
+        {createChildren()}
+        {createIcon(props.rightIcon)}
+      </>
+    );
+  });
   return (
     <button
       // props
@@ -100,10 +114,7 @@ export const Button: Component<ButtonProps> = (userProps) => {
       class={createClassList()}
       {...htmlProps}
     >
-      {createIcon(props.icon)}
-      {createText()}
-      {createChildren()}
-      {createIcon(props.rightIcon)}
+      {createContent()}
     </button>
   );
 };
