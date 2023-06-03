@@ -11,3 +11,4 @@ export * as SHARE from "./images/share.svg?component-solid";
 export * as SEARCH from "./images/search.svg?component-solid";
 export * as HAND_RIGHT from "./images/hand-right.svg?component-solid";
 export * as STACKBLITZ from "./images/stackblitz.svg?component-solid";
+export * as GITHUB from "./images/github.svg?component-solid";

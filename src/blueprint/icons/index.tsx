@@ -28,6 +28,7 @@ export enum IconName {
   SEARCH = "search",
   SHARE = "share",
   STACKBLITZ = "stackblitz",
+  GITHUB = "github",
 }
 
 export const Icons = {
@@ -44,6 +45,7 @@ export const Icons = {
   [IconName.SHARE]: Images.SHARE.default,
   [IconName.HAND_RIGHT]: Images.HAND_RIGHT.default,
   [IconName.STACKBLITZ]: Images.STACKBLITZ.default,
+  [IconName.GITHUB]: Images.GITHUB.default,
 };
 
 const icons = Object.keys(Icons);
