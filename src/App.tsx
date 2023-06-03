@@ -2,9 +2,11 @@ import { createSignal } from "solid-js";
 import type { Component } from "solid-js";
 import { useI18n } from "solid-i18n";
 
-import { Alignment, Classes, Intent, Props } from "@blueprint/core";
+import { Alignment, Classes, Intent } from "@blueprint/core";
 import {
+  ButtonProps,
   Button,
+  ButtonGroupProps,
   ButtonGroup,
   CalloutProps,
   Callout,
@@ -40,6 +42,8 @@ import {
   Spinner,
 } from "@blueprint/components";
 import {
+  ButtonPropsSchema,
+  ButtonGroupPropsSchema,
   CalloutPropsSchema,
   CardPropsSchema,
   CollapsePropsSchema,
@@ -52,47 +56,9 @@ import {
 } from "@blueprint/schema";
 import { IconName } from "@blueprint/icons";
 import { Example } from "./Example";
+import { ToolsList } from "./ToolsList";
 
 import "./App.css";
-
-interface ITool {
-  tool: string;
-  logo: string;
-  url: string;
-}
-
-const Tools: ITool[] = [
-  { tool: "Solid", logo: "/images/solid.svg", url: "https://solidjs.org" },
-  {
-    tool: "BlueprintJS",
-    logo: "/images/blueprint.svg",
-    url: "https://blueprintjs.com",
-  },
-  {
-    tool: "Typescript",
-    logo: "/images/typescript.svg",
-    url: "https://www.typescriptlang.org",
-  },
-  { tool: "Vite", logo: "/images/vite.svg", url: "https://vitejs.dev" },
-];
-interface ToolsListProps extends Props {
-  tools: ITool[];
-}
-const ToolsList: Component<ToolsListProps> = ({ tools }) => {
-  return (
-    <UL class="Tools">
-      {tools.map((tool) => {
-        return (
-          <li>
-            <a href={tool.url} target="_blank">
-              <img class="logo" src={tool.logo} alt={tool.tool} />
-            </a>
-          </li>
-        );
-      })}
-    </UL>
-  );
-};
 
 const codeLines = [
   "[11:53:30] Finished 'typescript-bundle-blueprint' after 769 ms",
@@ -109,28 +75,43 @@ const App: Component = () => {
   // const [spinnerIntent, setSpinnerIntent] = createSignal(Intent.NONE);
   return (
     <div class={`App ${Classes.DARK}`}>
-      <ToolsList tools={Tools} />
+      <ToolsList />
       <h1 class="AppHeaderTitle">Solid + BlueprintJS + Typescript + Vite</h1>
       <p class="read-the-docs">Click on the logos to learn more</p>
-      <Example example="Button">
-        <Button
-          intent={Intent.SUCCESS}
-          icon={IconName.HAND_RIGHT}
-          rightIcon={IconName.PLUS}
-          text={t("Count is {count}", { count: count() })}
-          onClick={() => {
-            setCount((count) => count + 1);
-          }}
-        />
-      </Example>
-      <Example example="ButtonGroup">
-        <ButtonGroup>
-          <Button intent={Intent.DANGER} icon={IconName.DATABASE} text="Danger" />
-          <Button intent={Intent.SUCCESS} icon={IconName.FUNCTION} text="Success" />
-          <Button intent={Intent.PRIMARY} icon={IconName.REFRESH} text="Primary" />
-          <Button intent={Intent.NONE} icon={IconName.COG} text="None" />
-        </ButtonGroup>
-      </Example>
+
+      <Example<ButtonProps>
+        example="Button"
+        schema={ButtonPropsSchema}
+        render={(props) => {
+          return (
+            <Button
+              {...props}
+              intent={props.intent || Intent.SUCCESS}
+              icon={props.icon}
+              rightIcon={props.rightIcon}
+              text={props.text || t("Count is {count}", { count: count() })}
+              onClick={() => {
+                setCount((count) => count + 1);
+              }}
+            />
+          );
+        }}
+      />
+
+      <Example<ButtonGroupProps>
+        example="ButtonGroup"
+        schema={ButtonGroupPropsSchema}
+        render={(props) => {
+          return (
+            <ButtonGroup {...props}>
+              <Button intent={Intent.DANGER} icon={IconName.DATABASE} text="Danger" />
+              <Button intent={Intent.SUCCESS} icon={IconName.FUNCTION} text="Success" />
+              <Button intent={Intent.PRIMARY} icon={IconName.REFRESH} text="Primary" />
+              <Button intent={Intent.NONE} icon={IconName.COG} text="None" />
+            </ButtonGroup>
+          );
+        }}
+      />
 
       <Example<CalloutProps>
         example="Callout"
@@ -156,6 +137,7 @@ const App: Component = () => {
       <Example example="Code">
         <Code>{codeLines.join("\n")}</Code>
       </Example>
+
       <Example example="CodeBlock">
         <CodeBlock>{codeLines.join("\n")}</CodeBlock>
       </Example>
@@ -182,6 +164,7 @@ const App: Component = () => {
           );
         }}
       />
+
       <Example<MenuProps>
         example="Menu"
         schema={MenuPropsSchema}
@@ -243,6 +226,7 @@ const App: Component = () => {
           <li>Item 4</li>
         </OL>
       </Example>
+
       <Example<HTMLTableProps>
         example="HTMLTable"
         schema={HTMLTablePropsSchema}
@@ -277,6 +261,7 @@ const App: Component = () => {
           );
         }}
       />
+
       <Example<NonIdealStateProps>
         example="NonIdealState"
         schema={NonIdealStatePropsSchema}
@@ -298,6 +283,7 @@ const App: Component = () => {
           );
         }}
       />
+
       <Example<ProgressBarProps>
         example="ProgressBar"
         schema={ProgressBarPropsSchema}
@@ -305,6 +291,7 @@ const App: Component = () => {
           return <ProgressBar {...props} />;
         }}
       />
+      
       <Example<SpinnerProps>
         example="Spinner"
         schema={SpinnerPropsSchema}

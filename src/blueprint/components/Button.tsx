@@ -15,7 +15,7 @@ import {
 import { ActionProps } from "@blueprint/tools/actions";
 import { Icon, IconName } from "@blueprint/icons";
 
-export type ButtonType = "submit" | "reset" | "button" | undefined;
+export type ButtonType = "submit" | "reset" | "button";
 
 interface IButtonProps<E extends HTMLButtonElement | HTMLAnchorElement | HTMLElement = HTMLButtonElement> extends ActionProps<E>, IntentProps, Props {
   icon?: IconName | null;

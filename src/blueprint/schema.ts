@@ -4,6 +4,9 @@ import * as y from "yup";
 import { IconName } from "@blueprint/icons";
 import { Props, Alignment, Elevation, Intent, Layout } from "@blueprint/core";
 import {
+  ButtonType,
+  ButtonProps,
+  ButtonGroupProps,
   CalloutProps,
   CardProps,
   CollapseProps,
@@ -22,30 +25,44 @@ export const PropsSchema: y.ObjectSchema<Omit<Props, "children">> = y.object({
   class: y.string().optional().nullable(),
 });
 
+export const AlignmentSchema = y
+  .string<Alignment>()
+  .oneOf([
+    // enum
+    Alignment.LEFT,
+    Alignment.CENTER,
+    Alignment.RIGHT,
+  ])
+  .optional();
 export const AlignmentPropsSchema = y.object({
-  alignment: y
-    .string<Alignment>()
-    .oneOf([
-      // enum
-      Alignment.LEFT,
-      Alignment.CENTER,
-      Alignment.RIGHT,
-    ])
-    .optional(),
+  alignment: AlignmentSchema,
 });
 
+export const ElevationSchema = y
+  .number<Elevation>()
+  .oneOf([
+    // enum
+    Elevation.ZERO,
+    Elevation.ONE,
+    Elevation.TWO,
+    Elevation.THREE,
+    Elevation.FOUR,
+  ])
+  .optional();
 export const ElevationPropsSchema = y.object({
-  elevation: y
-    .number<Elevation>()
-    .oneOf([
-      // enum
-      Elevation.ZERO,
-      Elevation.ONE,
-      Elevation.TWO,
-      Elevation.THREE,
-      Elevation.FOUR,
-    ])
-    .optional(),
+  elevation: ElevationSchema,
+});
+
+export const LayouSchema = y
+  .string<Layout>()
+  .oneOf([
+    // enum
+    Layout.VERTICAL,
+    Layout.HORIZONTAL,
+  ])
+  .optional();
+export const LayoutPropsSchema = y.object({
+  layout: LayouSchema,
 });
 
 const IconSchema = y
@@ -79,7 +96,6 @@ const IntentSchema = y
     Intent.WARNING,
   ])
   .optional();
-
 export const IntentPropsSchema = y.object({
   intent: IntentSchema,
 });
@@ -89,6 +105,42 @@ export const InteractivePropsSchema = y.object({
 });
 
 // Components
+export const ButtonPropsSchema: y.ObjectSchema<Omit<ButtonProps, "children" | "onClick">> = y
+  .object({
+    icon: IconSchema.default(IconName.HAND_RIGHT as any),
+    rightIcon: IconSchema.default(IconName.PLUS as any),
+    alignText: AlignmentSchema.default(Alignment.LEFT),
+    active: y.boolean().default(false),
+    fill: y.boolean().default(false),
+    large: y.boolean().default(false),
+    loading: y.boolean().default(false),
+    minimal: y.boolean().default(false),
+    outlined: y.boolean().default(false),
+    small: y.boolean().default(false),
+    text: y.string().optional().nullable(),
+    type: y
+      .string<ButtonType>()
+      .oneOf([
+        // enum
+        "button",
+        "reset",
+        "submit",
+      ])
+      .default("button"),
+    intent: IntentSchema.default(Intent.SUCCESS),
+  })
+  .concat(PropsSchema);
+
+export const ButtonGroupPropsSchema: y.ObjectSchema<Omit<ButtonGroupProps, "children">> = y
+  .object({
+    alignText: AlignmentSchema.default(Alignment.LEFT),
+    fill: y.boolean().default(false),
+    minimal: y.boolean().default(false),
+    large: y.boolean().default(false),
+    vertical: y.boolean().default(false),
+  })
+  .concat(PropsSchema);
+
 export const CalloutPropsSchema: y.ObjectSchema<Omit<CalloutProps, "children">> = y
   .object({
     icon: IconSchema.default(IconName.SEARCH as any),
@@ -133,32 +185,12 @@ export const HTMLTablePropsSchema: y.ObjectSchema<Omit<HTMLTableProps, "children
   .concat(InteractivePropsSchema)
   .concat(PropsSchema);
 
-export const LayoutPropsSchema = y.object({
-  layout: y
-    .string<Layout>()
-    .oneOf([
-      // enum
-      Layout.VERTICAL,
-      Layout.HORIZONTAL,
-    ])
-    .optional(),
-});
-
 export const NonIdealStatePropsSchema: y.ObjectSchema<Omit<NonIdealStateProps, "children" | "action">> = y
   .object({
     title: y.string().optional().nullable(),
     text: y.string().optional().nullable(),
     description: y.string().optional().nullable(),
-    layout: y
-      .string<Layout>()
-      .optional()
-      .nullable()
-      .oneOf([
-        // enum
-        Layout.HORIZONTAL,
-        Layout.VERTICAL,
-      ])
-      .default(NonIdealStatePropsDefaults.layout),
+    layout: LayouSchema.default(NonIdealStatePropsDefaults.layout),
     iconSize: y.number().default(NonIdealStatePropsDefaults.iconSize),
     icon: IconSchema.default(IconName.SEARCH as any),
   })
