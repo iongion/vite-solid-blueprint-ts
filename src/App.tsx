@@ -86,7 +86,7 @@ const App: Component = () => {
         <br />
         <ButtonGroup minimal>
           <AnchorButton icon={IconName.STACKBLITZ} href="https://stackblitz.com/edit/solidjs-templates-gfcotu" target="_blank" text={t("Edit source")} />
-          <AnchorButton rightIcon={IconName.GITHUB} href="https://stackblitz.com/edit/solidjs-templates-gfcotu" target="_blank" text={t("Git")} />
+          <AnchorButton rightIcon={IconName.GITHUB} href="https://github.com/iongion/vite-solid-blueprint-ts" target="_blank" text={t("Git")} />
         </ButtonGroup>
       </p>
       <Example<ButtonProps>
