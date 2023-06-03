@@ -1,5 +1,5 @@
 import classNames from "classnames";
-import { mergeProps, splitProps, children } from "solid-js";
+import { mergeProps, splitProps, children, createMemo } from "solid-js";
 import type { Component } from "solid-js";
 
 import { DISPLAYNAME_PREFIX, Classes, MaybeElement, Props } from "@blueprint/core";
@@ -15,16 +15,20 @@ export const MenuDivider: Component<MenuDividerProps> = (userProps) => {
     "class",
     "disabled",
   ]);
+  const createClassList = createMemo(() =>
+    classNames(
+      Classes.MENU_DIVIDER,
+      {
+        // from props
+        [Classes.DISABLED]: !!props.disabled,
+      },
+      props.class
+    )
+  );
   return (
     <div
-      class={classNames(
-        Classes.MENU_DIVIDER,
-        {
-          // from props
-          [Classes.DISABLED]: !!props.disabled,
-        },
-        props.class
-      )}
+      // props
+      class={createClassList()}
       {...htmlProps}
     ></div>
   );
@@ -58,27 +62,33 @@ export const MenuItem: Component<MenuItemProps> = (userProps) => {
   const createText = () => {
     return props.text ? <div class={classNames(Classes.FILL, Classes.TEXT_OVERFLOW_ELLIPSIS)}>{props.text}</div> : undefined;
   };
+  const createListItemClassList = createMemo(() =>
+    classNames(
+      {
+        // from props
+        [Classes.DISABLED]: !!props.disabled,
+      },
+      props.class
+    )
+  );
+  const createAnchorClassList = createMemo(() =>
+    classNames(
+      Classes.MENU_ITEM,
+      {
+        // from props
+        [Classes.DISABLED]: !!props.disabled,
+      },
+      props.class
+    )
+  );
   const createChildren = children(() => props.children);
   return (
-    <li
-      class={
-        classNames({
-          // from props
-          [Classes.DISABLED]: !!props.disabled,
-        }) || undefined
-      }
-    >
+    <li class={createListItemClassList()}>
       <a
+        // props
         role="menuitem"
         tabindex="0"
-        class={classNames(
-          Classes.MENU_ITEM,
-          {
-            // from props
-            [Classes.DISABLED]: !!props.disabled,
-          },
-          props.class
-        )}
+        class={createAnchorClassList()}
         onClick={props.disabled ? undefined : props.onClick}
         {...htmlProps}
       >
@@ -108,19 +118,23 @@ export function Menu(userProps: MenuProps = {}) {
     "class",
     "disabled",
   ]);
+  const createClassList = createMemo(() =>
+    classNames(
+      Classes.MENU,
+      Classes.POPOVER_DISMISS,
+      {
+        // from props
+        [Classes.FIXED_TOP]: !!props.fixedToTop,
+        [Classes.DISABLED]: !!props.disabled,
+      },
+      props.class
+    )
+  );
   const createChildren = children(() => props.children);
   return (
     <div
-      class={classNames(
-        Classes.MENU,
-        Classes.POPOVER_DISMISS,
-        {
-          // from props
-          [Classes.FIXED_TOP]: !!props.fixedToTop,
-          [Classes.DISABLED]: !!props.disabled,
-        },
-        props.class
-      )}
+      // props
+      class={createClassList()}
       {...htmlProps}
     >
       {createChildren()}

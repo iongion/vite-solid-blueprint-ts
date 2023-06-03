@@ -1,5 +1,5 @@
 import classNames from "classnames";
-import { mergeProps, splitProps, children } from "solid-js";
+import { mergeProps, splitProps, children, createMemo } from "solid-js";
 import { Dynamic } from "solid-js/web";
 import type { Component } from "solid-js";
 
@@ -11,18 +11,22 @@ export type HeadingProps = IHeadingProps;
 export function createHeading(tagName: string) {
   const Heading: Component<HeadingProps> = (userProps) => {
     const [props, htmlProps] = splitProps(userProps, ["children", "class", "disabled"]);
+    const createClassList = createMemo(() =>
+      classNames(
+        Classes.HEADING,
+        {
+          // from props
+          [Classes.DISABLED]: !!props.disabled,
+        },
+        props.class
+      )
+    );
     const createChildren = children(() => props.children);
     return (
       <Dynamic
+        // props
         component={tagName}
-        class={classNames(
-          Classes.HEADING,
-          {
-            // from props
-            [Classes.DISABLED]: !!props.disabled,
-          },
-          props.class
-        )}
+        class={createClassList()}
         {...htmlProps}
       >
         {createChildren()}
@@ -39,18 +43,22 @@ export type ListProps = IListProps;
 export function createList(tagName: string) {
   const List: Component<ListProps> = (userProps) => {
     const [props, htmlProps] = splitProps(userProps, ["children", "class", "disabled"]);
+    const createClassList = createMemo(() =>
+      classNames(
+        Classes.LIST,
+        {
+          // from props
+          [Classes.DISABLED]: !!props.disabled,
+        },
+        props.class
+      )
+    );
     const createChildren = children(() => props.children);
     return (
       <Dynamic
+        // props
         component={tagName}
-        class={classNames(
-          Classes.LIST,
-          {
-            // from props
-            [Classes.DISABLED]: !!props.disabled,
-          },
-          props.class
-        )}
+        class={createClassList()}
         {...htmlProps}
       >
         {createChildren()}
@@ -71,17 +79,21 @@ export const H6 = createHeading("h6");
 export type BlockquoteProps = Props;
 export const Blockquote: Component<BlockquoteProps> = (userProps: BlockquoteProps) => {
   const [props, htmlProps] = splitProps(userProps, ["children", "class", "disabled"]);
+  const createClassList = createMemo(() =>
+    classNames(
+      Classes.BLOCKQUOTE,
+      {
+        // from props
+        [Classes.DISABLED]: !!props.disabled,
+      },
+      props.class
+    )
+  );
   const createChildren = children(() => props.children);
   return (
     <blockquote
-      class={classNames(
-        Classes.BLOCKQUOTE,
-        {
-          // from props
-          [Classes.DISABLED]: !!props.disabled,
-        },
-        props.class
-      )}
+      // props
+      class={createClassList()}
       {...htmlProps}
     >
       {createChildren()}
@@ -97,17 +109,21 @@ interface ILabelProps extends Props {
 export type LabelProps = ILabelProps;
 export const Label: Component<LabelProps> = (userProps: LabelProps) => {
   const [props, htmlProps] = splitProps(userProps, ["for", "htmlFor", "children", "class", "disabled"]);
+  const createClassList = createMemo(() =>
+    classNames(
+      Classes.LABEL,
+      {
+        // from props
+        [Classes.DISABLED]: !!props.disabled,
+      },
+      props.class
+    )
+  );
   const createChildren = children(() => props.children);
   return (
     <label
-      class={classNames(
-        Classes.LABEL,
-        {
-          // from props
-          [Classes.DISABLED]: !!props.disabled,
-        },
-        props.class
-      )}
+      // props
+      class={createClassList()}
       for={props.for || props.htmlFor}
       {...htmlProps}
     >
@@ -149,23 +165,27 @@ export const HTMLTable: Component<HTMLTableProps> = (userProps: HTMLTableProps) 
     "class",
     "disabled",
   ]);
+  const createClassList = createMemo(() =>
+    classNames(
+      // default
+      Classes.HTML_TABLE,
+      {
+        // from props
+        [Classes.HTML_TABLE_CONDENSED]: props.compact || props.condensed,
+        [Classes.HTML_TABLE_BORDERED]: !!props.bordered,
+        [Classes.HTML_TABLE_STRIPED]: !!props.striped,
+        [Classes.INTERACTIVE]: !!props.interactive,
+        [Classes.DISABLED]: !!props.disabled,
+      },
+      // user
+      props.class
+    )
+  );
   const createChildren = children(() => props.children);
   return (
     <table
-      class={classNames(
-        // default
-        Classes.HTML_TABLE,
-        {
-          // from props
-          [Classes.HTML_TABLE_CONDENSED]: props.compact || props.condensed,
-          [Classes.HTML_TABLE_BORDERED]: !!props.bordered,
-          [Classes.HTML_TABLE_STRIPED]: !!props.striped,
-          [Classes.INTERACTIVE]: !!props.interactive,
-          [Classes.DISABLED]: !!props.disabled,
-        },
-        // user
-        props.class
-      )}
+      // props
+      class={createClassList()}
       {...htmlProps}
     >
       {createChildren()}

@@ -1,5 +1,5 @@
 import classNames from "classnames";
-import { mergeProps, splitProps, children } from "solid-js";
+import { mergeProps, splitProps, children, createMemo } from "solid-js";
 import type { Component } from "solid-js";
 
 import { DISPLAYNAME_PREFIX, Classes, Alignment, Props } from "@blueprint/core";
@@ -12,16 +12,20 @@ export const NavbarDivider: Component<NavbarDividerProps> = (userProps) => {
     "class",
     "disabled",
   ]);
+  const createClassList = createMemo(() =>
+    classNames(
+      Classes.NAVBAR_DIVIDER,
+      {
+        // from props
+        [Classes.DISABLED]: !!props.disabled,
+      },
+      props.class
+    )
+  );
   return (
     <div
-      class={classNames(
-        Classes.NAVBAR_DIVIDER,
-        {
-          // from props
-          [Classes.DISABLED]: !!props.disabled,
-        },
-        props.class
-      )}
+      // props
+      class={createClassList()}
       {...htmlProps}
     ></div>
   );
@@ -38,17 +42,21 @@ export const NavbarHeading: Component<NavbarHeadingProps> = (userProps) => {
     "class",
     "disabled",
   ]);
+  const createClassList = createMemo(() =>
+    classNames(
+      Classes.NAVBAR_HEADING,
+      {
+        // from props
+        [Classes.DISABLED]: !!props.disabled,
+      },
+      props.class
+    )
+  );
   const createChildren = children(() => props.children);
   return (
     <div
-      class={classNames(
-        Classes.NAVBAR_HEADING,
-        {
-          // from props
-          [Classes.DISABLED]: !!props.disabled,
-        },
-        props.class
-      )}
+      // props
+      class={createClassList()}
       {...htmlProps}
     >
       {createChildren()}
@@ -73,18 +81,22 @@ export const NavbarGroup: Component<NavbarGroupProps> = (userProps) => {
     "class",
     "disabled",
   ]);
+  const createClassList = createMemo(() =>
+    classNames(
+      Classes.NAVBAR_GROUP,
+      Classes.alignmentClass(props.align),
+      {
+        // from props
+        [Classes.DISABLED]: !!props.disabled,
+      },
+      props.class
+    )
+  );
   const createChildren = children(() => props.children);
   return (
     <div
-      class={classNames(
-        Classes.NAVBAR_GROUP,
-        Classes.alignmentClass(props.align),
-        {
-          // from props
-          [Classes.DISABLED]: !!props.disabled,
-        },
-        props.class
-      )}
+      // props
+      class={createClassList()}
       {...htmlProps}
     >
       {createChildren()}
@@ -109,18 +121,22 @@ export function Navbar(userProps: NavbarProps = {}) {
     "class",
     "disabled",
   ]);
+  const createClassList = createMemo(() =>
+    classNames(
+      Classes.NAVBAR,
+      {
+        // from props
+        [Classes.FIXED_TOP]: !!props.fixedToTop,
+        [Classes.DISABLED]: !!props.disabled,
+      },
+      props.class
+    )
+  );
   const createChildren = children(() => props.children);
   return (
     <div
-      class={classNames(
-        Classes.NAVBAR,
-        {
-          // from props
-          [Classes.FIXED_TOP]: !!props.fixedToTop,
-          [Classes.DISABLED]: !!props.disabled,
-        },
-        props.class
-      )}
+      // props
+      class={createClassList()}
       {...htmlProps}
     >
       {createChildren()}

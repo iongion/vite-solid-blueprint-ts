@@ -65,17 +65,21 @@ export const NonIdealState: Component<NonIdealStateProps> = (userProps: NonIdeal
   const renderAction = createMemo(() => {
     return props.action ? props.action : undefined;
   });
+  const createClassList = createMemo(() =>
+    classNames(
+      Classes.NON_IDEAL_STATE,
+      {
+        // from props
+        [Classes.DISABLED]: !!props.disabled,
+      },
+      props.class
+    )
+  );
   const createChildren = children(() => props.children);
   return (
     <div
-      class={classNames(
-        Classes.NON_IDEAL_STATE,
-        {
-          // from props
-          [Classes.DISABLED]: !!props.disabled,
-        },
-        props.class
-      )}
+      // props
+      class={createClassList()}
       {...htmlProps}
     >
       {renderVisual()}

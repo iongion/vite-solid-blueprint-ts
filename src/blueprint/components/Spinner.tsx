@@ -70,30 +70,59 @@ export const Spinner: Component<SpinnerProps> = (userProps: SpinnerProps) => {
     const value = PATH_LENGTH - PATH_LENGTH * (props.value == null ? 0.25 : clamp(props.value, 0, 1));
     return value;
   });
+  const createValueNow = createMemo(() => {
+    return percent() || 0;
+  });
+  const createClassList = createMemo(() =>
+    classNames(
+      Classes.SPINNER,
+      intentClass(props.intent),
+      {
+        // from props
+        [Classes.SPINNER_NO_SPIN]: props.value !== null && props.value != undefined,
+        [Classes.DISABLED]: !!props.disabled,
+      },
+      // user
+      props.class
+    )
+  );
   return (
     <Dynamic
+      // props
       component={props.tagName || "div"}
       role="progressbar"
       aria-valuemax={100}
       aria-valuemin={0}
-      aria-valuenow={percent() || 0}
-      class={classNames(
-        Classes.SPINNER,
-        intentClass(props.intent),
-        {
-          // from props
-          [Classes.SPINNER_NO_SPIN]: props.value !== null && props.value != undefined,
-          [Classes.DISABLED]: !!props.disabled,
-        },
-        // user
-        props.class
-      )}
+      aria-valuenow={createValueNow()}
+      class={createClassList()}
       {...htmlProps}
     >
-      <Dynamic component={props.tagName || "div"} class={Classes.SPINNER_ANIMATION}>
-        <svg xmlns="http://www.w3.org/2000/svg" width={getSize()} height={getSize()} stroke-width={strokeWidth().toFixed(2)} viewBox={getViewBox(strokeWidth())}>
-          <path class={Classes.SPINNER_TRACK} d={SPINNER_TRACK} />
-          <path class={Classes.SPINNER_HEAD} d={SPINNER_TRACK} pathLength={PATH_LENGTH} stroke-dasharray={`${PATH_LENGTH} ${PATH_LENGTH}`} stroke-dashoffset={strokeOffset()} />
+      <Dynamic
+        // props
+        component={props.tagName || "div"}
+        class={Classes.SPINNER_ANIMATION}
+      >
+        <svg
+          // props
+          xmlns="http://www.w3.org/2000/svg"
+          width={getSize()}
+          height={getSize()}
+          stroke-width={strokeWidth().toFixed(2)}
+          viewBox={getViewBox(strokeWidth())}
+        >
+          <path
+            // props
+            class={Classes.SPINNER_TRACK}
+            d={SPINNER_TRACK}
+          />
+          <path
+            // props
+            class={Classes.SPINNER_HEAD}
+            d={SPINNER_TRACK}
+            pathLength={PATH_LENGTH}
+            stroke-dasharray={`${PATH_LENGTH} ${PATH_LENGTH}`}
+            stroke-dashoffset={strokeOffset()}
+          />
         </svg>
       </Dynamic>
     </Dynamic>

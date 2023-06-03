@@ -1,5 +1,5 @@
 import classNames from "classnames";
-import { createMemo, mergeProps, splitProps } from "solid-js";
+import { mergeProps, splitProps, createMemo } from "solid-js";
 import type { Component } from "solid-js";
 
 import { DISPLAYNAME_PREFIX, Classes, Intent, IntentProps, Props, clamp } from "@blueprint/core";
@@ -31,28 +31,38 @@ export const ProgressBar: Component<ProgressBarProps> = (userProps: ProgressBarP
     const value = props.value == null || props.value === undefined ? undefined : 100 * clamp(props.value, 0, 1);
     return value;
   });
+  const createValueNow = createMemo(() => {
+    return percent() === undefined ? "" : Math.round(percent() || 0);
+  });
+  const createMeterStyle = createMemo(() => {
+    return percent() === undefined ? undefined : `width: ${percent()}%`;
+  });
+  const createClassList = createMemo(() =>
+    classNames(
+      // implicit
+      Classes.PROGRESS_BAR,
+      Classes.intentClass(props.intent),
+      {
+        // from props
+        [Classes.PROGRESS_NO_ANIMATION]: !!!props.animate,
+        [Classes.PROGRESS_NO_STRIPES]: !!!props.stripes,
+        [Classes.DISABLED]: !!props.disabled,
+      },
+      // user
+      props.class
+    )
+  );
   return (
     <div
+      // props
       role="progressbar"
       aria-valuemax={100}
       aria-valuemin={100}
-      aria-valuenow={percent() === undefined ? "" : Math.round(percent() || 0)}
-      class={classNames(
-        // implicit
-        Classes.PROGRESS_BAR,
-        Classes.intentClass(props.intent),
-        {
-          // from props
-          [Classes.PROGRESS_NO_ANIMATION]: !!!props.animate,
-          [Classes.PROGRESS_NO_STRIPES]: !!!props.stripes,
-          [Classes.DISABLED]: !!props.disabled,
-        },
-        // user
-        props.class
-      )}
+      aria-valuenow={createValueNow()}
+      class={createClassList()}
       {...htmlProps}
     >
-      <div class={Classes.PROGRESS_METER} style={percent() === undefined ? undefined : `width: ${percent()}%`}></div>
+      <div class={Classes.PROGRESS_METER} style={createMeterStyle()}></div>
     </div>
   );
 };
