@@ -216,4 +216,8 @@ export const AnchorButton: Component<AnchorButtonProps> = (userProps) => {
     </a>
   );
 };
-(AnchorButton as any).displayName = `${DISPLAYNAME_PREFIX}.AnchorButton`;
+Object.defineProperty(AnchorButton, "displayName", {
+  value: `${DISPLAYNAME_PREFIX}.AnchorButton`,
+  writable: false,
+});
+console.debug(AnchorButton.displayName);
