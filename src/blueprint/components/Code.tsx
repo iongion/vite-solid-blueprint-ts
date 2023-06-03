@@ -48,10 +48,25 @@ export const Code: Component<CodeProps> = (userProps: CodeProps) => {
     // props list
     "children",
     "class",
+    "disabled",
   ]);
+  const createClassList = createMemo(() =>
+    classNames(
+      Classes.CODE,
+      {
+        // from props
+        [Classes.DISABLED]: !!props.disabled,
+      },
+      props.class
+    )
+  );
   const createChildren = children(() => props.children);
   return (
-    <code class={classNames(Classes.CODE, props.class)} {...htmlProps}>
+    <code
+      // props
+      class={createClassList()}
+      {...htmlProps}
+    >
       {createChildren()}
     </code>
   );
