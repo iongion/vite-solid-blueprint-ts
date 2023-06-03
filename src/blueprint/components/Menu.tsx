@@ -12,12 +12,12 @@ export const MenuDividerPropsDefaults: MenuDividerProps = {};
 export const MenuDivider: Component<MenuDividerProps> = (userProps) => {
   const [props, htmlProps] = splitProps(mergeProps(MenuDividerPropsDefaults, userProps), [
     // props list
-    "disabled",
     "children",
     "class",
+    "disabled",
   ]);
   return (
-    <div class={classNames(Classes.MENU_DIVIDER, { [Classes.DISABLED]: props.disabled }, props.class)} data-disabled={props.disabled ? "disabled" : undefined} {...htmlProps}>
+    <div class={classNames(Classes.MENU_DIVIDER, { [Classes.DISABLED]: props.disabled }, props.class)} {...htmlProps}>
       {props.children}
     </div>
   );
@@ -38,8 +38,8 @@ export const MenuItem: Component<MenuItemProps> = (userProps) => {
     "icon",
     "rightIcon",
     "children",
-    "disabled",
     "class",
+    "disabled",
   ]);
   const createIcon = (icon?: IconName, isRight?: boolean) => {
     return icon === undefined ? undefined : (
@@ -52,7 +52,7 @@ export const MenuItem: Component<MenuItemProps> = (userProps) => {
     return props.text ? <div class={classNames(Classes.FILL, Classes.TEXT_OVERFLOW_ELLIPSIS)}>{props.text}</div> : undefined;
   };
   return (
-    <li class={classNames({ [Classes.DISABLED]: !!props.disabled }) || undefined} data-disabled={props.disabled ? "disabled" : undefined}>
+    <li class={classNames({ [Classes.DISABLED]: !!props.disabled }) || undefined}>
       <a
         role="menuitem"
         tabindex="0"
@@ -89,9 +89,19 @@ export function Menu(userProps: MenuProps = {}) {
     "fixedToTop",
     "children",
     "class",
+    "disabled",
   ]);
   return (
-    <div class={classNames(Classes.MENU, Classes.POPOVER_DISMISS, { [Classes.FIXED_TOP]: props.fixedToTop }, props.class)} {...htmlProps}>
+    <div
+      class={classNames(
+        Classes.MENU,
+        Classes.POPOVER_DISMISS,
+        // from props
+        { [Classes.FIXED_TOP]: props.fixedToTop, [Classes.DISABLED]: props.disabled },
+        props.class
+      )}
+      {...htmlProps}
+    >
       {props.children}
     </div>
   );

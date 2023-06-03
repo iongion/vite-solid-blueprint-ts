@@ -1,9 +1,8 @@
-import { createContext, useContext } from "solid-js";
+import { createContext, useContext, createUniqueId } from "solid-js";
 import type { JSX } from "solid-js";
 import { createStore } from "solid-js/store";
 import { Key } from "@solid-primitives/keyed";
 import * as y from "yup";
-import { v4 } from "uuid";
 
 import { Props } from "@blueprint/core";
 import { HTMLTable, Label } from "@blueprint/components";
@@ -11,7 +10,7 @@ import { HTMLTable, Label } from "@blueprint/components";
 import "./Example.css";
 
 function SchemaForm<T>({ schema, props, onPropertyChange }: { schema: y.ObjectSchema<any>; props: T; onPropertyChange: (name: string, value: any) => void }) {
-  const guid = v4();
+  const guid = createUniqueId();
   // console.debug("context", { schema, props, setProperty });
   return (
     <form class="ExampleSchemaForm">
@@ -39,7 +38,7 @@ function SchemaForm<T>({ schema, props, onPropertyChange }: { schema: y.ObjectSc
                       {...identityProps}
                       type="checkbox"
                       checked={value || false}
-                      onChange={(e) => {
+                      onInput={(e) => {
                         onPropertyChange(name, e.currentTarget.checked);
                       }}
                     />
@@ -51,7 +50,7 @@ function SchemaForm<T>({ schema, props, onPropertyChange }: { schema: y.ObjectSc
                       {...identityProps}
                       type="number"
                       value={value || undefined}
-                      onChange={(e) => {
+                      onInput={(e) => {
                         onPropertyChange(name, Number(e.currentTarget.value));
                       }}
                     />
