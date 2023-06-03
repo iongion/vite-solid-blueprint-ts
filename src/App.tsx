@@ -75,8 +75,6 @@ const codeLines = [
 const App: Component = () => {
   const { t } = useI18n();
   const [count, setCount] = createSignal(0);
-  // const [spinnerSize, setSpinnerSize] = createSignal(50);
-  // const [spinnerIntent, setSpinnerIntent] = createSignal(Intent.NONE);
   return (
     <div class={`App ${Classes.DARK}`}>
       <ToolsList />
