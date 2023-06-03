@@ -16,6 +16,8 @@ import { ActionProps } from "@blueprint/tools/actions";
 import { Icon, IconName } from "@blueprint/icons";
 import { Spinner } from "./Spinner";
 
+import "./Button.css";
+
 export type ButtonType = "submit" | "reset" | "button";
 
 interface IButtonProps<E extends HTMLButtonElement | HTMLAnchorElement | HTMLElement = HTMLButtonElement> extends ActionProps<E>, IntentProps, Props {
@@ -95,7 +97,7 @@ export const Button: Component<ButtonProps> = (userProps) => {
   };
   const createChildren = children(() => props.children);
   const createLoader = createMemo(() => {
-    return props.loading ? <Spinner intent={props.intent} size={20} /> : undefined;
+    return props.loading ? <Spinner class={Classes.BUTTON_SPINNER} intent={props.intent} size={20} /> : undefined;
   });
   return (
     <button
@@ -106,9 +108,9 @@ export const Button: Component<ButtonProps> = (userProps) => {
       disabled={!!props.disabled}
       {...htmlProps}
     >
+      {createLoader()}
       {createIcon(props.icon)}
       {createText()}
-      {createLoader()}
       {createChildren()}
       {createIcon(props.rightIcon)}
     </button>
