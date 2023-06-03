@@ -6,8 +6,8 @@
   "license": "ISC",
   "type": "module",
   "scripts": {
-    "start": "vite --no-hmr",
-    "dev": "vite --no-hmr",
+    "start": "vite",
+    "dev": "vite",
     "build": "tsc && vite build",
     "serve": "vite preview"
   },

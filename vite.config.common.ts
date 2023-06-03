@@ -30,8 +30,8 @@ export const createConfig = ({ mode }) => {
       // https://github.com/thetarnav/solid-devtools/tree/main/packages/transform#options
       autoname: true,
       locator: {
-        targetIDE: 'vscode',
-        key: 'Ctrl',
+        targetIDE: "vscode",
+        key: "Ctrl",
         jsxLocation: true,
         componentLocation: true,
       },
@@ -74,6 +74,9 @@ export const createConfig = ({ mode }) => {
           appMaintenance: fileURLToPath(new URL("./maintenance.html", import.meta.url)),
         },
       },
+    },
+    server: {
+      hmr: false,
     },
     resolve: {
       alias: {
