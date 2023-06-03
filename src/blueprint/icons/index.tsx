@@ -85,18 +85,23 @@ export const Icon: Component<IconProps> = (userProps) => {
   );
   const createIcon = createMemo(() => {
     const iconElement = props.icon ? Icons[props.icon] : undefined;
-    return iconElement;
+    const size = props.size || IconSize.STANDARD;
+    return iconElement
+      ? iconElement({
+          width: size,
+          height: size,
+          viewBox: `0 0 ${size} ${size}`,
+        })
+      : undefined;
   });
   createEffect(() => {
     const size = props.size || IconSize.STANDARD;
     const icon = createIcon();
     if (!icon) return;
-    icon({
-      // icon props
-      width: size,
-      height: size,
-      viewBox: `0 0 ${size} ${size}`,
-    });
+    console.debug(icon);
+    icon.setAttibute("width", size);
+    icon.setAttibute("height", size);
+    icon.setAttibute("viewBox", `0 0 ${size} ${size}`);
   });
   return (
     <span
