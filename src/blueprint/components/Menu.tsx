@@ -51,6 +51,7 @@ export const MenuItem: Component<MenuItemProps> = (userProps) => {
     "children",
     "class",
     "disabled",
+    "tabIndex",
   ]);
   const createIcon = (icon?: IconName, isRight?: boolean) => {
     return icon === undefined ? undefined : (
@@ -86,9 +87,9 @@ export const MenuItem: Component<MenuItemProps> = (userProps) => {
     <li class={createListItemClassList()}>
       <a
         // props
-        role="menuitem"
-        tabindex="0"
         class={createAnchorClassList()}
+        role="menuitem"
+        tabIndex={props.disabled ? -1 : props.tabIndex}
         onClick={props.disabled ? undefined : props.onClick}
         {...htmlProps}
       >

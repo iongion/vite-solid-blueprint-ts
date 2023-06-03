@@ -52,7 +52,6 @@ export const ButtonPropsDefaults: ButtonProps = {
 export const Button: Component<ButtonProps> = (userProps) => {
   const [props, htmlProps] = splitProps(mergeProps(ButtonPropsDefaults, userProps), [
     // props list
-    "disabled",
     "icon",
     "rightIcon",
     "alignText",
@@ -69,6 +68,8 @@ export const Button: Component<ButtonProps> = (userProps) => {
     "children",
     "onClick",
     "class",
+    "tabIndex",
+    "disabled",
   ]);
   const createClassList = createMemo(() =>
     classNames(
