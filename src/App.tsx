@@ -50,11 +50,12 @@ import {
   MenuPropsSchema,
   NavbarPropsSchema,
   HTMLTablePropsSchema,
+  IconPropsSchema,
   NonIdealStatePropsSchema,
   ProgressBarPropsSchema,
   SpinnerPropsSchema,
 } from "@blueprint/schema";
-import { IconName } from "@blueprint/icons";
+import { Icon, IconName, IconProps } from "@blueprint/icons";
 import { Example } from "./Example";
 import { ToolsList } from "./ToolsList";
 
@@ -165,42 +166,6 @@ const App: Component = () => {
         }}
       />
 
-      <Example<MenuProps>
-        example="Menu"
-        schema={MenuPropsSchema}
-        render={(props) => {
-          return (
-            <Menu {...props}>
-              <Menu.Item icon={IconName.DATABASE} text={t("Database")} />
-              <Menu.Divider />
-              <Menu.Item icon={IconName.COG} text={t("Settings")} />
-              <Menu.Item icon={IconName.INFO_SIGN} text={t("Alert")} />
-              <Menu.Divider />
-              <Menu.Item rightIcon={IconName.CARET_RIGHT} text={t("Help & support")} />
-            </Menu>
-          );
-        }}
-      />
-
-      <Example<NavbarProps>
-        example="Navbar &amp; NavbarGroup &amp; NavbarHeading &amp; NavbarDivider"
-        schema={NavbarPropsSchema}
-        render={(props) => {
-          return (
-            <Navbar {...props}>
-              <Navbar.Group align={Alignment.LEFT}>
-                <Navbar.Heading>{t("Navbar heading")}</Navbar.Heading>
-              </Navbar.Group>
-              <Navbar.Group align={Alignment.RIGHT}>
-                <Button intent={Intent.PRIMARY} minimal icon={IconName.COG} text={t("Settings")} />
-                <Navbar.Divider />
-                <Button intent={Intent.SUCCESS} minimal icon={IconName.INFO_SIGN} text={t("Help")} />
-              </Navbar.Group>
-            </Navbar>
-          );
-        }}
-      />
-
       <Example example="HTML Elements">
         <H1>H1 example</H1>
         <H2>H2 example</H2>
@@ -258,6 +223,50 @@ const App: Component = () => {
                 </tr>
               </tfoot>
             </HTMLTable>
+          );
+        }}
+      />
+
+      <Example<IconProps>
+        example="Icon"
+        schema={IconPropsSchema}
+        render={(props) => {
+          return <Icon {...props} />;
+        }}
+      />
+
+      <Example<MenuProps>
+        example="Menu"
+        schema={MenuPropsSchema}
+        render={(props) => {
+          return (
+            <Menu {...props}>
+              <Menu.Item icon={IconName.DATABASE} text={t("Database")} />
+              <Menu.Divider />
+              <Menu.Item icon={IconName.COG} text={t("Settings")} />
+              <Menu.Item icon={IconName.INFO_SIGN} text={t("Alert")} />
+              <Menu.Divider />
+              <Menu.Item rightIcon={IconName.CARET_RIGHT} text={t("Help & support")} />
+            </Menu>
+          );
+        }}
+      />
+
+      <Example<NavbarProps>
+        example="Navbar &amp; NavbarGroup &amp; NavbarHeading &amp; NavbarDivider"
+        schema={NavbarPropsSchema}
+        render={(props) => {
+          return (
+            <Navbar {...props}>
+              <Navbar.Group align={Alignment.LEFT}>
+                <Navbar.Heading>{t("Navbar heading")}</Navbar.Heading>
+              </Navbar.Group>
+              <Navbar.Group align={Alignment.RIGHT}>
+                <Button intent={Intent.PRIMARY} minimal icon={IconName.COG} text={t("Settings")} />
+                <Navbar.Divider />
+                <Button intent={Intent.SUCCESS} minimal icon={IconName.INFO_SIGN} text={t("Help")} />
+              </Navbar.Group>
+            </Navbar>
           );
         }}
       />

@@ -45,7 +45,7 @@ export const isIcon = (x: any): x is IconType => icons.includes(x);
 
 export interface IconProps extends Omit<Props, "children"> {
   icon: IconName;
-  size?: IconSize;
+  size?: IconSize | number;
 }
 export const IconPropsDefaults: IconProps = {
   icon: IconName.PLUS,
@@ -60,12 +60,18 @@ export const Icon: Component<IconProps> = (userProps) => {
     "class",
     "disabled",
   ]);
+  const createStyle = createMemo(() => {
+    if (props.size === IconSize.LARGE || props.size === IconSize.STANDARD) return;
+    return `font-size: ${props.size}px; line-height: ${props.size}px`;
+  });
   const createClassList = createMemo(() =>
     classNames(
       Classes.ICON,
       props.icon ? `${Classes.ICON}-${props.icon}` : null,
       {
         // from props
+        [Classes.ICON_LARGE]: props.size === IconSize.LARGE,
+        [Classes.ICON_STANDARD]: props.size === IconSize.STANDARD,
         [Classes.DISABLED]: !!props.disabled,
       },
       props.icon,
@@ -78,6 +84,7 @@ export const Icon: Component<IconProps> = (userProps) => {
       // props
       aria-hidden="true"
       data-icon={props.icon}
+      style={createStyle()}
       class={createClassList()}
       {...htmlProps}
     ></span>

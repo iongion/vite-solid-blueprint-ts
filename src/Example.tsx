@@ -45,16 +45,29 @@ function SchemaForm<T>({ schema, props, onPropertyChange }: { schema: y.ObjectSc
                   );
                   break;
                 case "number":
-                  widget = (
-                    <input
-                      {...identityProps}
-                      type="number"
-                      value={value || undefined}
-                      onInput={(e) => {
-                        onPropertyChange(name, Number(e.currentTarget.value));
-                      }}
-                    />
-                  );
+                  widget =
+                    items.length === 0 ? (
+                      <input
+                        {...identityProps}
+                        type="number"
+                        value={value || undefined}
+                        onInput={(e) => {
+                          onPropertyChange(name, Number(e.currentTarget.value));
+                        }}
+                      />
+                    ) : (
+                      <select
+                        {...identityProps}
+                        value={value || undefined}
+                        onChange={(e) => {
+                          onPropertyChange(name, Number(e.currentTarget.value));
+                        }}
+                      >
+                        {items.map((it) => {
+                          return <option value={it}>{it}</option>;
+                        })}
+                      </select>
+                    );
                   break;
                 case "string":
                   if (items.length) {
