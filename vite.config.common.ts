@@ -3,6 +3,7 @@ import tsconfigPaths from "vite-tsconfig-paths";
 import { ViteEjsPlugin } from "vite-plugin-ejs";
 import { checker } from "vite-plugin-checker";
 import solidPlugin from "vite-plugin-solid";
+import devtools from "solid-devtools/vite";
 import solidSvg from "vite-plugin-solid-svg";
 import { fileURLToPath } from "url";
 
@@ -23,6 +24,12 @@ if (process.env.LOCAL === "yes") {
 // eslint-disable-next-line import/no-unused-modules
 export const createConfig = ({ mode }) => {
   const plugins = [
+    // the vite plugin is not necessary for the devtools to work
+    devtools({
+      // but enabling some of the options, such as "autoname" will improve the debugging experience
+      // https://github.com/thetarnav/solid-devtools/tree/main/packages/transform#options
+      autoname: true,
+    }),
     solidPlugin(),
     solidSvg(),
     checker({
