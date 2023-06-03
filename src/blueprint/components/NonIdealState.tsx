@@ -16,7 +16,7 @@ interface INonIdealStateProps extends LayoutProps, Props {
   title?: string | MaybeElement;
   text?: string | MaybeElement;
   description?: string | MaybeElement;
-  iconSize?: NonIdealStateIconSize;
+  iconSize?: NonIdealStateIconSize | number;
   icon?: IconName | null;
   action?: MaybeElement;
 }
