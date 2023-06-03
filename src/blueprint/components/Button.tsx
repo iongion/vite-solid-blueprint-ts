@@ -220,4 +220,3 @@ Object.defineProperty(AnchorButton, "displayName", {
   value: `${DISPLAYNAME_PREFIX}.AnchorButton`,
   writable: false,
 });
-console.debug(AnchorButton.displayName);
