@@ -76,7 +76,7 @@ export const createConfig = ({ mode }) => {
       },
     },
     server: {
-      hmr: false,
+      // hmr: false,
     },
     resolve: {
       alias: {
