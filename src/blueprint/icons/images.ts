@@ -1,9 +1,10 @@
 export * as CARET_DOWN from "./images/caret-down.svg";
 export * as CARET_UP from "./images/caret-up.svg";
 export * as CARET_RIGHT from "./images/caret-right.svg";
-export * as COG_ICON from "./images/cog.svg";
-export * as DATABASE_ICON from "./images/database.svg";
-export * as DUPLICATE_ICON from "./images/duplicate.svg";
-export * as FUNCTION_ICON from "./images/function.svg";
+export * as COG from "./images/cog.svg";
+export * as DATABASE from "./images/database.svg";
+export * as DUPLICATE from "./images/duplicate.svg";
+export * as FUNCTION from "./images/function.svg";
 export * as INFO_SIGN from "./images/info-sign.svg";
-export * as REFRESH_ICON from "./images/refresh.svg";
+export * as REFRESH from "./images/refresh.svg";
+export * as SHARE from "./images/share.svg";

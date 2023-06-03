@@ -106,7 +106,15 @@ const App: Component = () => {
         example="AnchorButton"
         schema={AnchorButtonPropsSchema}
         render={(props) => {
-          return <AnchorButton {...props} intent={props.intent || Intent.PRIMARY} icon={props.icon} rightIcon={props.rightIcon} text={props.text || t("Go to")} />;
+          return (
+            <AnchorButton
+              {...props}
+              intent={props.intent || Intent.PRIMARY}
+              icon={props.icon}
+              rightIcon={props.rightIcon || IconName.INFO_SIGN}
+              text={props.text || t("Go to RUL")}
+            />
+          );
         }}
       />
 

@@ -24,18 +24,20 @@ export enum IconName {
   ADD = "add",
   HAND_RIGHT = "hand-right",
   SEARCH = "search",
+  SHARE = "share",
 }
 
 export const Icons = {
-  [IconName.REFRESH]: Images.REFRESH_ICON.default,
-  [IconName.DUPLICATE]: Images.DUPLICATE_ICON.default,
-  [IconName.DATABASE]: Images.DATABASE_ICON.default,
-  [IconName.FUNCTION]: Images.FUNCTION_ICON.default,
-  [IconName.COG]: Images.COG_ICON.default,
+  [IconName.REFRESH]: Images.REFRESH.default,
+  [IconName.DUPLICATE]: Images.DUPLICATE.default,
+  [IconName.DATABASE]: Images.DATABASE.default,
+  [IconName.FUNCTION]: Images.FUNCTION.default,
+  [IconName.COG]: Images.COG.default,
   [IconName.INFO_SIGN]: Images.INFO_SIGN.default,
   [IconName.CARET_DOWN]: Images.CARET_DOWN.default,
   [IconName.CARET_UP]: Images.CARET_UP.default,
   [IconName.CARET_RIGHT]: Images.CARET_RIGHT.default,
+  [IconName.SHARE]: Images.SHARE.default,
 };
 
 const icons = Object.keys(Icons);
