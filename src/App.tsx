@@ -84,9 +84,9 @@ const App: Component = () => {
       <p class="read-the-docs">
         <span>Click on the logos to learn more.</span>
         <br />
-        <ButtonGroup minimal>
-          <AnchorButton icon={IconName.STACKBLITZ} href="https://stackblitz.com/edit/solidjs-templates-gfcotu" target="_blank" text={t("Edit source")} />
-          <AnchorButton rightIcon={IconName.GITHUB} href="https://github.com/iongion/vite-solid-blueprint-ts" target="_blank" text={t("Git")} />
+        <ButtonGroup>
+          <AnchorButton intent={Intent.NONE} icon={IconName.STACKBLITZ} href="https://stackblitz.com/edit/solidjs-templates-gfcotu" target="_blank" text={t("Edit source")} />
+          <AnchorButton intent={Intent.SUCCESS} icon={IconName.GITHUB} href="https://github.com/iongion/vite-solid-blueprint-ts" target="_blank" text={t("Fork repo")} />
         </ButtonGroup>
       </p>
       <Example<ButtonProps>
