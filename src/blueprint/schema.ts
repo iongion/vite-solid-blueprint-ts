@@ -111,7 +111,7 @@ export const InteractivePropsSchema = y.object({
 });
 
 // Components
-export const ButtonPropsSchema: y.ObjectSchema<Omit<ButtonProps, "children" | "onClick">> = y
+export const ButtonPropsSchema: y.ObjectSchema<Omit<ButtonProps, "children" | "onClick" | "onFocus">> = y
   .object({
     icon: IconSchema.default(IconName.HAND_RIGHT as any),
     rightIcon: IconSchema.default(IconName.PLUS as any),

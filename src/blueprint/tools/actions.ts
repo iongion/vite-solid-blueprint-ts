@@ -10,3 +10,8 @@ export interface ActionProps<T extends HTMLElement = HTMLElement> extends Intent
   onFocus?: JSX.EventHandlerUnion<T, FocusEvent>;
   tabIndex?: number;
 }
+
+export type LinkProps = {
+  href?: string;
+  target?: string;
+};

@@ -6,9 +6,7 @@ import {
   //
   DISPLAYNAME_PREFIX,
   Classes,
-  Props,
   Alignment,
-  IntentProps,
   alignmentClass,
   intentClass,
 } from "@blueprint/core";
