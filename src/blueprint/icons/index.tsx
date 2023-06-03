@@ -1,5 +1,5 @@
 import classNames from "classnames";
-import { mergeProps, splitProps, createMemo, createEffect } from "solid-js";
+import { mergeProps, splitProps, createMemo } from "solid-js";
 import type { Component } from "solid-js";
 
 import { Classes, Props } from "@blueprint/core";
@@ -93,14 +93,6 @@ export const Icon: Component<IconProps> = (userProps) => {
           // viewBox: `0 0 ${size} ${size}`,
         })
       : undefined;
-  });
-  createEffect(() => {
-    const size = props.size || IconSize.STANDARD;
-    const icon = createIcon();
-    if (!icon) return;
-    icon.setAttibute("width", size);
-    icon.setAttibute("height", size);
-    // icon.setAttibute("viewBox", `0 0 ${size} ${size}`);
   });
   return (
     <span
