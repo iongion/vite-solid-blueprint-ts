@@ -291,7 +291,7 @@ const App: Component = () => {
           return <ProgressBar {...props} />;
         }}
       />
-      
+
       <Example<SpinnerProps>
         example="Spinner"
         schema={SpinnerPropsSchema}

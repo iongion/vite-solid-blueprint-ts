@@ -75,7 +75,7 @@ export const Button: Component<ButtonProps> = (userProps) => {
   const createChildren = children(() => props.children);
   return (
     <button
-      onClick={props.onClick}
+      onClick={props.disabled ? undefined : props.onClick}
       type={props.type as ButtonType}
       class={classNames(
         Classes.BUTTON,
@@ -85,6 +85,7 @@ export const Button: Component<ButtonProps> = (userProps) => {
           [Classes.MINIMAL]: !!props.minimal,
           [Classes.OUTLINED]: !!props.outlined,
           [Classes.SMALL]: !!props.small,
+          [Classes.LARGE]: !!props.large,
           [Classes.FILL]: !!props.fill,
           [Classes.DISABLED]: !!props.disabled,
         },
