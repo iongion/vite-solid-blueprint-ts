@@ -10,7 +10,7 @@ export type MaybeElement = JSX.Element | false | null | undefined;
 export type Props = {
   disabled?: boolean;
   class?: string;
-  children?: MaybeElement;
+  children?: MaybeElement | any;
 };
 
 export type AlignmentProps = {
