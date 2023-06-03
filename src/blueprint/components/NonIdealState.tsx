@@ -1,5 +1,5 @@
 import classNames from "classnames";
-import { mergeProps, splitProps, createMemo } from "solid-js";
+import { mergeProps, splitProps, createMemo, children } from "solid-js";
 import type { Component } from "solid-js";
 
 import { H4 } from "@blueprint/components";
@@ -36,6 +36,7 @@ export const NonIdealState: Component<NonIdealStateProps> = (userProps: NonIdeal
     "action",
     "children",
     "class",
+    "disabled",
   ]);
   const renderIcon = createMemo(() => {
     return props.icon ? <Icon icon={props.icon} /> : undefined;
@@ -64,11 +65,22 @@ export const NonIdealState: Component<NonIdealStateProps> = (userProps: NonIdeal
   const renderAction = createMemo(() => {
     return props.action ? props.action : undefined;
   });
+  const createChildren = children(() => props.children);
   return (
-    <div class={classNames(Classes.NON_IDEAL_STATE, props.class)} {...htmlProps}>
+    <div
+      class={classNames(
+        Classes.NON_IDEAL_STATE,
+        {
+          // from props
+          [Classes.DISABLED]: props.disabled,
+        },
+        props.class
+      )}
+      {...htmlProps}
+    >
       {renderVisual()}
       {renderText()}
-      {props.children}
+      {createChildren()}
       {renderAction()}
     </div>
   );

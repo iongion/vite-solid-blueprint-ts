@@ -1,25 +1,29 @@
 import classNames from "classnames";
-import { mergeProps, splitProps } from "solid-js";
+import { mergeProps, splitProps, children } from "solid-js";
 import type { Component } from "solid-js";
 
 import { DISPLAYNAME_PREFIX, Classes, Alignment, Props } from "@blueprint/core";
 
 // NavbarDivider
-interface INavbarDividerProps extends Props {}
-export type NavbarDividerProps = INavbarDividerProps;
+export type NavbarDividerProps = Omit<Props, "children">;
 export const NavbarDivider: Component<NavbarDividerProps> = (userProps) => {
   const [props, htmlProps] = splitProps(mergeProps({}, userProps), [
     // props list
-    "children",
     "class",
     "disabled",
   ]);
   return (
-    <div class={classNames(Classes.NAVBAR_DIVIDER,
-      // from props
-      { [Classes.DISABLED]: props.disabled }, props.class)} {...htmlProps}>
-      {props.children}
-    </div>
+    <div
+      class={classNames(
+        Classes.NAVBAR_DIVIDER,
+        {
+          // from props
+          [Classes.DISABLED]: props.disabled,
+        },
+        props.class
+      )}
+      {...htmlProps}
+    ></div>
   );
 };
 (NavbarDivider as any).displayName = `${DISPLAYNAME_PREFIX}.NavbarDivider`;
@@ -34,17 +38,20 @@ export const NavbarHeading: Component<NavbarHeadingProps> = (userProps) => {
     "class",
     "disabled",
   ]);
+  const createChildren = children(() => props.children);
   return (
     <div
       class={classNames(
         Classes.NAVBAR_HEADING,
-        // from props
-        { [Classes.DISABLED]: props.disabled },
+        {
+          // from props
+          [Classes.DISABLED]: props.disabled,
+        },
         props.class
       )}
       {...htmlProps}
     >
-      {props.children}
+      {createChildren()}
     </div>
   );
 };
@@ -66,18 +73,21 @@ export const NavbarGroup: Component<NavbarGroupProps> = (userProps) => {
     "class",
     "disabled",
   ]);
+  const createChildren = children(() => props.children);
   return (
     <div
       class={classNames(
         Classes.NAVBAR_GROUP,
         Classes.alignmentClass(props.align),
-        // from props
-        { [Classes.DISABLED]: props.disabled },
+        {
+          // from props
+          [Classes.DISABLED]: props.disabled,
+        },
         props.class
       )}
       {...htmlProps}
     >
-      {props.children}
+      {createChildren()}
     </div>
   );
 };
@@ -99,17 +109,21 @@ export function Navbar(userProps: NavbarProps = {}) {
     "class",
     "disabled",
   ]);
+  const createChildren = children(() => props.children);
   return (
     <div
       class={classNames(
         Classes.NAVBAR,
-        // from props
-        { [Classes.FIXED_TOP]: props.fixedToTop, [Classes.DISABLED]: props.disabled },
+        {
+          // from props
+          [Classes.FIXED_TOP]: props.fixedToTop,
+          [Classes.DISABLED]: props.disabled,
+        },
         props.class
       )}
       {...htmlProps}
     >
-      {props.children}
+      {createChildren()}
     </div>
   );
 }

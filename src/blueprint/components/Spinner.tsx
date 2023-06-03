@@ -17,7 +17,7 @@ export enum SpinnerSize {
   STANDARD = 50,
   LARGE = 100,
 }
-interface ISpinnerProps extends IntentProps, Props {
+interface ISpinnerProps extends IntentProps, Omit<Props, "children"> {
   tagName?: string | null;
   size?: number | null;
   value?: number | null;
@@ -45,6 +45,7 @@ export const Spinner: Component<SpinnerProps> = (userProps: SpinnerProps) => {
     "value",
     "size",
     "class",
+    "disabled",
   ]);
   const percent = createMemo(() => {
     const value = props.value == null || props.value === undefined ? undefined : props.value * 100;
@@ -80,7 +81,9 @@ export const Spinner: Component<SpinnerProps> = (userProps: SpinnerProps) => {
         Classes.SPINNER,
         intentClass(props.intent),
         {
+          // from props
           [Classes.SPINNER_NO_SPIN]: props.value != null,
+          [Classes.DISABLED]: props.disabled,
         },
         // user
         props.class
