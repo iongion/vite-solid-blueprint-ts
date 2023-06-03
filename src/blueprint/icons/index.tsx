@@ -64,7 +64,7 @@ export const Icon: Component<IconProps> = (userProps) => {
     "disabled",
   ]);
   const createStyle = createMemo(() => {
-    if (props.size === IconSize.LARGE || props.size === IconSize.STANDARD) return;
+    if (props.size === IconSize.STANDARD) return;
     return `font-size: ${props.size}px; line-height: ${props.size}px`;
   });
   const createClassList = createMemo(() =>
@@ -84,8 +84,16 @@ export const Icon: Component<IconProps> = (userProps) => {
   );
   const createIcon = createMemo(() => {
     const iconElement = props.icon ? Icons[props.icon] : undefined;
-    console.debug(iconElement);
-    return iconElement({ width: props.size, height: props.size });
+    const size = props.size || IconSize.STANDARD;
+    console.debug(size);
+    return iconElement
+      ? iconElement({
+          // icon props
+          width: size,
+          height: size,
+          viewBox: `0 0 ${size} ${size}`,
+        })
+      : undefined;
   });
   return (
     <span
