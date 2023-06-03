@@ -1,5 +1,5 @@
 import classNames from "classnames";
-import { mergeProps, splitProps } from "solid-js";
+import { mergeProps, splitProps, children } from "solid-js";
 import type { Component } from "solid-js";
 
 import { DISPLAYNAME_PREFIX, Classes, Elevation, Props, ElevationProps, InteractiveProps, elevationClass } from "@blueprint/core";
@@ -13,26 +13,26 @@ export const CardPropsDefaults: CardProps = {
 };
 
 export const Card: Component<CardProps> = (userProps: CardProps) => {
-  const props = mergeProps(CardPropsDefaults, userProps);
-  const [local, htmlProps] = splitProps(props, [
+  const [props, htmlProps] = splitProps(mergeProps(CardPropsDefaults, userProps), [
     // props list
     "elevation",
     "interactive",
     "children",
     "class",
   ]);
+  const createChildren = children(() => props.children);
   return (
     <div
       class={classNames(
         Classes.CARD,
-        { [Classes.INTERACTIVE]: local.interactive },
-        elevationClass(local.elevation),
+        { [Classes.INTERACTIVE]: props.interactive },
+        elevationClass(props.elevation),
         // user
-        local.class
+        props.class
       )}
       {...htmlProps}
     >
-      {local.children}
+      {createChildren()}
     </div>
   );
 };

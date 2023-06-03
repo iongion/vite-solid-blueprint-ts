@@ -1,5 +1,5 @@
 import classNames from "classnames";
-import { mergeProps, splitProps } from "solid-js";
+import { mergeProps, splitProps, children } from "solid-js";
 import type { Component } from "solid-js";
 
 import { DISPLAYNAME_PREFIX, Classes, Props } from "@blueprint/core";
@@ -24,6 +24,7 @@ export const Collapse: Component<CollapseProps> = (userProps: CollapseProps) => 
     "disabled",
     "class",
   ]);
+  const createChildren = children(() => props.children);
   return (
     <div
       class={classNames(
@@ -38,7 +39,7 @@ export const Collapse: Component<CollapseProps> = (userProps: CollapseProps) => 
       )}
       {...htmlProps}
     >
-      {props.isOpen ? props.children : props.keepChildrenMounted ? props.children : undefined}
+      {props.isOpen ? createChildren() : props.keepChildrenMounted ? createChildren() : undefined}
     </div>
   );
 };

@@ -1,5 +1,5 @@
 import classNames from "classnames";
-import { mergeProps, splitProps } from "solid-js";
+import { mergeProps, splitProps, children } from "solid-js";
 import type { Component } from "solid-js";
 
 import { DISPLAYNAME_PREFIX, Alignment, Classes, Props } from "@blueprint/core";
@@ -13,19 +13,16 @@ interface IButtonGroupProps extends Props {
 }
 
 export type ButtonGroupProps = IButtonGroupProps;
+export const ButtonGroupPropsDefaults: ButtonGroupProps = {
+  alignText: Alignment.LEFT,
+  fill: false,
+  minimal: false,
+  large: false,
+  vertical: false,
+};
 
 export const ButtonGroup: Component<ButtonGroupProps> = (userProps: ButtonGroupProps) => {
-  const props = mergeProps(
-    {
-      alignText: Alignment.LEFT,
-      fill: false,
-      minimal: false,
-      large: false,
-      vertical: false,
-    },
-    userProps
-  );
-  const [local, htmlProps] = splitProps(props, [
+  const [props, htmlProps] = splitProps(mergeProps(ButtonGroupPropsDefaults, userProps), [
     // props list
     "alignText",
     "fill",
@@ -35,23 +32,24 @@ export const ButtonGroup: Component<ButtonGroupProps> = (userProps: ButtonGroupP
     "children",
     "class",
   ]);
+  const createChildren = children(() => props.children);
   return (
     <div
       class={classNames(
         Classes.BUTTON_GROUP,
         {
-          [Classes.FILL]: local.fill,
-          [Classes.LARGE]: local.large,
-          [Classes.MINIMAL]: local.minimal,
-          [Classes.VERTICAL]: local.vertical,
+          [Classes.FILL]: props.fill,
+          [Classes.LARGE]: props.large,
+          [Classes.MINIMAL]: props.minimal,
+          [Classes.VERTICAL]: props.vertical,
         },
-        Classes.alignmentClass(local.alignText),
+        Classes.alignmentClass(props.alignText),
         // user
-        local.class
+        props.class
       )}
       {...htmlProps}
     >
-      {local.children}
+      {createChildren()}
     </div>
   );
 };

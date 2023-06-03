@@ -1,5 +1,5 @@
 import classNames from "classnames";
-import { mergeProps, splitProps } from "solid-js";
+import { mergeProps, splitProps, children } from "solid-js";
 import type { Component } from "solid-js";
 
 import { DISPLAYNAME_PREFIX, Classes, MaybeElement, Props } from "@blueprint/core";
@@ -51,6 +51,7 @@ export const MenuItem: Component<MenuItemProps> = (userProps) => {
   const createText = () => {
     return props.text ? <div class={classNames(Classes.FILL, Classes.TEXT_OVERFLOW_ELLIPSIS)}>{props.text}</div> : undefined;
   };
+  const createChildren = children(() => props.children);
   return (
     <li class={classNames({ [Classes.DISABLED]: !!props.disabled }) || undefined}>
       <a
@@ -67,7 +68,7 @@ export const MenuItem: Component<MenuItemProps> = (userProps) => {
       >
         {createIcon(props.icon as any)}
         {createText()}
-        {props.children}
+        {createChildren()}
         {createIcon(props.rightIcon as any, true)}
       </a>
     </li>

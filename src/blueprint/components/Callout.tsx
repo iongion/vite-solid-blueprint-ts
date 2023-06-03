@@ -1,5 +1,5 @@
 import classNames from "classnames";
-import { mergeProps, splitProps, createMemo } from "solid-js";
+import { mergeProps, splitProps, createMemo, children } from "solid-js";
 import type { Component } from "solid-js";
 
 import { DISPLAYNAME_PREFIX, Classes, Intent, MaybeElement, IntentProps, Props, intentClass } from "@blueprint/core";
@@ -29,6 +29,7 @@ export const Callout: Component<CalloutProps> = (userProps: CalloutProps) => {
   const createIcon = createMemo(() => {
     return props.icon ? typeof props.icon === "string" ? <Icon icon={props.icon as IconName} /> : undefined : undefined;
   });
+  const createChildren = children(() => props.children);
   return (
     <div
       class={classNames(
@@ -43,7 +44,7 @@ export const Callout: Component<CalloutProps> = (userProps: CalloutProps) => {
       {...htmlProps}
     >
       {createIcon()}
-      {props.children}
+      {createChildren()}
     </div>
   );
 };

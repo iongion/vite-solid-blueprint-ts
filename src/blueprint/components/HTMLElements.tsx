@@ -1,88 +1,40 @@
 import classNames from "classnames";
-import { mergeProps, splitProps } from "solid-js";
+import { mergeProps, splitProps, children } from "solid-js";
+import { Dynamic } from "solid-js/web";
 import type { Component } from "solid-js";
 
 import { DISPLAYNAME_PREFIX, Classes, InteractiveProps, Props } from "@blueprint/core";
 
-interface IH1Props extends Props {}
-export type H1Props = IH1Props;
-export const H1: Component<H1Props> = (userProps: H1Props) => {
-  const [props, htmlProps] = splitProps(userProps, ["children", "class"]);
-  return (
-    <h1 class={classNames(Classes.HEADING, props.class)} {...htmlProps}>
-      {props.children}
-    </h1>
-  );
-};
-(H1 as any).displayName = `${DISPLAYNAME_PREFIX}.H1`;
+interface IHeadingProps extends Props {}
+export type HeadingProps = IHeadingProps;
+export function createHeading<T extends HeadingProps = Props>(tagName: string) {
+  function Heading(userProps: T) {
+    const [props, htmlProps] = splitProps(userProps, ["children", "class"]);
+    const createChildren = children(() => props.children);
+    return (
+      <Dynamic component={tagName} class={classNames(Classes.HEADING, props.class)} {...htmlProps}>
+        {createChildren()}
+      </Dynamic>
+    );
+  }
+  Heading.displayName = `${DISPLAYNAME_PREFIX}.${tagName}`;
+  return Heading;
+}
 
-interface IH2Props extends Props {}
-export type H2Props = IH2Props;
-export const H2: Component<H2Props> = (userProps: H2Props) => {
-  const [props, htmlProps] = splitProps(userProps, ["children", "class"]);
-  return (
-    <h2 class={classNames(Classes.HEADING, props.class)} {...htmlProps}>
-      {props.children}
-    </h2>
-  );
-};
-(H2 as any).displayName = `${DISPLAYNAME_PREFIX}.H2`;
+export const H1 = createHeading<HeadingProps>("h1");
+export const H2 = createHeading<HeadingProps>("h2");
+export const H3 = createHeading<HeadingProps>("h3");
+export const H4 = createHeading<HeadingProps>("h4");
+export const H5 = createHeading<HeadingProps>("h5");
+export const H6 = createHeading<HeadingProps>("h6");
 
-interface IH3Props extends Props {}
-export type H3Props = IH3Props;
-export const H3: Component<H3Props> = (userProps: H3Props) => {
-  const [props, htmlProps] = splitProps(userProps, ["children", "class"]);
-  return (
-    <h3 class={classNames(Classes.HEADING, props.class)} {...htmlProps}>
-      {props.children}
-    </h3>
-  );
-};
-(H3 as any).displayName = `${DISPLAYNAME_PREFIX}.H3`;
-
-interface IH4Props extends Props {}
-export type H4Props = IH4Props;
-export const H4: Component<H4Props> = (userProps: H4Props) => {
-  const [props, htmlProps] = splitProps(userProps, ["children", "class"]);
-  return (
-    <h4 class={classNames(Classes.HEADING, props.class)} {...htmlProps}>
-      {props.children}
-    </h4>
-  );
-};
-(H4 as any).displayName = `${DISPLAYNAME_PREFIX}.H4`;
-
-interface IH5Props extends Props {}
-export type H5Props = IH5Props;
-export const H5: Component<H5Props> = (userProps: H5Props) => {
-  const [props, htmlProps] = splitProps(userProps, ["children", "class"]);
-  return (
-    <h5 class={classNames(Classes.HEADING, props.class)} {...htmlProps}>
-      {props.children}
-    </h5>
-  );
-};
-(H5 as any).displayName = `${DISPLAYNAME_PREFIX}.H5`;
-
-interface IH6Props extends Props {}
-export type H6Props = IH6Props;
-export const H6: Component<H6Props> = (userProps: H6Props) => {
-  const [props, htmlProps] = splitProps(userProps, ["children", "class"]);
-  return (
-    <h6 class={classNames(Classes.HEADING, props.class)} {...htmlProps}>
-      {props.children}
-    </h6>
-  );
-};
-(H6 as any).displayName = `${DISPLAYNAME_PREFIX}.H6`;
-
-interface IBlockquoteProps extends Props {}
-export type BlockquoteProps = IBlockquoteProps;
+export type BlockquoteProps = Props;
 export const Blockquote: Component<BlockquoteProps> = (userProps: BlockquoteProps) => {
   const [props, htmlProps] = splitProps(userProps, ["children", "class"]);
+  const createChildren = children(() => props.children);
   return (
     <blockquote class={classNames(Classes.BLOCKQUOTE, props.class)} {...htmlProps}>
-      {props.children}
+      {createChildren()}
     </blockquote>
   );
 };
@@ -95,9 +47,10 @@ interface ILabelProps extends Props {
 export type LabelProps = ILabelProps;
 export const Label: Component<LabelProps> = (userProps: LabelProps) => {
   const [props, htmlProps] = splitProps(userProps, ["for", "htmlFor", "children", "class"]);
+  const createChildren = children(() => props.children);
   return (
     <label class={classNames(Classes.LABEL, props.class)} for={props.for || props.htmlFor} {...htmlProps}>
-      {props.children}
+      {createChildren()}
     </label>
   );
 };
@@ -107,9 +60,10 @@ interface IULProps extends Props {}
 export type ULProps = IULProps;
 export const UL: Component<ULProps> = (userProps: ULProps) => {
   const [props, htmlProps] = splitProps(userProps, ["children", "class"]);
+  const createChildren = children(() => props.children);
   return (
     <ul class={classNames(Classes.LIST, props.class)} {...htmlProps}>
-      {props.children}
+      {createChildren()}
     </ul>
   );
 };
@@ -119,9 +73,10 @@ interface IOLProps extends Props {}
 export type OLProps = IOLProps;
 export const OL: Component<OLProps> = (userProps: OLProps) => {
   const [props, htmlProps] = splitProps(userProps, ["children", "class"]);
+  const createChildren = children(() => props.children);
   return (
     <ol class={classNames(Classes.LIST, props.class)} {...htmlProps}>
-      {props.children}
+      {createChildren()}
     </ol>
   );
 };
@@ -152,6 +107,7 @@ export const HTMLTable: Component<HTMLTableProps> = (userProps: HTMLTableProps) 
     "children",
     "class",
   ]);
+  const createChildren = children(() => props.children);
   return (
     <table
       class={classNames(
@@ -169,7 +125,7 @@ export const HTMLTable: Component<HTMLTableProps> = (userProps: HTMLTableProps) 
       )}
       {...htmlProps}
     >
-      {props.children}
+      {createChildren()}
     </table>
   );
 };
