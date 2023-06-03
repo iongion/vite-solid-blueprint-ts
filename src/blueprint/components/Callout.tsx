@@ -37,8 +37,8 @@ export const Callout: Component<CalloutProps> = (userProps: CalloutProps) => {
         Classes.CALLOUT,
         {
           // from props
-          [Classes.CALLOUT_ICON]: !!props.icon,
-          [Classes.DISABLED]: props.disabled,
+          [Classes.CALLOUT_ICON]: props.icon,
+          [Classes.DISABLED]: !!props.disabled,
         },
         intentClass(props.intent),
         // user

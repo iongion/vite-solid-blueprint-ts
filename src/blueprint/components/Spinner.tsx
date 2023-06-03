@@ -82,8 +82,8 @@ export const Spinner: Component<SpinnerProps> = (userProps: SpinnerProps) => {
         intentClass(props.intent),
         {
           // from props
-          [Classes.SPINNER_NO_SPIN]: props.value != null,
-          [Classes.DISABLED]: props.disabled,
+          [Classes.SPINNER_NO_SPIN]: props.value !== null && props.value != undefined,
+          [Classes.DISABLED]: !!props.disabled,
         },
         // user
         props.class

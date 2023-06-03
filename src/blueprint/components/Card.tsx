@@ -28,8 +28,8 @@ export const Card: Component<CardProps> = (userProps: CardProps) => {
         Classes.CARD,
         {
           // from props
-          [Classes.INTERACTIVE]: props.interactive,
-          [Classes.DISABLED]: props.disabled,
+          [Classes.INTERACTIVE]: !!props.interactive,
+          [Classes.DISABLED]: !!props.disabled,
         },
         elevationClass(props.elevation),
         // user

@@ -1,3 +1,18 @@
+.Example {
+  margin-bottom: 10px;
+}
+.Example:last-child {
+  margin-bottom: 0;
+}
+.AppExampleTitle {
+  padding: 5px;
+  margin: 0;
+  background: #1f242c;
+  display: block;
+  width: 100%;
+  text-align: center;
+  font-size: 18px;
+}
 .AppExampleContent {
   display: flex;
   flex: 1;
@@ -5,7 +20,6 @@
   min-height: 50px;
   width: 100%;
 }
-
 .AppExampleComponentPreview {
   display: flex;
   flex-direction: column;
@@ -41,4 +55,8 @@
 .ExampleSchemaForm label {
   margin: 0;
   padding: 0;
+}
+
+[data-example="HTMLTable"] .AppExampleComponentPreview table {
+  min-width: 100%;
 }

@@ -81,12 +81,12 @@ export const Button: Component<ButtonProps> = (userProps) => {
         Classes.BUTTON,
         {
           // from props
-          [Classes.ACTIVE]: props.active,
-          [Classes.MINIMAL]: props.minimal,
-          [Classes.OUTLINED]: props.outlined,
-          [Classes.SMALL]: props.small,
-          [Classes.FILL]: props.fill,
-          [Classes.DISABLED]: props.disabled,
+          [Classes.ACTIVE]: !!props.active,
+          [Classes.MINIMAL]: !!props.minimal,
+          [Classes.OUTLINED]: !!props.outlined,
+          [Classes.SMALL]: !!props.small,
+          [Classes.FILL]: !!props.fill,
+          [Classes.DISABLED]: !!props.disabled,
         },
         alignmentClass(props.alignText),
         intentClass(props.intent),

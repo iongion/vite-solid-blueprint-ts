@@ -18,7 +18,7 @@ export const NavbarDivider: Component<NavbarDividerProps> = (userProps) => {
         Classes.NAVBAR_DIVIDER,
         {
           // from props
-          [Classes.DISABLED]: props.disabled,
+          [Classes.DISABLED]: !!props.disabled,
         },
         props.class
       )}
@@ -45,7 +45,7 @@ export const NavbarHeading: Component<NavbarHeadingProps> = (userProps) => {
         Classes.NAVBAR_HEADING,
         {
           // from props
-          [Classes.DISABLED]: props.disabled,
+          [Classes.DISABLED]: !!props.disabled,
         },
         props.class
       )}
@@ -81,7 +81,7 @@ export const NavbarGroup: Component<NavbarGroupProps> = (userProps) => {
         Classes.alignmentClass(props.align),
         {
           // from props
-          [Classes.DISABLED]: props.disabled,
+          [Classes.DISABLED]: !!props.disabled,
         },
         props.class
       )}
@@ -116,8 +116,8 @@ export function Navbar(userProps: NavbarProps = {}) {
         Classes.NAVBAR,
         {
           // from props
-          [Classes.FIXED_TOP]: props.fixedToTop,
-          [Classes.DISABLED]: props.disabled,
+          [Classes.FIXED_TOP]: !!props.fixedToTop,
+          [Classes.DISABLED]: !!props.disabled,
         },
         props.class
       )}

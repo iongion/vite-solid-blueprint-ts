@@ -43,9 +43,9 @@ export const ProgressBar: Component<ProgressBarProps> = (userProps: ProgressBarP
         Classes.intentClass(props.intent),
         {
           // from props
-          [Classes.PROGRESS_NO_ANIMATION]: !props.animate,
-          [Classes.PROGRESS_NO_STRIPES]: !props.stripes,
-          [Classes.DISABLED]: props.disabled,
+          [Classes.PROGRESS_NO_ANIMATION]: !!!props.animate,
+          [Classes.PROGRESS_NO_STRIPES]: !!!props.stripes,
+          [Classes.DISABLED]: !!props.disabled,
         },
         // user
         props.class

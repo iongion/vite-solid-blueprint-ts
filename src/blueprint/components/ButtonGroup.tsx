@@ -40,11 +40,11 @@ export const ButtonGroup: Component<ButtonGroupProps> = (userProps: ButtonGroupP
         Classes.BUTTON_GROUP,
         {
           // from props
-          [Classes.FILL]: props.fill,
-          [Classes.LARGE]: props.large,
-          [Classes.MINIMAL]: props.minimal,
-          [Classes.VERTICAL]: props.vertical,
-          [Classes.DISABLED]: props.disabled,
+          [Classes.FILL]: !!props.fill,
+          [Classes.LARGE]: !!props.large,
+          [Classes.MINIMAL]: !!props.minimal,
+          [Classes.VERTICAL]: !!props.vertical,
+          [Classes.DISABLED]: !!props.disabled,
         },
         Classes.alignmentClass(props.alignText),
         // user

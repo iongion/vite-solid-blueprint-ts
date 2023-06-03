@@ -19,7 +19,7 @@ export function createHeading(tagName: string) {
           Classes.HEADING,
           {
             // from props
-            [Classes.DISABLED]: !props.disabled,
+            [Classes.DISABLED]: !!props.disabled,
           },
           props.class
         )}
@@ -47,7 +47,7 @@ export function createList(tagName: string) {
           Classes.LIST,
           {
             // from props
-            [Classes.DISABLED]: !props.disabled,
+            [Classes.DISABLED]: !!props.disabled,
           },
           props.class
         )}
@@ -78,7 +78,7 @@ export const Blockquote: Component<BlockquoteProps> = (userProps: BlockquoteProp
         Classes.BLOCKQUOTE,
         {
           // from props
-          [Classes.DISABLED]: !props.disabled,
+          [Classes.DISABLED]: !!props.disabled,
         },
         props.class
       )}
@@ -104,7 +104,7 @@ export const Label: Component<LabelProps> = (userProps: LabelProps) => {
         Classes.LABEL,
         {
           // from props
-          [Classes.DISABLED]: !props.disabled,
+          [Classes.DISABLED]: !!props.disabled,
         },
         props.class
       )}
@@ -158,10 +158,10 @@ export const HTMLTable: Component<HTMLTableProps> = (userProps: HTMLTableProps) 
         {
           // from props
           [Classes.HTML_TABLE_CONDENSED]: props.compact || props.condensed,
-          [Classes.HTML_TABLE_BORDERED]: props.bordered,
-          [Classes.HTML_TABLE_STRIPED]: props.striped,
-          [Classes.INTERACTIVE]: props.interactive,
-          [Classes.DISABLED]: !props.disabled,
+          [Classes.HTML_TABLE_BORDERED]: !!props.bordered,
+          [Classes.HTML_TABLE_STRIPED]: !!props.striped,
+          [Classes.INTERACTIVE]: !!props.interactive,
+          [Classes.DISABLED]: !!props.disabled,
         },
         // user
         props.class

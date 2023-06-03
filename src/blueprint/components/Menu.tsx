@@ -21,7 +21,7 @@ export const MenuDivider: Component<MenuDividerProps> = (userProps) => {
         Classes.MENU_DIVIDER,
         {
           // from props
-          [Classes.DISABLED]: props.disabled,
+          [Classes.DISABLED]: !!props.disabled,
         },
         props.class
       )}
@@ -75,7 +75,7 @@ export const MenuItem: Component<MenuItemProps> = (userProps) => {
           Classes.MENU_ITEM,
           {
             // from props
-            [Classes.DISABLED]: props.disabled,
+            [Classes.DISABLED]: !!props.disabled,
           },
           props.class
         )}
@@ -116,8 +116,8 @@ export function Menu(userProps: MenuProps = {}) {
         Classes.POPOVER_DISMISS,
         {
           // from props
-          [Classes.FIXED_TOP]: props.fixedToTop,
-          [Classes.DISABLED]: props.disabled,
+          [Classes.FIXED_TOP]: !!props.fixedToTop,
+          [Classes.DISABLED]: !!props.disabled,
         },
         props.class
       )}

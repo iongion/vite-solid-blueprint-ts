@@ -22,7 +22,7 @@ export const CodeBlock: Component<CodeBlockProps> = (userProps: CodeBlockProps) 
         Classes.CODE_BLOCK,
         {
           // from props
-          [Classes.DISABLED]: props.disabled,
+          [Classes.DISABLED]: !!props.disabled,
         },
         props.class
       )}

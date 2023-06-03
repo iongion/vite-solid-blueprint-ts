@@ -72,7 +72,7 @@ export const NonIdealState: Component<NonIdealStateProps> = (userProps: NonIdeal
         Classes.NON_IDEAL_STATE,
         {
           // from props
-          [Classes.DISABLED]: props.disabled,
+          [Classes.DISABLED]: !!props.disabled,
         },
         props.class
       )}

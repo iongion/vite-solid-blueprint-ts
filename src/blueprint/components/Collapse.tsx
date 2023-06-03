@@ -31,9 +31,9 @@ export const Collapse: Component<CollapseProps> = (userProps: CollapseProps) => 
         Classes.COLLAPSE,
         {
           // from props
-          [Classes.COLLAPSE_OPEN]: props.isOpen,
-          [Classes.COLLAPSE_CLOSE]: !props.isOpen,
-          [Classes.DISABLED]: !props.disabled,
+          [Classes.COLLAPSE_OPEN]: !!props.isOpen,
+          [Classes.COLLAPSE_CLOSE]: !!!props.isOpen,
+          [Classes.DISABLED]: !!props.disabled,
         },
         props.class
       )}
