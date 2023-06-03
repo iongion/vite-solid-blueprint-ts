@@ -27,23 +27,27 @@ export const Callout: Component<CalloutProps> = (userProps: CalloutProps) => {
     "class",
     "disabled",
   ]);
+  const createClassList = createMemo(() =>
+    classNames(
+      Classes.CALLOUT,
+      {
+        // from props
+        [Classes.CALLOUT_ICON]: props.icon,
+        [Classes.DISABLED]: !!props.disabled,
+      },
+      intentClass(props.intent),
+      // user
+      props.class
+    )
+  );
   const createIcon = createMemo(() => {
     return props.icon ? typeof props.icon === "string" ? <Icon icon={props.icon as IconName} /> : undefined : undefined;
   });
   const createChildren = children(() => props.children);
   return (
     <div
-      class={classNames(
-        Classes.CALLOUT,
-        {
-          // from props
-          [Classes.CALLOUT_ICON]: props.icon,
-          [Classes.DISABLED]: !!props.disabled,
-        },
-        intentClass(props.intent),
-        // user
-        props.class
-      )}
+      // props
+      class={createClassList()}
       {...htmlProps}
     >
       {createIcon()}

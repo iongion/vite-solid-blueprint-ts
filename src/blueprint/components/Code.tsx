@@ -1,5 +1,5 @@
 import classNames from "classnames";
-import { mergeProps, splitProps, children } from "solid-js";
+import { mergeProps, splitProps, children, createMemo } from "solid-js";
 import type { Component } from "solid-js";
 
 import { DISPLAYNAME_PREFIX, Classes, Props } from "@blueprint/core";
@@ -15,17 +15,21 @@ export const CodeBlock: Component<CodeBlockProps> = (userProps: CodeBlockProps) 
     "class",
     "disabled",
   ]);
+  const createClassList = createMemo(() =>
+    classNames(
+      Classes.CODE_BLOCK,
+      {
+        // from props
+        [Classes.DISABLED]: !!props.disabled,
+      },
+      props.class
+    )
+  );
   const createChildren = children(() => props.children);
   return (
     <pre
-      class={classNames(
-        Classes.CODE_BLOCK,
-        {
-          // from props
-          [Classes.DISABLED]: !!props.disabled,
-        },
-        props.class
-      )}
+      // props
+      class={createClassList()}
       {...htmlProps}
     >
       {createChildren()}

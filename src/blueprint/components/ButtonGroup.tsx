@@ -1,5 +1,5 @@
 import classNames from "classnames";
-import { mergeProps, splitProps, children } from "solid-js";
+import { mergeProps, splitProps, children, createMemo } from "solid-js";
 import type { Component } from "solid-js";
 
 import { DISPLAYNAME_PREFIX, Alignment, Classes, Props } from "@blueprint/core";
@@ -33,23 +33,27 @@ export const ButtonGroup: Component<ButtonGroupProps> = (userProps: ButtonGroupP
     "class",
     "disabled",
   ]);
+  const createClassList = createMemo(() =>
+    classNames(
+      Classes.BUTTON_GROUP,
+      {
+        // from props
+        [Classes.FILL]: !!props.fill,
+        [Classes.LARGE]: !!props.large,
+        [Classes.MINIMAL]: !!props.minimal,
+        [Classes.VERTICAL]: !!props.vertical,
+        [Classes.DISABLED]: !!props.disabled,
+      },
+      Classes.alignmentClass(props.alignText),
+      // user
+      props.class
+    )
+  );
   const createChildren = children(() => props.children);
   return (
     <div
-      class={classNames(
-        Classes.BUTTON_GROUP,
-        {
-          // from props
-          [Classes.FILL]: !!props.fill,
-          [Classes.LARGE]: !!props.large,
-          [Classes.MINIMAL]: !!props.minimal,
-          [Classes.VERTICAL]: !!props.vertical,
-          [Classes.DISABLED]: !!props.disabled,
-        },
-        Classes.alignmentClass(props.alignText),
-        // user
-        props.class
-      )}
+      // props
+      class={createClassList()}
       {...htmlProps}
     >
       {createChildren()}

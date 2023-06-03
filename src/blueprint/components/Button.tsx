@@ -1,5 +1,5 @@
 import classNames from "classnames";
-import { mergeProps, splitProps, children } from "solid-js";
+import { mergeProps, splitProps, children, createMemo } from "solid-js";
 import type { Component } from "solid-js";
 
 import {
@@ -66,34 +66,38 @@ export const Button: Component<ButtonProps> = (userProps) => {
     "onClick",
     "class",
   ]);
-  const createText = () => {
+  const createClassList = createMemo(() =>
+    classNames(
+      Classes.BUTTON,
+      {
+        // from props
+        [Classes.ACTIVE]: !!props.active,
+        [Classes.MINIMAL]: !!props.minimal,
+        [Classes.OUTLINED]: !!props.outlined,
+        [Classes.SMALL]: !!props.small,
+        [Classes.LARGE]: !!props.large,
+        [Classes.FILL]: !!props.fill,
+        [Classes.DISABLED]: !!props.disabled,
+      },
+      alignmentClass(props.alignText),
+      intentClass(props.intent),
+      // user
+      props.class
+    )
+  );
+  const createText = createMemo(() => {
     return props.text ? <span class={Classes.BUTTON_TEXT}>{props.text}</span> : undefined;
-  };
+  });
   const createIcon = (icon?: IconName | null) => {
     return icon ? <Icon icon={icon} /> : undefined;
   };
   const createChildren = children(() => props.children);
   return (
     <button
+      // props
       onClick={props.disabled ? undefined : props.onClick}
       type={props.type as ButtonType}
-      class={classNames(
-        Classes.BUTTON,
-        {
-          // from props
-          [Classes.ACTIVE]: !!props.active,
-          [Classes.MINIMAL]: !!props.minimal,
-          [Classes.OUTLINED]: !!props.outlined,
-          [Classes.SMALL]: !!props.small,
-          [Classes.LARGE]: !!props.large,
-          [Classes.FILL]: !!props.fill,
-          [Classes.DISABLED]: !!props.disabled,
-        },
-        alignmentClass(props.alignText),
-        intentClass(props.intent),
-        // user
-        props.class
-      )}
+      class={createClassList()}
       {...htmlProps}
     >
       {createIcon(props.icon)}

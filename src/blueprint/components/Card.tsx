@@ -1,5 +1,5 @@
 import classNames from "classnames";
-import { mergeProps, splitProps, children } from "solid-js";
+import { mergeProps, splitProps, children, createMemo } from "solid-js";
 import type { Component } from "solid-js";
 
 import { DISPLAYNAME_PREFIX, Classes, Elevation, Props, ElevationProps, InteractiveProps, elevationClass } from "@blueprint/core";
@@ -21,20 +21,24 @@ export const Card: Component<CardProps> = (userProps: CardProps) => {
     "class",
     "disabled",
   ]);
+  const createClassList = createMemo(() =>
+    classNames(
+      Classes.CARD,
+      {
+        // from props
+        [Classes.INTERACTIVE]: !!props.interactive,
+        [Classes.DISABLED]: !!props.disabled,
+      },
+      elevationClass(props.elevation),
+      // user
+      props.class
+    )
+  );
   const createChildren = children(() => props.children);
   return (
     <div
-      class={classNames(
-        Classes.CARD,
-        {
-          // from props
-          [Classes.INTERACTIVE]: !!props.interactive,
-          [Classes.DISABLED]: !!props.disabled,
-        },
-        elevationClass(props.elevation),
-        // user
-        props.class
-      )}
+      // props
+      class={createClassList()}
       {...htmlProps}
     >
       {createChildren()}
