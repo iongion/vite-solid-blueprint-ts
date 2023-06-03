@@ -38,12 +38,15 @@ export const NonIdealState: Component<NonIdealStateProps> = (userProps: NonIdeal
     "class",
     "disabled",
   ]);
+  const createStyle = createMemo(() => {
+    return `font-size: ${props.iconSize}px; line-height: ${props.iconSize}px`;
+  });
   const renderIcon = createMemo(() => {
     return props.icon ? <Icon icon={props.icon} size={props.iconSize} /> : undefined;
   });
   const renderVisual = createMemo(() => {
     return (
-      <div class={Classes.NON_IDEAL_STATE_VISUAL} style={`font-size: ${props.iconSize}px; line-height: ${props.iconSize}px`}>
+      <div class={Classes.NON_IDEAL_STATE_VISUAL} style={createStyle()}>
         {renderIcon()}
       </div>
     );
