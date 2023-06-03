@@ -81,8 +81,14 @@ const App: Component = () => {
     <div class={`App ${Classes.DARK}`}>
       <ToolsList />
       <h1 class="AppHeaderTitle">Solid + BlueprintJS + Typescript + Vite</h1>
-      <p class="read-the-docs">Click on the logos to learn more</p>
-
+      <p class="read-the-docs">
+        <span>Click on the logos to learn more.</span>
+        <br />
+        <ButtonGroup minimal>
+          <AnchorButton icon={IconName.STACKBLITZ} href="https://stackblitz.com/edit/solidjs-templates-gfcotu" target="_blank" text={t("Edit source")} />
+          <AnchorButton href="https://stackblitz.com/edit/solidjs-templates-gfcotu" target="_blank" text={t("Git")} />
+        </ButtonGroup>
+      </p>
       <Example<ButtonProps>
         example="Button"
         schema={ButtonPropsSchema}

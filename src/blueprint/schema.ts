@@ -84,6 +84,7 @@ const IconSchema = y
     IconName.ADD,
     IconName.HAND_RIGHT,
     IconName.SEARCH,
+    IconName.STACKBLITZ,
   ])
   .defined();
 

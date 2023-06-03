@@ -27,6 +27,7 @@ export enum IconName {
   HAND_RIGHT = "hand-right",
   SEARCH = "search",
   SHARE = "share",
+  STACKBLITZ = "stackblitz",
 }
 
 export const Icons = {
@@ -42,6 +43,7 @@ export const Icons = {
   [IconName.SEARCH]: Images.SEARCH.default,
   [IconName.SHARE]: Images.SHARE.default,
   [IconName.HAND_RIGHT]: Images.HAND_RIGHT.default,
+  [IconName.STACKBLITZ]: Images.STACKBLITZ.default,
 };
 
 const icons = Object.keys(Icons);
