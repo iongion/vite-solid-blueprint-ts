@@ -191,7 +191,7 @@ export const CollapsePropsSchema: y.ObjectSchema<Omit<CollapseProps, "children">
 
 export const MenuPropsSchema: y.ObjectSchema<Omit<MenuProps, "children">> = y
   .object({
-    fixedToTop: y.boolean().default(false),
+    large: y.boolean().default(false),
   })
   .concat(PropsSchema);
 

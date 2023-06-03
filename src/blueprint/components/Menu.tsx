@@ -105,16 +105,16 @@ export const MenuItem: Component<MenuItemProps> = (userProps) => {
 
 // Menu
 interface IMenuProps extends Props {
-  fixedToTop?: boolean;
+  large?: boolean;
 }
 export type MenuProps = IMenuProps;
 export const MenuPropsDefaults: MenuProps = {
-  fixedToTop: false,
+  large: false,
 };
 export function Menu(userProps: MenuProps = {}) {
   const [props, htmlProps] = splitProps(mergeProps(MenuPropsDefaults, userProps), [
     // props list
-    "fixedToTop",
+    "large",
     "children",
     "class",
     "disabled",
@@ -125,7 +125,7 @@ export function Menu(userProps: MenuProps = {}) {
       Classes.POPOVER_DISMISS,
       {
         // from props
-        [Classes.FIXED_TOP]: !!props.fixedToTop,
+        [Classes.LARGE]: !!props.large,
         [Classes.DISABLED]: !!props.disabled,
       },
       props.class
