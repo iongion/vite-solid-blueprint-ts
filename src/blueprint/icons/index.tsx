@@ -85,7 +85,7 @@ export const Icon: Component<IconProps> = (userProps) => {
   const createIcon = createMemo(() => {
     const iconElement = props.icon ? Icons[props.icon] : undefined;
     console.debug(iconElement);
-    return iconElement;
+    return iconElement({ width: props.size, height: props.size });
   });
   return (
     <span
