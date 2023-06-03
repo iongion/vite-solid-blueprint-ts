@@ -111,7 +111,7 @@ const App: Component = () => {
               {...props}
               intent={props.intent || Intent.PRIMARY}
               icon={props.icon || IconName.DUPLICATE}
-              rightIcon={props.rightIcon || IconName.INFO_SIGN}
+              rightIcon={props.rightIcon || IconName.SHARE}
               text={props.text || t("Duplicate this page")}
             />
           );
