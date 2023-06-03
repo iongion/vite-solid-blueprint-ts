@@ -20,7 +20,7 @@ import "./Button.css";
 
 export type ButtonType = "submit" | "reset" | "button";
 
-interface IButtonProps<E extends HTMLButtonElement | HTMLAnchorElement | HTMLElement = HTMLButtonElement> extends ActionProps<E>, IntentProps, Props {
+interface IButtonProps<E extends HTMLButtonElement | HTMLAnchorElement | HTMLElement = HTMLButtonElement> extends ActionProps<E> {
   icon?: IconName | null;
   rightIcon?: IconName | null;
   alignText?: Alignment | null;

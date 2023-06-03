@@ -1,11 +1,12 @@
 import { JSX } from "solid-js";
 
 import type { IconName } from "@blueprint/icons";
-import type { MaybeElement } from "@blueprint/core";
+import type { Props, IntentProps, MaybeElement } from "@blueprint/core";
 
-export interface ActionProps<T extends HTMLElement = HTMLElement> {
+export interface ActionProps<T extends HTMLElement = HTMLElement> extends IntentProps, Props {
   icon?: IconName | MaybeElement;
   text?: string | MaybeElement;
   onClick?: JSX.EventHandlerUnion<T, MouseEvent>;
+  onFocus?: JSX.EventHandlerUnion<T, FocusEvent>;
   tabIndex?: number;
 }

@@ -36,7 +36,7 @@ export const MenuDivider: Component<MenuDividerProps> = (userProps) => {
 (MenuDivider as any).displayName = `${DISPLAYNAME_PREFIX}.MenuDivider`;
 
 // MenuItem
-interface IMenuItemProps<E extends HTMLAnchorElement | HTMLElement = HTMLAnchorElement> extends ActionProps<E>, Props {
+interface IMenuItemProps<E extends HTMLAnchorElement | HTMLElement = HTMLAnchorElement> extends ActionProps<E> {
   rightIcon?: IconName | MaybeElement;
 }
 export type MenuItemProps = IMenuItemProps;
