@@ -29,7 +29,8 @@ function SchemaForm<T>({ schema, props, onPropertyChange }: { schema: y.ObjectSc
               const name = fieldName();
               const field = schema.fields[name];
               const desc = field.describe();
-              const value = (props?.[name] as any) || (desc as any).default;
+              const { [name]: propertyValue } = destructure(props || { [name]: (desc as any).default });
+              const value = propertyValue() || (desc as any).default;
               let widget: JSX.Element | null;
               const items: string[] = (desc as any).oneOf || [];
               // console.debug(name, value, { desc, field }, items);
