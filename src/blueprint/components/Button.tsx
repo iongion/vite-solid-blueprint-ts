@@ -79,7 +79,7 @@ export const Button: Component<ButtonProps> = (userProps) => {
         [Classes.LARGE]: !!props.large,
         [Classes.FILL]: !!props.fill,
         [Classes.LOADING]: !!props.loading,
-        [Classes.DISABLED]: !!props.disabled,
+        [Classes.DISABLED]: !!props.disabled || !!props.loading,
       },
       alignmentClass(props.alignText),
       intentClass(props.intent),
@@ -94,17 +94,8 @@ export const Button: Component<ButtonProps> = (userProps) => {
     return icon ? <Icon icon={icon} /> : undefined;
   };
   const createChildren = children(() => props.children);
-  const createContent = createMemo(() => {
-    return props.loading ? (
-      <Spinner />
-    ) : (
-      <>
-        {createIcon(props.icon)}
-        {createText()}
-        {createChildren()}
-        {createIcon(props.rightIcon)}
-      </>
-    );
+  const createLoader = createMemo(() => {
+    return props.loading ? <Spinner intent={props.intent} size={20} /> : undefined;
   });
   return (
     <button
@@ -112,9 +103,14 @@ export const Button: Component<ButtonProps> = (userProps) => {
       onClick={props.disabled ? undefined : props.onClick}
       type={props.type as ButtonType}
       class={createClassList()}
+      disabled={!!props.disabled}
       {...htmlProps}
     >
-      {createContent()}
+      {createIcon(props.icon)}
+      {createText()}
+      {createLoader()}
+      {createChildren()}
+      {createIcon(props.rightIcon)}
     </button>
   );
 };
