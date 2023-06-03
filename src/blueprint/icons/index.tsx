@@ -1,4 +1,5 @@
 import classNames from "classnames";
+import { mergeProps, splitProps, createMemo } from "solid-js";
 import type { Component } from "solid-js";
 
 import { Classes, Props } from "@blueprint/core";
@@ -42,13 +43,45 @@ const icons = Object.keys(Icons);
 export type IconType = typeof icons[number];
 export const isIcon = (x: any): x is IconType => icons.includes(x);
 
-export interface IconProps extends Props {
+export interface IconProps extends Omit<Props, "children"> {
   icon: IconName;
   size?: IconSize;
 }
+export const IconPropsDefaults: IconProps = {
+  icon: IconName.PLUS,
+  size: IconSize.STANDARD,
+};
 
-export const Icon: Component<IconProps> = (props) => (
-  <span aria-hidden="true" data-icon={props.icon} class={classNames(Classes.ICON, props.icon ? `${Classes.ICON}-${props.icon}` : null, props.icon)}></span>
-);
+export const Icon: Component<IconProps> = (userProps) => {
+  const [props, htmlProps] = splitProps(mergeProps(IconPropsDefaults, userProps), [
+    // props list
+    "icon",
+    "size",
+    "class",
+    "disabled",
+  ]);
+  const createClassList = createMemo(() =>
+    classNames(
+      Classes.ICON,
+      props.icon ? `${Classes.ICON}-${props.icon}` : null,
+      {
+        // from props
+        [Classes.DISABLED]: !!props.disabled,
+      },
+      props.icon,
+      // user
+      props.class
+    )
+  );
+  return (
+    <span
+      // props
+      aria-hidden="true"
+      data-icon={props.icon}
+      class={createClassList()}
+      {...htmlProps}
+    ></span>
+  );
+};
 
 export type PIcon = IconName | typeof Icon;

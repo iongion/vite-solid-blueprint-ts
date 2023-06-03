@@ -10,15 +10,16 @@ import {
   CalloutProps,
   CardProps,
   CollapseProps,
+  HTMLTableProps,
   MenuProps,
   NavbarProps,
-  HTMLTableProps,
   NonIdealStatePropsDefaults,
   NonIdealStateProps,
+  ProgressBarProps,
   SpinnerProps,
   SpinnerSize,
-  ProgressBarProps,
 } from "@blueprint/components";
+import { IconSize, IconProps } from "@blueprint/icons";
 
 export const PropsSchema: y.ObjectSchema<Omit<Props, "children">> = y.object({
   disabled: y.boolean().optional().nullable(),
@@ -79,11 +80,16 @@ const IconSchema = y
     IconName.CARET_UP,
     IconName.CARET_RIGHT,
   ])
-  .optional();
+  .defined();
 
-export const IconPropsSchema = y.object({
-  intent: IconSchema,
-});
+const IconSizeSchema = y.number<IconSize>().oneOf([IconSize.STANDARD, IconSize.LARGE]);
+
+export const IconPropsSchema: y.ObjectSchema<Omit<IconProps, "children">> = y
+  .object({
+    icon: IconSchema.default(IconName.HAND_RIGHT as any),
+    size: IconSizeSchema.default(IconSize.STANDARD),
+  })
+  .concat(PropsSchema);
 
 const IntentSchema = y
   .string<Intent>()
