@@ -29,6 +29,12 @@ export const createConfig = ({ mode }) => {
       // but enabling some of the options, such as "autoname" will improve the debugging experience
       // https://github.com/thetarnav/solid-devtools/tree/main/packages/transform#options
       autoname: true,
+      locator: {
+        targetIDE: 'vscode',
+        key: 'Ctrl',
+        jsxLocation: true,
+        componentLocation: true,
+      },
     }),
     solidPlugin(),
     solidSvg(),
