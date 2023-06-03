@@ -31,6 +31,7 @@ export const ButtonGroup: Component<ButtonGroupProps> = (userProps: ButtonGroupP
     "vertical",
     "children",
     "class",
+    "disabled",
   ]);
   const createChildren = children(() => props.children);
   return (
@@ -38,10 +39,12 @@ export const ButtonGroup: Component<ButtonGroupProps> = (userProps: ButtonGroupP
       class={classNames(
         Classes.BUTTON_GROUP,
         {
+          // from props
           [Classes.FILL]: props.fill,
           [Classes.LARGE]: props.large,
           [Classes.MINIMAL]: props.minimal,
           [Classes.VERTICAL]: props.vertical,
+          [Classes.DISABLED]: props.disabled,
         },
         Classes.alignmentClass(props.alignText),
         // user

@@ -25,6 +25,7 @@ export const Callout: Component<CalloutProps> = (userProps: CalloutProps) => {
     "title",
     "children",
     "class",
+    "disabled",
   ]);
   const createIcon = createMemo(() => {
     return props.icon ? typeof props.icon === "string" ? <Icon icon={props.icon as IconName} /> : undefined : undefined;
@@ -35,7 +36,9 @@ export const Callout: Component<CalloutProps> = (userProps: CalloutProps) => {
       class={classNames(
         Classes.CALLOUT,
         {
+          // from props
           [Classes.CALLOUT_ICON]: !!props.icon,
+          [Classes.DISABLED]: props.disabled,
         },
         intentClass(props.intent),
         // user

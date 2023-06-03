@@ -13,10 +13,21 @@ export const CodeBlock: Component<CodeBlockProps> = (userProps: CodeBlockProps) 
     // props list
     "children",
     "class",
+    "disabled",
   ]);
   const createChildren = children(() => props.children);
   return (
-    <pre class={classNames(Classes.CODE_BLOCK, props.class)} {...htmlProps}>
+    <pre
+      class={classNames(
+        Classes.CODE_BLOCK,
+        {
+          // from props
+          [Classes.DISABLED]: props.disabled,
+        },
+        props.class
+      )}
+      {...htmlProps}
+    >
       {createChildren()}
     </pre>
   );

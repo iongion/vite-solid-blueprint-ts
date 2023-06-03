@@ -5,35 +5,85 @@ import type { Component } from "solid-js";
 
 import { DISPLAYNAME_PREFIX, Classes, InteractiveProps, Props } from "@blueprint/core";
 
+// Generic heading
 interface IHeadingProps extends Props {}
 export type HeadingProps = IHeadingProps;
-export function createHeading<T extends HeadingProps = Props>(tagName: string) {
-  function Heading(userProps: T) {
-    const [props, htmlProps] = splitProps(userProps, ["children", "class"]);
+export function createHeading(tagName: string) {
+  const Heading: Component<HeadingProps> = (userProps) => {
+    const [props, htmlProps] = splitProps(userProps, ["children", "class", "disabled"]);
     const createChildren = children(() => props.children);
     return (
-      <Dynamic component={tagName} class={classNames(Classes.HEADING, props.class)} {...htmlProps}>
+      <Dynamic
+        component={tagName}
+        class={classNames(
+          Classes.HEADING,
+          {
+            // from props
+            [Classes.DISABLED]: !props.disabled,
+          },
+          props.class
+        )}
+        {...htmlProps}
+      >
         {createChildren()}
       </Dynamic>
     );
-  }
-  Heading.displayName = `${DISPLAYNAME_PREFIX}.${tagName}`;
+  };
+  (Heading as any).displayName = `${DISPLAYNAME_PREFIX}.${tagName}`;
   return Heading;
 }
 
-export const H1 = createHeading<HeadingProps>("h1");
-export const H2 = createHeading<HeadingProps>("h2");
-export const H3 = createHeading<HeadingProps>("h3");
-export const H4 = createHeading<HeadingProps>("h4");
-export const H5 = createHeading<HeadingProps>("h5");
-export const H6 = createHeading<HeadingProps>("h6");
+// Generic list
+interface IListProps extends Props {}
+export type ListProps = IListProps;
+export function createList(tagName: string) {
+  const List: Component<ListProps> = (userProps) => {
+    const [props, htmlProps] = splitProps(userProps, ["children", "class", "disabled"]);
+    const createChildren = children(() => props.children);
+    return (
+      <Dynamic
+        component={tagName}
+        class={classNames(
+          Classes.LIST,
+          {
+            // from props
+            [Classes.DISABLED]: !props.disabled,
+          },
+          props.class
+        )}
+        {...htmlProps}
+      >
+        {createChildren()}
+      </Dynamic>
+    );
+  };
+  (List as any).displayName = `${DISPLAYNAME_PREFIX}.${tagName}`;
+  return List;
+}
+
+export const H1 = createHeading("h1");
+export const H2 = createHeading("h2");
+export const H3 = createHeading("h3");
+export const H4 = createHeading("h4");
+export const H5 = createHeading("h5");
+export const H6 = createHeading("h6");
 
 export type BlockquoteProps = Props;
 export const Blockquote: Component<BlockquoteProps> = (userProps: BlockquoteProps) => {
-  const [props, htmlProps] = splitProps(userProps, ["children", "class"]);
+  const [props, htmlProps] = splitProps(userProps, ["children", "class", "disabled"]);
   const createChildren = children(() => props.children);
   return (
-    <blockquote class={classNames(Classes.BLOCKQUOTE, props.class)} {...htmlProps}>
+    <blockquote
+      class={classNames(
+        Classes.BLOCKQUOTE,
+        {
+          // from props
+          [Classes.DISABLED]: !props.disabled,
+        },
+        props.class
+      )}
+      {...htmlProps}
+    >
       {createChildren()}
     </blockquote>
   );
@@ -46,41 +96,32 @@ interface ILabelProps extends Props {
 }
 export type LabelProps = ILabelProps;
 export const Label: Component<LabelProps> = (userProps: LabelProps) => {
-  const [props, htmlProps] = splitProps(userProps, ["for", "htmlFor", "children", "class"]);
+  const [props, htmlProps] = splitProps(userProps, ["for", "htmlFor", "children", "class", "disabled"]);
   const createChildren = children(() => props.children);
   return (
-    <label class={classNames(Classes.LABEL, props.class)} for={props.for || props.htmlFor} {...htmlProps}>
+    <label
+      class={classNames(
+        Classes.LABEL,
+        {
+          // from props
+          [Classes.DISABLED]: !props.disabled,
+        },
+        props.class
+      )}
+      for={props.for || props.htmlFor}
+      {...htmlProps}
+    >
       {createChildren()}
     </label>
   );
 };
 (Label as any).displayName = `${DISPLAYNAME_PREFIX}.Label`;
 
-interface IULProps extends Props {}
-export type ULProps = IULProps;
-export const UL: Component<ULProps> = (userProps: ULProps) => {
-  const [props, htmlProps] = splitProps(userProps, ["children", "class"]);
-  const createChildren = children(() => props.children);
-  return (
-    <ul class={classNames(Classes.LIST, props.class)} {...htmlProps}>
-      {createChildren()}
-    </ul>
-  );
-};
-(UL as any).displayName = `${DISPLAYNAME_PREFIX}.UL`;
+export type ULProps = Props;
+export const UL: Component<ULProps> = createList("ul");
 
-interface IOLProps extends Props {}
-export type OLProps = IOLProps;
-export const OL: Component<OLProps> = (userProps: OLProps) => {
-  const [props, htmlProps] = splitProps(userProps, ["children", "class"]);
-  const createChildren = children(() => props.children);
-  return (
-    <ol class={classNames(Classes.LIST, props.class)} {...htmlProps}>
-      {createChildren()}
-    </ol>
-  );
-};
-(OL as any).displayName = `${DISPLAYNAME_PREFIX}.OL`;
+export type OLProps = Props;
+export const OL: Component<OLProps> = createList("ol");
 
 interface IHTMLTableProps extends InteractiveProps, Props {
   bordered?: boolean | null;
@@ -106,6 +147,7 @@ export const HTMLTable: Component<HTMLTableProps> = (userProps: HTMLTableProps) 
     "interactive",
     "children",
     "class",
+    "disabled",
   ]);
   const createChildren = children(() => props.children);
   return (
@@ -113,12 +155,13 @@ export const HTMLTable: Component<HTMLTableProps> = (userProps: HTMLTableProps) 
       class={classNames(
         // default
         Classes.HTML_TABLE,
-        // props
         {
+          // from props
           [Classes.HTML_TABLE_CONDENSED]: props.compact || props.condensed,
           [Classes.HTML_TABLE_BORDERED]: props.bordered,
           [Classes.HTML_TABLE_STRIPED]: props.striped,
           [Classes.INTERACTIVE]: props.interactive,
+          [Classes.DISABLED]: !props.disabled,
         },
         // user
         props.class
@@ -129,4 +172,4 @@ export const HTMLTable: Component<HTMLTableProps> = (userProps: HTMLTableProps) 
     </table>
   );
 };
-(OL as any).displayName = `${DISPLAYNAME_PREFIX}.OL`;
+(HTMLTable as any).displayName = `${DISPLAYNAME_PREFIX}.HTMLTable`;

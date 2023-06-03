@@ -80,6 +80,7 @@ export const Button: Component<ButtonProps> = (userProps) => {
       class={classNames(
         Classes.BUTTON,
         {
+          // from props
           [Classes.ACTIVE]: props.active,
           [Classes.MINIMAL]: props.minimal,
           [Classes.OUTLINED]: props.outlined,

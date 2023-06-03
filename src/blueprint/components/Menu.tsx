@@ -7,19 +7,26 @@ import { ActionProps } from "@blueprint/tools/actions";
 import { Icon, IconName } from "@blueprint/icons";
 
 // MenuDivider
-export type MenuDividerProps = Props;
+export type MenuDividerProps = Omit<Props, "children">;
 export const MenuDividerPropsDefaults: MenuDividerProps = {};
 export const MenuDivider: Component<MenuDividerProps> = (userProps) => {
   const [props, htmlProps] = splitProps(mergeProps(MenuDividerPropsDefaults, userProps), [
     // props list
-    "children",
     "class",
     "disabled",
   ]);
   return (
-    <div class={classNames(Classes.MENU_DIVIDER, { [Classes.DISABLED]: props.disabled }, props.class)} {...htmlProps}>
-      {props.children}
-    </div>
+    <div
+      class={classNames(
+        Classes.MENU_DIVIDER,
+        {
+          // from props
+          [Classes.DISABLED]: props.disabled,
+        },
+        props.class
+      )}
+      {...htmlProps}
+    ></div>
   );
 };
 (MenuDivider as any).displayName = `${DISPLAYNAME_PREFIX}.MenuDivider`;
@@ -53,14 +60,23 @@ export const MenuItem: Component<MenuItemProps> = (userProps) => {
   };
   const createChildren = children(() => props.children);
   return (
-    <li class={classNames({ [Classes.DISABLED]: !!props.disabled }) || undefined}>
+    <li
+      class={
+        classNames({
+          // from props
+          [Classes.DISABLED]: !!props.disabled,
+        }) || undefined
+      }
+    >
       <a
         role="menuitem"
         tabindex="0"
         class={classNames(
           Classes.MENU_ITEM,
-          // from props
-          { [Classes.DISABLED]: props.disabled },
+          {
+            // from props
+            [Classes.DISABLED]: props.disabled,
+          },
           props.class
         )}
         onClick={props.disabled ? undefined : props.onClick}
@@ -92,18 +108,22 @@ export function Menu(userProps: MenuProps = {}) {
     "class",
     "disabled",
   ]);
+  const createChildren = children(() => props.children);
   return (
     <div
       class={classNames(
         Classes.MENU,
         Classes.POPOVER_DISMISS,
-        // from props
-        { [Classes.FIXED_TOP]: props.fixedToTop, [Classes.DISABLED]: props.disabled },
+        {
+          // from props
+          [Classes.FIXED_TOP]: props.fixedToTop,
+          [Classes.DISABLED]: props.disabled,
+        },
         props.class
       )}
       {...htmlProps}
     >
-      {props.children}
+      {createChildren()}
     </div>
   );
 }

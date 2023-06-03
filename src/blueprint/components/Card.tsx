@@ -19,13 +19,18 @@ export const Card: Component<CardProps> = (userProps: CardProps) => {
     "interactive",
     "children",
     "class",
+    "disabled",
   ]);
   const createChildren = children(() => props.children);
   return (
     <div
       class={classNames(
         Classes.CARD,
-        { [Classes.INTERACTIVE]: props.interactive },
+        {
+          // from props
+          [Classes.INTERACTIVE]: props.interactive,
+          [Classes.DISABLED]: props.disabled,
+        },
         elevationClass(props.elevation),
         // user
         props.class
