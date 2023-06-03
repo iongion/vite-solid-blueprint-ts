@@ -37,6 +37,7 @@ export const Icons = {
   [IconName.CARET_DOWN]: Images.CARET_DOWN.default,
   [IconName.CARET_UP]: Images.CARET_UP.default,
   [IconName.CARET_RIGHT]: Images.CARET_RIGHT.default,
+  [IconName.SEARCH]: Images.SEARCH.default,
   [IconName.SHARE]: Images.SHARE.default,
 };
 
@@ -81,6 +82,11 @@ export const Icon: Component<IconProps> = (userProps) => {
       props.class
     )
   );
+  const createIcon = createMemo(() => {
+    const iconElement = props.icon ? Icons[props.icon] : undefined;
+    console.debug(iconElement);
+    return iconElement;
+  });
   return (
     <span
       // props
@@ -89,7 +95,9 @@ export const Icon: Component<IconProps> = (userProps) => {
       style={createStyle()}
       class={createClassList()}
       {...htmlProps}
-    ></span>
+    >
+      {createIcon()}
+    </span>
   );
 };
 
