@@ -9,3 +9,4 @@ export * as INFO_SIGN from "./images/info-sign.svg?component-solid";
 export * as REFRESH from "./images/refresh.svg?component-solid";
 export * as SHARE from "./images/share.svg?component-solid";
 export * as SEARCH from "./images/search.svg?component-solid";
+export * as HAND_RIGHT from "./images/hand-right.svg?component-solid";
