@@ -39,6 +39,7 @@ export const Icons = {
   [IconName.CARET_RIGHT]: Images.CARET_RIGHT.default,
   [IconName.SEARCH]: Images.SEARCH.default,
   [IconName.SHARE]: Images.SHARE.default,
+  [IconName.HAND_RIGHT]: Images.HAND_RIGHT.default,
 };
 
 const icons = Object.keys(Icons);
