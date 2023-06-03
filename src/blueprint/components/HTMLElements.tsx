@@ -140,10 +140,10 @@ export type OLProps = Props;
 export const OL: Component<OLProps> = createList("ol");
 
 interface IHTMLTableProps extends InteractiveProps, Props {
-  bordered?: boolean | null;
-  compact?: boolean | null;
-  condensed?: boolean | null;
-  striped?: boolean | null;
+  bordered?: boolean;
+  compact?: boolean;
+  condensed?: boolean;
+  striped?: boolean;
 }
 export type HTMLTableProps = IHTMLTableProps;
 export const HTMLTablePropsSchemaDefaults: HTMLTableProps = {

@@ -105,7 +105,7 @@ export const MenuItem: Component<MenuItemProps> = (userProps) => {
 
 // Menu
 interface IMenuProps extends Props {
-  fixedToTop?: boolean | null;
+  fixedToTop?: boolean;
 }
 export type MenuProps = IMenuProps;
 export const MenuPropsDefaults: MenuProps = {

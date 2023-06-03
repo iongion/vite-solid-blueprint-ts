@@ -107,7 +107,7 @@ export const NavbarGroup: Component<NavbarGroupProps> = (userProps) => {
 
 // Navbar
 interface INavbarProps extends Props {
-  fixedToTop?: boolean | null;
+  fixedToTop?: boolean;
 }
 export type NavbarProps = INavbarProps;
 export const NavbarPropsDefaults: NavbarProps = {

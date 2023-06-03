@@ -23,7 +23,7 @@ import {
 import { IconSize, IconProps } from "@blueprint/icons";
 
 export const PropsSchema: y.ObjectSchema<Omit<Props, "children">> = y.object({
-  disabled: y.boolean().optional().nullable(),
+  disabled: y.boolean().default(false),
   class: y.string().optional().nullable(),
 });
 
@@ -108,7 +108,7 @@ export const IntentPropsSchema = y.object({
 });
 
 export const InteractivePropsSchema = y.object({
-  interactive: y.boolean().optional().nullable(),
+  interactive: y.boolean().default(false),
 });
 
 // Components
@@ -167,36 +167,36 @@ export const CalloutPropsSchema: y.ObjectSchema<Omit<CalloutProps, "children">> 
 
 export const CardPropsSchema: y.ObjectSchema<Omit<CardProps, "children">> = y
   .object({
-    interactive: y.boolean().optional().nullable(),
+    interactive: y.boolean().default(false),
   })
   .concat(ElevationPropsSchema)
   .concat(PropsSchema);
 
 export const CollapsePropsSchema: y.ObjectSchema<Omit<CollapseProps, "children">> = y
   .object({
-    isOpen: y.boolean().optional().nullable(),
-    keepChildrenMounted: y.boolean().optional().nullable(),
+    isOpen: y.boolean().default(false),
+    keepChildrenMounted: y.boolean().default(false),
   })
   .concat(PropsSchema);
 
 export const MenuPropsSchema: y.ObjectSchema<Omit<MenuProps, "children">> = y
   .object({
-    fixedToTop: y.boolean().optional().nullable(),
+    fixedToTop: y.boolean().default(false),
   })
   .concat(PropsSchema);
 
 export const NavbarPropsSchema: y.ObjectSchema<Omit<NavbarProps, "children">> = y
   .object({
-    fixedToTop: y.boolean().optional().nullable(),
+    fixedToTop: y.boolean().default(false),
   })
   .concat(PropsSchema);
 
 export const HTMLTablePropsSchema: y.ObjectSchema<Omit<HTMLTableProps, "children">> = y
   .object({
-    bordered: y.boolean().optional().nullable(),
-    compact: y.boolean().optional().nullable(),
-    condensed: y.boolean().optional().nullable(),
-    striped: y.boolean().optional().nullable(),
+    bordered: y.boolean().default(false),
+    compact: y.boolean().default(false),
+    condensed: y.boolean().default(false),
+    striped: y.boolean().default(false),
   })
   .concat(InteractivePropsSchema)
   .concat(PropsSchema);

@@ -8,8 +8,8 @@ import { Layout } from "./layout";
 export type MaybeElement = JSX.Element | false | null | undefined;
 
 export type Props = {
-  disabled?: boolean | null;
-  class?: string | null;
+  disabled?: boolean;
+  class?: string;
   children?: MaybeElement;
 };
 
@@ -20,7 +20,7 @@ export type ElevationProps = {
   elevation?: Elevation | null;
 };
 export type InteractiveProps = {
-  interactive?: boolean | null;
+  interactive?: boolean;
 };
 export type IntentProps = {
   intent?: Intent | null;

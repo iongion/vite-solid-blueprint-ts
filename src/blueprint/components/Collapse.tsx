@@ -5,8 +5,8 @@ import type { Component } from "solid-js";
 import { DISPLAYNAME_PREFIX, Classes, Props } from "@blueprint/core";
 
 interface ICollapseProps extends Props {
-  isOpen?: boolean | null;
-  keepChildrenMounted?: boolean | null;
+  isOpen?: boolean;
+  keepChildrenMounted?: boolean;
 }
 
 export type CollapseProps = ICollapseProps;

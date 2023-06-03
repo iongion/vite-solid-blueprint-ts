@@ -1,7 +1,6 @@
 import classNames from "classnames";
 import { mergeProps, splitProps, children, createMemo } from "solid-js";
 import type { Component } from "solid-js";
-import { Dynamic } from "solid-js/web";
 
 import {
   //
@@ -48,84 +47,150 @@ export const ButtonPropsDefaults: ButtonProps = {
   tabIndex: undefined,
 };
 
-export function createButton(tagName: string) {
-  const AbstractButton: Component<ButtonProps> = (userProps) => {
-    const [props, htmlProps] = splitProps(mergeProps(ButtonPropsDefaults, userProps), [
-      // props list
-      "icon",
-      "rightIcon",
-      "alignText",
-      "active",
-      "fill",
-      "large",
-      "loading",
-      "minimal",
-      "outlined",
-      "small",
-      "type",
-      "intent",
-      "text",
-      "children",
-      "onClick",
-      "class",
-      "tabIndex",
-      "disabled",
-    ]);
-    const createClassList = createMemo(() =>
-      classNames(
-        Classes.BUTTON,
-        {
-          // from props
-          [Classes.ACTIVE]: !!props.active,
-          [Classes.MINIMAL]: !!props.minimal,
-          [Classes.OUTLINED]: !!props.outlined,
-          [Classes.SMALL]: !!props.small,
-          [Classes.LARGE]: !!props.large,
-          [Classes.FILL]: !!props.fill,
-          [Classes.LOADING]: !!props.loading,
-          [Classes.DISABLED]: !!props.disabled || !!props.loading,
-        },
-        alignmentClass(props.alignText),
-        intentClass(props.intent),
-        // user
-        props.class
-      )
-    );
-    const createText = createMemo(() => {
-      return props.text ? <span class={Classes.BUTTON_TEXT}>{props.text}</span> : undefined;
-    });
-    const createIcon = (icon?: IconName | null) => {
-      return icon ? <Icon icon={icon} /> : undefined;
-    };
-    const createChildren = children(() => props.children);
-    const createLoader = createMemo(() => {
-      return props.loading ? <Spinner class={Classes.BUTTON_SPINNER} intent={props.intent} size={20} /> : undefined;
-    });
-    return (
-      <Dynamic
-        // props
-        component={tagName}
-        onClick={props.disabled ? undefined : props.onClick}
-        type={props.type as ButtonType}
-        class={createClassList()}
-        disabled={!!props.disabled}
-        tabIndex={props.disabled ? -1 : props.tabIndex}
-        {...htmlProps}
-      >
-        {createLoader()}
-        {createIcon(props.icon)}
-        {createText()}
-        {createChildren()}
-        {createIcon(props.rightIcon)}
-      </Dynamic>
-    );
+export const Button: Component<ButtonProps> = (userProps) => {
+  const [props, htmlProps] = splitProps(mergeProps(ButtonPropsDefaults, userProps), [
+    // props list
+    "icon",
+    "rightIcon",
+    "alignText",
+    "active",
+    "fill",
+    "large",
+    "loading",
+    "minimal",
+    "outlined",
+    "small",
+    "type",
+    "intent",
+    "text",
+    "children",
+    "onClick",
+    "class",
+    "tabIndex",
+    "disabled",
+  ]);
+  const createClassList = createMemo(() =>
+    classNames(
+      Classes.BUTTON,
+      {
+        // from props
+        [Classes.ACTIVE]: !!props.active,
+        [Classes.MINIMAL]: !!props.minimal,
+        [Classes.OUTLINED]: !!props.outlined,
+        [Classes.SMALL]: !!props.small,
+        [Classes.LARGE]: !!props.large,
+        [Classes.FILL]: !!props.fill,
+        [Classes.LOADING]: !!props.loading,
+        [Classes.DISABLED]: !!props.disabled || !!props.loading,
+      },
+      alignmentClass(props.alignText),
+      intentClass(props.intent),
+      // user
+      props.class
+    )
+  );
+  const createText = createMemo(() => {
+    return props.text ? <span class={Classes.BUTTON_TEXT}>{props.text}</span> : undefined;
+  });
+  const createIcon = (icon?: IconName | null) => {
+    return icon ? <Icon icon={icon} /> : undefined;
   };
-  return AbstractButton;
-}
-
-export const Button: Component<ButtonProps> = createButton("button");
+  const createChildren = children(() => props.children);
+  const createLoader = createMemo(() => {
+    return props.loading ? <Spinner class={Classes.BUTTON_SPINNER} intent={props.intent} size={20} /> : undefined;
+  });
+  return (
+    <button
+      // props
+      onClick={props.disabled ? undefined : props.onClick}
+      type={props.type as ButtonType}
+      class={createClassList()}
+      disabled={!!props.disabled}
+      tabIndex={props.disabled ? -1 : props.tabIndex}
+      {...htmlProps}
+    >
+      {createLoader()}
+      {createIcon(props.icon)}
+      {createText()}
+      {createChildren()}
+      {createIcon(props.rightIcon)}
+    </button>
+  );
+};
 (Button as any).displayName = `${DISPLAYNAME_PREFIX}.Button`;
 
-export type AnchorButtonProps = ButtonProps & LinkProps;
-export const AnchorButton: Component<AnchorButtonProps> = createButton("a");
+// AnchorButton
+export type AnchorButtonProps = IButtonProps & LinkProps;
+export const AnchorButtonPropsDefaults: AnchorButtonProps = {
+  ...ButtonPropsDefaults,
+  href: "#",
+  target: "_blank",
+};
+export const AnchorButton: Component<AnchorButtonProps> = (userProps) => {
+  const [props, htmlProps] = splitProps(mergeProps(ButtonPropsDefaults, userProps), [
+    // props list
+    "icon",
+    "rightIcon",
+    "alignText",
+    "active",
+    "fill",
+    "large",
+    "loading",
+    "minimal",
+    "outlined",
+    "small",
+    "type",
+    "intent",
+    "text",
+    "children",
+    "onClick",
+    "class",
+    "tabIndex",
+    "disabled",
+  ]);
+  const createClassList = createMemo(() =>
+    classNames(
+      Classes.BUTTON,
+      {
+        // from props
+        [Classes.ACTIVE]: !!props.active,
+        [Classes.MINIMAL]: !!props.minimal,
+        [Classes.OUTLINED]: !!props.outlined,
+        [Classes.SMALL]: !!props.small,
+        [Classes.LARGE]: !!props.large,
+        [Classes.FILL]: !!props.fill,
+        [Classes.LOADING]: !!props.loading,
+        [Classes.DISABLED]: !!props.disabled || !!props.loading,
+      },
+      alignmentClass(props.alignText),
+      intentClass(props.intent),
+      // user
+      props.class
+    )
+  );
+  const createText = createMemo(() => {
+    return props.text ? <span class={Classes.BUTTON_TEXT}>{props.text}</span> : undefined;
+  });
+  const createIcon = (icon?: IconName | null) => {
+    return icon ? <Icon icon={icon} /> : undefined;
+  };
+  const createChildren = children(() => props.children);
+  const createLoader = createMemo(() => {
+    return props.loading ? <Spinner class={Classes.BUTTON_SPINNER} intent={props.intent} size={20} /> : undefined;
+  });
+  return (
+    <a
+      // props
+      class={createClassList()}
+      tabIndex={props.disabled ? -1 : props.tabIndex}
+      {...htmlProps}
+    >
+      {createLoader()}
+      {createIcon(props.icon)}
+      {createText()}
+      {createChildren()}
+      {createIcon(props.rightIcon)}
+    </a>
+  );
+};
 (AnchorButton as any).displayName = `${DISPLAYNAME_PREFIX}.AnchorButton`;
