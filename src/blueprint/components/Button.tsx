@@ -46,6 +46,7 @@ export const ButtonPropsDefaults: ButtonProps = {
   outlined: false,
   small: false,
   type: "submit",
+  tabIndex: undefined,
 };
 
 export const Button: Component<ButtonProps> = (userProps) => {
@@ -106,6 +107,7 @@ export const Button: Component<ButtonProps> = (userProps) => {
       type={props.type as ButtonType}
       class={createClassList()}
       disabled={!!props.disabled}
+      tabIndex={props.disabled ? -1 : props.tabIndex}
       {...htmlProps}
     >
       {createLoader()}

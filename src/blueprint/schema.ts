@@ -134,6 +134,7 @@ export const ButtonPropsSchema: y.ObjectSchema<Omit<ButtonProps, "children" | "o
       ])
       .default("button"),
     intent: IntentSchema.default(Intent.SUCCESS),
+    tabIndex: y.number().optional(),
   })
   .concat(PropsSchema);
 
