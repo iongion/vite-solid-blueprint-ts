@@ -4,38 +4,48 @@
 .Example:last-child {
   margin-bottom: 0;
 }
-.AppExampleTitle {
-  padding: 5px;
-  margin: 0;
-  background: #1f242c;
-  display: block;
-  width: 100%;
-  text-align: center;
-  font-size: 18px;
-}
-.AppExampleContent {
+.ExampleContent {
   display: flex;
   flex: 1;
   flex-direction: row;
   min-height: 50px;
   width: 100%;
 }
-.AppExampleComponentPreview {
+.ExampleComponent {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-height: 50px;
+  width: 100%;
+}
+.ExampleComponentTitle {
+  padding: 5px;
+  margin: 0;
+  background: #1f242c;
+  display: block;
+  width: 100%;
+  text-align: center;
+  font-size: 16px;
+}
+.ExampleComponentPreview {
   display: flex;
   flex-direction: column;
   background: #252a31;
   flex-grow: 1;
   flex-shrink: 1;
-  padding: 20px;
+  padding: 10px;
   align-items: center;
   justify-content: center;
 }
-.AppExampleComponentProperties {
+.ExampleComponentProperties {
   display: flex;
-  background-color: #383e47;
+  background-color: #1f242c;
   flex-direction: column;
-  max-width: 300px;
-  padding: 20px;
+  width: 320px;
+  padding: 5px;
+}
+.ExampleComponentProperties table {
+  width: 100%;
 }
 
 .Example {
@@ -57,6 +67,6 @@
   padding: 0;
 }
 
-[data-example="HTMLTable"] .AppExampleComponentPreview table {
+[data-example="HTMLTable"] .ExampleComponentPreview table {
   min-width: 100%;
 }

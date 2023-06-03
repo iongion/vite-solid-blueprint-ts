@@ -3,6 +3,7 @@ import type { JSX } from "solid-js";
 import { createStore } from "solid-js/store";
 import { Key } from "@solid-primitives/keyed";
 import * as y from "yup";
+import { useI18n } from "solid-i18n";
 
 import { Props } from "@blueprint/core";
 import { HTMLTable, Label } from "@blueprint/components";
@@ -10,11 +11,17 @@ import { HTMLTable, Label } from "@blueprint/components";
 import "./Example.css";
 
 function SchemaForm<T>({ schema, props, onPropertyChange }: { schema: y.ObjectSchema<any>; props: T; onPropertyChange: (name: string, value: any) => void }) {
+  const { t } = useI18n();
   const guid = createUniqueId();
   // console.debug("context", { schema, props, setProperty });
   return (
     <form class="ExampleSchemaForm">
-      <HTMLTable compact striped interactive>
+      <HTMLTable compact interactive>
+        <thead>
+          <tr>
+            <th colSpan="2">{t("Properties")}</th>
+          </tr>
+        </thead>
         <tbody>
           <Key each={Object.keys(schema.fields)} by={(it) => it}>
             {(fieldName) => {
@@ -145,19 +152,21 @@ export function Example<T extends Props = any>({ title, example, children, schem
   return (
     <context.Provider value={state}>
       <div class="Example" data-example={example}>
-        <h2 class="AppExampleTitle">{example || title}</h2>
-        <div class="AppExampleContent">
-          <div class="AppExampleComponentPreview">
-            {render && schema
-              ? (() => {
-                  const ctx = useContext(context);
-                  // console.debug(">>> CTX", ctx);
-                  return ctx === undefined ? undefined : render(ctx, onPropertyChange);
-                })()
-              : children}
+        <div class="ExampleContent">
+          <div class="ExampleComponent">
+            <h2 class="ExampleComponentTitle">{example || title}</h2>
+            <div class="ExampleComponentPreview">
+              {render && schema
+                ? (() => {
+                    const ctx = useContext(context);
+                    // console.debug(">>> CTX", ctx);
+                    return ctx === undefined ? undefined : render(ctx, onPropertyChange);
+                  })()
+                : children}
+            </div>
           </div>
           {schema && context ? (
-            <div class="AppExampleComponentProperties">
+            <div class="ExampleComponentProperties">
               {(() => {
                 const ctx = useContext(context);
                 return ctx === undefined ? undefined : <SchemaForm<T> schema={schema} props={ctx} onPropertyChange={onPropertyChange} />;
