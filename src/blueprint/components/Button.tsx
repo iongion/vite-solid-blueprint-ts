@@ -11,7 +11,7 @@ import {
   alignmentClass,
   intentClass,
 } from "@blueprint/core";
-import { ActionProps } from "@blueprint/tools/actions";
+import { ActionProps, LinkProps } from "@blueprint/tools/actions";
 import { Icon, IconName } from "@blueprint/icons";
 import { Spinner } from "./Spinner";
 
@@ -126,5 +126,6 @@ export function createButton(tagName: string) {
 export const Button: Component<ButtonProps> = createButton("button");
 (Button as any).displayName = `${DISPLAYNAME_PREFIX}.Button`;
 
-export const AnchorButton: Component<ButtonProps> = createButton("a");
+export type AnchorButtonProps = ButtonProps & LinkProps;
+export const AnchorButton: Component<AnchorButtonProps> = createButton("a");
 (AnchorButton as any).displayName = `${DISPLAYNAME_PREFIX}.AnchorButton`;

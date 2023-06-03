@@ -4,6 +4,8 @@ import { useI18n } from "solid-i18n";
 
 import { Alignment, Classes, Intent } from "@blueprint/core";
 import {
+  AnchorButtonProps,
+  AnchorButton,
   ButtonProps,
   Button,
   ButtonGroupProps,
@@ -42,6 +44,7 @@ import {
   Spinner,
 } from "@blueprint/components";
 import {
+  AnchorButtonPropsSchema,
   ButtonPropsSchema,
   ButtonGroupPropsSchema,
   CalloutPropsSchema,
@@ -86,6 +89,25 @@ const App: Component = () => {
         render={(props) => {
           return (
             <Button
+              {...props}
+              intent={props.intent || Intent.SUCCESS}
+              icon={props.icon}
+              rightIcon={props.rightIcon}
+              text={props.text || t("Count is {count}", { count: count() })}
+              onClick={() => {
+                setCount((count) => count + 1);
+              }}
+            />
+          );
+        }}
+      />
+
+      <Example<AnchorButtonProps>
+        example="AnchorButton"
+        schema={AnchorButtonPropsSchema}
+        render={(props) => {
+          return (
+            <AnchorButton
               {...props}
               intent={props.intent || Intent.SUCCESS}
               icon={props.icon}

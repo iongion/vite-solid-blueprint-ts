@@ -5,6 +5,7 @@ import { IconName } from "@blueprint/icons";
 import { Props, Alignment, Elevation, Intent, Layout } from "@blueprint/core";
 import {
   ButtonType,
+  AnchorButtonProps,
   ButtonProps,
   ButtonGroupProps,
   CalloutProps,
@@ -136,6 +137,14 @@ export const ButtonPropsSchema: y.ObjectSchema<Omit<ButtonProps, "children" | "o
     intent: IntentSchema.default(Intent.SUCCESS),
     tabIndex: y.number().optional(),
   })
+  .concat(PropsSchema);
+
+export const AnchorButtonPropsSchema: y.ObjectSchema<Omit<AnchorButtonProps, "children" | "onClick" | "onFocus">> = y
+  .object({
+    href: y.string().optional().nullable(),
+    target: y.string().optional().nullable(),
+  })
+  .concat(ButtonPropsSchema)
   .concat(PropsSchema);
 
 export const ButtonGroupPropsSchema: y.ObjectSchema<Omit<ButtonGroupProps, "children">> = y

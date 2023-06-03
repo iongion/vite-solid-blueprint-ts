@@ -12,6 +12,6 @@ export interface ActionProps<T extends HTMLElement = HTMLElement> extends Intent
 }
 
 export type LinkProps = {
-  href?: string;
-  target?: string;
+  href?: string | null;
+  target?: string | null;
 };
