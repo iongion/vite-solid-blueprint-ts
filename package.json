@@ -38,8 +38,8 @@
     "vitest": "^0.31.2"
   },
   "dependencies": {
-    "@solid-primitives/keyed": "^1.2.0",
     "@solid-primitives/destructure": "^0.1.13",
+    "@solid-primitives/keyed": "^1.2.0",
     "classnames": "^2.3.2",
     "solid-i18n": "~1.0.4",
     "solid-js": "^1.7.5",

@@ -1,4 +1,4 @@
-import { createContext, useContext, createUniqueId } from "solid-js";
+import { createContext, useContext, createUniqueId, createMemo } from "solid-js";
 import type { JSX } from "solid-js";
 import { createStore } from "solid-js/store";
 import { Key } from "@solid-primitives/keyed";
@@ -29,8 +29,8 @@ function SchemaForm<T>({ schema, props, onPropertyChange }: { schema: y.ObjectSc
               const name = fieldName();
               const field = schema.fields[name];
               const desc = field.describe();
-              const { [name]: propertyValue } = destructure(props || { [name]: (desc as any).default });
-              const value = propertyValue() || (desc as any).default;
+              const values = destructure(props || { [name]: (desc as any).default });
+              const value = createMemo(() => values[name]() as any);
               let widget: JSX.Element | null;
               const items: string[] = (desc as any).oneOf || [];
               // console.debug(name, value, { desc, field }, items);
@@ -46,7 +46,7 @@ function SchemaForm<T>({ schema, props, onPropertyChange }: { schema: y.ObjectSc
                     <input
                       {...identityProps}
                       type="checkbox"
-                      checked={value || false}
+                      checked={value()}
                       onInput={(e) => {
                         onPropertyChange(name, e.currentTarget.checked);
                       }}
@@ -59,7 +59,7 @@ function SchemaForm<T>({ schema, props, onPropertyChange }: { schema: y.ObjectSc
                       <input
                         {...identityProps}
                         type="number"
-                        value={value || undefined}
+                        value={value()}
                         onInput={(e) => {
                           onPropertyChange(name, Number(e.currentTarget.value));
                         }}
@@ -67,7 +67,7 @@ function SchemaForm<T>({ schema, props, onPropertyChange }: { schema: y.ObjectSc
                     ) : (
                       <select
                         {...identityProps}
-                        value={value || undefined}
+                        value={value()}
                         onChange={(e) => {
                           onPropertyChange(name, Number(e.currentTarget.value));
                         }}
@@ -83,7 +83,7 @@ function SchemaForm<T>({ schema, props, onPropertyChange }: { schema: y.ObjectSc
                     widget = (
                       <select
                         {...identityProps}
-                        value={value || undefined}
+                        value={value()}
                         onChange={(e) => {
                           onPropertyChange(name, e.currentTarget.value);
                         }}
@@ -98,7 +98,7 @@ function SchemaForm<T>({ schema, props, onPropertyChange }: { schema: y.ObjectSc
                       <input
                         {...identityProps}
                         type="text"
-                        value={value || ""}
+                        value={value()}
                         onInput={(e) => {
                           onPropertyChange(name, e.currentTarget.value);
                         }}
