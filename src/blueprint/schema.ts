@@ -87,7 +87,13 @@ const IconSchema = y
   ])
   .defined();
 
-const IconSizeSchema = y.number<IconSize>().oneOf([IconSize.STANDARD, IconSize.LARGE]);
+const IconSizeSchema = y.number<IconSize>().oneOf([
+  //
+  IconSize.STANDARD,
+  IconSize.LARGE,
+  IconSize.XLARGE,
+  IconSize.XXLARGE,
+]);
 
 export const IconPropsSchema: y.ObjectSchema<Omit<IconProps, "children">> = y
   .object({

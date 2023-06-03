@@ -8,6 +8,8 @@ import * as Images from "@blueprint/icons/images";
 export enum IconSize {
   STANDARD = 16,
   LARGE = 20,
+  XLARGE = 32,
+  XXLARGE = 48,
 }
 
 export enum IconName {
