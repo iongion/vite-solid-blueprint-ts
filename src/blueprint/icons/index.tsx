@@ -90,7 +90,7 @@ export const Icon: Component<IconProps> = (userProps) => {
       ? iconElement({
           width: size,
           height: size,
-          viewBox: `0 0 ${size} ${size}`,
+          // viewBox: `0 0 ${size} ${size}`,
         })
       : undefined;
   });
@@ -98,10 +98,9 @@ export const Icon: Component<IconProps> = (userProps) => {
     const size = props.size || IconSize.STANDARD;
     const icon = createIcon();
     if (!icon) return;
-    console.debug(icon);
     icon.setAttibute("width", size);
     icon.setAttibute("height", size);
-    icon.setAttibute("viewBox", `0 0 ${size} ${size}`);
+    // icon.setAttibute("viewBox", `0 0 ${size} ${size}`);
   });
   return (
     <span
