@@ -24,7 +24,7 @@ import { IconSize, IconProps } from "@blueprint/icons";
 
 export const PropsSchema: y.ObjectSchema<Omit<Props, "children">> = y.object({
   disabled: y.boolean().default(false),
-  class: y.string().optional().nullable(),
+  class: y.string().optional(),
 });
 
 export const AlignmentSchema = y
@@ -80,6 +80,10 @@ const IconSchema = y
     IconName.CARET_DOWN,
     IconName.CARET_UP,
     IconName.CARET_RIGHT,
+    IconName.PLUS,
+    IconName.ADD,
+    IconName.HAND_RIGHT,
+    IconName.SEARCH,
   ])
   .defined();
 
@@ -114,8 +118,8 @@ export const InteractivePropsSchema = y.object({
 // Components
 export const ButtonPropsSchema: y.ObjectSchema<Omit<ButtonProps, "children" | "onClick" | "onFocus">> = y
   .object({
-    icon: IconSchema.default(IconName.HAND_RIGHT as any),
-    rightIcon: IconSchema.default(IconName.PLUS as any),
+    icon: IconSchema,
+    rightIcon: IconSchema,
     alignText: AlignmentSchema.default(Alignment.LEFT),
     active: y.boolean().default(false),
     fill: y.boolean().default(false),
@@ -124,7 +128,7 @@ export const ButtonPropsSchema: y.ObjectSchema<Omit<ButtonProps, "children" | "o
     minimal: y.boolean().default(false),
     outlined: y.boolean().default(false),
     small: y.boolean().default(false),
-    text: y.string().optional().nullable(),
+    text: y.string().optional().default(""),
     type: y
       .string<ButtonType>()
       .oneOf([
@@ -134,15 +138,15 @@ export const ButtonPropsSchema: y.ObjectSchema<Omit<ButtonProps, "children" | "o
         "submit",
       ])
       .default("button"),
-    intent: IntentSchema.default(Intent.SUCCESS),
+    intent: IntentSchema,
     tabIndex: y.number().optional(),
   })
   .concat(PropsSchema);
 
-export const AnchorButtonPropsSchema: y.ObjectSchema<Omit<AnchorButtonProps, "children" | "onClick" | "onFocus">> = y
+export const AnchorButtonPropsSchema: y.ObjectSchema<Partial<Omit<AnchorButtonProps, "children" | "onClick" | "onFocus">>> = y
   .object({
-    href: y.string().optional().nullable(),
-    target: y.string().optional().nullable(),
+    href: y.string().optional().default("#"),
+    target: y.string().optional().default("_blank"),
   })
   .concat(ButtonPropsSchema)
   .concat(PropsSchema);

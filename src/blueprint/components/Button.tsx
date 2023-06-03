@@ -17,8 +17,21 @@ import { Spinner } from "./Spinner";
 import "./Button.css";
 
 export type ButtonType = "submit" | "reset" | "button";
+export const CommonButtonDefaults = {
+  icon: undefined,
+  rightIcon: undefined,
+  alignText: Alignment.LEFT,
+  active: false,
+  fill: false,
+  large: false,
+  loading: false,
+  minimal: false,
+  outlined: false,
+  small: false,
+  tabIndex: undefined,
+};
 
-interface IButtonProps<E extends HTMLButtonElement | HTMLAnchorElement | HTMLElement = HTMLButtonElement> extends ActionProps<E> {
+interface IButtonProps<E extends HTMLButtonElement | HTMLElement = HTMLButtonElement> extends ActionProps<E> {
   icon?: IconName | null;
   rightIcon?: IconName | null;
   alignText?: Alignment | null;
@@ -33,18 +46,8 @@ interface IButtonProps<E extends HTMLButtonElement | HTMLAnchorElement | HTMLEle
 }
 export type ButtonProps = IButtonProps;
 export const ButtonPropsDefaults: ButtonProps = {
-  icon: undefined,
-  rightIcon: undefined,
-  alignText: Alignment.LEFT,
-  active: false,
-  fill: false,
-  large: false,
-  loading: false,
-  minimal: false,
-  outlined: false,
-  small: false,
+  ...CommonButtonDefaults,
   type: "submit",
-  tabIndex: undefined,
 };
 
 export const Button: Component<ButtonProps> = (userProps) => {
@@ -120,14 +123,27 @@ export const Button: Component<ButtonProps> = (userProps) => {
 (Button as any).displayName = `${DISPLAYNAME_PREFIX}.Button`;
 
 // AnchorButton
-export type AnchorButtonProps = IButtonProps & LinkProps;
+interface IAnchorButtonProps<E extends HTMLAnchorElement = HTMLAnchorElement> extends ActionProps<E>, LinkProps {
+  icon?: IconName | null;
+  rightIcon?: IconName | null;
+  alignText?: Alignment | null;
+  active?: boolean;
+  fill?: boolean;
+  large?: boolean;
+  loading?: boolean;
+  minimal?: boolean;
+  outlined?: boolean;
+  small?: boolean;
+  type?: ButtonType;
+}
+export type AnchorButtonProps = IAnchorButtonProps;
 export const AnchorButtonPropsDefaults: AnchorButtonProps = {
-  ...ButtonPropsDefaults,
+  ...CommonButtonDefaults,
   href: "#",
   target: "_blank",
 };
 export const AnchorButton: Component<AnchorButtonProps> = (userProps) => {
-  const [props, htmlProps] = splitProps(mergeProps(ButtonPropsDefaults, userProps), [
+  const [props, htmlProps] = splitProps(mergeProps(AnchorButtonPropsDefaults, userProps), [
     // props list
     "icon",
     "rightIcon",
@@ -144,9 +160,12 @@ export const AnchorButton: Component<AnchorButtonProps> = (userProps) => {
     "text",
     "children",
     "onClick",
+    "onFocus",
     "class",
     "tabIndex",
     "disabled",
+    "href",
+    "target",
   ]);
   const createClassList = createMemo(() =>
     classNames(
@@ -181,9 +200,13 @@ export const AnchorButton: Component<AnchorButtonProps> = (userProps) => {
   return (
     <a
       // props
+      role="button"
       class={createClassList()}
-      tabIndex={props.disabled ? -1 : props.tabIndex}
+      onClick={props.disabled ? undefined : props.onClick}
+      onFocus={props.disabled ? undefined : props.onFocus}
       {...htmlProps}
+      href={props.disabled ? undefined : props.href}
+      tabIndex={props.disabled ? -1 : props.tabIndex}
     >
       {createLoader()}
       {createIcon(props.icon)}

@@ -91,8 +91,8 @@ const App: Component = () => {
             <Button
               {...props}
               intent={props.intent || Intent.SUCCESS}
-              icon={props.icon}
-              rightIcon={props.rightIcon}
+              icon={props.icon || IconName.HAND_RIGHT}
+              rightIcon={props.rightIcon || IconName.PLUS}
               text={props.text || t("Count is {count}", { count: count() })}
               onClick={() => {
                 setCount((count) => count + 1);
@@ -106,18 +106,7 @@ const App: Component = () => {
         example="AnchorButton"
         schema={AnchorButtonPropsSchema}
         render={(props) => {
-          return (
-            <AnchorButton
-              {...props}
-              intent={props.intent || Intent.SUCCESS}
-              icon={props.icon}
-              rightIcon={props.rightIcon}
-              text={props.text || t("Count is {count}", { count: count() })}
-              onClick={() => {
-                setCount((count) => count + 1);
-              }}
-            />
-          );
+          return <AnchorButton {...props} intent={props.intent || Intent.PRIMARY} icon={props.icon} rightIcon={props.rightIcon} text={props.text || t("Go to")} />;
         }}
       />
 
