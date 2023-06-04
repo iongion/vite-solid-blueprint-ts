@@ -98,10 +98,10 @@ export const Button: Component<ButtonProps> = (userProps) => {
   const createIcon = (icon?: IconName | null) => {
     return icon ? <Icon icon={icon} /> : undefined;
   };
-  const createChildren = children(() => props.children);
   const createLoader = createMemo(() => {
     return props.loading ? <Spinner class={Classes.BUTTON_SPINNER} intent={props.intent} size={20} /> : undefined;
   });
+  const createChildren = children(() => props.children);
   return (
     <button
       // props

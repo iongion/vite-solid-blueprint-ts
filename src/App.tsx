@@ -369,7 +369,15 @@ const App: Component = () => {
         example="Switch"
         schema={SwitchPropsSchema}
         render={(props) => {
-          return <Switch label={props.label || "Click to switch state"} {...props} />;
+          return (
+            <Switch
+              label={props.label || "Click to switch state"}
+              {...props}
+              onChange={(e) => {
+                console.debug(e);
+              }}
+            />
+          );
         }}
       />
     </div>
