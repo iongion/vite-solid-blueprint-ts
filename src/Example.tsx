@@ -133,6 +133,7 @@ function ExampleSchemaForm<T>({
                     <InputGroup
                       {...identityProps}
                       small
+                      fill
                       type="text"
                       value={value()}
                       onInput={(e) => {
@@ -201,6 +202,7 @@ function ExampleSchemaForm<T>({
                       <InputGroup
                         {...identityProps}
                         small
+                        fill
                         type="text"
                         value={value()}
                         onInput={(e) => {
