@@ -1,11 +1,11 @@
 import classNames from "classnames";
-import { mergeProps, splitProps, createMemo, children } from "solid-js";
+import { JSX, mergeProps, splitProps, createMemo, children } from "solid-js";
 import { Dynamic } from "solid-js/web";
 import type { Component } from "solid-js";
 
 import { DISPLAYNAME_PREFIX, MaybeElement, Alignment, Classes, AlignmentProps, Props } from "@blueprint/core";
 
-interface ISwitchProps extends AlignmentProps, Props {
+interface ISwitchProps extends Omit<JSX.SelectHTMLAttributes<HTMLInputElement>, "children">, AlignmentProps, Props {
   inline?: boolean;
   large?: boolean;
   checked?: boolean;
@@ -61,10 +61,10 @@ export const Switch: Component<SwitchProps> = (userProps: SwitchProps) => {
       // props
       component={props.tagName || "div"}
       class={createClassList()}
-      {...htmlProps}
     >
-      <input type="checkbox" />
-      <span class={Classes.CONTROL_INDICATOR}>{props.label || props.labelElement}</span>
+      <input type="checkbox" {...htmlProps} />
+      <span class={Classes.CONTROL_INDICATOR}></span>
+      {props.label || props.labelElement}
       {createChildren()}
     </Dynamic>
   );

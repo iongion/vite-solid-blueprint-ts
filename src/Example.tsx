@@ -7,7 +7,7 @@ import * as y from "yup";
 import { useI18n } from "solid-i18n";
 
 import { Alignment, Boundary, Elevation, Intent, Layout, Position, Props } from "@blueprint/core";
-import { HTMLSelect, HTMLTable, Label, NonIdealStateIconSize } from "@blueprint/components";
+import { HTMLSelect, HTMLTable, Label, NonIdealStateIconSize, Switch } from "@blueprint/components";
 import { IconSize } from "@blueprint/icons";
 
 import "./Example.css";
@@ -144,9 +144,10 @@ function ExampleSchemaForm<T>({
                   break;
                 case "boolean":
                   widget = (
-                    <input
+                    <Switch
                       {...identityProps}
-                      type="checkbox"
+                      inline
+                      label={name}
                       checked={value()}
                       onInput={(e) => {
                         onPropertyChange(name, e.currentTarget.checked);
@@ -217,11 +218,7 @@ function ExampleSchemaForm<T>({
                   {isFlag ? (
                     <>
                       <td>&nbsp;</td>
-                      <td>
-                        <Label for={identityProps.id}>
-                          {widget} {name}
-                        </Label>
-                      </td>
+                      <td>{widget}</td>
                     </>
                   ) : (
                     <>
