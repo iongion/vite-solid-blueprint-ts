@@ -82,6 +82,8 @@ export const InputGroup: Component<InputGroupProps> = (userProps: InputGroupProp
         // props
         type={props.type || InputGroupPropsSchemaDefaults.type}
         class={classNames(Classes.INPUT, props.inputClassName)}
+        disabled={props.disabled}
+        readonly={props.readOnly}
       />
     );
   });
