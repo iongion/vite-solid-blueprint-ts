@@ -3,9 +3,9 @@ import { mergeProps, splitProps, createMemo } from "solid-js";
 import { Dynamic } from "solid-js/web";
 import type { Component } from "solid-js";
 
-import { DISPLAYNAME_PREFIX, Classes, Props } from "@blueprint/core";
+import { DISPLAYNAME_PREFIX, Classes, Layout, LayoutProps, Props } from "@blueprint/core";
 
-interface IDividerProps extends Omit<Props, "children"> {
+interface IDividerProps extends LayoutProps, Omit<Props, "children"> {
   tagName?: string | null;
 }
 
@@ -18,6 +18,7 @@ export const Divider: Component<DividerProps> = (userProps: DividerProps) => {
   const [props, htmlProps] = splitProps(mergeProps(DividerPropsDefaults, userProps), [
     // props list
     "tagName",
+    "layout",
     "class",
     "disabled",
   ]);
@@ -26,6 +27,8 @@ export const Divider: Component<DividerProps> = (userProps: DividerProps) => {
       Classes.DIVIDER,
       {
         // from props
+        [Classes.VERTICAL]: props.layout === Layout.VERTICAL,
+        [Classes.HORIZONTAL]: props.layout === Layout.HORIZONTAL,
         [Classes.DISABLED]: !!props.disabled,
       },
       // user
