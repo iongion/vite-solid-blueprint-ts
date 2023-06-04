@@ -19,8 +19,8 @@ interface IInputGroupProps extends Omit<JSX.SelectHTMLAttributes<HTMLInputElemen
   inputClassName?: string;
   leftElement?: MaybeElement;
   rightElement?: MaybeElement;
-  leftIcon?: IconName | MaybeElement;
-  rightIcon?: IconName | MaybeElement;
+  leftIcon?: IconName;
+  rightIcon?: IconName;
   value?: string;
 }
 export type InputGroupProps = IInputGroupProps;
@@ -80,7 +80,7 @@ export const InputGroup: Component<InputGroupProps> = (userProps: InputGroupProp
       return props.leftElement;
     }
     if (props.leftIcon) {
-      return isIcon(props.leftIcon) ? <Icon icon={props.leftIcon as IconName} /> : props.leftIcon;
+      return <Icon icon={props.leftIcon} />;
     }
   });
   const createRightElement = createMemo(() => {
@@ -88,7 +88,7 @@ export const InputGroup: Component<InputGroupProps> = (userProps: InputGroupProp
       return props.rightElement;
     }
     if (props.rightIcon) {
-      return isIcon(props.rightIcon) ? <Icon icon={props.rightIcon as IconName} /> : props.rightIcon;
+      return <Icon icon={props.rightIcon} />;
     }
   });
   const createInputElement = createMemo(() => {
