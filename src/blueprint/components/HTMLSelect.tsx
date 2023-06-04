@@ -53,6 +53,7 @@ export const HTMLSelect: Component<HTMLSelectProps> = (userProps: HTMLSelectProp
         [Classes.FILL]: !!props.fill,
         [Classes.DISABLED]: !!props.disabled,
       },
+      Classes.intentClass(props.intent),
       // user
       props.class
     )
