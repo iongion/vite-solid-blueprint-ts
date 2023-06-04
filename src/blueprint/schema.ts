@@ -220,7 +220,6 @@ export const HTMLTablePropsSchema: y.ObjectSchema<Omit<HTMLTableProps, "children
   .object({
     bordered: y.boolean().default(false),
     compact: y.boolean().default(false),
-    condensed: y.boolean().default(false),
     striped: y.boolean().default(false),
   })
   .concat(InteractivePropsSchema)

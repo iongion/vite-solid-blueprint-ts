@@ -7,14 +7,12 @@ import { DISPLAYNAME_PREFIX, Classes, InteractiveProps, Props } from "@blueprint
 interface IHTMLTableProps extends InteractiveProps, Props {
   bordered?: boolean;
   compact?: boolean;
-  condensed?: boolean;
   striped?: boolean;
 }
 export type HTMLTableProps = IHTMLTableProps;
 export const HTMLTablePropsSchemaDefaults: HTMLTableProps = {
   bordered: false,
   compact: false,
-  condensed: false,
   striped: false,
   interactive: false,
 };
@@ -23,7 +21,6 @@ export const HTMLTable: Component<HTMLTableProps> = (userProps: HTMLTableProps) 
     // props list
     "bordered",
     "compact",
-    "condensed",
     "striped",
     "interactive",
     "children",
@@ -36,7 +33,7 @@ export const HTMLTable: Component<HTMLTableProps> = (userProps: HTMLTableProps) 
       Classes.HTML_TABLE,
       {
         // from props
-        [Classes.HTML_TABLE_CONDENSED]: props.compact || props.condensed,
+        [Classes.HTML_TABLE_CONDENSED]: props.compact,
         [Classes.HTML_TABLE_BORDERED]: !!props.bordered,
         [Classes.HTML_TABLE_STRIPED]: !!props.striped,
         [Classes.INTERACTIVE]: !!props.interactive,
