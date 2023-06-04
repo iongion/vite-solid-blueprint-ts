@@ -372,14 +372,8 @@ const App: Component = () => {
           console.debug(">> Switch on change", props);
           return (
             <Switch
+              {...props}
               label={props.label || "Click to switch state"}
-              inline={props.inline}
-              large={props.large}
-              checked={props.checked}
-              innerLabel={props.innerLabel}
-              innerLabelChecked={props.innerLabelChecked}
-              tagName={props.tagName}
-              alignIndicator={props.alignIndicator}
               onChange={(e) => {
                 setProperty("checked", e.currentTarget.checked);
               }}
