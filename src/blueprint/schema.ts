@@ -229,7 +229,6 @@ export const HTMLSelectPropsSchema: y.ObjectSchema<Omit<HTMLSelectProps, "option
     iconName: IconSchema.default(IconName.DOUBLE_CARET_VERTICAL),
     value: y.mixed<string>().concat(y.mixed<number>()),
   })
-  .concat(IntentPropsSchema)
   .concat(PropsSchema);
 
 export const HTMLTablePropsSchema: y.ObjectSchema<Omit<HTMLTableProps, "children">> = y

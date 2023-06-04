@@ -3,12 +3,12 @@ import { mergeProps, splitProps, children, createMemo } from "solid-js";
 import type { Component } from "solid-js";
 import { Key } from "@solid-primitives/keyed";
 
-import { DISPLAYNAME_PREFIX, Classes, IntentProps, OptionProps, Props } from "@blueprint/core";
+import { DISPLAYNAME_PREFIX, Classes, OptionProps, Props } from "@blueprint/core";
 import { Icon, IconName, IconProps } from "@blueprint/icons";
 
 import "./HTMLSelect.css";
 
-interface IHTMLSelectProps extends IntentProps, Props {
+interface IHTMLSelectProps extends Props {
   fill?: boolean;
   large?: boolean;
   minimal?: boolean;
@@ -34,7 +34,6 @@ export const HTMLSelect: Component<HTMLSelectProps> = (userProps: HTMLSelectProp
     "large",
     "minimal",
     "multiple",
-    "intent",
     "iconName",
     "iconProps",
     "options",
@@ -53,7 +52,6 @@ export const HTMLSelect: Component<HTMLSelectProps> = (userProps: HTMLSelectProp
         [Classes.FILL]: !!props.fill,
         [Classes.DISABLED]: !!props.disabled,
       },
-      Classes.intentClass(props.intent),
       // user
       props.class
     )
