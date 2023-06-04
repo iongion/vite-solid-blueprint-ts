@@ -4,7 +4,7 @@ import { Dynamic } from "solid-js/web";
 import type { Component } from "solid-js";
 
 import { DISPLAYNAME_PREFIX, Classes, Intent, IntentProps, Props, MaybeElement } from "@blueprint/core";
-import { IconName } from "@blueprint/icons";
+import { Icon, IconName, isIcon } from "@blueprint/icons";
 
 interface IInputGroupProps extends Omit<JSX.SelectHTMLAttributes<HTMLInputElement>, "children">, IntentProps, Omit<Props, "children"> {
   inline?: boolean;
@@ -76,7 +76,20 @@ export const InputGroup: Component<InputGroupProps> = (userProps: InputGroupProp
     )
   );
   const createLeftElement = createMemo(() => {
-    return <></>;
+    if (props.leftElement) {
+      return props.leftElement;
+    }
+    if (props.leftIcon) {
+      return isIcon(props.leftIcon) ? <Icon icon={props.leftIcon as IconName} /> : props.leftIcon;
+    }
+  });
+  const createRightElement = createMemo(() => {
+    if (props.rightElement) {
+      return props.rightElement;
+    }
+    if (props.rightIcon) {
+      return isIcon(props.rightIcon) ? <Icon icon={props.rightIcon as IconName} /> : props.rightIcon;
+    }
   });
   const createInputElement = createMemo(() => {
     return (
@@ -91,9 +104,6 @@ export const InputGroup: Component<InputGroupProps> = (userProps: InputGroupProp
         placeholder={props.placeholder || ""}
       />
     );
-  });
-  const createRightElement = createMemo(() => {
-    return <></>;
   });
   return (
     <Dynamic

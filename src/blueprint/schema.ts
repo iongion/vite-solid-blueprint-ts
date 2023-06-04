@@ -289,5 +289,7 @@ export const InputGroupPropsSchema: y.ObjectSchema<Omit<Props, "children"> & { t
     placeholder: y.string().default("Placeholder"),
     value: y.string().default("Example"),
     intent: IntentSchema,
+    leftIcon: IconSchema.default(IconName.SEARCH as any),
+    rightIcon: IconSchema.default(IconName.SEARCH as any),
   })
   .concat(PropsSchema);
