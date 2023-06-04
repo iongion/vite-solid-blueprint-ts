@@ -3,7 +3,8 @@ import { JSX, mergeProps, splitProps, createMemo } from "solid-js";
 import { Dynamic } from "solid-js/web";
 import type { Component } from "solid-js";
 
-import { DISPLAYNAME_PREFIX, Classes, Intent, IntentProps, Props } from "@blueprint/core";
+import { DISPLAYNAME_PREFIX, Classes, Intent, IntentProps, Props, MaybeElement } from "@blueprint/core";
+import { IconName } from "@blueprint/icons";
 
 interface IInputGroupProps extends Omit<JSX.SelectHTMLAttributes<HTMLInputElement>, "children">, IntentProps, Omit<Props, "children"> {
   inline?: boolean;
@@ -15,6 +16,10 @@ interface IInputGroupProps extends Omit<JSX.SelectHTMLAttributes<HTMLInputElemen
   tagName?: string;
   type?: string;
   inputClassName?: string;
+  leftElement?: MaybeElement;
+  rightElement?: MaybeElement;
+  leftIcon?: IconName | MaybeElement;
+  rightIcon?: IconName | MaybeElement;
 }
 export type InputGroupProps = IInputGroupProps;
 export const InputGroupPropsSchemaDefaults: InputGroupProps = {
