@@ -4,7 +4,7 @@ import { Dynamic } from "solid-js/web";
 import type { Component } from "solid-js";
 
 import { DISPLAYNAME_PREFIX, Classes, Intent, IntentProps, Props, MaybeElement } from "@blueprint/core";
-import { Icon, IconName, isIcon } from "@blueprint/icons";
+import { Icon, IconName } from "@blueprint/icons";
 
 interface IInputGroupProps extends Omit<JSX.SelectHTMLAttributes<HTMLInputElement>, "children">, IntentProps, Omit<Props, "children"> {
   inline?: boolean;
