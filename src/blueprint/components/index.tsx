@@ -14,3 +14,4 @@ export * from "./NonIdealState";
 export * from "./ProgressBar";
 export * from "./Spinner";
 export * from "./Switch";
+export * from "./InputGroup";

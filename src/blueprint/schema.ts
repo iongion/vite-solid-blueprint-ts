@@ -283,3 +283,25 @@ export const SwitchPropsSchema: y.ObjectSchema<Omit<Props, "children"> & { tagNa
     alignIndicator: AlignmentSchema.default(Alignment.LEFT),
   })
   .concat(PropsSchema);
+
+export const InputGroupPropsSchema: y.ObjectSchema<Omit<Props, "children"> & { tagName: string }> = y
+  .object({
+    inline: y.boolean().default(false),
+    fill: y.boolean().default(true),
+    readOnly: y.boolean().default(true),
+    large: y.boolean().default(true),
+    small: y.boolean().default(true),
+    round: y.boolean().default(true),
+    tagName: y.string<keyof JSX.IntrinsicElements>().default("label"),
+    alignIndicator: AlignmentSchema.default(Alignment.LEFT),
+    type: y
+      .string()
+      .oneOf([
+        // enum
+        "text",
+        "number",
+      ])
+      .default("text"),
+    inputClassName: y.string().optional().nullable(),
+  })
+  .concat(PropsSchema);

@@ -1,11 +1,11 @@
 import classNames from "classnames";
-import { JSX, mergeProps, splitProps, createMemo, children } from "solid-js";
+import { JSX, mergeProps, splitProps, createMemo } from "solid-js";
 import { Dynamic } from "solid-js/web";
 import type { Component } from "solid-js";
 
 import { DISPLAYNAME_PREFIX, Classes, Intent, IntentProps, Props } from "@blueprint/core";
 
-interface IInputGroupProps extends Omit<JSX.SelectHTMLAttributes<HTMLInputElement>, "children">, IntentProps, Props {
+interface IInputGroupProps extends Omit<JSX.SelectHTMLAttributes<HTMLInputElement>, "children">, IntentProps, Omit<Props, "children"> {
   inline?: boolean;
   fill?: boolean;
   readOnly?: boolean;
@@ -14,6 +14,7 @@ interface IInputGroupProps extends Omit<JSX.SelectHTMLAttributes<HTMLInputElemen
   round?: boolean;
   tagName?: string;
   type?: string;
+  inputClassName?: string;
 }
 export type InputGroupProps = IInputGroupProps;
 export const InputGroupPropsSchemaDefaults: InputGroupProps = {
@@ -38,8 +39,8 @@ export const InputGroup: Component<InputGroupProps> = (userProps: InputGroupProp
     "round",
     "intent",
     "tagName",
+    "inputClassName",
     "type",
-    "children",
     "class",
     "disabled",
   ]);
@@ -61,29 +62,31 @@ export const InputGroup: Component<InputGroupProps> = (userProps: InputGroupProp
       props.class
     )
   );
-  const createInnerLabel = createMemo(() => {
+  const createLeftElement = createMemo(() => {
+    return <></>;
+  });
+  const createInputElement = createMemo(() => {
     return (
-      <>
-        <div class={Classes.CONTROL_INDICATOR_CHILD}>
-          <div class={Classes.InputGroup_INNER_TEXT}>{props.innerLabelChecked}</div>
-        </div>
-        <div class={Classes.CONTROL_INDICATOR_CHILD}>
-          <div class={Classes.InputGroup_INNER_TEXT}>{props.innerLabel}</div>
-        </div>
-      </>
+      <input
+        // props
+        type={props.type || InputGroupPropsSchemaDefaults.type}
+        class={classNames(Classes.INPUT, props.inputClassName)}
+      />
     );
   });
-  const createChildren = children(() => props.children);
+  const createRightElement = createMemo(() => {
+    return <></>;
+  });
   return (
     <Dynamic
       // props
-      component={props.tagName || "label"}
+      component={props.tagName || InputGroupPropsSchemaDefaults.tagName}
       class={createClassList()}
+      {...htmlProps}
     >
-      <input type="checkbox" checked={props.checked} disabled={props.disabled} {...htmlProps} />
-      <span class={Classes.CONTROL_INDICATOR}>{createInnerLabel()}</span>
-      {props.label}
-      {createChildren()}
+      {createLeftElement()}
+      {createInputElement()}
+      {createRightElement()}
     </Dynamic>
   );
 };

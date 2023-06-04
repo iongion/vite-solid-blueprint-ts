@@ -48,6 +48,8 @@ import {
   Spinner,
   Switch,
   SwitchProps,
+  InputGroupProps,
+  InputGroup,
 } from "@blueprint/components";
 import {
   AnchorButtonPropsSchema,
@@ -66,6 +68,7 @@ import {
   ProgressBarPropsSchema,
   SpinnerPropsSchema,
   SwitchPropsSchema,
+  InputGroupPropsSchema,
 } from "@blueprint/schema";
 import { Icon, IconName, IconProps } from "@blueprint/icons";
 import { Example } from "./Example";
@@ -369,7 +372,6 @@ const App: Component = () => {
         example="Switch"
         schema={SwitchPropsSchema}
         render={(props, setProperty) => {
-          console.debug(">> Switch on change", props);
           return (
             <Switch
               {...props}
@@ -379,6 +381,14 @@ const App: Component = () => {
               }}
             />
           );
+        }}
+      />
+
+      <Example<InputGroupProps>
+        example="InputGroup"
+        schema={InputGroupPropsSchema}
+        render={(props) => {
+          return <InputGroup {...props} />;
         }}
       />
     </div>
