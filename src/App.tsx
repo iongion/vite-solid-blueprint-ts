@@ -46,6 +46,7 @@ import {
   ProgressBar,
   SpinnerProps,
   Spinner,
+  Switch,
 } from "@blueprint/components";
 import {
   AnchorButtonPropsSchema,
@@ -361,6 +362,10 @@ const App: Component = () => {
           return <Spinner {...props} aria-label={t("Loading...")} />;
         }}
       />
+
+      <Example example="Switch">
+        <Switch />
+      </Example>
     </div>
   );
 };

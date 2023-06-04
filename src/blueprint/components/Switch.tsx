@@ -3,9 +3,9 @@ import { mergeProps, splitProps, createMemo, children } from "solid-js";
 import { Dynamic } from "solid-js/web";
 import type { Component } from "solid-js";
 
-import { DISPLAYNAME_PREFIX, MaybeElement, Classes, Props } from "@blueprint/core";
+import { DISPLAYNAME_PREFIX, MaybeElement, Alignment, Classes, AlignmentProps, Props } from "@blueprint/core";
 
-interface ISwitchProps extends Props {
+interface ISwitchProps extends AlignmentProps, Props {
   inline?: boolean;
   large?: boolean;
   checked?: boolean;
@@ -21,6 +21,7 @@ export const SwitchPropsSchemaDefaults: SwitchProps = {
   large: false,
   checked: false,
   tagName: "label",
+  alignment: Alignment.LEFT,
 };
 export const Switch: Component<SwitchProps> = (userProps: SwitchProps) => {
   const [props, htmlProps] = splitProps(mergeProps(SwitchPropsSchemaDefaults, userProps), [
@@ -33,6 +34,7 @@ export const Switch: Component<SwitchProps> = (userProps: SwitchProps) => {
     "label",
     "labelElement",
     "tagName",
+    "alignment",
     "children",
     "class",
     "disabled",
@@ -40,13 +42,15 @@ export const Switch: Component<SwitchProps> = (userProps: SwitchProps) => {
   const createClassList = createMemo(() =>
     classNames(
       // default
-      Classes.HTML_SELECT,
+      Classes.CONTROL,
+      Classes.SWITCH,
       {
         // from props
         [Classes.INLINE]: !!props.inline,
         [Classes.LARGE]: !!props.large,
         [Classes.DISABLED]: !!props.disabled,
       },
+      Classes.alignmentClass(props.alignment),
       // user
       props.class
     )
