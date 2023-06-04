@@ -32,6 +32,7 @@ export enum IconName {
   DOUBLE_CARET_VERTICAL = "double-caret-vertical",
   FLASH = "flash",
   MOON = "moon",
+  FILTER = "filter",
 }
 
 export const Icons = {
@@ -52,6 +53,7 @@ export const Icons = {
   [IconName.DOUBLE_CARET_VERTICAL]: Images.DOUBLE_CARET_VERTICAL.default,
   [IconName.FLASH]: Images.FLASH.default,
   [IconName.MOON]: Images.MOON.default,
+  [IconName.FILTER]: Images.FILTER.default,
 };
 
 export const IconsList = Object.keys(Icons);
