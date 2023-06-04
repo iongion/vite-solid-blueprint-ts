@@ -167,6 +167,7 @@ function ExampleSchemaForm<T>({
                       />
                     ) : (
                       <HTMLSelect
+                        fill
                         {...identityProps}
                         value={value()}
                         onChange={(e) => {
@@ -183,6 +184,7 @@ function ExampleSchemaForm<T>({
                   if (items.length) {
                     widget = (
                       <HTMLSelect
+                        fill
                         {...identityProps}
                         value={value()}
                         onChange={(e) => {
