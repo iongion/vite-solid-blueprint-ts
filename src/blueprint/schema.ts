@@ -277,8 +277,8 @@ export const SwitchPropsSchema: y.ObjectSchema<Omit<Props, "children"> & { tagNa
     inline: y.boolean().default(false),
     large: y.boolean().default(true),
     checked: y.boolean().default(true),
-    innerLabel: y.string().optional().nullable(),
-    innerLabelChecked: y.string().optional().nullable(),
+    innerLabel: y.string().default("off"),
+    innerLabelChecked: y.string().default("on"),
     tagName: y.string<keyof JSX.IntrinsicElements>().default("label"),
     alignIndicator: AlignmentSchema.default(Alignment.LEFT),
   })

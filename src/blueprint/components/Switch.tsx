@@ -57,19 +57,16 @@ export const Switch: Component<SwitchProps> = (userProps: SwitchProps) => {
     )
   );
   const createInnerLabel = createMemo(() => {
-    let innerLabel = props.innerLabel;
-    if (props.checked) {
-      if (props.innerLabelChecked) {
-        innerLabel = props.innerLabelChecked;
-      }
-    }
-    if (innerLabel) {
-      return (
+    return (
+      <>
         <div class={Classes.CONTROL_INDICATOR_CHILD}>
-          <div class={Classes.SWITCH_INNER_TEXT}>{innerLabel}</div>
+          <div class={Classes.SWITCH_INNER_TEXT}>{props.innerLabelChecked}</div>
         </div>
-      );
-    }
+        <div class={Classes.CONTROL_INDICATOR_CHILD}>
+          <div class={Classes.SWITCH_INNER_TEXT}>{props.innerLabel}</div>
+        </div>
+      </>
+    );
   });
   const createChildren = children(() => props.children);
   return (
