@@ -159,10 +159,12 @@ function ExampleSchemaForm<T>({
                 case "number":
                   widget =
                     items.length === 0 ? (
-                      <input
+                      <InputGroup
                         {...identityProps}
+                        small
+                        fill
                         type="number"
-                        value={value()}
+                        value={value() || "0"}
                         onInput={(e) => {
                           onPropertyChange(name, Number(e.currentTarget.value));
                         }}
