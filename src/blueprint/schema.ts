@@ -227,6 +227,7 @@ export const HTMLSelectPropsSchema: y.ObjectSchema<Omit<HTMLSelectProps, "option
     minimal: y.boolean().default(false),
     multiple: y.boolean().default(false),
     iconName: IconSchema.default(IconName.DOUBLE_CARET_VERTICAL),
+    value: y.mixed(),
   })
   .concat(IntentPropsSchema)
   .concat(PropsSchema);
