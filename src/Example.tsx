@@ -6,12 +6,95 @@ import { destructure } from "@solid-primitives/destructure";
 import * as y from "yup";
 import { useI18n } from "solid-i18n";
 
-import { Props } from "@blueprint/core";
-import { HTMLTable, Label } from "@blueprint/components";
+import { Alignment, Boundary, Elevation, Intent, Layout, Position, Props } from "@blueprint/core";
+import { HTMLTable, Label, NonIdealStateIconSize } from "@blueprint/components";
+import { IconSize } from "@blueprint/icons";
 
 import "./Example.css";
 
-function SchemaForm<T>({ schema, props, onPropertyChange }: { schema: y.ObjectSchema<any>; props: T; onPropertyChange: (name: string, value: any) => void }) {
+const AlignmentLabels = {
+  [Alignment.LEFT]: "LEFT",
+  [Alignment.CENTER]: "CENTER",
+  [Alignment.RIGHT]: "RIGHT",
+};
+const BoundaryLabels = {
+  [Boundary.START]: "START",
+  [Boundary.END]: "END",
+};
+const ElevationLabels = {
+  [Elevation.ZERO]: "ZERO",
+  [Elevation.ONE]: "ONE",
+  [Elevation.TWO]: "TWO",
+  [Elevation.THREE]: "THREE",
+  [Elevation.FOUR]: "FOUR",
+};
+const IntentLabels = {
+  [Intent.NONE]: "NONE",
+  [Intent.PRIMARY]: "PRIMARY",
+  [Intent.SUCCESS]: "SUCCESS",
+  [Intent.WARNING]: "WARNING",
+  [Intent.DANGER]: "DANGER",
+};
+const LayoutLabels = {
+  [Layout.HORIZONTAL]: "HORIZONTAL",
+  [Layout.VERTICAL]: "VERTICAL",
+};
+const PositionLabels = {
+  [Position.BOTTOM]: "BOTTOM",
+  [Position.BOTTOM_LEFT]: "BOTTOM_LEFT",
+  [Position.BOTTOM_RIGHT]: "BOTTOM_RIGHT",
+  [Position.LEFT]: "LEFT",
+  [Position.LEFT_BOTTOM]: "LEFT_BOTTOM",
+  [Position.LEFT_TOP]: "LEFT_TOP",
+  [Position.RIGHT]: "RIGHT",
+  [Position.RIGHT_BOTTOM]: "RIGHT_BOTTOM",
+  [Position.RIGHT_TOP]: "RIGHT_TOP",
+  [Position.TOP]: "TOP",
+  [Position.TOP_LEFT]: "TOP_LEFT",
+  [Position.TOP_RIGHT]: "TOP_RIGHT",
+};
+const IconSizeLabels = {
+  [IconSize.STANDARD]: "STANDARD",
+  [IconSize.LARGE]: "LARGE",
+  [IconSize.XLARGE]: "XLARGE",
+  [IconSize.XXLARGE]: "XXLARGE",
+};
+const NonIdealStateIconSizeLabels = {
+  [NonIdealStateIconSize.STANDARD]: "STANDARD",
+  [NonIdealStateIconSize.SMALL]: "SMALL",
+  [NonIdealStateIconSize.EXTRA_SMALL]: "EXTRA_SMALL",
+};
+
+const PropsLabels = {
+  align: AlignmentLabels,
+  alignText: AlignmentLabels,
+  boundary: BoundaryLabels,
+  intent: IntentLabels,
+  elevation: ElevationLabels,
+  layout: LayoutLabels,
+  position: PositionLabels,
+  iconSize: IconSizeLabels,
+};
+const ExampleComponentPropsLabels = {
+  NonIdealState: {
+    iconSize: NonIdealStateIconSizeLabels,
+  },
+  Icon: {
+    size: IconSizeLabels,
+  },
+};
+
+function ExampleSchemaForm<T>({
+  example,
+  schema,
+  props,
+  onPropertyChange,
+}: {
+  example: string;
+  schema: y.ObjectSchema<any>;
+  props: T;
+  onPropertyChange: (name: string, value: any) => void;
+}) {
   const { t } = useI18n();
   const guid = createUniqueId();
   // console.debug("context", { schema, props, setProperty });
@@ -40,6 +123,10 @@ function SchemaForm<T>({ schema, props, onPropertyChange }: { schema: y.ObjectSc
                 name: `${name}-${guid}`,
               };
               const isFlag = desc.type === "boolean";
+              const getValueLabel = (it: string) => {
+                const label = ExampleComponentPropsLabels[example]?.[name]?.[it as any] || PropsLabels[name]?.[it as any] || it;
+                return label;
+              };
               switch (desc.type) {
                 case "boolean":
                   widget = (
@@ -73,7 +160,7 @@ function SchemaForm<T>({ schema, props, onPropertyChange }: { schema: y.ObjectSc
                         }}
                       >
                         {items.map((it) => {
-                          return <option value={it}>{it}</option>;
+                          return <option value={it}>{getValueLabel(it)}</option>;
                         })}
                       </select>
                     );
@@ -89,7 +176,7 @@ function SchemaForm<T>({ schema, props, onPropertyChange }: { schema: y.ObjectSc
                         }}
                       >
                         {items.map((it) => {
-                          return <option value={it}>{it}</option>;
+                          return <option value={it}>{getValueLabel(it)}</option>;
                         })}
                       </select>
                     );
@@ -171,7 +258,7 @@ export function Example<T extends Props = any>({ title, example, children, schem
             <div class="ExampleComponentProperties">
               {(() => {
                 const ctx = useContext(context);
-                return ctx === undefined ? undefined : <SchemaForm<T> schema={schema} props={ctx} onPropertyChange={onPropertyChange} />;
+                return ctx === undefined ? undefined : <ExampleSchemaForm<T> example={example} schema={schema} props={ctx} onPropertyChange={onPropertyChange} />;
               })()}
             </div>
           ) : null}
