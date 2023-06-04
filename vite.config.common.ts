@@ -24,18 +24,15 @@ if (process.env.LOCAL === "yes") {
 // eslint-disable-next-line import/no-unused-modules
 export const createConfig = ({ mode }) => {
   const plugins = [
-    // the vite plugin is not necessary for the devtools to work
-    devtools({
-      // but enabling some of the options, such as "autoname" will improve the debugging experience
-      // https://github.com/thetarnav/solid-devtools/tree/main/packages/transform#options
-      autoname: true,
-      locator: {
-        targetIDE: "vscode",
-        key: "Ctrl",
-        jsxLocation: true,
-        componentLocation: true,
-      },
-    }),
+    // devtools({
+    //   autoname: true,
+    //   locator: {
+    //     targetIDE: "vscode",
+    //     key: "Ctrl",
+    //     jsxLocation: true,
+    //     componentLocation: true,
+    //   },
+    // }),
     solidPlugin(),
     solidSvg(),
     checker({

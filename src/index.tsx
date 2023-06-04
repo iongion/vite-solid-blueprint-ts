@@ -2,7 +2,7 @@
 import { render } from "solid-js/web";
 import { createI18n, I18nProvider } from "solid-i18n";
 
-import "solid-devtools";
+// import "solid-devtools";
 
 import "./index.css";
 
