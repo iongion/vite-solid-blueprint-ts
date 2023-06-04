@@ -116,8 +116,10 @@ function ExampleSchemaForm<T>({
               const value = createMemo(() => values[name]() as any);
               let widget: JSX.Element | null;
               const items: string[] = (desc as any).oneOf || [];
-              // console.debug(name, value, { desc, field }, items);
-              // console.debug("render form input", name, value);
+              if (name === "value") {
+                // console.debug(name, field, desc, value());
+                // console.debug("render form input", name, value);
+              }
               const identityProps = {
                 id: `${name}-${guid}`,
                 name: `${name}-${guid}`,
@@ -128,6 +130,18 @@ function ExampleSchemaForm<T>({
                 return label;
               };
               switch (desc.type) {
+                case "mixed":
+                  widget = (
+                    <input
+                      {...identityProps}
+                      type="text"
+                      value={value()}
+                      onInput={(e) => {
+                        onPropertyChange(name, e.currentTarget.value);
+                      }}
+                    />
+                  );
+                  break;
                 case "boolean":
                   widget = (
                     <input
