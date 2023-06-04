@@ -55,6 +55,7 @@ import {
   CardPropsSchema,
   CollapsePropsSchema,
   DividerPropsSchema,
+  HTMLSelectPropsSchema,
   HTMLTablePropsSchema,
   IconPropsSchema,
   MenuPropsSchema,
@@ -231,6 +232,7 @@ const App: Component = () => {
 
       <Example<HTMLSelectProps>
         example="HTMLSelect"
+        schema={HTMLSelectPropsSchema}
         render={(props) => {
           return (
             <HTMLSelect {...props}>
