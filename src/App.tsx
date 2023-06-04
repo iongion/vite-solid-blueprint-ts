@@ -2,7 +2,7 @@ import { createSignal } from "solid-js";
 import type { Component } from "solid-js";
 import { useI18n } from "solid-i18n";
 import classNames from "classnames";
-import { Alignment, Classes, Intent } from "@blueprint/core";
+import { Alignment, Classes, Intent, Props } from "@blueprint/core";
 import {
   AnchorButtonProps,
   AnchorButton,
@@ -232,31 +232,39 @@ const App: Component = () => {
         }}
       />
 
-      <Example example="HTML Elements">
-        <H1>H1 example</H1>
-        <H2>H2 example</H2>
-        <H3>H3 example</H3>
-        <H4>H4 example</H4>
-        <H5>H5 example</H5>
-        <H6>H6 example</H6>
-        <Blockquote>Blockquote example with a long text</Blockquote>
-        <Label htmlFor="spanLabelTarget">
-          <span>Label example with a long text</span> &nbsp;
-          <input type="text" id="spanLabelTarget" />
-        </Label>
-        <UL>
-          <li>Item 1</li>
-          <li>Item 2</li>
-          <li>Item 3</li>
-          <li>Item 4</li>
-        </UL>
-        <OL>
-          <li>Item 1</li>
-          <li>Item 2</li>
-          <li>Item 3</li>
-          <li>Item 4</li>
-        </OL>
-      </Example>
+      <Example<Props>
+        example="HTML Elements"
+        schema={PropsSchema}
+        render={(props) => {
+          return (
+            <div>
+              <H1 {...props}>H1 example</H1>
+              <H2 {...props}>H2 example</H2>
+              <H3 {...props}>H3 example</H3>
+              <H4 {...props}>H4 example</H4>
+              <H5 {...props}>H5 example</H5>
+              <H6 {...props}>H6 example</H6>
+              <Blockquote {...props}>Blockquote example with a long text</Blockquote>
+              <Label {...props} for="spanLabelTarget">
+                <span>Label example with a long text</span> &nbsp;
+                <input type="text" id="spanLabelTarget" />
+              </Label>
+              <UL {...props}>
+                <li>Item 1</li>
+                <li>Item 2</li>
+                <li>Item 3</li>
+                <li>Item 4</li>
+              </UL>
+              <OL {...props}>
+                <li>Item 1</li>
+                <li>Item 2</li>
+                <li>Item 3</li>
+                <li>Item 4</li>
+              </OL>
+            </div>
+          );
+        }}
+      />
 
       <Example<HTMLSelectProps>
         example="HTMLSelect"
