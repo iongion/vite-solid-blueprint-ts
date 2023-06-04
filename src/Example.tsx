@@ -149,7 +149,7 @@ function ExampleSchemaForm<T>({
                       inline
                       label={name}
                       checked={value()}
-                      onInput={(e) => {
+                      onChange={(e) => {
                         onPropertyChange(name, e.currentTarget.checked);
                       }}
                     />
