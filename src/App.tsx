@@ -381,7 +381,6 @@ const App: Component = () => {
               tagName={props.tagName}
               alignIndicator={props.alignIndicator}
               onChange={(e) => {
-                console.debug("set checked", e.currentTarget.checked);
                 setProperty("checked", e.currentTarget.checked);
               }}
             />

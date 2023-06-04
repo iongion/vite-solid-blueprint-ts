@@ -3,7 +3,7 @@ import { JSX, mergeProps, splitProps, createMemo, children } from "solid-js";
 import { Dynamic } from "solid-js/web";
 import type { Component } from "solid-js";
 
-import { DISPLAYNAME_PREFIX, MaybeElement, Alignment, Classes, AlignmentProps, Props } from "@blueprint/core";
+import { DISPLAYNAME_PREFIX, MaybeElement, Alignment, Classes, Props } from "@blueprint/core";
 
 interface ISwitchProps extends Omit<JSX.SelectHTMLAttributes<HTMLInputElement>, "children">, Props {
   inline?: boolean;
