@@ -10,8 +10,10 @@ interface IHTMLSelectProps extends IntentProps, Props {
   fill?: boolean;
   large?: boolean;
   minimal?: boolean;
+  multiple?: boolean;
   iconName?: IconName;
   iconProps?: IconProps;
+  value?: string | number;
   options?: ReadonlyArray<string | number | OptionProps>;
 }
 export type HTMLSelectProps = IHTMLSelectProps;
@@ -19,14 +21,17 @@ export const HTMLSelectPropsSchemaDefaults: HTMLSelectProps = {
   fill: false,
   large: false,
   minimal: false,
+  multiple: false,
   iconName: IconName.DOUBLE_CARET_VERTICAL,
 };
 export const HTMLSelect: Component<HTMLSelectProps> = (userProps: HTMLSelectProps) => {
   const [props, htmlProps] = splitProps(mergeProps(HTMLSelectPropsSchemaDefaults, userProps), [
     // props list
+    "value",
     "fill",
     "large",
     "minimal",
+    "multiple",
     "intent",
     "iconName",
     "iconProps",
@@ -78,8 +83,10 @@ export const HTMLSelect: Component<HTMLSelectProps> = (userProps: HTMLSelectProp
       class={createClassList()}
       {...htmlProps}
     >
-      {createOptionChildren()}
-      {createChildren()}
+      <select disabled={props.disabled} value={props.value} multiple={props.multiple} {...htmlProps}>
+        {createOptionChildren()}
+        {createChildren()}
+      </select>
       {createIcon()}
     </div>
   );

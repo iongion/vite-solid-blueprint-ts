@@ -225,6 +225,7 @@ export const HTMLSelectPropsSchema: y.ObjectSchema<Omit<HTMLSelectProps, "option
     fill: y.boolean().default(false),
     large: y.boolean().default(false),
     minimal: y.boolean().default(false),
+    multiple: y.boolean().default(false),
     iconName: IconSchema.default(IconName.DOUBLE_CARET_VERTICAL),
   })
   .concat(IntentPropsSchema)
