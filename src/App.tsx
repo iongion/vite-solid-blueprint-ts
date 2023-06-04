@@ -101,9 +101,11 @@ const App: Component = () => {
           <AnchorButton intent={Intent.SUCCESS} icon={IconName.GITHUB} href="https://github.com/iongion/vite-solid-blueprint-ts" target="_blank" text={t("Fork repo")} />
         </ButtonGroup>
         <br />
+        <br />
         <Switch
-          innerLabel={t("Light") || ""}
-          innerLabelChecked={t("Dark") || ""}
+          checked={useDarkTheme()}
+          innerLabel={t("Light")}
+          innerLabelChecked={t("Dark")}
           onChange={(e) => {
             setUseDarkTheme(e.currentTarget.checked);
           }}
