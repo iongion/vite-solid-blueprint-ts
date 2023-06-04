@@ -22,6 +22,7 @@ import {
   ProgressBarProps,
   SpinnerProps,
   SpinnerSize,
+  // SwitchProps,
 } from "@blueprint/components";
 import { IconSize, IconProps } from "@blueprint/icons";
 
@@ -261,11 +262,24 @@ export const ProgressBarPropsSchema: y.ObjectSchema<Omit<ProgressBarProps, "chil
   .concat(IntentPropsSchema)
   .concat(PropsSchema);
 
-export const SpinnerPropsSchema: y.ObjectSchema<Omit<SpinnerProps, "children" | "tagName"> & { tagName: string }> = y
+export const SpinnerPropsSchema: y.ObjectSchema<Omit<SpinnerProps, "children"> & { tagName: string }> = y
   .object({
     tagName: y.string<keyof JSX.IntrinsicElements>().default("div"),
     size: y.number().default(SpinnerSize.STANDARD),
     value: y.number().min(0).max(1).default(null),
   })
   .concat(IntentPropsSchema)
+  .concat(PropsSchema);
+
+export const SwitchPropsSchema: y.ObjectSchema<Omit<Props, "children"> & { tagName: string }> = y
+  .object({
+    label: y.string().optional().nullable(),
+    inline: y.boolean().default(false),
+    large: y.boolean().default(false),
+    checked: y.boolean().default(false),
+    innerLabel: y.string().optional().nullable(),
+    innerLabelChecked: y.boolean().default(false),
+    tagName: y.string<keyof JSX.IntrinsicElements>().default("div"),
+    alignment: AlignmentSchema.default(Alignment.LEFT),
+  })
   .concat(PropsSchema);

@@ -55,6 +55,15 @@ export const Switch: Component<SwitchProps> = (userProps: SwitchProps) => {
       props.class
     )
   );
+  const createLabel = createMemo(() => {
+    if (props.checked && props.innerLabelChecked) {
+      return props.innerLabelChecked;
+    }
+    if (props.innerLabel) {
+      return props.innerLabel;
+    }
+    return props.label;
+  });
   const createChildren = children(() => props.children);
   return (
     <Dynamic
@@ -64,7 +73,9 @@ export const Switch: Component<SwitchProps> = (userProps: SwitchProps) => {
     >
       <input type="checkbox" {...htmlProps} />
       <span class={Classes.CONTROL_INDICATOR}></span>
-      {props.label || props.labelElement}
+      <div class={Classes.CONTROL_INDICATOR_CHILD}>
+        <div class={Classes.SWITCH_INNER_TEXT}>{createLabel()}</div>
+      </div>
       {createChildren()}
     </Dynamic>
   );

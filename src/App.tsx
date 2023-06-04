@@ -47,6 +47,7 @@ import {
   SpinnerProps,
   Spinner,
   Switch,
+  SwitchProps,
 } from "@blueprint/components";
 import {
   AnchorButtonPropsSchema,
@@ -64,6 +65,7 @@ import {
   NonIdealStatePropsSchema,
   ProgressBarPropsSchema,
   SpinnerPropsSchema,
+  SwitchPropsSchema,
 } from "@blueprint/schema";
 import { Icon, IconName, IconProps } from "@blueprint/icons";
 import { Example } from "./Example";
@@ -363,9 +365,13 @@ const App: Component = () => {
         }}
       />
 
-      <Example example="Switch">
-        <Switch />
-      </Example>
+      <Example<SwitchProps>
+        example="Switch"
+        schema={SwitchPropsSchema}
+        render={(props) => {
+          return <Switch label={props.label || "Click to switch state"} {...props} />;
+        }}
+      />
     </div>
   );
 };
