@@ -114,8 +114,9 @@ export const IntentPropsSchema = y.object({
   intent: IntentSchema,
 });
 
+const InteractiveSchema = y.boolean().default(false);
 export const InteractivePropsSchema = y.object({
-  interactive: y.boolean().default(false),
+  interactive: InteractiveSchema,
 });
 
 // Components
@@ -174,7 +175,7 @@ export const CalloutPropsSchema: y.ObjectSchema<Omit<CalloutProps, "children">> 
 
 export const CardPropsSchema: y.ObjectSchema<Omit<CardProps, "children">> = y
   .object({
-    interactive: y.boolean().default(false),
+    interactive: InteractiveSchema.default(false),
   })
   .concat(ElevationPropsSchema)
   .concat(PropsSchema);
@@ -218,11 +219,11 @@ export const HTMLSelectPropsSchema: y.AnyObjectSchema = y
 
 export const HTMLTablePropsSchema: y.ObjectSchema<Omit<HTMLTableProps, "children">> = y
   .object({
-    bordered: y.boolean().default(false),
-    compact: y.boolean().default(false),
-    striped: y.boolean().default(false),
+    bordered: y.boolean().default(true),
+    compact: y.boolean().default(true),
+    striped: y.boolean().default(true),
+    interactive: InteractiveSchema.default(true),
   })
-  .concat(InteractivePropsSchema)
   .concat(PropsSchema);
 
 export const NonIdealStatePropsSchema: y.ObjectSchema<Omit<NonIdealStateProps, "children" | "action">> = y
