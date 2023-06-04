@@ -368,29 +368,15 @@ const App: Component = () => {
       <Example<SwitchProps>
         example="Switch"
         schema={SwitchPropsSchema}
-        render={(props) => {
+        render={(props, setProperty) => {
           console.debug(">> Switch on change", props);
           return (
             <>
               <Switch
-                label={props.label || "Click to switch state 1"}
+                label={props.label || "Click to switch state"}
                 {...props}
                 onChange={(e) => {
-                  console.debug(e);
-                }}
-              />
-              <Switch
-                label={props.label || "Click to switch state 2"}
-                {...props}
-                onChange={(e) => {
-                  console.debug(e);
-                }}
-              />
-              <Switch
-                label={props.label || "Click to switch state 3"}
-                {...props}
-                onChange={(e) => {
-                  console.debug(e);
+                  setProperty("checked", e.currentTarget.checked);
                 }}
               />
             </>
