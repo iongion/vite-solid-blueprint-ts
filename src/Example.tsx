@@ -101,7 +101,7 @@ function ExampleSchemaForm<T>({
   // console.debug("context", { schema, props, setProperty });
   return (
     <form class="ExampleSchemaForm">
-      <HTMLTable compact interactive>
+      <HTMLTable striped interactive>
         <thead>
           <tr>
             <th colSpan="2">{t("Properties")}</th>
