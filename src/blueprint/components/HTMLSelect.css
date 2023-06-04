@@ -2,3 +2,224 @@
   min-height: 100px;
   padding: 5px;
 }
+
+.bp4-html-select:not([class*="bp4-intent-"]) {
+  background-color: #f6f7f9;
+  -webkit-box-shadow: inset 0 0 0 1px rgba(17, 20, 24, 0.2), 0 1px 2px rgba(17, 20, 24, 0.1);
+  box-shadow: inset 0 0 0 1px rgba(17, 20, 24, 0.2), 0 1px 2px rgba(17, 20, 24, 0.1);
+  color: #1c2127;
+}
+.bp4-html-select:not([class*="bp4-intent-"]):hover {
+  background-clip: padding-box;
+  background-color: #edeff2;
+  -webkit-box-shadow: inset 0 0 0 1px rgba(17, 20, 24, 0.2), 0 1px 2px rgba(17, 20, 24, 0.2);
+  box-shadow: inset 0 0 0 1px rgba(17, 20, 24, 0.2), 0 1px 2px rgba(17, 20, 24, 0.2);
+}
+.bp4-html-select:not([class*="bp4-intent-"]):active,
+.bp4-html-select:not([class*="bp4-intent-"]).bp4-active {
+  background-color: #dce0e5;
+  -webkit-box-shadow: inset 0 0 0 1px rgba(17, 20, 24, 0.2), 0 1px 2px rgba(17, 20, 24, 0.2);
+  box-shadow: inset 0 0 0 1px rgba(17, 20, 24, 0.2), 0 1px 2px rgba(17, 20, 24, 0.2);
+}
+@media (forced-colors: active) and (prefers-color-scheme: dark) {
+  .bp4-html-select:not([class*="bp4-intent-"]):active,
+  .bp4-html-select:not([class*="bp4-intent-"]).bp4-active {
+    background: highlight;
+  }
+}
+.bp4-html-select:not([class*="bp4-intent-"]):disabled,
+.bp4-html-select:not([class*="bp4-intent-"]).bp4-disabled {
+  background-color: rgba(211, 216, 222, 0.5);
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  color: rgba(95, 107, 124, 0.6);
+  cursor: not-allowed;
+  outline: none;
+}
+.bp4-html-select:not([class*="bp4-intent-"]):disabled.bp4-active,
+.bp4-html-select:not([class*="bp4-intent-"]):disabled.bp4-active:hover,
+.bp4-html-select:not([class*="bp4-intent-"]).bp4-disabled.bp4-active,
+.bp4-html-select:not([class*="bp4-intent-"]).bp4-disabled.bp4-active:hover {
+  background: rgba(211, 216, 222, 0.7);
+}
+@media (forced-colors: active) and (prefers-color-scheme: dark) {
+  .bp4-html-select:not([class*="bp4-intent-"]) {
+    border: 1px solid buttonborder;
+  }
+}
+.bp4-html-select.bp4-intent-primary {
+  background-color: #2d72d2;
+  -webkit-box-shadow: inset 0 0 0 1px rgba(17, 20, 24, 0.2), 0 1px 2px rgba(17, 20, 24, 0.1);
+  box-shadow: inset 0 0 0 1px rgba(17, 20, 24, 0.2), 0 1px 2px rgba(17, 20, 24, 0.1);
+  color: #ffffff;
+}
+.bp4-html-select.bp4-intent-primary:hover,
+.bp4-html-select.bp4-intent-primary:active,
+.bp4-html-select.bp4-intent-primary.bp4-active {
+  color: #ffffff;
+}
+.bp4-html-select.bp4-intent-primary:hover {
+  background-color: #215db0;
+  -webkit-box-shadow: inset 0 0 0 1px rgba(17, 20, 24, 0.2), 0 1px 2px rgba(17, 20, 24, 0.2);
+  box-shadow: inset 0 0 0 1px rgba(17, 20, 24, 0.2), 0 1px 2px rgba(17, 20, 24, 0.2);
+}
+.bp4-html-select.bp4-intent-primary:active,
+.bp4-html-select.bp4-intent-primary.bp4-active {
+  background-color: #184a90;
+  -webkit-box-shadow: inset 0 0 0 1px rgba(17, 20, 24, 0.2), 0 1px 2px rgba(17, 20, 24, 0.2);
+  box-shadow: inset 0 0 0 1px rgba(17, 20, 24, 0.2), 0 1px 2px rgba(17, 20, 24, 0.2);
+}
+.bp4-html-select.bp4-intent-primary:disabled,
+.bp4-html-select.bp4-intent-primary.bp4-disabled {
+  background-color: rgba(45, 114, 210, 0.5);
+  border-color: transparent;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  color: rgba(255, 255, 255, 0.6);
+}
+@media (forced-colors: active) and (prefers-color-scheme: dark) {
+  .bp4-html-select.bp4-intent-primary:disabled,
+  .bp4-html-select.bp4-intent-primary.bp4-disabled {
+    border-color: graytext;
+    color: graytext;
+  }
+}
+@media (forced-colors: active) and (prefers-color-scheme: dark) {
+  .bp4-html-select.bp4-intent-primary {
+    border: 1px solid buttonborder;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+  }
+}
+.bp4-html-select.bp4-intent-success {
+  background-color: #238551;
+  -webkit-box-shadow: inset 0 0 0 1px rgba(17, 20, 24, 0.2), 0 1px 2px rgba(17, 20, 24, 0.1);
+  box-shadow: inset 0 0 0 1px rgba(17, 20, 24, 0.2), 0 1px 2px rgba(17, 20, 24, 0.1);
+  color: #ffffff;
+}
+.bp4-html-select.bp4-intent-success:hover,
+.bp4-html-select.bp4-intent-success:active,
+.bp4-html-select.bp4-intent-success.bp4-active {
+  color: #ffffff;
+}
+.bp4-html-select.bp4-intent-success:hover {
+  background-color: #1c6e42;
+  -webkit-box-shadow: inset 0 0 0 1px rgba(17, 20, 24, 0.2), 0 1px 2px rgba(17, 20, 24, 0.2);
+  box-shadow: inset 0 0 0 1px rgba(17, 20, 24, 0.2), 0 1px 2px rgba(17, 20, 24, 0.2);
+}
+.bp4-html-select.bp4-intent-success:active,
+.bp4-html-select.bp4-intent-success.bp4-active {
+  background-color: #165a36;
+  -webkit-box-shadow: inset 0 0 0 1px rgba(17, 20, 24, 0.2), 0 1px 2px rgba(17, 20, 24, 0.2);
+  box-shadow: inset 0 0 0 1px rgba(17, 20, 24, 0.2), 0 1px 2px rgba(17, 20, 24, 0.2);
+}
+.bp4-html-select.bp4-intent-success:disabled,
+.bp4-html-select.bp4-intent-success.bp4-disabled {
+  background-color: rgba(35, 133, 81, 0.5);
+  border-color: transparent;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  color: rgba(255, 255, 255, 0.6);
+}
+@media (forced-colors: active) and (prefers-color-scheme: dark) {
+  .bp4-html-select.bp4-intent-success:disabled,
+  .bp4-html-select.bp4-intent-success.bp4-disabled {
+    border-color: graytext;
+    color: graytext;
+  }
+}
+@media (forced-colors: active) and (prefers-color-scheme: dark) {
+  .bp4-html-select.bp4-intent-success {
+    border: 1px solid buttonborder;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+  }
+}
+.bp4-html-select.bp4-intent-warning {
+  background-color: #c87619;
+  -webkit-box-shadow: inset 0 0 0 1px rgba(17, 20, 24, 0.2), 0 1px 2px rgba(17, 20, 24, 0.1);
+  box-shadow: inset 0 0 0 1px rgba(17, 20, 24, 0.2), 0 1px 2px rgba(17, 20, 24, 0.1);
+  color: #ffffff;
+}
+.bp4-html-select.bp4-intent-warning:hover,
+.bp4-html-select.bp4-intent-warning:active,
+.bp4-html-select.bp4-intent-warning.bp4-active {
+  color: #ffffff;
+}
+.bp4-html-select.bp4-intent-warning:hover {
+  background-color: #935610;
+  -webkit-box-shadow: inset 0 0 0 1px rgba(17, 20, 24, 0.2), 0 1px 2px rgba(17, 20, 24, 0.2);
+  box-shadow: inset 0 0 0 1px rgba(17, 20, 24, 0.2), 0 1px 2px rgba(17, 20, 24, 0.2);
+}
+.bp4-html-select.bp4-intent-warning:active,
+.bp4-html-select.bp4-intent-warning.bp4-active {
+  background-color: #77450d;
+  -webkit-box-shadow: inset 0 0 0 1px rgba(17, 20, 24, 0.2), 0 1px 2px rgba(17, 20, 24, 0.2);
+  box-shadow: inset 0 0 0 1px rgba(17, 20, 24, 0.2), 0 1px 2px rgba(17, 20, 24, 0.2);
+}
+.bp4-html-select.bp4-intent-warning:disabled,
+.bp4-html-select.bp4-intent-warning.bp4-disabled {
+  background-color: rgba(200, 118, 25, 0.5);
+  border-color: transparent;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  color: rgba(255, 255, 255, 0.6);
+}
+@media (forced-colors: active) and (prefers-color-scheme: dark) {
+  .bp4-html-select.bp4-intent-warning:disabled,
+  .bp4-html-select.bp4-intent-warning.bp4-disabled {
+    border-color: graytext;
+    color: graytext;
+  }
+}
+@media (forced-colors: active) and (prefers-color-scheme: dark) {
+  .bp4-html-select.bp4-intent-warning {
+    border: 1px solid buttonborder;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+  }
+}
+.bp4-html-select.bp4-intent-danger {
+  background-color: #cd4246;
+  -webkit-box-shadow: inset 0 0 0 1px rgba(17, 20, 24, 0.2), 0 1px 2px rgba(17, 20, 24, 0.1);
+  box-shadow: inset 0 0 0 1px rgba(17, 20, 24, 0.2), 0 1px 2px rgba(17, 20, 24, 0.1);
+  color: #ffffff;
+}
+.bp4-html-select.bp4-intent-danger:hover,
+.bp4-html-select.bp4-intent-danger:active,
+.bp4-html-select.bp4-intent-danger.bp4-active {
+  color: #ffffff;
+}
+.bp4-html-select.bp4-intent-danger:hover {
+  background-color: #ac2f33;
+  -webkit-box-shadow: inset 0 0 0 1px rgba(17, 20, 24, 0.2), 0 1px 2px rgba(17, 20, 24, 0.2);
+  box-shadow: inset 0 0 0 1px rgba(17, 20, 24, 0.2), 0 1px 2px rgba(17, 20, 24, 0.2);
+}
+.bp4-html-select.bp4-intent-danger:active,
+.bp4-html-select.bp4-intent-danger.bp4-active {
+  background-color: #8e292c;
+  -webkit-box-shadow: inset 0 0 0 1px rgba(17, 20, 24, 0.2), 0 1px 2px rgba(17, 20, 24, 0.2);
+  box-shadow: inset 0 0 0 1px rgba(17, 20, 24, 0.2), 0 1px 2px rgba(17, 20, 24, 0.2);
+}
+.bp4-html-select.bp4-intent-danger:disabled,
+.bp4-html-select.bp4-intent-danger.bp4-disabled {
+  background-color: rgba(205, 66, 70, 0.5);
+  border-color: transparent;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  color: rgba(255, 255, 255, 0.6);
+}
+@media (forced-colors: active) and (prefers-color-scheme: dark) {
+  .bp4-html-select.bp4-intent-danger:disabled,
+  .bp4-html-select.bp4-intent-danger.bp4-disabled {
+    border-color: graytext;
+    color: graytext;
+  }
+}
+@media (forced-colors: active) and (prefers-color-scheme: dark) {
+  .bp4-html-select.bp4-intent-danger {
+    border: 1px solid buttonborder;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+  }
+}
