@@ -6,7 +6,7 @@ import { Key } from "@solid-primitives/keyed";
 import { DISPLAYNAME_PREFIX, Classes, IntentProps, OptionProps, Props } from "@blueprint/core";
 import { Icon, IconName, IconProps } from "@blueprint/icons";
 
-import "./HTMLSelect";
+import "./HTMLSelect.css";
 
 interface IHTMLSelectProps extends IntentProps, Props {
   fill?: boolean;
