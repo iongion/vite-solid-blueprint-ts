@@ -147,6 +147,7 @@ function ExampleSchemaForm<T>({
                     <Switch
                       {...identityProps}
                       inline
+                      fill
                       label={name}
                       checked={checked()}
                       onChange={(e) => {

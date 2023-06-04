@@ -5,10 +5,13 @@ import type { Component } from "solid-js";
 
 import { DISPLAYNAME_PREFIX, MaybeElement, Alignment, Classes, Props } from "@blueprint/core";
 
+import "./Switch.css";
+
 interface ISwitchProps extends Omit<JSX.SelectHTMLAttributes<HTMLInputElement>, "children">, Props {
   inline?: boolean;
   large?: boolean;
   checked?: boolean;
+  fill?: boolean;
   innerLabel?: string;
   innerLabelChecked?: string;
   label?: string;
@@ -21,6 +24,7 @@ export const SwitchPropsSchemaDefaults: SwitchProps = {
   inline: false,
   large: false,
   checked: false,
+  fill: false,
   tagName: "label",
   alignIndicator: Alignment.LEFT,
 };
@@ -30,6 +34,7 @@ export const Switch: Component<SwitchProps> = (userProps: SwitchProps) => {
     "inline",
     "large",
     "checked",
+    "fill",
     "innerLabel",
     "innerLabelChecked",
     "label",
@@ -49,6 +54,7 @@ export const Switch: Component<SwitchProps> = (userProps: SwitchProps) => {
         // from props
         [Classes.INLINE]: !!props.inline,
         [Classes.LARGE]: !!props.large,
+        [Classes.FILL]: !!props.fill,
         [Classes.DISABLED]: !!props.disabled,
       },
       Classes.alignmentClass(props.alignIndicator),
