@@ -302,5 +302,7 @@ export const InputGroupPropsSchema: y.ObjectSchema<Omit<Props, "children"> & { t
       ])
       .default("text"),
     inputClassName: y.string().optional().nullable(),
+    placeholder: y.string().default("Placeholder"),
+    value: y.string().default("Example"),
   })
   .concat(PropsSchema);

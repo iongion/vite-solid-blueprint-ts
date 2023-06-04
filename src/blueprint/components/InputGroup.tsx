@@ -21,6 +21,7 @@ interface IInputGroupProps extends Omit<JSX.SelectHTMLAttributes<HTMLInputElemen
   rightElement?: MaybeElement;
   leftIcon?: IconName | MaybeElement;
   rightIcon?: IconName | MaybeElement;
+  value?: string;
 }
 export type InputGroupProps = IInputGroupProps;
 export const InputGroupPropsSchemaDefaults: InputGroupProps = {
@@ -52,6 +53,7 @@ export const InputGroup: Component<InputGroupProps> = (userProps: InputGroupProp
     "leftIcon",
     "rightIcon",
     "type",
+    "value",
     "class",
     "disabled",
   ]);
@@ -84,6 +86,8 @@ export const InputGroup: Component<InputGroupProps> = (userProps: InputGroupProp
         class={classNames(Classes.INPUT, props.inputClassName)}
         disabled={props.disabled}
         readonly={props.readOnly}
+        value={props.value || ""}
+        placeholder={props.placeholder || ""}
       />
     );
   });
