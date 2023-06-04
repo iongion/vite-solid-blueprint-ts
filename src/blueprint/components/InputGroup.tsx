@@ -82,6 +82,7 @@ export const InputGroup: Component<InputGroupProps> = (userProps: InputGroupProp
     return (
       <input
         // props
+        {...htmlProps}
         type={props.type || InputGroupPropsSchemaDefaults.type}
         class={classNames(Classes.INPUT, props.inputClassName)}
         disabled={props.disabled}
@@ -99,7 +100,6 @@ export const InputGroup: Component<InputGroupProps> = (userProps: InputGroupProp
       // props
       component={props.tagName || InputGroupPropsSchemaDefaults.tagName}
       class={createClassList()}
-      {...htmlProps}
     >
       {createLeftElement()}
       {createInputElement()}
