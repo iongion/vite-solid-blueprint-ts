@@ -14,7 +14,9 @@ import {
   Callout,
   CardProps,
   Card,
+  CodeProps,
   Code,
+  CodeBlockProps,
   CodeBlock,
   CollapseProps,
   Collapse,
@@ -52,6 +54,7 @@ import {
   InputGroup,
 } from "@blueprint/components";
 import {
+  PropsSchema,
   AnchorButtonPropsSchema,
   ButtonPropsSchema,
   ButtonGroupPropsSchema,
@@ -89,7 +92,7 @@ const App: Component = () => {
   const [count, setCount] = createSignal(0);
   const [useDarkTheme, setUseDarkTheme] = createSignal(true);
   return (
-    <div class={classNames("App", { [Classes.DARK]: useDarkTheme })}>
+    <div class={classNames("App", { [Classes.DARK]: useDarkTheme() })}>
       <ToolsList />
       <h1 class="AppHeaderTitle">Solid + BlueprintJS + Typescript + Vite</h1>
       <p class="read-the-docs">
@@ -182,13 +185,21 @@ const App: Component = () => {
         }}
       />
 
-      <Example example="Code">
-        <Code>{codeLines.join("\n")}</Code>
-      </Example>
+      <Example<CodeProps>
+        example="Code"
+        schema={PropsSchema}
+        render={(props) => {
+          return <Code {...props}>{codeLines.join("\n")}</Code>;
+        }}
+      />
 
-      <Example example="CodeBlock">
-        <CodeBlock>{codeLines.join("\n")}</CodeBlock>
-      </Example>
+      <Example<CodeBlockProps>
+        example="CodeBlock"
+        schema={PropsSchema}
+        render={(props) => {
+          return <CodeBlock {...props}>{codeLines.join("\n")}</CodeBlock>;
+        }}
+      />
 
       <Example<CollapseProps>
         example="Collapse"

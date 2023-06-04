@@ -21,7 +21,6 @@
 .ExampleComponentTitle {
   padding: 5px;
   margin: 0;
-  background: #1f242c;
   display: block;
   width: 100%;
   text-align: center;
@@ -30,7 +29,6 @@
 .ExampleComponentPreview {
   display: flex;
   flex-direction: column;
-  background: #252a31;
   flex-grow: 1;
   flex-shrink: 1;
   padding: 10px;
@@ -39,7 +37,6 @@
 }
 .ExampleComponentProperties {
   display: flex;
-  background-color: #1f242c;
   flex-direction: column;
   width: 340px;
   padding: 5px;
@@ -69,4 +66,30 @@
 
 [data-example="HTMLTable"] .ExampleComponentPreview table {
   min-width: 100%;
+}
+
+.ExampleComponentProperties table tr th,
+.ExampleComponentProperties table tr td {
+  vertical-align: middle;
+}
+
+/* theme */
+.ExampleComponentTitle {
+  background: #ffffff;
+}
+.ExampleComponentPreview {
+  background: #ffffff;
+}
+.ExampleComponentProperties {
+  background-color: #f9f9f9;
+}
+
+.bp4-dark .ExampleComponentTitle {
+  background: #252a31;
+}
+.bp4-dark .ExampleComponentPreview {
+  background: #252a31;
+}
+.bp4-dark .ExampleComponentProperties {
+  background-color: #1f242c;
 }

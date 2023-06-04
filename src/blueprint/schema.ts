@@ -40,6 +40,7 @@ export const AlignmentSchema = y
     Alignment.RIGHT,
   ])
   .optional();
+
 export const AlignmentPropsSchema = y.object({
   alignment: AlignmentSchema,
 });
