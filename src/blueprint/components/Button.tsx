@@ -67,7 +67,6 @@ export const Button: Component<ButtonProps> = (userProps) => {
     "intent",
     "text",
     "children",
-    "onClick",
     "class",
     "tabIndex",
     "disabled",
@@ -105,7 +104,6 @@ export const Button: Component<ButtonProps> = (userProps) => {
   return (
     <button
       // props
-      onClick={props.disabled ? undefined : props.onClick}
       type={props.type as ButtonType}
       class={createClassList()}
       disabled={!!props.disabled}
