@@ -6,6 +6,8 @@ import { Key } from "@solid-primitives/keyed";
 import { DISPLAYNAME_PREFIX, Classes, IntentProps, OptionProps, Props } from "@blueprint/core";
 import { Icon, IconName, IconProps } from "@blueprint/icons";
 
+import "./HTMLSelect";
+
 interface IHTMLSelectProps extends IntentProps, Props {
   fill?: boolean;
   large?: boolean;
@@ -56,7 +58,7 @@ export const HTMLSelect: Component<HTMLSelectProps> = (userProps: HTMLSelectProp
     )
   );
   const createIcon = createMemo(() => {
-    return props.iconName ? <Icon icon={props.iconName} {...props.iconProps} /> : undefined;
+    return props.iconName && !props.multiple ? <Icon icon={props.iconName} {...props.iconProps} /> : undefined;
   });
   const createOptionChildren = children(() => {
     return (
