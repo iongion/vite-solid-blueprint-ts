@@ -371,15 +371,19 @@ const App: Component = () => {
         render={(props, setProperty) => {
           console.debug(">> Switch on change", props);
           return (
-            <>
-              <Switch
-                label={props.label || "Click to switch state"}
-                {...props}
-                onChange={(e) => {
-                  setProperty("checked", e.currentTarget.checked);
-                }}
-              />
-            </>
+            <Switch
+              label={props.label || "Click to switch state"}
+              inline={props.inline}
+              large={props.large}
+              checked={props.checked}
+              innerLabel={props.innerLabel}
+              innerLabelChecked={props.innerLabelChecked}
+              alignment={props.alignment}
+              onChange={(e) => {
+                console.debug("set checked");
+                setProperty("checked", e.currentTarget.checked);
+              }}
+            />
           );
         }}
       />

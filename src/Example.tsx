@@ -113,18 +113,14 @@ function ExampleSchemaForm<T>({
               const field = schema.fields[name];
               const desc = field.describe();
               const values = destructure(props || { [name]: (desc as any).default });
+              const isFlag = desc.type === "boolean";
               const value = createMemo(() => values[name]() as any);
               let widget: JSX.Element | null;
               const items: string[] = (desc as any).oneOf || [];
-              if (name === "value") {
-                // console.debug(name, field, desc, value());
-                // console.debug("render form input", name, value);
-              }
               const identityProps = {
                 id: `${name}-${guid}`,
                 name: `${name}-${guid}`,
               };
-              const isFlag = desc.type === "boolean";
               const getValueLabel = (it: string) => {
                 const label = ExampleComponentPropsLabels[example]?.[name]?.[it as any] || PropsLabels[name]?.[it as any] || it;
                 return label;
