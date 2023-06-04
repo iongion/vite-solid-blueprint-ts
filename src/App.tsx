@@ -35,6 +35,8 @@ import {
   Menu,
   NavbarProps,
   Navbar,
+  HTMLSelectProps,
+  HTMLSelect,
   HTMLTableProps,
   HTMLTable,
   NonIdealStateIconSize,
@@ -226,6 +228,20 @@ const App: Component = () => {
           <li>Item 4</li>
         </OL>
       </Example>
+
+      <Example<HTMLSelectProps>
+        example="HTMLSelect"
+        render={(props) => {
+          return (
+            <HTMLSelect {...props}>
+              <option value="option.value.1">{t("Option label 1")}</option>
+              <option value="option.value.2">{t("Option label 2")}</option>
+              <option value="option.value.3">{t("Option label 3")}</option>
+              <option value="option.value.4">{t("Option label 4")}</option>
+            </HTMLSelect>
+          );
+        }}
+      />
 
       <Example<HTMLTableProps>
         example="HTMLTable"

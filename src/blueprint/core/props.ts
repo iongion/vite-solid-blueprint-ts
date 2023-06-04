@@ -29,4 +29,11 @@ export type LayoutProps = {
   layout?: Layout | null;
 };
 
+export interface IOptionProps extends Props {
+  disabled?: boolean;
+  label?: string;
+  value: string | number;
+}
+export type OptionProps = IOptionProps;
+
 export const DISPLAYNAME_PREFIX = "Blueprint4";
