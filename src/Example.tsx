@@ -7,7 +7,7 @@ import * as y from "yup";
 import { useI18n } from "solid-i18n";
 
 import { Alignment, Boundary, Elevation, Intent, Layout, Position, Props } from "@blueprint/core";
-import { HTMLTable, Label, NonIdealStateIconSize } from "@blueprint/components";
+import { HTMLSelect, HTMLTable, Label, NonIdealStateIconSize } from "@blueprint/components";
 import { IconSize } from "@blueprint/icons";
 
 import "./Example.css";
@@ -166,7 +166,7 @@ function ExampleSchemaForm<T>({
                         }}
                       />
                     ) : (
-                      <select
+                      <HTMLSelect
                         {...identityProps}
                         value={value()}
                         onChange={(e) => {
@@ -176,13 +176,13 @@ function ExampleSchemaForm<T>({
                         {items.map((it) => {
                           return <option value={it}>{getValueLabel(it)}</option>;
                         })}
-                      </select>
+                      </HTMLSelect>
                     );
                   break;
                 case "string":
                   if (items.length) {
                     widget = (
-                      <select
+                      <HTMLSelect
                         {...identityProps}
                         value={value()}
                         onChange={(e) => {
@@ -192,7 +192,7 @@ function ExampleSchemaForm<T>({
                         {items.map((it) => {
                           return <option value={it}>{getValueLabel(it)}</option>;
                         })}
-                      </select>
+                      </HTMLSelect>
                     );
                   } else {
                     widget = (
