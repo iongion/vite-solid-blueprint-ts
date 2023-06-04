@@ -7,7 +7,7 @@ import * as y from "yup";
 import { useI18n } from "solid-i18n";
 
 import { Alignment, Boundary, Elevation, Intent, Layout, Position, Props } from "@blueprint/core";
-import { HTMLSelect, HTMLTable, Label, NonIdealStateIconSize, Switch } from "@blueprint/components";
+import { HTMLSelect, HTMLTable, Label, NonIdealStateIconSize, Switch, InputGroup } from "@blueprint/components";
 import { IconSize } from "@blueprint/icons";
 
 import "./Example.css";
@@ -130,8 +130,9 @@ function ExampleSchemaForm<T>({
               switch (desc.type) {
                 case "mixed":
                   widget = (
-                    <input
+                    <InputGroup
                       {...identityProps}
+                      small
                       type="text"
                       value={value()}
                       onInput={(e) => {
@@ -197,8 +198,9 @@ function ExampleSchemaForm<T>({
                     );
                   } else {
                     widget = (
-                      <input
+                      <InputGroup
                         {...identityProps}
+                        small
                         type="text"
                         value={value()}
                         onInput={(e) => {
