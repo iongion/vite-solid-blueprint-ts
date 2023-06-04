@@ -378,9 +378,10 @@ const App: Component = () => {
               checked={props.checked}
               innerLabel={props.innerLabel}
               innerLabelChecked={props.innerLabelChecked}
+              tagName={props.tagName}
               alignment={props.alignment}
               onChange={(e) => {
-                console.debug("set checked");
+                console.debug("set checked", e.currentTarget.checked);
                 setProperty("checked", e.currentTarget.checked);
               }}
             />

@@ -279,7 +279,7 @@ export const SwitchPropsSchema: y.ObjectSchema<Omit<Props, "children"> & { tagNa
     checked: y.boolean().default(false),
     innerLabel: y.string().optional().nullable(),
     innerLabelChecked: y.string().optional().nullable(),
-    tagName: y.string<keyof JSX.IntrinsicElements>().default("div"),
+    tagName: y.string<keyof JSX.IntrinsicElements>().default("label"),
     alignment: AlignmentSchema.default(Alignment.LEFT),
   })
   .concat(PropsSchema);

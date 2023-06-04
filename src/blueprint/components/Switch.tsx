@@ -74,7 +74,7 @@ export const Switch: Component<SwitchProps> = (userProps: SwitchProps) => {
   return (
     <Dynamic
       // props
-      component={props.tagName || "div"}
+      component={props.tagName || "label"}
       class={createClassList()}
     >
       <input type="checkbox" {...htmlProps} />
