@@ -1,7 +1,7 @@
 import { createSignal } from "solid-js";
 import type { Component } from "solid-js";
 import { useI18n } from "solid-i18n";
-
+import classNames from "classnames";
 import { Alignment, Classes, Intent } from "@blueprint/core";
 import {
   AnchorButtonProps,
@@ -87,8 +87,9 @@ const codeLines = [
 const App: Component = () => {
   const { t } = useI18n();
   const [count, setCount] = createSignal(0);
+  const [useDarkTheme, setUseDarkTheme] = createSignal(true);
   return (
-    <div class={`App ${Classes.DARK}`}>
+    <div class={classNames("App", { [Classes.DARK]: useDarkTheme })}>
       <ToolsList />
       <h1 class="AppHeaderTitle">Solid + BlueprintJS + Typescript + Vite</h1>
       <p class="read-the-docs">
@@ -99,6 +100,14 @@ const App: Component = () => {
           <AnchorButton intent={Intent.NONE} icon={IconName.STACKBLITZ} href="https://stackblitz.com/edit/solidjs-templates-gfcotu" target="_blank" text={t("Edit source")} />
           <AnchorButton intent={Intent.SUCCESS} icon={IconName.GITHUB} href="https://github.com/iongion/vite-solid-blueprint-ts" target="_blank" text={t("Fork repo")} />
         </ButtonGroup>
+        <br />
+        <Switch
+          innerLabel={t("Light") || ""}
+          innerLabelChecked={t("Dark") || ""}
+          onChange={(e) => {
+            setUseDarkTheme(e.currentTarget.checked);
+          }}
+        />
       </p>
       <Example<ButtonProps>
         example="Button"

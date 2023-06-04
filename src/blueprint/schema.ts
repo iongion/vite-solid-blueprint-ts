@@ -24,7 +24,7 @@ import {
   SpinnerSize,
   // SwitchProps,
 } from "@blueprint/components";
-import { IconSize, IconProps } from "@blueprint/icons";
+import { IconsList, IconSize, IconProps } from "@blueprint/icons";
 
 export const PropsSchema: y.ObjectSchema<Omit<Props, "children">> = y.object({
   disabled: y.boolean().default(false),
@@ -73,24 +73,7 @@ export const LayoutPropsSchema = y.object({
 
 const IconSchema = y
   .string<IconName>()
-  .oneOf([
-    // enum
-    IconName.REFRESH,
-    IconName.DUPLICATE,
-    IconName.DATABASE,
-    IconName.FUNCTION,
-    IconName.COG,
-    IconName.INFO_SIGN,
-    IconName.CARET_DOWN,
-    IconName.CARET_UP,
-    IconName.CARET_RIGHT,
-    IconName.PLUS,
-    IconName.ADD,
-    IconName.HAND_RIGHT,
-    IconName.SEARCH,
-    IconName.STACKBLITZ,
-    IconName.DOUBLE_CARET_VERTICAL,
-  ])
+  .oneOf(IconsList as IconName[])
   .defined();
 
 const IconSizeSchema = y.number<IconSize>().oneOf([

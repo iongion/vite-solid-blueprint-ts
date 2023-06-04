@@ -13,3 +13,5 @@ export * as HAND_RIGHT from "./images/hand-right.svg?component-solid";
 export * as STACKBLITZ from "./images/stackblitz.svg?component-solid";
 export * as GITHUB from "./images/github.svg?component-solid";
 export * as DOUBLE_CARET_VERTICAL from "./images/double-caret-vertical.svg?component-solid";
+export * as FLASH from "./images/flash.svg?component-solid";
+export * as MOON from "./images/moon.svg?component-solid";

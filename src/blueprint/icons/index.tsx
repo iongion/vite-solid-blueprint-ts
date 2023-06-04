@@ -30,6 +30,8 @@ export enum IconName {
   STACKBLITZ = "stackblitz",
   GITHUB = "github",
   DOUBLE_CARET_VERTICAL = "double-caret-vertical",
+  FLASH = "flash",
+  MOON = "moon",
 }
 
 export const Icons = {
@@ -48,12 +50,14 @@ export const Icons = {
   [IconName.STACKBLITZ]: Images.STACKBLITZ.default,
   [IconName.GITHUB]: Images.GITHUB.default,
   [IconName.DOUBLE_CARET_VERTICAL]: Images.DOUBLE_CARET_VERTICAL.default,
+  [IconName.FLASH]: Images.FLASH.default,
+  [IconName.MOON]: Images.MOON.default,
 };
 
-const icons = Object.keys(Icons);
+export const IconsList = Object.keys(Icons);
 
-export type IconType = typeof icons[number];
-export const isIcon = (x: any): x is IconType => icons.includes(x);
+export type IconType = typeof IconsList[number];
+export const isIcon = (x: any): x is IconType => IconsList.includes(x);
 
 export interface IconProps extends Omit<Props, "children"> {
   icon: IconName;

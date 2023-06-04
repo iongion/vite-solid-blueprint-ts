@@ -12,9 +12,9 @@ interface ISwitchProps extends Omit<JSX.SelectHTMLAttributes<HTMLInputElement>, 
   large?: boolean;
   checked?: boolean;
   fill?: boolean;
-  innerLabel?: string;
-  innerLabelChecked?: string;
-  label?: string;
+  innerLabel?: MaybeElement;
+  innerLabelChecked?: MaybeElement;
+  label?: MaybeElement;
   labelElement?: MaybeElement;
   tagName?: string;
   alignIndicator?: Alignment;
