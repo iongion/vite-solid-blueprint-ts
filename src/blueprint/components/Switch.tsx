@@ -78,7 +78,7 @@ export const Switch: Component<SwitchProps> = (userProps: SwitchProps) => {
       component={props.tagName || "label"}
       class={createClassList()}
     >
-      <input type="checkbox" {...htmlProps} />
+      <input type="checkbox" checked={props.checked} disabled={props.disabled} {...htmlProps} />
       <span class={Classes.CONTROL_INDICATOR}>{createInnerLabel()}</span>
       {props.label}
       {createChildren()}

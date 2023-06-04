@@ -275,8 +275,8 @@ export const SwitchPropsSchema: y.ObjectSchema<Omit<Props, "children"> & { tagNa
   .object({
     label: y.string().optional().nullable(),
     inline: y.boolean().default(false),
-    large: y.boolean().default(false),
-    checked: y.boolean().default(false),
+    large: y.boolean().default(true),
+    checked: y.boolean().default(true),
     innerLabel: y.string().optional().nullable(),
     innerLabelChecked: y.string().optional().nullable(),
     tagName: y.string<keyof JSX.IntrinsicElements>().default("label"),
