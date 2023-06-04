@@ -142,7 +142,7 @@ export const ButtonPropsSchema: y.ObjectSchema<Omit<ButtonProps, "children" | "o
     alignText: AlignmentSchema.default(Alignment.LEFT),
     active: y.boolean().default(false),
     fill: y.boolean().default(false),
-    large: y.boolean().default(false),
+    large: y.boolean().default(true),
     loading: y.boolean().default(false),
     minimal: y.boolean().default(false),
     outlined: y.boolean().default(false),
@@ -258,14 +258,14 @@ export const ProgressBarPropsSchema: y.ObjectSchema<Omit<ProgressBarProps, "chil
     animate: y.boolean().default(true),
     stripes: y.boolean().default(true),
     value: y.number().min(0).max(1).default(null),
+    intent: IntentSchema.default(Intent.SUCCESS),
   })
-  .concat(IntentPropsSchema)
   .concat(PropsSchema);
 
 export const SpinnerPropsSchema: y.ObjectSchema<Omit<SpinnerProps, "children"> & { tagName: string }> = y
   .object({
     tagName: y.string<keyof JSX.IntrinsicElements>().default("div"),
-    size: y.number().default(SpinnerSize.STANDARD),
+    size: y.number().default(SpinnerSize.STANDARD * 2),
     value: y.number().min(0).max(1).default(null),
   })
   .concat(IntentPropsSchema)
@@ -304,5 +304,6 @@ export const InputGroupPropsSchema: y.ObjectSchema<Omit<Props, "children"> & { t
     inputClassName: y.string().optional().nullable(),
     placeholder: y.string().default("Placeholder"),
     value: y.string().default("Example"),
+    intent: IntentSchema,
   })
   .concat(PropsSchema);
