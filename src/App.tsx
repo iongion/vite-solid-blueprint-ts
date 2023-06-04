@@ -18,6 +18,8 @@ import {
   CodeBlock,
   CollapseProps,
   Collapse,
+  DividerProps,
+  Divider,
   // HTML Elements
   H1,
   H2,
@@ -50,10 +52,11 @@ import {
   CalloutPropsSchema,
   CardPropsSchema,
   CollapsePropsSchema,
-  MenuPropsSchema,
-  NavbarPropsSchema,
+  DividerPropsSchema,
   HTMLTablePropsSchema,
   IconPropsSchema,
+  MenuPropsSchema,
+  NavbarPropsSchema,
   NonIdealStatePropsSchema,
   ProgressBarPropsSchema,
   SpinnerPropsSchema,
@@ -187,6 +190,14 @@ const App: Component = () => {
               </Collapse>
             </>
           );
+        }}
+      />
+
+      <Example<DividerProps>
+        example="Divider"
+        schema={DividerPropsSchema}
+        render={(props) => {
+          return <Divider {...props} />;
         }}
       />
 

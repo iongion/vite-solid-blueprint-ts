@@ -1,4 +1,5 @@
 export * from "./alignment";
+export * from "./boundary";
 export * as Classes from "./classes";
 export * from "./elevation";
 export * from "./intent";

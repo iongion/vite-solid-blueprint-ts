@@ -11,6 +11,7 @@ import {
   CalloutProps,
   CardProps,
   CollapseProps,
+  DividerProps,
   HTMLTableProps,
   MenuProps,
   NavbarProps,
@@ -187,6 +188,12 @@ export const CollapsePropsSchema: y.ObjectSchema<Omit<CollapseProps, "children">
   .object({
     isOpen: y.boolean().default(false),
     keepChildrenMounted: y.boolean().default(false),
+  })
+  .concat(PropsSchema);
+
+export const DividerPropsSchema: y.ObjectSchema<Omit<DividerProps, "children" | "tagName"> & { tagName: string }> = y
+  .object({
+    tagName: y.string<keyof JSX.IntrinsicElements>().default("div"),
   })
   .concat(PropsSchema);
 
