@@ -5,7 +5,7 @@ import type { Component } from "solid-js";
 
 import { DISPLAYNAME_PREFIX, MaybeElement, Alignment, Classes, AlignmentProps, Props } from "@blueprint/core";
 
-interface ISwitchProps extends Omit<JSX.SelectHTMLAttributes<HTMLInputElement>, "children">, AlignmentProps, Props {
+interface ISwitchProps extends Omit<JSX.SelectHTMLAttributes<HTMLInputElement>, "children">, Props {
   inline?: boolean;
   large?: boolean;
   checked?: boolean;
@@ -14,6 +14,7 @@ interface ISwitchProps extends Omit<JSX.SelectHTMLAttributes<HTMLInputElement>, 
   label?: string;
   labelElement?: MaybeElement;
   tagName?: string;
+  alignIndicator?: Alignment;
 }
 export type SwitchProps = ISwitchProps;
 export const SwitchPropsSchemaDefaults: SwitchProps = {
@@ -21,7 +22,7 @@ export const SwitchPropsSchemaDefaults: SwitchProps = {
   large: false,
   checked: false,
   tagName: "label",
-  alignment: Alignment.LEFT,
+  alignIndicator: Alignment.LEFT,
 };
 export const Switch: Component<SwitchProps> = (userProps: SwitchProps) => {
   const [props, htmlProps] = splitProps(mergeProps(SwitchPropsSchemaDefaults, userProps), [
@@ -34,7 +35,7 @@ export const Switch: Component<SwitchProps> = (userProps: SwitchProps) => {
     "label",
     "labelElement",
     "tagName",
-    "alignment",
+    "alignIndicator",
     "children",
     "class",
     "disabled",
@@ -50,7 +51,7 @@ export const Switch: Component<SwitchProps> = (userProps: SwitchProps) => {
         [Classes.LARGE]: !!props.large,
         [Classes.DISABLED]: !!props.disabled,
       },
-      Classes.alignmentClass(props.alignment),
+      Classes.alignmentClass(props.alignIndicator),
       // user
       props.class
     )

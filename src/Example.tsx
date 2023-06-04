@@ -68,6 +68,7 @@ const NonIdealStateIconSizeLabels = {
 const PropsLabels = {
   align: AlignmentLabels,
   alignText: AlignmentLabels,
+  alignIndicator: AlignmentLabels,
   boundary: BoundaryLabels,
   intent: IntentLabels,
   elevation: ElevationLabels,
@@ -112,9 +113,10 @@ function ExampleSchemaForm<T>({
               const name = fieldName();
               const field = schema.fields[name];
               const desc = field.describe();
-              const values = destructure(props || { [name]: (desc as any).default });
+              const properties = destructure(props || { [name]: (desc as any).default });
               const isFlag = desc.type === "boolean";
-              const value = createMemo(() => values[name]() as any);
+              const value = createMemo(() => properties[name]() as any);
+              const checked = createMemo(() => properties[name]() as boolean);
               let widget: JSX.Element | null;
               const items: string[] = (desc as any).oneOf || [];
               const identityProps = {
@@ -144,7 +146,7 @@ function ExampleSchemaForm<T>({
                       {...identityProps}
                       inline
                       label={name}
-                      checked={value()}
+                      checked={checked()}
                       onChange={(e) => {
                         onPropertyChange(name, e.currentTarget.checked);
                       }}
