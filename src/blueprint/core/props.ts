@@ -5,12 +5,12 @@ import { Elevation } from "./elevation";
 import { Intent } from "./intent";
 import { Layout } from "./layout";
 
-export type MaybeElement = JSX.Element | false | null | undefined;
+export type MaybeElement = Element[] | JSX.Element | false | null | undefined;
 
 export type Props = {
   disabled?: boolean;
   class?: string;
-  children?: MaybeElement | any;
+  children?: MaybeElement;
 };
 
 export type AlignmentProps = {

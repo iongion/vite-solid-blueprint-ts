@@ -1,5 +1,5 @@
 import classNames from "classnames";
-import { mergeProps, splitProps, children, createMemo } from "solid-js";
+import { JSX, mergeProps, splitProps, children, createMemo } from "solid-js";
 import type { Component } from "solid-js";
 import { Key } from "@solid-primitives/keyed";
 
@@ -8,7 +8,7 @@ import { Icon, IconName, IconProps } from "@blueprint/icons";
 
 import "./HTMLSelect.css";
 
-interface IHTMLSelectProps extends Props {
+interface IHTMLSelectProps extends Omit<JSX.SelectHTMLAttributes<HTMLSelectElement>, "children">, Props {
   fill?: boolean;
   large?: boolean;
   minimal?: boolean;
@@ -82,7 +82,6 @@ export const HTMLSelect: Component<HTMLSelectProps> = (userProps: HTMLSelectProp
     <div
       // props
       class={createClassList()}
-      {...htmlProps}
     >
       <select disabled={props.disabled} value={props.value} multiple={props.multiple} {...htmlProps}>
         {createOptionChildren()}
