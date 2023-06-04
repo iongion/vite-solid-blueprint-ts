@@ -12,7 +12,7 @@ import {
   CardProps,
   CollapseProps,
   DividerProps,
-  HTMLSelectProps,
+  // HTMLSelectProps,
   HTMLTableProps,
   MenuProps,
   NavbarProps,
@@ -220,7 +220,7 @@ export const NavbarPropsSchema: y.ObjectSchema<Omit<NavbarProps, "children">> = 
   })
   .concat(PropsSchema);
 
-export const HTMLSelectPropsSchema: y.ObjectSchema<Omit<HTMLSelectProps, "options" | "iconProps" | "children">> = y
+export const HTMLSelectPropsSchema: y.AnyObjectSchema = y
   .object({
     fill: y.boolean().default(false),
     large: y.boolean().default(false),
