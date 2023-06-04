@@ -12,6 +12,7 @@ import {
   CardProps,
   CollapseProps,
   DividerProps,
+  HTMLSelectProps,
   HTMLTableProps,
   MenuProps,
   NavbarProps,
@@ -87,6 +88,7 @@ const IconSchema = y
     IconName.HAND_RIGHT,
     IconName.SEARCH,
     IconName.STACKBLITZ,
+    IconName.DOUBLE_CARET_VERTICAL,
   ])
   .defined();
 
@@ -216,6 +218,16 @@ export const NavbarPropsSchema: y.ObjectSchema<Omit<NavbarProps, "children">> = 
   .object({
     fixedToTop: y.boolean().default(false),
   })
+  .concat(PropsSchema);
+
+export const HTMLSelectPropsSchema: y.ObjectSchema<Omit<HTMLSelectProps, "options" | "iconProps" | "children">> = y
+  .object({
+    fill: y.boolean().default(false),
+    large: y.boolean().default(false),
+    minimal: y.boolean().default(false),
+    iconName: IconSchema.default(IconName.DOUBLE_CARET_VERTICAL),
+  })
+  .concat(IntentPropsSchema)
   .concat(PropsSchema);
 
 export const HTMLTablePropsSchema: y.ObjectSchema<Omit<HTMLTableProps, "children">> = y
