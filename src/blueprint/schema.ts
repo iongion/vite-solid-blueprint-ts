@@ -15,6 +15,7 @@ import {
   HTMLTableProps,
   MenuProps,
   NavbarProps,
+  NonIdealStateIconSize,
   NonIdealStatePropsDefaults,
   NonIdealStateProps,
   ProgressBarProps,
@@ -95,6 +96,13 @@ const IconSizeSchema = y.number<IconSize>().oneOf([
   IconSize.LARGE,
   IconSize.XLARGE,
   IconSize.XXLARGE,
+]);
+
+const NonIdealStateIconSizeSchema = y.number<NonIdealStateIconSize>().oneOf([
+  //
+  NonIdealStateIconSize.STANDARD,
+  NonIdealStateIconSize.SMALL,
+  NonIdealStateIconSize.EXTRA_SMALL,
 ]);
 
 export const IconPropsSchema: y.ObjectSchema<Omit<IconProps, "children">> = y
@@ -194,6 +202,7 @@ export const CollapsePropsSchema: y.ObjectSchema<Omit<CollapseProps, "children">
 export const DividerPropsSchema: y.ObjectSchema<Omit<DividerProps, "children" | "tagName"> & { tagName: string }> = y
   .object({
     tagName: y.string<keyof JSX.IntrinsicElements>().default("div"),
+    layout: LayouSchema.default(Layout.VERTICAL),
   })
   .concat(PropsSchema);
 
@@ -225,7 +234,7 @@ export const NonIdealStatePropsSchema: y.ObjectSchema<Omit<NonIdealStateProps, "
     text: y.string().optional().nullable(),
     description: y.string().optional().nullable(),
     layout: LayouSchema.default(NonIdealStatePropsDefaults.layout),
-    iconSize: y.number().default(NonIdealStatePropsDefaults.iconSize),
+    iconSize: NonIdealStateIconSizeSchema.default(NonIdealStatePropsDefaults.iconSize),
     icon: IconSchema.default(IconName.SEARCH as any),
   })
   .concat(PropsSchema);

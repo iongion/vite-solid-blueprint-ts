@@ -6,6 +6,7 @@ export * from "./Code";
 export * from "./Collapse";
 export * from "./Divider";
 export * from "./HTMLElements";
+export * from "./HTMLSelect";
 export * from "./HTMLTable";
 export * from "./Menu";
 export * from "./Navbar";
