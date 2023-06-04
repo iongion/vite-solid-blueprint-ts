@@ -292,8 +292,7 @@ export const InputGroupPropsSchema: y.ObjectSchema<Omit<Props, "children"> & { t
     large: y.boolean().default(false),
     small: y.boolean().default(false),
     round: y.boolean().default(false),
-    tagName: y.string<keyof JSX.IntrinsicElements>().default("label"),
-    alignIndicator: AlignmentSchema.default(Alignment.LEFT),
+    tagName: y.string<keyof JSX.IntrinsicElements>().default("div"),
     type: y
       .string()
       .oneOf([
