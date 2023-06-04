@@ -287,11 +287,11 @@ export const SwitchPropsSchema: y.ObjectSchema<Omit<Props, "children"> & { tagNa
 export const InputGroupPropsSchema: y.ObjectSchema<Omit<Props, "children"> & { tagName: string }> = y
   .object({
     inline: y.boolean().default(false),
-    fill: y.boolean().default(true),
-    readOnly: y.boolean().default(true),
-    large: y.boolean().default(true),
-    small: y.boolean().default(true),
-    round: y.boolean().default(true),
+    fill: y.boolean().default(false),
+    readOnly: y.boolean().default(false),
+    large: y.boolean().default(false),
+    small: y.boolean().default(false),
+    round: y.boolean().default(false),
     tagName: y.string<keyof JSX.IntrinsicElements>().default("label"),
     alignIndicator: AlignmentSchema.default(Alignment.LEFT),
     type: y

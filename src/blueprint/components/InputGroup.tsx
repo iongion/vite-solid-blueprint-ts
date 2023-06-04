@@ -13,6 +13,7 @@ interface IInputGroupProps extends Omit<JSX.SelectHTMLAttributes<HTMLInputElemen
   large?: boolean;
   small?: boolean;
   round?: boolean;
+  placeholder?: string;
   tagName?: string;
   type?: string;
   inputClassName?: string;
