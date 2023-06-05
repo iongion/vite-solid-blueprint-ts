@@ -116,7 +116,7 @@ export const InteractivePropsSchema = y.object({
 
 export const IconPropsSchema: y.ObjectSchema<Omit<IconProps, "children">> = y
   .object({
-    icon: IconSchema.default(IconName.HAND_RIGHT as any),
+    icon: IconSchema.default(IconName.HAND_RIGHT),
     size: IconSizeSchema.default(IconSize.STANDARD),
     intent: IntentSchema.default(Intent.NONE),
   })
@@ -170,7 +170,7 @@ export const ButtonGroupPropsSchema: y.ObjectSchema<Omit<ButtonGroupProps, "chil
 
 export const CalloutPropsSchema: y.ObjectSchema<Omit<CalloutProps, "children">> = y
   .object({
-    icon: IconSchema.default(IconName.SEARCH as any),
+    icon: IconSchema.default(IconName.SEARCH),
     title: y.string().optional().nullable(),
     intent: IntentSchema.default(Intent.SUCCESS),
   })
@@ -236,7 +236,7 @@ export const NonIdealStatePropsSchema: y.ObjectSchema<Omit<NonIdealStateProps, "
     description: y.string().optional().nullable(),
     layout: LayouSchema.default(NonIdealStatePropsDefaults.layout),
     iconSize: NonIdealStateIconSizeSchema.default(NonIdealStatePropsDefaults.iconSize),
-    icon: IconSchema.default(IconName.SEARCH as any),
+    icon: IconSchema.default(IconName.SEARCH),
   })
   .concat(PropsSchema);
 
