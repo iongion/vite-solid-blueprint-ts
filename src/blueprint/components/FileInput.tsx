@@ -4,6 +4,8 @@ import type { Component } from "solid-js";
 
 import { DISPLAYNAME_PREFIX, Classes, Intent, IntentProps, Props, MaybeElement } from "@blueprint/core";
 
+import "./FileInput.css";
+
 interface IFileInputProps extends Omit<JSX.SelectHTMLAttributes<HTMLLabelElement>, "children">, IntentProps, Omit<Props, "children"> {
   fill?: boolean;
   readOnly?: boolean;
