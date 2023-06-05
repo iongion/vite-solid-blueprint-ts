@@ -458,7 +458,7 @@ const App: Component = () => {
         example="Tag"
         schema={TagPropsSchema}
         render={(props) => {
-          return <Tag {...props} />;
+          return <Tag {...props}>{t("London")}</Tag>;
         }}
       />
     </div>
