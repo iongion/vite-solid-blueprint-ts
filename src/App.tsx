@@ -58,6 +58,8 @@ import {
   Text,
   TagProps,
   Tag,
+  Tab,
+  TabTitle,
 } from "@blueprint/components";
 import {
   PropsSchema,
@@ -461,6 +463,10 @@ const App: Component = () => {
           return <Tag {...props}>{t("London")}</Tag>;
         }}
       />
+
+      <Example example="Tab">
+        <Tab></Tab>
+      </Example>
     </div>
   );
 };
