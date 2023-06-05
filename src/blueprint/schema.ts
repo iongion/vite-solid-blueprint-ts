@@ -309,3 +309,23 @@ export const FileInputPropsSchema: y.ObjectSchema<Omit<Props, "children">> = y
     intent: IntentSchema,
   })
   .concat(PropsSchema);
+
+export const TagPropsSchema: y.ObjectSchema<Omit<Props, "children">> = y
+  .object({
+    active: y.boolean().default(false),
+    fill: y.boolean().default(false),
+    inline: y.boolean().default(false),
+    large: y.boolean().default(false),
+    small: y.boolean().default(false),
+    minimal: y.boolean().default(false),
+    multiline: y.boolean().default(false),
+    round: y.boolean().default(false),
+    htmlTitle: y.string().default(""),
+    inputClassName: y.string().optional().nullable(),
+    intent: IntentSchema,
+    interactive: y.boolean().default(true),
+    icon: IconSchema.default(IconName.HAND_RIGHT),
+    rightIcon: IconSchema.default(IconName.CARET_DOWN),
+    tabIndex: y.number().optional(),
+  })
+  .concat(PropsSchema);

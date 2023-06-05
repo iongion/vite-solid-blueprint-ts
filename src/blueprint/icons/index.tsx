@@ -33,6 +33,7 @@ export enum IconName {
   FLASH = "flash",
   MOON = "moon",
   FILTER = "filter",
+  SMALL_CROSS = "small-cross",
 }
 
 export const Icons = {
@@ -54,6 +55,7 @@ export const Icons = {
   [IconName.FLASH]: Images.FLASH.default,
   [IconName.MOON]: Images.MOON.default,
   [IconName.FILTER]: Images.FILTER.default,
+  [IconName.SMALL_CROSS]: Images.SMALL_CROSS.default,
 };
 
 export const IconsList = Object.keys(Icons);

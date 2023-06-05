@@ -54,6 +54,8 @@ import {
   InputGroup,
   FileInputProps,
   FileInput,
+  TagProps,
+  Tag,
 } from "@blueprint/components";
 import {
   PropsSchema,
@@ -75,6 +77,7 @@ import {
   SwitchPropsSchema,
   InputGroupPropsSchema,
   FileInputPropsSchema,
+  TagPropsSchema,
 } from "@blueprint/schema";
 import { Icon, IconName, IconProps } from "@blueprint/icons";
 import { Example } from "./Example";
@@ -430,6 +433,14 @@ const App: Component = () => {
         schema={FileInputPropsSchema}
         render={(props) => {
           return <FileInput {...props} />;
+        }}
+      />
+
+      <Example<TagProps>
+        example="Tag"
+        schema={TagPropsSchema}
+        render={(props) => {
+          return <Tag {...props} />;
         }}
       />
     </div>

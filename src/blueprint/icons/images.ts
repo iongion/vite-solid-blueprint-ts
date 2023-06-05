@@ -16,3 +16,4 @@ export * as DOUBLE_CARET_VERTICAL from "./images/double-caret-vertical.svg?compo
 export * as FLASH from "./images/flash.svg?component-solid";
 export * as MOON from "./images/moon.svg?component-solid";
 export * as FILTER from "./images/filter.svg?component-solid";
+export * as SMALL_CROSS from "./images/small-cross.svg?component-solid";

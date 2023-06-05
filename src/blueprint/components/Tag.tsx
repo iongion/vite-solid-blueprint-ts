@@ -4,7 +4,7 @@ import type { Component } from "solid-js";
 
 import { DISPLAYNAME_PREFIX, Classes, Intent, InteractiveProps, IntentProps, Props, MaybeElement } from "@blueprint/core";
 import { Text } from "@blueprint/components";
-import { isIcon, Icon, IconName } from "@blueprint/icons";
+import { isIcon, Icon, IconName, IconSize } from "@blueprint/icons";
 
 interface ITagProps extends Omit<JSX.SelectHTMLAttributes<HTMLSpanElement>, "children">, InteractiveProps, IntentProps, Props {
   active?: boolean;
@@ -16,7 +16,7 @@ interface ITagProps extends Omit<JSX.SelectHTMLAttributes<HTMLSpanElement>, "chi
   minimal?: boolean;
   multiline?: boolean;
   round?: boolean;
-  placeholder?: string;
+  removable?: boolean;
   tagName?: string;
   type?: string;
   inputClassName?: string;
@@ -39,6 +39,7 @@ export const TagPropsSchemaDefaults: TagProps = {
   minimal: false,
   multiline: false,
   round: false,
+  removable: false,
   rightIcon: undefined,
   htmlTitle: undefined,
   intent: Intent.NONE,
@@ -57,6 +58,7 @@ export const Tag: Component<TagProps> = (userProps: TagProps) => {
     "minimal",
     "multiline",
     "round",
+    "removable",
     "rightIcon",
     "htmlTitle",
     "intent",
@@ -102,7 +104,19 @@ export const Tag: Component<TagProps> = (userProps: TagProps) => {
     ) : undefined;
   });
   const createRemoveButton = createMemo(() => {
-    return <></>;
+    const isRemovable = props.removable || props.onRemove !== undefined;
+    const removeButton = isRemovable ? (
+      <button
+          aria-label="Remove Tag"
+          type="button"
+          class={Classes.TAG_REMOVE}
+          onClick={props.onRemoveClick}
+          tabIndex={props.tabIndex}
+      >
+          <Icon icon={IconNames.SMALL_CROSS} size={props.large ? IconSize.LARGE : IconSize.STANDARD} />
+      </button>
+  ) : null;
+  return removeButton;
   });
   return (
     <span
