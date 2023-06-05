@@ -296,14 +296,15 @@ export const InputGroupPropsSchema: y.ObjectSchema<Omit<Props, "children"> & { t
 
 export const FileInputPropsSchema: y.ObjectSchema<Omit<Props, "children">> = y
   .object({
-    inline: y.boolean().default(false),
     fill: y.boolean().default(false),
     readOnly: y.boolean().default(false),
+    hasSelection: y.boolean().default(false),
     large: y.boolean().default(false),
     small: y.boolean().default(false),
     round: y.boolean().default(false),
+    text: y.string().default("~/Downloads/file.txt"),
+    buttonText: y.string().default("Pick"),
     inputClassName: y.string().optional().nullable(),
-    placeholder: y.string().default("Placeholder"),
     intent: IntentSchema,
   })
   .concat(PropsSchema);

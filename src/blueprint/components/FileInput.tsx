@@ -16,7 +16,6 @@ interface IFileInputProps extends Omit<JSX.SelectHTMLAttributes<HTMLLabelElement
   round?: boolean;
   text?: MaybeElement;
   buttonText?: string;
-  placeholder?: string;
 }
 export type FileInputProps = IFileInputProps;
 export const FileInputPropsSchemaDefaults: FileInputProps = {
@@ -30,7 +29,6 @@ export const FileInputPropsSchemaDefaults: FileInputProps = {
   text: undefined,
   buttonText: undefined,
   intent: Intent.NONE,
-  placeholder: undefined,
 };
 export const FileInput: Component<FileInputProps> = (userProps: FileInputProps) => {
   const [props, htmlProps] = splitProps(mergeProps(FileInputPropsSchemaDefaults, userProps), [
@@ -45,7 +43,6 @@ export const FileInput: Component<FileInputProps> = (userProps: FileInputProps) 
     "text",
     "buttonText",
     "intent",
-    "placeholder",
     "value",
     "class",
     "disabled",
@@ -78,7 +75,6 @@ export const FileInput: Component<FileInputProps> = (userProps: FileInputProps) 
         disabled={props.disabled}
         readonly={props.readOnly}
         value={props.value || ""}
-        placeholder={props.placeholder || ""}
       />
     );
   });
