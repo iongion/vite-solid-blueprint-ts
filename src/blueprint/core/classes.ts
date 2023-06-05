@@ -92,6 +92,8 @@ export const CARD = `${NS}-card`;
 
 export const COLLAPSE = `${NS}-collapse`;
 export const COLLAPSE_BODY = `${COLLAPSE}-body`;
+export const COLLAPSE_OPEN = `${COLLAPSE}-open`;
+export const COLLAPSE_CLOSE = `${COLLAPSE}-close`;
 
 export const COLLAPSIBLE_LIST = `${NS}-collapse-list`;
 

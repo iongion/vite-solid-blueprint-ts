@@ -116,7 +116,7 @@ export const TabTitle: Component<TabTitleProps> = (userProps: TabTitleProps) => 
     )
   );
   const createIcon = () => {
-    return isIcon(props.icon) ? <Icon icon={props.icon as IconName} intent={props.intent} className={Classes.TAB_ICON} /> : undefined;
+    return isIcon(props.icon) ? <Icon icon={props.icon as IconName} intent={props.intent} class={Classes.TAB_ICON} /> : undefined;
   };
   const createChildren = () => {
     return props.children;
