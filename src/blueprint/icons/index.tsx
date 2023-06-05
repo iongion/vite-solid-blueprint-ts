@@ -2,7 +2,7 @@ import classNames from "classnames";
 import { mergeProps, splitProps, createMemo } from "solid-js";
 import type { Component } from "solid-js";
 
-import { Classes, Props } from "@blueprint/core";
+import { Classes, Intent, Props, IntentProps } from "@blueprint/core";
 import * as Images from "@blueprint/icons/images";
 
 export enum IconSize {
@@ -63,13 +63,14 @@ export const IconsList = Object.keys(Icons);
 export type IconType = typeof IconsList[number];
 export const isIcon = (x: any): x is IconType => IconsList.includes(x);
 
-export interface IconProps extends Omit<Props, "children"> {
+export interface IconProps extends IntentProps, Omit<Props, "children"> {
   icon: IconName;
   size?: IconSize | number;
 }
 export const IconPropsDefaults: IconProps = {
   icon: IconName.PLUS,
   size: IconSize.STANDARD,
+  intent: Intent.NONE,
 };
 
 export const Icon: Component<IconProps> = (userProps) => {
@@ -77,6 +78,7 @@ export const Icon: Component<IconProps> = (userProps) => {
     // props list
     "icon",
     "size",
+    "intent",
     "class",
     "disabled",
   ]);
@@ -94,6 +96,7 @@ export const Icon: Component<IconProps> = (userProps) => {
         [Classes.ICON_STANDARD]: props.size === IconSize.STANDARD,
         [Classes.DISABLED]: !!props.disabled,
       },
+      Classes.intentClass(props.intent),
       props.icon,
       // user
       props.class
