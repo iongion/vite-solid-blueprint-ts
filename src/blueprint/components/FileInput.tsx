@@ -16,6 +16,8 @@ interface IFileInputProps extends Omit<JSX.SelectHTMLAttributes<HTMLLabelElement
   round?: boolean;
   text?: MaybeElement;
   buttonText?: string;
+  // events
+  onInputChange?: JSX.ChangeEventHandler<HTMLInputElement, Event>;
 }
 export type FileInputProps = IFileInputProps;
 export const FileInputPropsSchemaDefaults: FileInputProps = {
@@ -29,6 +31,7 @@ export const FileInputPropsSchemaDefaults: FileInputProps = {
   text: undefined,
   buttonText: undefined,
   intent: Intent.NONE,
+  onInputChange: undefined,
 };
 export const FileInput: Component<FileInputProps> = (userProps: FileInputProps) => {
   const [props, htmlProps] = splitProps(mergeProps(FileInputPropsSchemaDefaults, userProps), [
@@ -44,6 +47,7 @@ export const FileInput: Component<FileInputProps> = (userProps: FileInputProps) 
     "buttonText",
     "intent",
     "value",
+    "onInputChange",
     "class",
     "disabled",
   ]);
@@ -75,6 +79,7 @@ export const FileInput: Component<FileInputProps> = (userProps: FileInputProps) 
         disabled={props.disabled}
         readonly={props.readOnly}
         value={props.value || ""}
+        onChange={props.onInputChange}
       />
     );
   });
