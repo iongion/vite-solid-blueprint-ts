@@ -52,6 +52,8 @@ import {
   SwitchProps,
   InputGroupProps,
   InputGroup,
+  FileInputProps,
+  FileInput,
 } from "@blueprint/components";
 import {
   PropsSchema,
@@ -72,6 +74,7 @@ import {
   SpinnerPropsSchema,
   SwitchPropsSchema,
   InputGroupPropsSchema,
+  FileInputPropsSchema,
 } from "@blueprint/schema";
 import { Icon, IconName, IconProps } from "@blueprint/icons";
 import { Example } from "./Example";
@@ -419,6 +422,14 @@ const App: Component = () => {
         schema={InputGroupPropsSchema}
         render={(props) => {
           return <InputGroup {...props} />;
+        }}
+      />
+
+      <Example<FileInputProps>
+        example="FileInput"
+        schema={FileInputPropsSchema}
+        render={(props) => {
+          return <FileInput {...props} />;
         }}
       />
     </div>
