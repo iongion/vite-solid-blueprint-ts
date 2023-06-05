@@ -30,6 +30,7 @@ export const ROUND = `${NS}-round`;
 export const SELECTED = `${NS}-selected`;
 export const SMALL = `${NS}-small`;
 export const VERTICAL = `${NS}-vertical`;
+export const HORIZONTAL = `${NS}-horizontal`;
 export const POSITION_TOP = positionClass(Position.TOP);
 export const POSITION_BOTTOM = positionClass(Position.BOTTOM);
 export const POSITION_LEFT = positionClass(Position.LEFT);
