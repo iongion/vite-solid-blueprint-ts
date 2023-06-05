@@ -96,7 +96,7 @@ export const Tag: Component<TagProps> = (userProps: TagProps) => {
   });
   const createChildren = children(() => {
     return props.children ? (
-      <Text className={Classes.FILL} ellipsize={!props.multiline} tagName="span" title={props.htmlTitle}>
+      <Text class={Classes.FILL} ellipsize={!props.multiline} tagName="span" title={props.htmlTitle}>
         {props.children}
       </Text>
     ) : undefined;
