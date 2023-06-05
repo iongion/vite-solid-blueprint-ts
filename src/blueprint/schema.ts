@@ -92,13 +92,6 @@ const NonIdealStateIconSizeSchema = y.number<NonIdealStateIconSize>().oneOf([
   NonIdealStateIconSize.EXTRA_SMALL,
 ]);
 
-export const IconPropsSchema: y.ObjectSchema<Omit<IconProps, "children">> = y
-  .object({
-    icon: IconSchema.default(IconName.HAND_RIGHT as any),
-    size: IconSizeSchema.default(IconSize.STANDARD),
-  })
-  .concat(PropsSchema);
-
 const IntentSchema = y
   .string<Intent>()
   .oneOf([
@@ -118,6 +111,16 @@ const InteractiveSchema = y.boolean().default(false);
 export const InteractivePropsSchema = y.object({
   interactive: InteractiveSchema,
 });
+
+// Icons
+
+export const IconPropsSchema: y.ObjectSchema<Omit<IconProps, "children">> = y
+  .object({
+    icon: IconSchema.default(IconName.HAND_RIGHT as any),
+    size: IconSizeSchema.default(IconSize.STANDARD),
+    intent: IntentSchema.default(Intent.NONE),
+  })
+  .concat(PropsSchema);
 
 // Components
 export const ButtonPropsSchema: y.ObjectSchema<Omit<ButtonProps, "children" | "onClick" | "onFocus">> = y

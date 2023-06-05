@@ -41,6 +41,7 @@ export const Tab: Component<TabProps> = (userProps: TabProps) => {
     "icon",
     "tagContent",
     "tagProps",
+    "children",
     "class",
     "disabled",
   ]);
@@ -97,6 +98,7 @@ export const TabTitle: Component<TabTitleProps> = (userProps: TabTitleProps) => 
     "tagContent",
     "tagProps",
     "intent",
+    "children",
     "class",
     "disabled",
     //

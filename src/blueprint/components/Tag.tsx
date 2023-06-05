@@ -110,10 +110,10 @@ export const Tag: Component<TagProps> = (userProps: TagProps) => {
           aria-label="Remove Tag"
           type="button"
           class={Classes.TAG_REMOVE}
-          onClick={props.onRemoveClick}
+          onClick={props.onRemove}
           tabIndex={props.tabIndex}
       >
-          <Icon icon={IconNames.SMALL_CROSS} size={props.large ? IconSize.LARGE : IconSize.STANDARD} />
+          <Icon icon={IconName.SMALL_CROSS} size={props.large ? IconSize.LARGE : IconSize.STANDARD} />
       </button>
   ) : null;
   return removeButton;
