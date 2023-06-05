@@ -282,6 +282,7 @@ export const InputGroupPropsSchema: y.ObjectSchema<Omit<Props, "children"> & { t
       .oneOf([
         // enum
         "text",
+        "search",
         "number",
       ])
       .default("text"),

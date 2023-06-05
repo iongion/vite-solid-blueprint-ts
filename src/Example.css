@@ -1,6 +1,5 @@
 .Example {
   margin-bottom: 10px;
-  font-size: 11px;
 }
 .Example:last-child {
   margin-bottom: 0;
@@ -44,6 +43,7 @@
 }
 .ExampleComponentProperties table {
   width: 100%;
+  font-size: 12px;
 }
 
 .Example {

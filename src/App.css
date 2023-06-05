@@ -37,6 +37,7 @@ ul.Tools li a .logo.vanilla:hover {
 /* theme */
 .App {
   background-color: #f6f7f9;
+  padding: 10px;
 }
 .App.bp4-dark {
   background-color: #172742;

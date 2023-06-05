@@ -16,3 +16,5 @@ export * from "./Spinner";
 export * from "./Switch";
 export * from "./InputGroup";
 export * from "./FileInput";
+export * from "./Text";
+export * from "./Tag";
