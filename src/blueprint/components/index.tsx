@@ -19,3 +19,4 @@ export * from "./FileInput";
 export * from "./Text";
 export * from "./Tag";
 export * from "./Tab";
+export * from "./TabTitle";
