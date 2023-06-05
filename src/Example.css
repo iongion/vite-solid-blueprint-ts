@@ -1,5 +1,6 @@
 .Example {
   margin-bottom: 10px;
+  font-size: 11px;
 }
 .Example:last-child {
   margin-bottom: 0;
@@ -81,7 +82,7 @@
   background: #ffffff;
 }
 .ExampleComponentProperties {
-  background-color: #f9f9f9;
+  background-color: #edeff2;
 }
 
 .bp4-dark .ExampleComponentTitle {

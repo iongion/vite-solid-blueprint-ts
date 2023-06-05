@@ -1,6 +1,5 @@
 .AppHeaderTitle {
   margin-top: 40px;
-  color: #fff;
   text-align: center;
 }
 
@@ -33,4 +32,15 @@ ul.Tools li a .logo:hover {
 }
 ul.Tools li a .logo.vanilla:hover {
   filter: drop-shadow(0 0 2em #3178c6aa);
+}
+
+/* theme */
+.App {
+  background-color: #f6f7f9;
+}
+.App.bp4-dark {
+  background-color: #172742;
+}
+.App.bp4-dark .AppHeaderTitle {
+  color: #fff;
 }
