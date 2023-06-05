@@ -320,6 +320,7 @@ export const TagPropsSchema: y.ObjectSchema<Omit<Props, "children">> = y
     minimal: y.boolean().default(false),
     multiline: y.boolean().default(false),
     round: y.boolean().default(false),
+    removable: y.boolean().default(true),
     htmlTitle: y.string().default(""),
     inputClassName: y.string().optional().nullable(),
     intent: IntentSchema,

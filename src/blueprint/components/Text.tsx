@@ -1,5 +1,5 @@
 import classNames from "classnames";
-import { JSX, mergeProps, splitProps, createMemo, createSignal, createEffect } from "solid-js";
+import { JSX, mergeProps, splitProps, createMemo, createSignal, createEffect, on } from "solid-js";
 import { Dynamic } from "solid-js/web";
 import type { Component } from "solid-js";
 
@@ -46,12 +46,18 @@ export const Text: Component<TextProps> = (userProps: TextProps) => {
     )
   );
   let textRef;
-  createEffect(() => {
-    if (textRef) {
-      setIsContentOverflowing(props.ellipsize! && textRef.scrollWidth > textRef.clientWidth);
-      setTextContent(textRef.textContent);
-    }
-  });
+  createEffect(
+    on(
+      () => props.ellipsize,
+      () => {
+        if (textRef) {
+          console.debug(props.ellipsize, textRef.scrollWidth, textRef.clientWidth);
+          setIsContentOverflowing(props.ellipsize! && textRef.scrollWidth > textRef.clientWidth);
+          setTextContent(textRef.textContent);
+        }
+      }
+    )
+  );
   return (
     <Dynamic
       // props

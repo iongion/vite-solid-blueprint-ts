@@ -444,10 +444,12 @@ const App: Component = () => {
         schema={TextPropsSchema}
         render={(props) => {
           return (
-            <Text {...props}>
-              You can change the text in the input below. Hover to see full text. If the text is long enough, then the content will overflow. This is done by setting ellipsize to
-              true.
-            </Text>
+            <div style={{ width: "300px" }}>
+              <Text {...props}>
+                You can change the text in the input below. Hover to see full text. If the text is long enough, then the content will overflow. This is done by setting ellipsize to
+                true.
+              </Text>
+            </div>
           );
         }}
       />
