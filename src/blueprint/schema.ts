@@ -329,3 +329,11 @@ export const TagPropsSchema: y.ObjectSchema<Omit<Props, "children">> = y
     tabIndex: y.number().optional(),
   })
   .concat(PropsSchema);
+
+export const TextPropsSchema: y.ObjectSchema<Omit<Props, "children">> = y
+  .object({
+    tagName: y.string<keyof JSX.IntrinsicElements>().default("div"),
+    ellipsize: y.boolean().default(false),
+    title: y.string().default("Test text goes here"),
+  })
+  .concat(PropsSchema);
