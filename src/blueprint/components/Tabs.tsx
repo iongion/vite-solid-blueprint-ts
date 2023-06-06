@@ -25,7 +25,7 @@ interface ITabsProps extends Props {
 export type TabsProps = ITabsProps;
 
 export function isTabElement(child: any): child is TabElement {
-  console.debug("Check child", child, "is Tab");
+  // console.debug("Check child", child, "is Tab");
   return isElementOfType(child, Tab);
 }
 
@@ -89,10 +89,11 @@ export const Tabs: UIComponent<TabsProps> = (userProps: TabsProps) => {
   });
   const onTabClick = () => {};
   const createTabTitles = createMemo(() => {
-    const resolved = children(() => props.children);
+    const resolved = children(() => props.children).toArray();
     const childrenList = Array.isArray(resolved) ? resolved : [resolved];
-    const titles = childrenList.map((c) => (c as any).props);
-    console.debug(">> createTabTitles children", children, titles);
+    console.debug("> childrenList", childrenList);
+    // const titles = childrenList.map((c) => (c as any).props);
+    // console.debug(">> createTabTitles children", children, titles);
     return (
       <For each={childrenList}>
         {(child) => {

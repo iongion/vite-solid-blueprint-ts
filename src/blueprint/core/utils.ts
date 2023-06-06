@@ -13,6 +13,6 @@ export const clamp = (value: number, min?: number, max?: number): number => {
 };
 
 export function isElementOfType<P = {}>(element: any, ComponentType: UIComponent<P>): element is JSX.Element {
-  console.debug(">> isElementOfType", Object.keys(element));
+  // console.debug(">> isElementOfType", Object.keys(element));
   return element != null && element.type != null && element.type.displayName != null && element.type.displayName === ComponentType.displayName;
 }
