@@ -1,5 +1,5 @@
 import classNames from "classnames";
-import { mergeProps, splitProps, createMemo, createSignal, For, children } from "solid-js";
+import { mergeProps, splitProps, createMemo, createSignal, For } from "solid-js";
 import type { JSX } from "solid-js";
 
 import { DISPLAYNAME_PREFIX, Classes, Props, isElementOfType } from "@blueprint/core";
