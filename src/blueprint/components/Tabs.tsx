@@ -4,7 +4,7 @@ import type { JSX } from "solid-js";
 
 import { DISPLAYNAME_PREFIX, Classes, Props } from "@blueprint/core";
 import type { UIComponent } from "@blueprint/core";
-import { TabId, TabProps } from "./Tab";
+import { Tab, TabId, TabProps } from "./Tab";
 import { TabTitle } from "./TabTitle";
 
 export type TabElement = UIComponent<TabProps & { children: JSX.Element }>;
@@ -25,7 +25,7 @@ interface ITabsProps extends Props {
 export type TabsProps = ITabsProps;
 
 export function isTabElement(child: any) {
-  console.debug("Check child", child, "is Tab", child.name);
+  console.debug("Check child", child.displayName, "is Tab", child.name, Object.getPrototypeOf(child).isPrototypeOf(Object.getPrototypeOf(Tabs)));
   return false;
 }
 
@@ -91,7 +91,7 @@ export const Tabs: UIComponent<TabsProps> = (userProps: TabsProps) => {
   const createTabTitles = createMemo(() => {
     const resolved = props.children;
     const childrenList = Array.isArray(resolved) ? resolved : [resolved];
-    console.debug("> childrenList", childrenList);
+    console.debug("> childrenList", childrenList, resolved);
     // const titles = childrenList.map((c) => (c as any).props);
     // console.debug(">> createTabTitles children", children, titles);
     return (
