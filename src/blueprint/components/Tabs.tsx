@@ -2,9 +2,9 @@ import classNames from "classnames";
 import { mergeProps, splitProps, createMemo, createSignal, For } from "solid-js";
 import type { JSX } from "solid-js";
 
-import { DISPLAYNAME_PREFIX, Classes, Props, isElementOfType } from "@blueprint/core";
+import { DISPLAYNAME_PREFIX, Classes, Props } from "@blueprint/core";
 import type { UIComponent } from "@blueprint/core";
-import { TabId, Tab, TabProps } from "./Tab";
+import { TabId, TabProps } from "./Tab";
 import { TabTitle } from "./TabTitle";
 
 export type TabElement = UIComponent<TabProps & { children: JSX.Element }>;
@@ -24,9 +24,8 @@ interface ITabsProps extends Props {
 
 export type TabsProps = ITabsProps;
 
-export function isTabElement(child: any): child is TabElement {
-  // console.debug("Check child", child, "is Tab");
-  return isElementOfType(child, Tab);
+export function isTabElement(child: any) {
+  console.debug("Check child", child, "is Tab");
 }
 
 export const TabsPropsDefaults: Partial<TabsProps> = {
