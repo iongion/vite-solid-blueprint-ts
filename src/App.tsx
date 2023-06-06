@@ -474,12 +474,10 @@ const App: Component = () => {
           return (
             <Tabs
               id="TabsExample"
-              render={(context) => (
-                <>
-                  <Tab
+            >
+              <Tab
                     id="TabsExampleTabID1"
                     title="Title tab 1"
-                    context={context}
                     panel={
                       <div>
                         <H4>Tab 1 header</H4>
@@ -490,7 +488,6 @@ const App: Component = () => {
                   <Tab
                     id="TabsExampleTabID2"
                     title="Title tab 2"
-                    context={context}
                     panel={
                       <div>
                         <H4>Tab 2 header</H4>
@@ -498,9 +495,7 @@ const App: Component = () => {
                       </div>
                     }
                   />
-                </>
-              )}
-            />
+            </Tabs>
           );
         }}
       />

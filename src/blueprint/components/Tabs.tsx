@@ -26,6 +26,7 @@ export type TabsProps = ITabsProps;
 
 export function isTabElement(child: any) {
   console.debug("Check child", child, "is Tab");
+  return false;
 }
 
 export const TabsPropsDefaults: Partial<TabsProps> = {
