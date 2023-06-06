@@ -341,3 +341,16 @@ export const TextPropsSchema: y.ObjectSchema<Omit<Props, "children">> = y
     title: y.string().default("Test text goes here"),
   })
   .concat(PropsSchema);
+
+export const TabsPropsSchema: y.ObjectSchema<Omit<Props, "children">> = y
+  .object({
+    animate: y.boolean().default(false),
+    defaultSelectedTabId: y.string().default("tab1"),
+    id: y.string().default("Tabs"),
+    large: y.boolean().default(false),
+    renderActiveTabPanelOnly: y.boolean().default(false),
+    selectedTabId: y.string().default("tab1"),
+    vertical: y.boolean().default(false),
+    fill: y.boolean().default(false),
+  })
+  .concat(PropsSchema);

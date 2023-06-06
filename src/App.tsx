@@ -59,6 +59,7 @@ import {
   TagProps,
   Tag,
   Tab,
+  TabsProps,
   Tabs,
   // TabTitle,
 } from "@blueprint/components";
@@ -84,6 +85,7 @@ import {
   FileInputPropsSchema,
   TagPropsSchema,
   TextPropsSchema,
+  TabsPropsSchema,
 } from "@blueprint/schema";
 import { Icon, IconName, IconProps } from "@blueprint/icons";
 import { Example } from "./Example";
@@ -465,21 +467,38 @@ const App: Component = () => {
         }}
       />
 
-      <Example example="Tab">
-        <Tabs id="TabsExample">
-          <Tab
-            panel={
-              <div>
-                <H4>Example panel: React</H4>
-                <p class={Classes.RUNNING_TEXT}>
-                  Lots of people use React as the V in MVC. Since React makes no assumptions about the rest of your technology stack, it's easy to try it out on a small feature in
-                  an existing project.
-                </p>
-              </div>
-            }
-          />
-        </Tabs>
-      </Example>
+      <Example<TabsProps>
+        example="Tab"
+        schema={TabsPropsSchema}
+        render={() => {
+          return (
+            <Tabs id="TabsExample">
+              <Tab
+                panel={
+                  <div>
+                    <H4>Example panel: React</H4>
+                    <p class={Classes.RUNNING_TEXT}>
+                      Lots of people use React as the V in MVC. Since React makes no assumptions about the rest of your technology stack, it's easy to try it out on a small feature
+                      in an existing project.
+                    </p>
+                  </div>
+                }
+              />
+              <Tab
+                panel={
+                  <div>
+                    <H4>Example panel: React</H4>
+                    <p class={Classes.RUNNING_TEXT}>
+                      Lots of people use React as the V in MVC. Since React makes no assumptions about the rest of your technology stack, it's easy to try it out on a small feature
+                      in an existing project.
+                    </p>
+                  </div>
+                }
+              />
+            </Tabs>
+          );
+        }}
+      />
     </div>
   );
 };
