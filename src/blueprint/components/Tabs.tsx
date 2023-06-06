@@ -89,7 +89,7 @@ export const Tabs: UIComponent<TabsProps> = (userProps: TabsProps) => {
   });
   const onTabClick = () => {};
   const createTabTitles = createMemo(() => {
-    const resolved = children(() => props.children).toArray();
+    const resolved = props.children;
     const childrenList = Array.isArray(resolved) ? resolved : [resolved];
     console.debug("> childrenList", childrenList);
     // const titles = childrenList.map((c) => (c as any).props);
