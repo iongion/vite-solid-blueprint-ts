@@ -5,6 +5,7 @@ import type { JSX } from "solid-js";
 import { DISPLAYNAME_PREFIX, Classes, Props, isElementOfType } from "@blueprint/core";
 import type { UIComponent } from "@blueprint/core";
 import { TabId, Tab, TabProps } from "./Tab";
+import { TabTitle } from "./TabTitle";
 
 export type TabElement = UIComponent<TabProps & { children: JSX.Element }>;
 export const TAB_SELECTOR = `.${Classes.TAB}`;
@@ -85,6 +86,7 @@ export const Tabs: UIComponent<TabsProps> = (userProps: TabsProps) => {
       );
     }
   });
+  const onTabClick = () => {};
   const createTabTitles = createMemo(() => {
     const children = Array.isArray(props.children) ? props.children : [props.children];
     if (children) {
@@ -92,14 +94,35 @@ export const Tabs: UIComponent<TabsProps> = (userProps: TabsProps) => {
         <For each={children}>
           {(child) => {
             if (isTabElement(child)) {
-              return undefined;
+              const element = child as TabElement;
+              console.debug(element);
+              return <TabTitle parentId={props.id} onClick={onTabClick} selected={false} />;
             }
           }}
         </For>
       );
     }
   });
-  const createTabPanels = createMemo(() => {});
+  const createTabPanels = createMemo(() => {
+    const children = Array.isArray(props.children) ? props.children : [props.children];
+    if (children) {
+      return (
+        <For each={children}>
+          {(child) => {
+            if (isTabElement(child)) {
+              const element = child as TabElement;
+              console.debug(element);
+              return (
+                <div role="tabpanel" class={classNames(Classes.TAB_PANEL, props.class)}>
+                  {child}
+                </div>
+              );
+            }
+          }}
+        </For>
+      );
+    }
+  });
   return (
     <div
       // props
