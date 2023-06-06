@@ -474,24 +474,22 @@ const App: Component = () => {
           return (
             <Tabs id="TabsExample">
               <Tab
+                id="TabsExampleTabID1"
+                title="Title tab 1"
                 panel={
                   <div>
-                    <H4>Example panel: React</H4>
-                    <p class={Classes.RUNNING_TEXT}>
-                      Lots of people use React as the V in MVC. Since React makes no assumptions about the rest of your technology stack, it's easy to try it out on a small feature
-                      in an existing project.
-                    </p>
+                    <H4>Tab 1 header</H4>
+                    <p class={Classes.RUNNING_TEXT}>Tab 1 content</p>
                   </div>
                 }
               />
               <Tab
+                id="TabsExampleTabID2"
+                title="Title tab 2"
                 panel={
                   <div>
-                    <H4>Example panel: React</H4>
-                    <p class={Classes.RUNNING_TEXT}>
-                      Lots of people use React as the V in MVC. Since React makes no assumptions about the rest of your technology stack, it's easy to try it out on a small feature
-                      in an existing project.
-                    </p>
+                    <H4>Tab 2 header</H4>
+                    <p class={Classes.RUNNING_TEXT}>Tab 2 content</p>
                   </div>
                 }
               />
