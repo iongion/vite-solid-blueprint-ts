@@ -37,7 +37,7 @@ export const TabsPropsDefaults: Partial<TabsProps> = {
 };
 
 export const Tabs: UIComponent<TabsProps> = (userProps: TabsProps) => {
-  const [indicatorWrapperStyle, setIndicatorWrapperStyle] = createSignal<JSX.CSSProperties>({});
+  const [indicatorWrapperStyle] = createSignal<JSX.CSSProperties>({});
   const [props, htmlProps] = splitProps(mergeProps(TabsPropsDefaults, userProps), [
     // props list
     "animate",
