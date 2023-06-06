@@ -44,8 +44,8 @@
     "@solid-primitives/keyed": "^1.2.0",
     "classnames": "^2.3.2",
     "solid-i18n": "~1.0.4",
-    "solid-popper": "^0.3.0",
     "solid-js": "^1.7.6",
+    "solid-popper": "^0.3.0",
     "solid-transition-group": "^0.2.2",
     "yup": "^1.2.0"
   }

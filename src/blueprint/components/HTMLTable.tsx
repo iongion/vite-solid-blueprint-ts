@@ -1,8 +1,8 @@
 import classNames from "classnames";
 import { mergeProps, splitProps, children, createMemo } from "solid-js";
-import type { Component } from "solid-js";
 
 import { DISPLAYNAME_PREFIX, Classes, InteractiveProps, Props } from "@blueprint/core";
+import type { UIComponent } from "@blueprint/core";
 
 interface IHTMLTableProps extends InteractiveProps, Props {
   bordered?: boolean;
@@ -16,7 +16,7 @@ export const HTMLTablePropsSchemaDefaults: HTMLTableProps = {
   striped: false,
   interactive: false,
 };
-export const HTMLTable: Component<HTMLTableProps> = (userProps: HTMLTableProps) => {
+export const HTMLTable: UIComponent<HTMLTableProps> = (userProps: HTMLTableProps) => {
   const [props, htmlProps] = splitProps(mergeProps(HTMLTablePropsSchemaDefaults, userProps), [
     // props list
     "bordered",
@@ -54,4 +54,4 @@ export const HTMLTable: Component<HTMLTableProps> = (userProps: HTMLTableProps) 
     </table>
   );
 };
-(HTMLTable as any).displayName = `${DISPLAYNAME_PREFIX}.HTMLTable`;
+HTMLTable.displayName = `${DISPLAYNAME_PREFIX}.HTMLTable`;

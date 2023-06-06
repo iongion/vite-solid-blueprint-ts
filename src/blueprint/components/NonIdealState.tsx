@@ -1,9 +1,9 @@
 import classNames from "classnames";
 import { mergeProps, splitProps, createMemo, children } from "solid-js";
-import type { Component } from "solid-js";
 
-import { H4 } from "@blueprint/components";
 import { DISPLAYNAME_PREFIX, Classes, Layout, LayoutProps, MaybeElement, Props } from "@blueprint/core";
+import type { UIComponent } from "@blueprint/core";
+import { H4 } from "@blueprint/components";
 import { Icon, IconName, IconSize } from "@blueprint/icons";
 
 export enum NonIdealStateIconSize {
@@ -25,7 +25,7 @@ export const NonIdealStatePropsDefaults: NonIdealStateProps = {
   iconSize: NonIdealStateIconSize.STANDARD,
   layout: Layout.VERTICAL,
 };
-export const NonIdealState: Component<NonIdealStateProps> = (userProps: NonIdealStateProps) => {
+export const NonIdealState: UIComponent<NonIdealStateProps> = (userProps: NonIdealStateProps) => {
   const [props, htmlProps] = splitProps(mergeProps(NonIdealStatePropsDefaults, userProps), [
     // props list
     "title",
@@ -92,4 +92,4 @@ export const NonIdealState: Component<NonIdealStateProps> = (userProps: NonIdeal
     </div>
   );
 };
-(NonIdealState as any).displayName = `${DISPLAYNAME_PREFIX}.NonIdealState`;
+NonIdealState.displayName = `${DISPLAYNAME_PREFIX}.NonIdealState`;

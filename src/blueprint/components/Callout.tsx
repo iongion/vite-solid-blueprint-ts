@@ -1,8 +1,8 @@
 import classNames from "classnames";
 import { mergeProps, splitProps, createMemo, children } from "solid-js";
-import type { Component } from "solid-js";
 
 import { DISPLAYNAME_PREFIX, Classes, Intent, MaybeElement, IntentProps, Props, intentClass } from "@blueprint/core";
+import type { UIComponent } from "@blueprint/core";
 import { Icon, IconName } from "@blueprint/icons";
 
 interface ICalloutProps extends IntentProps, Props {
@@ -17,7 +17,7 @@ export const CalloutPropsDefaults: CalloutProps = {
   intent: Intent.NONE,
 };
 
-export const Callout: Component<CalloutProps> = (userProps: CalloutProps) => {
+export const Callout: UIComponent<CalloutProps> = (userProps: CalloutProps) => {
   const [props, htmlProps] = splitProps(mergeProps(CalloutPropsDefaults, userProps), [
     // props list
     "intent",
@@ -55,4 +55,4 @@ export const Callout: Component<CalloutProps> = (userProps: CalloutProps) => {
     </div>
   );
 };
-(Callout as any).displayName = `${DISPLAYNAME_PREFIX}.Callout`;
+Callout.displayName = `${DISPLAYNAME_PREFIX}.Callout`;

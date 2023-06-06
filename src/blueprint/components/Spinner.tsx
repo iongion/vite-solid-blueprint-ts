@@ -1,9 +1,9 @@
 import classNames from "classnames";
 import { mergeProps, splitProps, createMemo } from "solid-js";
 import { Dynamic } from "solid-js/web";
-import type { Component } from "solid-js";
 
 import { DISPLAYNAME_PREFIX, Classes, Props, IntentProps, intentClass, clamp } from "@blueprint/core";
+import type { UIComponent } from "@blueprint/core";
 
 const R = 45;
 const SPINNER_TRACK = `M 50,50 m 0,-${R} a ${R},${R} 0 1 1 0,${R * 2} a ${R},${R} 0 1 1 0,-${R * 2}`;
@@ -37,7 +37,7 @@ export function getViewBox(strokeWidth: number) {
   return `${viewBoxX} ${viewBoxX} ${viewBoxWidth} ${viewBoxWidth}`;
 }
 
-export const Spinner: Component<SpinnerProps> = (userProps: SpinnerProps) => {
+export const Spinner: UIComponent<SpinnerProps> = (userProps: SpinnerProps) => {
   const [props, htmlProps] = splitProps(mergeProps(SpinnerPropsDefaults, userProps), [
     // props list
     "intent",
@@ -128,4 +128,4 @@ export const Spinner: Component<SpinnerProps> = (userProps: SpinnerProps) => {
     </Dynamic>
   );
 };
-(Spinner as any).displayName = `${DISPLAYNAME_PREFIX}.Spinner`;
+Spinner.displayName = `${DISPLAYNAME_PREFIX}.Spinner`;

@@ -1,8 +1,8 @@
 import classNames from "classnames";
 import { JSX, mergeProps, splitProps, createMemo } from "solid-js";
-import type { Component } from "solid-js";
 
 import { DISPLAYNAME_PREFIX, MaybeElement, Classes, Props } from "@blueprint/core";
+import type { UIComponent } from "@blueprint/core";
 import { IconName } from "@blueprint/icons";
 
 import { TagProps } from "./Tag";
@@ -32,7 +32,7 @@ export const TabPropsDefaults: TabProps = {
   disabled: false,
 };
 
-export const Tab: Component<TabProps> = (userProps: TabProps) => {
+export const Tab: UIComponent<TabProps> = (userProps: TabProps) => {
   const [props, htmlProps] = splitProps(mergeProps(TabPropsDefaults, userProps), [
     // props list
     "id",
@@ -71,4 +71,4 @@ export const Tab: Component<TabProps> = (userProps: TabProps) => {
     </div>
   );
 };
-(Tab as any).displayName = `${DISPLAYNAME_PREFIX}.Tab`;
+Tab.displayName = `${DISPLAYNAME_PREFIX}.Tab`;

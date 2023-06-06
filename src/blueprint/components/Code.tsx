@@ -1,14 +1,14 @@
 import classNames from "classnames";
 import { mergeProps, splitProps, children, createMemo } from "solid-js";
-import type { Component } from "solid-js";
 
 import { DISPLAYNAME_PREFIX, Classes, Props } from "@blueprint/core";
+import type { UIComponent } from "@blueprint/core";
 
 interface ICodeBlockProps extends Props {}
 
 export type CodeBlockProps = ICodeBlockProps;
 
-export const CodeBlock: Component<CodeBlockProps> = (userProps: CodeBlockProps) => {
+export const CodeBlock: UIComponent<CodeBlockProps> = (userProps: CodeBlockProps) => {
   const [props, htmlProps] = splitProps(mergeProps({}, userProps), [
     // props list
     "children",
@@ -36,14 +36,14 @@ export const CodeBlock: Component<CodeBlockProps> = (userProps: CodeBlockProps) 
     </pre>
   );
 };
-(CodeBlock as any).displayName = `${DISPLAYNAME_PREFIX}.CodeBlock`;
+CodeBlock.displayName = `${DISPLAYNAME_PREFIX}.CodeBlock`;
 
 interface ICodeProps extends Props {}
 
 const defaultCodeProps: ICodeProps = {};
 
 export type CodeProps = ICodeProps;
-export const Code: Component<CodeProps> = (userProps: CodeProps) => {
+export const Code: UIComponent<CodeProps> = (userProps: CodeProps) => {
   const [props, htmlProps] = splitProps(mergeProps({}, defaultCodeProps, userProps), [
     // props list
     "children",
@@ -71,4 +71,4 @@ export const Code: Component<CodeProps> = (userProps: CodeProps) => {
     </code>
   );
 };
-(Code as any).displayName = `${DISPLAYNAME_PREFIX}.Code`;
+Code.displayName = `${DISPLAYNAME_PREFIX}.Code`;

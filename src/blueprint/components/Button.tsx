@@ -1,6 +1,7 @@
 import classNames from "classnames";
 import { mergeProps, splitProps, children, createMemo } from "solid-js";
-import type { Component } from "solid-js";
+
+import type { UIComponent } from "@blueprint/core";
 
 import {
   //
@@ -50,7 +51,7 @@ export const ButtonPropsDefaults: ButtonProps = {
   type: "submit",
 };
 
-export const Button: Component<ButtonProps> = (userProps) => {
+export const Button: UIComponent<ButtonProps> = (userProps) => {
   const [props, htmlProps] = splitProps(mergeProps(ButtonPropsDefaults, userProps), [
     // props list
     "icon",
@@ -118,7 +119,7 @@ export const Button: Component<ButtonProps> = (userProps) => {
     </button>
   );
 };
-(Button as any).displayName = `${DISPLAYNAME_PREFIX}.Button`;
+Button.displayName = `${DISPLAYNAME_PREFIX}.Button`;
 
 // AnchorButton
 interface IAnchorButtonProps<E extends HTMLAnchorElement = HTMLAnchorElement> extends ActionProps<E>, LinkProps {
@@ -140,7 +141,7 @@ export const AnchorButtonPropsDefaults: AnchorButtonProps = {
   href: "#",
   target: "_blank",
 };
-export const AnchorButton: Component<AnchorButtonProps> = (userProps) => {
+export const AnchorButton: UIComponent<AnchorButtonProps> = (userProps) => {
   const [props, htmlProps] = splitProps(mergeProps(AnchorButtonPropsDefaults, userProps), [
     // props list
     "icon",
@@ -214,7 +215,4 @@ export const AnchorButton: Component<AnchorButtonProps> = (userProps) => {
     </a>
   );
 };
-Object.defineProperty(AnchorButton, "displayName", {
-  value: `${DISPLAYNAME_PREFIX}.AnchorButton`,
-  writable: false,
-});
+AnchorButton.displayName = `${DISPLAYNAME_PREFIX}.AnchorButton`;

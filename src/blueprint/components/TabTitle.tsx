@@ -1,9 +1,9 @@
 import classNames from "classnames";
 import { mergeProps, splitProps, createMemo } from "solid-js";
-import type { Component } from "solid-js";
 
 import { DISPLAYNAME_PREFIX, Classes, IntentProps } from "@blueprint/core";
 import { isIcon, Icon, IconName } from "@blueprint/icons";
+import type { UIComponent } from "@blueprint/core";
 import { TabId, TabProps } from "./Tab";
 
 interface ITabTitleProps extends IntentProps, TabProps {
@@ -21,7 +21,7 @@ export function generateTabPanelId(parentId: TabId, tabId: TabId) {
 export function generateTabTitleId(parentId: TabId, tabId: TabId) {
   return `${Classes.TAB}-title_${parentId}_${tabId}`;
 }
-export const TabTitle: Component<TabTitleProps> = (userProps: TabTitleProps) => {
+export const TabTitle: UIComponent<TabTitleProps> = (userProps: TabTitleProps) => {
   const [props, htmlProps] = splitProps(mergeProps(TabTitlePropsDefaults, userProps), [
     // props list
     "id",
@@ -84,4 +84,4 @@ export const TabTitle: Component<TabTitleProps> = (userProps: TabTitleProps) => 
     </div>
   );
 };
-(TabTitle as any).displayName = `${DISPLAYNAME_PREFIX}.TabTitle`;
+TabTitle.displayName = `${DISPLAYNAME_PREFIX}.TabTitle`;

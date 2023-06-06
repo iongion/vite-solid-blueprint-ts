@@ -1,9 +1,9 @@
 import classNames from "classnames";
 import { JSX, mergeProps, splitProps, createMemo } from "solid-js";
 import { Dynamic } from "solid-js/web";
-import type { Component } from "solid-js";
 
 import { DISPLAYNAME_PREFIX, Classes, Intent, IntentProps, Props, MaybeElement } from "@blueprint/core";
+import type { UIComponent } from "@blueprint/core";
 import { Icon, IconName } from "@blueprint/icons";
 
 interface IInputGroupProps extends Omit<JSX.SelectHTMLAttributes<HTMLInputElement>, "children">, IntentProps, Omit<Props, "children"> {
@@ -35,7 +35,7 @@ export const InputGroupPropsSchemaDefaults: InputGroupProps = {
   type: "text",
   intent: Intent.NONE,
 };
-export const InputGroup: Component<InputGroupProps> = (userProps: InputGroupProps) => {
+export const InputGroup: UIComponent<InputGroupProps> = (userProps: InputGroupProps) => {
   const [props, htmlProps] = splitProps(mergeProps(InputGroupPropsSchemaDefaults, userProps), [
     // props list
     "inline",
@@ -117,4 +117,4 @@ export const InputGroup: Component<InputGroupProps> = (userProps: InputGroupProp
     </Dynamic>
   );
 };
-(InputGroup as any).displayName = `${DISPLAYNAME_PREFIX}.InputGroup`;
+InputGroup.displayName = `${DISPLAYNAME_PREFIX}.InputGroup`;

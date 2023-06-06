@@ -1,9 +1,9 @@
 import classNames from "classnames";
 import { mergeProps, splitProps, createMemo } from "solid-js";
 import { Dynamic } from "solid-js/web";
-import type { Component } from "solid-js";
 
 import { DISPLAYNAME_PREFIX, Classes, Layout, LayoutProps, Props } from "@blueprint/core";
+import type { UIComponent } from "@blueprint/core";
 
 interface IDividerProps extends LayoutProps, Omit<Props, "children"> {
   tagName?: string | null;
@@ -14,7 +14,7 @@ export const DividerPropsDefaults: DividerProps = {
   tagName: "div",
 };
 
-export const Divider: Component<DividerProps> = (userProps: DividerProps) => {
+export const Divider: UIComponent<DividerProps> = (userProps: DividerProps) => {
   const [props, htmlProps] = splitProps(mergeProps(DividerPropsDefaults, userProps), [
     // props list
     "tagName",
@@ -44,4 +44,4 @@ export const Divider: Component<DividerProps> = (userProps: DividerProps) => {
     />
   );
 };
-(Divider as any).displayName = `${DISPLAYNAME_PREFIX}.Divider`;
+Divider.displayName = `${DISPLAYNAME_PREFIX}.Divider`;

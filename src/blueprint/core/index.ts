@@ -7,6 +7,7 @@ export * from "./position";
 export * from "./layout";
 export * from "./common";
 export * from "./props";
+export * from "./types";
 export * from "./utils";
 
 export { getClassNamespace } from "./classes";

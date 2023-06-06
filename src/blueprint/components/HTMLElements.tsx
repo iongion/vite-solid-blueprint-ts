@@ -1,15 +1,15 @@
 import classNames from "classnames";
 import { splitProps, children, createMemo } from "solid-js";
 import { Dynamic } from "solid-js/web";
-import type { Component } from "solid-js";
 
 import { DISPLAYNAME_PREFIX, Classes, Props } from "@blueprint/core";
+import type { UIComponent } from "@blueprint/core";
 
 // Generic heading
 interface IHeadingProps extends Props {}
 export type HeadingProps = IHeadingProps;
 export function createHeading(tagName: string) {
-  const Heading: Component<HeadingProps> = (userProps) => {
+  const Heading: UIComponent<HeadingProps> = (userProps) => {
     const [props, htmlProps] = splitProps(userProps, ["children", "class", "disabled"]);
     const createClassList = createMemo(() =>
       classNames(
@@ -33,7 +33,7 @@ export function createHeading(tagName: string) {
       </Dynamic>
     );
   };
-  (Heading as any).displayName = `${DISPLAYNAME_PREFIX}.${tagName}`;
+  Heading.displayName = `${DISPLAYNAME_PREFIX}.${tagName}`;
   return Heading;
 }
 
@@ -41,7 +41,7 @@ export function createHeading(tagName: string) {
 interface IListProps extends Props {}
 export type ListProps = IListProps;
 export function createList(tagName: string) {
-  const List: Component<ListProps> = (userProps) => {
+  const List: UIComponent<ListProps> = (userProps) => {
     const [props, htmlProps] = splitProps(userProps, ["children", "class", "disabled"]);
     const createClassList = createMemo(() =>
       classNames(
@@ -65,7 +65,7 @@ export function createList(tagName: string) {
       </Dynamic>
     );
   };
-  (List as any).displayName = `${DISPLAYNAME_PREFIX}.${tagName}`;
+  List.displayName = `${DISPLAYNAME_PREFIX}.${tagName}`;
   return List;
 }
 
@@ -77,7 +77,7 @@ export const H5 = createHeading("h5");
 export const H6 = createHeading("h6");
 
 export type BlockquoteProps = Props;
-export const Blockquote: Component<BlockquoteProps> = (userProps: BlockquoteProps) => {
+export const Blockquote: UIComponent<BlockquoteProps> = (userProps: BlockquoteProps) => {
   const [props, htmlProps] = splitProps(userProps, ["children", "class", "disabled"]);
   const createClassList = createMemo(() =>
     classNames(
@@ -100,14 +100,14 @@ export const Blockquote: Component<BlockquoteProps> = (userProps: BlockquoteProp
     </blockquote>
   );
 };
-(Blockquote as any).displayName = `${DISPLAYNAME_PREFIX}.Blockquote`;
+Blockquote.displayName = `${DISPLAYNAME_PREFIX}.Blockquote`;
 
 interface ILabelProps extends Props {
   for?: string;
   htmlFor?: string;
 }
 export type LabelProps = ILabelProps;
-export const Label: Component<LabelProps> = (userProps: LabelProps) => {
+export const Label: UIComponent<LabelProps> = (userProps: LabelProps) => {
   const [props, htmlProps] = splitProps(userProps, ["for", "htmlFor", "children", "class", "disabled"]);
   const createClassList = createMemo(() =>
     classNames(
@@ -131,10 +131,10 @@ export const Label: Component<LabelProps> = (userProps: LabelProps) => {
     </label>
   );
 };
-(Label as any).displayName = `${DISPLAYNAME_PREFIX}.Label`;
+Label.displayName = `${DISPLAYNAME_PREFIX}.Label`;
 
 export type ULProps = Props;
-export const UL: Component<ULProps> = createList("ul");
+export const UL: UIComponent<ULProps> = createList("ul");
 
 export type OLProps = Props;
-export const OL: Component<OLProps> = createList("ol");
+export const OL: UIComponent<OLProps> = createList("ol");

@@ -1,9 +1,9 @@
 import classNames from "classnames";
 import { JSX, mergeProps, splitProps, createMemo, createSignal, createEffect, on } from "solid-js";
 import { Dynamic } from "solid-js/web";
-import type { Component } from "solid-js";
 
 import { DISPLAYNAME_PREFIX, MaybeElement, Classes, Props } from "@blueprint/core";
+import type { UIComponent } from "@blueprint/core";
 
 interface ITextProps extends Omit<JSX.SelectHTMLAttributes<HTMLElement>, "children" | "title">, Props {
   tagName?: string | null;
@@ -18,7 +18,7 @@ export const TextPropsDefaults: TextProps = {
   title: undefined,
 };
 
-export const Text: Component<TextProps> = (userProps: TextProps) => {
+export const Text: UIComponent<TextProps> = (userProps: TextProps) => {
   const [textContent, setTextContent] = createSignal("");
   const [isContentOverflowing, setIsContentOverflowing] = createSignal(false);
   const [props, htmlProps] = splitProps(mergeProps(TextPropsDefaults, userProps), [
@@ -69,4 +69,4 @@ export const Text: Component<TextProps> = (userProps: TextProps) => {
     />
   );
 };
-(Text as any).displayName = `${DISPLAYNAME_PREFIX}.Text`;
+Text.displayName = `${DISPLAYNAME_PREFIX}.Text`;

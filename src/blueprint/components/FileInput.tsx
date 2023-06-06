@@ -1,8 +1,8 @@
 import classNames from "classnames";
 import { JSX, mergeProps, splitProps, createMemo } from "solid-js";
-import type { Component } from "solid-js";
 
 import { DISPLAYNAME_PREFIX, Classes, Intent, IntentProps, Props, MaybeElement } from "@blueprint/core";
+import type { UIComponent } from "@blueprint/core";
 
 import "./FileInput.css";
 
@@ -33,7 +33,7 @@ export const FileInputPropsSchemaDefaults: FileInputProps = {
   intent: Intent.NONE,
   onInputChange: undefined,
 };
-export const FileInput: Component<FileInputProps> = (userProps: FileInputProps) => {
+export const FileInput: UIComponent<FileInputProps> = (userProps: FileInputProps) => {
   const [props, htmlProps] = splitProps(mergeProps(FileInputPropsSchemaDefaults, userProps), [
     // props list
     "fill",
@@ -104,4 +104,4 @@ export const FileInput: Component<FileInputProps> = (userProps: FileInputProps) 
     </label>
   );
 };
-(FileInput as any).displayName = `${DISPLAYNAME_PREFIX}.FileInput`;
+FileInput.displayName = `${DISPLAYNAME_PREFIX}.FileInput`;

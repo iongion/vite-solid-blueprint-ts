@@ -1,8 +1,8 @@
 import classNames from "classnames";
 import { mergeProps, splitProps, children, createMemo } from "solid-js";
-import type { Component } from "solid-js";
 
 import { DISPLAYNAME_PREFIX, Alignment, Classes, Props } from "@blueprint/core";
+import type { UIComponent } from "@blueprint/core";
 
 interface IButtonGroupProps extends Props {
   alignText?: Alignment;
@@ -21,7 +21,7 @@ export const ButtonGroupPropsDefaults: ButtonGroupProps = {
   vertical: false,
 };
 
-export const ButtonGroup: Component<ButtonGroupProps> = (userProps: ButtonGroupProps) => {
+export const ButtonGroup: UIComponent<ButtonGroupProps> = (userProps: ButtonGroupProps) => {
   const [props, htmlProps] = splitProps(mergeProps(ButtonGroupPropsDefaults, userProps), [
     // props list
     "alignText",
@@ -60,4 +60,4 @@ export const ButtonGroup: Component<ButtonGroupProps> = (userProps: ButtonGroupP
     </div>
   );
 };
-(ButtonGroup as any).displayName = `${DISPLAYNAME_PREFIX}.ButtonGroup`;
+ButtonGroup.displayName = `${DISPLAYNAME_PREFIX}.ButtonGroup`;

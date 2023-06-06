@@ -1,15 +1,15 @@
 import classNames from "classnames";
 import { mergeProps, splitProps, children, createMemo } from "solid-js";
-import type { Component } from "solid-js";
 
 import { DISPLAYNAME_PREFIX, Classes, MaybeElement, Props } from "@blueprint/core";
+import type { UIComponent } from "@blueprint/core";
 import { ActionProps } from "@blueprint/tools/actions";
 import { Icon, IconName } from "@blueprint/icons";
 
 // MenuDivider
 export type MenuDividerProps = Omit<Props, "children">;
 export const MenuDividerPropsDefaults: MenuDividerProps = {};
-export const MenuDivider: Component<MenuDividerProps> = (userProps) => {
+export const MenuDivider: UIComponent<MenuDividerProps> = (userProps) => {
   const [props, htmlProps] = splitProps(mergeProps(MenuDividerPropsDefaults, userProps), [
     // props list
     "class",
@@ -33,7 +33,7 @@ export const MenuDivider: Component<MenuDividerProps> = (userProps) => {
     ></div>
   );
 };
-(MenuDivider as any).displayName = `${DISPLAYNAME_PREFIX}.MenuDivider`;
+MenuDivider.displayName = `${DISPLAYNAME_PREFIX}.MenuDivider`;
 
 // MenuItem
 interface IMenuItemProps<E extends HTMLAnchorElement | HTMLElement = HTMLAnchorElement> extends ActionProps<E> {
@@ -41,7 +41,7 @@ interface IMenuItemProps<E extends HTMLAnchorElement | HTMLElement = HTMLAnchorE
 }
 export type MenuItemProps = IMenuItemProps;
 export const MenuItemPropsDefaults: MenuItemProps = {};
-export const MenuItem: Component<MenuItemProps> = (userProps) => {
+export const MenuItem: UIComponent<MenuItemProps> = (userProps) => {
   const [props, htmlProps] = splitProps(mergeProps(MenuItemPropsDefaults, userProps), [
     // props list
     "onClick",
@@ -101,7 +101,7 @@ export const MenuItem: Component<MenuItemProps> = (userProps) => {
     </li>
   );
 };
-(MenuItem as any).displayName = `${DISPLAYNAME_PREFIX}.MenuItem`;
+MenuItem.displayName = `${DISPLAYNAME_PREFIX}.MenuItem`;
 
 // Menu
 interface IMenuProps extends Props {

@@ -1,8 +1,8 @@
 import classNames from "classnames";
 import { mergeProps, splitProps, children, createMemo } from "solid-js";
-import type { Component } from "solid-js";
 
 import { DISPLAYNAME_PREFIX, Classes, Props } from "@blueprint/core";
+import type { UIComponent } from "@blueprint/core";
 
 interface ICollapseProps extends Props {
   isOpen?: boolean;
@@ -15,7 +15,7 @@ export const CollapsePropsDefaults: CollapseProps = {
   keepChildrenMounted: false,
 };
 
-export const Collapse: Component<CollapseProps> = (userProps: CollapseProps) => {
+export const Collapse: UIComponent<CollapseProps> = (userProps: CollapseProps) => {
   const [props, htmlProps] = splitProps(mergeProps(CollapsePropsDefaults, userProps), [
     // props list
     "isOpen",
@@ -47,4 +47,4 @@ export const Collapse: Component<CollapseProps> = (userProps: CollapseProps) => 
     </div>
   );
 };
-(Collapse as any).displayName = `${DISPLAYNAME_PREFIX}.Collapse`;
+Collapse.displayName = `${DISPLAYNAME_PREFIX}.Collapse`;

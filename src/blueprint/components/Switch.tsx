@@ -1,9 +1,9 @@
 import classNames from "classnames";
 import { JSX, mergeProps, splitProps, createMemo, children } from "solid-js";
 import { Dynamic } from "solid-js/web";
-import type { Component } from "solid-js";
 
 import { DISPLAYNAME_PREFIX, MaybeElement, Alignment, Classes, Props } from "@blueprint/core";
+import type { UIComponent } from "@blueprint/core";
 
 import "./Switch.css";
 
@@ -28,7 +28,7 @@ export const SwitchPropsSchemaDefaults: SwitchProps = {
   tagName: "label",
   alignIndicator: Alignment.LEFT,
 };
-export const Switch: Component<SwitchProps> = (userProps: SwitchProps) => {
+export const Switch: UIComponent<SwitchProps> = (userProps: SwitchProps) => {
   const [props, htmlProps] = splitProps(mergeProps(SwitchPropsSchemaDefaults, userProps), [
     // props list
     "inline",
@@ -88,4 +88,4 @@ export const Switch: Component<SwitchProps> = (userProps: SwitchProps) => {
     </Dynamic>
   );
 };
-(Switch as any).displayName = `${DISPLAYNAME_PREFIX}.Switch`;
+Switch.displayName = `${DISPLAYNAME_PREFIX}.Switch`;

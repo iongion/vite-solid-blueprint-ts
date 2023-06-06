@@ -1,8 +1,8 @@
 import classNames from "classnames";
 import { JSX, mergeProps, splitProps, createMemo, children } from "solid-js";
-import type { Component } from "solid-js";
 
 import { DISPLAYNAME_PREFIX, Classes, Intent, InteractiveProps, IntentProps, Props, MaybeElement } from "@blueprint/core";
+import type { UIComponent } from "@blueprint/core";
 import { Text } from "@blueprint/components";
 import { isIcon, Icon, IconName, IconSize } from "@blueprint/icons";
 
@@ -46,7 +46,7 @@ export const TagPropsSchemaDefaults: TagProps = {
   interactive: false,
   tabIndex: undefined,
 };
-export const Tag: Component<TagProps> = (userProps: TagProps) => {
+export const Tag: UIComponent<TagProps> = (userProps: TagProps) => {
   const [props, htmlProps] = splitProps(mergeProps(TagPropsSchemaDefaults, userProps), [
     // props list
     "active",
@@ -106,17 +106,11 @@ export const Tag: Component<TagProps> = (userProps: TagProps) => {
   const createRemoveButton = createMemo(() => {
     const isRemovable = props.removable || props.onRemove !== undefined;
     const removeButton = isRemovable ? (
-      <button
-          aria-label="Remove Tag"
-          type="button"
-          class={Classes.TAG_REMOVE}
-          onClick={props.onRemove}
-          tabIndex={props.tabIndex}
-      >
-          <Icon icon={IconName.SMALL_CROSS} size={props.large ? IconSize.LARGE : IconSize.STANDARD} />
+      <button aria-label="Remove Tag" type="button" class={Classes.TAG_REMOVE} onClick={props.onRemove} tabIndex={props.tabIndex}>
+        <Icon icon={IconName.SMALL_CROSS} size={props.large ? IconSize.LARGE : IconSize.STANDARD} />
       </button>
-  ) : null;
-  return removeButton;
+    ) : null;
+    return removeButton;
   });
   return (
     <span
@@ -132,4 +126,4 @@ export const Tag: Component<TagProps> = (userProps: TagProps) => {
     </span>
   );
 };
-(Tag as any).displayName = `${DISPLAYNAME_PREFIX}.Tag`;
+Tag.displayName = `${DISPLAYNAME_PREFIX}.Tag`;

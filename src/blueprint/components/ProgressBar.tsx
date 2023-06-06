@@ -1,8 +1,8 @@
 import classNames from "classnames";
 import { mergeProps, splitProps, createMemo } from "solid-js";
-import type { Component } from "solid-js";
 
 import { DISPLAYNAME_PREFIX, Classes, Intent, IntentProps, Props, clamp } from "@blueprint/core";
+import type { UIComponent } from "@blueprint/core";
 
 interface IProgressBarProps extends IntentProps, Omit<Props, "children"> {
   animate?: boolean;
@@ -17,7 +17,7 @@ export const ProgressBarPropsDefaults: ProgressBarProps = {
   value: null,
 };
 
-export const ProgressBar: Component<ProgressBarProps> = (userProps: ProgressBarProps) => {
+export const ProgressBar: UIComponent<ProgressBarProps> = (userProps: ProgressBarProps) => {
   const [props, htmlProps] = splitProps(mergeProps(ProgressBarPropsDefaults, userProps), [
     // props list
     "intent",
@@ -66,4 +66,4 @@ export const ProgressBar: Component<ProgressBarProps> = (userProps: ProgressBarP
     </div>
   );
 };
-(ProgressBar as any).displayName = `${DISPLAYNAME_PREFIX}.ProgressBar`;
+ProgressBar.displayName = `${DISPLAYNAME_PREFIX}.ProgressBar`;

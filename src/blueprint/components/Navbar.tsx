@@ -1,12 +1,12 @@
 import classNames from "classnames";
 import { mergeProps, splitProps, children, createMemo } from "solid-js";
-import type { Component } from "solid-js";
 
 import { DISPLAYNAME_PREFIX, Classes, Alignment, Props } from "@blueprint/core";
+import type { UIComponent } from "@blueprint/core";
 
 // NavbarDivider
 export type NavbarDividerProps = Omit<Props, "children">;
-export const NavbarDivider: Component<NavbarDividerProps> = (userProps) => {
+export const NavbarDivider: UIComponent<NavbarDividerProps> = (userProps) => {
   const [props, htmlProps] = splitProps(mergeProps({}, userProps), [
     // props list
     "class",
@@ -30,12 +30,12 @@ export const NavbarDivider: Component<NavbarDividerProps> = (userProps) => {
     ></div>
   );
 };
-(NavbarDivider as any).displayName = `${DISPLAYNAME_PREFIX}.NavbarDivider`;
+NavbarDivider.displayName = `${DISPLAYNAME_PREFIX}.NavbarDivider`;
 
 // NavbarHeading
 interface INavbarHeadingProps extends Props {}
 export type NavbarHeadingProps = INavbarHeadingProps;
-export const NavbarHeading: Component<NavbarHeadingProps> = (userProps) => {
+export const NavbarHeading: UIComponent<NavbarHeadingProps> = (userProps) => {
   const [props, htmlProps] = splitProps(mergeProps({}, userProps), [
     // props list
     "children",
@@ -63,7 +63,7 @@ export const NavbarHeading: Component<NavbarHeadingProps> = (userProps) => {
     </div>
   );
 };
-(NavbarHeading as any).displayName = `${DISPLAYNAME_PREFIX}.NavbarHeading`;
+NavbarHeading.displayName = `${DISPLAYNAME_PREFIX}.NavbarHeading`;
 
 // NavbarGroup
 interface INavbarGroupProps extends Props {
@@ -73,7 +73,7 @@ export type NavbarGroupProps = INavbarGroupProps;
 export const NavbarGroupPropsDefaults: NavbarGroupProps = {
   align: Alignment.LEFT,
 };
-export const NavbarGroup: Component<NavbarGroupProps> = (userProps) => {
+export const NavbarGroup: UIComponent<NavbarGroupProps> = (userProps) => {
   const [props, htmlProps] = splitProps(mergeProps(NavbarGroupPropsDefaults, userProps), [
     // props list
     "align",
@@ -103,7 +103,7 @@ export const NavbarGroup: Component<NavbarGroupProps> = (userProps) => {
     </div>
   );
 };
-(NavbarGroup as any).displayName = `${DISPLAYNAME_PREFIX}.NavbarGroup`;
+NavbarGroup.displayName = `${DISPLAYNAME_PREFIX}.NavbarGroup`;
 
 // Navbar
 interface INavbarProps extends Props {

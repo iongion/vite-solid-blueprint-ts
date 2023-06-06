@@ -1,8 +1,8 @@
 import classNames from "classnames";
 import { mergeProps, splitProps, children, createMemo } from "solid-js";
-import type { Component } from "solid-js";
 
 import { DISPLAYNAME_PREFIX, Classes, Elevation, Props, ElevationProps, InteractiveProps, elevationClass } from "@blueprint/core";
+import type { UIComponent } from "@blueprint/core";
 
 interface ICardProps extends ElevationProps, InteractiveProps, Props {}
 
@@ -12,7 +12,7 @@ export const CardPropsDefaults: CardProps = {
   interactive: true,
 };
 
-export const Card: Component<CardProps> = (userProps: CardProps) => {
+export const Card: UIComponent<CardProps> = (userProps: CardProps) => {
   const [props, htmlProps] = splitProps(mergeProps(CardPropsDefaults, userProps), [
     // props list
     "elevation",
@@ -45,4 +45,4 @@ export const Card: Component<CardProps> = (userProps: CardProps) => {
     </div>
   );
 };
-(Card as any).displayName = `${DISPLAYNAME_PREFIX}.Card`;
+Card.displayName = `${DISPLAYNAME_PREFIX}.Card`;

@@ -1,9 +1,9 @@
 import classNames from "classnames";
 import { JSX, mergeProps, splitProps, children, createMemo } from "solid-js";
-import type { Component } from "solid-js";
 import { Key } from "@solid-primitives/keyed";
 
 import { DISPLAYNAME_PREFIX, Classes, OptionProps, Props } from "@blueprint/core";
+import type { UIComponent } from "@blueprint/core";
 import { Icon, IconName, IconProps } from "@blueprint/icons";
 
 import "./HTMLSelect.css";
@@ -26,7 +26,7 @@ export const HTMLSelectPropsSchemaDefaults: HTMLSelectProps = {
   multiple: false,
   iconName: IconName.DOUBLE_CARET_VERTICAL,
 };
-export const HTMLSelect: Component<HTMLSelectProps> = (userProps: HTMLSelectProps) => {
+export const HTMLSelect: UIComponent<HTMLSelectProps> = (userProps: HTMLSelectProps) => {
   const [props, htmlProps] = splitProps(mergeProps(HTMLSelectPropsSchemaDefaults, userProps), [
     // props list
     "value",
@@ -91,4 +91,4 @@ export const HTMLSelect: Component<HTMLSelectProps> = (userProps: HTMLSelectProp
     </div>
   );
 };
-(HTMLSelect as any).displayName = `${DISPLAYNAME_PREFIX}.HTMLSelect`;
+HTMLSelect.displayName = `${DISPLAYNAME_PREFIX}.HTMLSelect`;
