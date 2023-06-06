@@ -2,9 +2,12 @@ import classNames from "classnames";
 import { mergeProps, splitProps, createMemo, createSignal, For } from "solid-js";
 import type { JSX } from "solid-js";
 
-import { DISPLAYNAME_PREFIX, Classes, Props } from "@blueprint/core";
+import { DISPLAYNAME_PREFIX, Classes, Props, isElementOfType } from "@blueprint/core";
 import type { UIComponent } from "@blueprint/core";
-import { TabId } from "./Tab";
+import { TabId, Tab, TabProps } from "./Tab";
+
+export type TabElement = UIComponent<TabProps & { children: JSX.Element }>;
+export const TAB_SELECTOR = `.${Classes.TAB}`;
 
 interface ITabsProps extends Props {
   animate?: boolean;
@@ -19,6 +22,11 @@ interface ITabsProps extends Props {
 }
 
 export type TabsProps = ITabsProps;
+
+export function isTabElement(child: any): child is TabElement {
+  return isElementOfType(child, Tab);
+}
+
 export const TabsPropsDefaults: Partial<TabsProps> = {
   animate: true,
   large: false,
@@ -82,8 +90,10 @@ export const Tabs: UIComponent<TabsProps> = (userProps: TabsProps) => {
     if (children) {
       return (
         <For each={children}>
-          {(item) => {
-            return undefined;
+          {(child) => {
+            if (isTabElement(child)) {
+              return undefined;
+            }
           }}
         </For>
       );
