@@ -72,3 +72,7 @@ export const Tab: UIComponent<TabProps> = (userProps: TabProps) => {
   );
 };
 Tab.displayName = `${DISPLAYNAME_PREFIX}.Tab`;
+Object.defineProperty(Tab, "displayName", {
+  value: Tab.displayName,
+  writable: false,
+});

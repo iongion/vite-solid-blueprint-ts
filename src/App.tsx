@@ -472,29 +472,27 @@ const App: Component = () => {
         schema={TabsPropsSchema}
         render={() => {
           return (
-            <Tabs
-              id="TabsExample"
-            >
+            <Tabs id="TabsExample">
               <Tab
-                    id="TabsExampleTabID1"
-                    title="Title tab 1"
-                    panel={
-                      <div>
-                        <H4>Tab 1 header</H4>
-                        <p class={Classes.RUNNING_TEXT}>Tab 1 content</p>
-                      </div>
-                    }
-                  />
-                  <Tab
-                    id="TabsExampleTabID2"
-                    title="Title tab 2"
-                    panel={
-                      <div>
-                        <H4>Tab 2 header</H4>
-                        <p class={Classes.RUNNING_TEXT}>Tab 2 content</p>
-                      </div>
-                    }
-                  />
+                id="TabsExampleTabID1"
+                title="Title tab 1"
+                panel={
+                  <div>
+                    <H4>Tab 1 header</H4>
+                    <p class={Classes.RUNNING_TEXT}>Tab 1 content</p>
+                  </div>
+                }
+              />
+              <Tab
+                id="TabsExampleTabID2"
+                title="Title tab 2"
+                panel={
+                  <div>
+                    <H4>Tab 2 header</H4>
+                    <p class={Classes.RUNNING_TEXT}>Tab 2 content</p>
+                  </div>
+                }
+              />
             </Tabs>
           );
         }}

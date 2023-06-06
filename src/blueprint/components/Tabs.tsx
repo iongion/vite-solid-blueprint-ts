@@ -25,7 +25,7 @@ interface ITabsProps extends Props {
 export type TabsProps = ITabsProps;
 
 export function isTabElement(child: any) {
-  console.debug("Check child", child, "is Tab");
+  console.debug("Check child", child, "is Tab", child.name);
   return false;
 }
 
