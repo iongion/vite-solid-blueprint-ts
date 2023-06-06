@@ -94,8 +94,7 @@ export const Tabs: UIComponent<TabsProps> = (userProps: TabsProps) => {
         <For each={children}>
           {(child) => {
             if (isTabElement(child)) {
-              const element = child as TabElement;
-              console.debug(element);
+              // const element = child as TabElement;
               return <TabTitle parentId={props.id} onClick={onTabClick} selected={false} />;
             }
           }}

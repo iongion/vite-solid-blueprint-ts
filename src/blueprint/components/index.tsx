@@ -20,3 +20,4 @@ export * from "./Text";
 export * from "./Tag";
 export * from "./Tab";
 export * from "./TabTitle";
+export * from "./Tabs";
