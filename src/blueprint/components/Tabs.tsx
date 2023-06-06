@@ -1,5 +1,5 @@
 import classNames from "classnames";
-import { mergeProps, splitProps, createMemo, createSignal, For } from "solid-js";
+import { mergeProps, splitProps, createMemo, createSignal, For, children } from "solid-js";
 import type { JSX } from "solid-js";
 
 import { DISPLAYNAME_PREFIX, Classes, Props, isElementOfType } from "@blueprint/core";
@@ -89,11 +89,12 @@ export const Tabs: UIComponent<TabsProps> = (userProps: TabsProps) => {
   });
   const onTabClick = () => {};
   const createTabTitles = createMemo(() => {
-    const children = Array.isArray(props.children) ? props.children : [props.children];
-    const titles = children.map((c) => (c as any).props.title);
+    const resolved = children(() => props.children);
+    const childrenList = Array.isArray(resolved) ? resolved : [resolved];
+    const titles = childrenList.map((c) => (c as any).props);
     console.debug(">> createTabTitles children", children, titles);
     return (
-      <For each={children}>
+      <For each={childrenList}>
         {(child) => {
           if (isTabElement(child)) {
             // const element = child as TabElement;
