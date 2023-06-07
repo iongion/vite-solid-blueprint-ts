@@ -1,5 +1,5 @@
 import classNames from "classnames";
-import { JSX, mergeProps, splitProps, createMemo } from "solid-js";
+import { JSX, mergeProps, splitProps, createMemo, onMount } from "solid-js";
 
 import { DISPLAYNAME_PREFIX, MaybeElement, Classes, Props } from "@blueprint/core";
 import type { UIComponent } from "@blueprint/core";
@@ -60,8 +60,13 @@ export const Tab: UIComponent<TabProps> = (userProps: TabProps) => {
   const createChildren = () => {
     return props.panel;
   };
+  let tabRef: HTMLDivElement | ((el: HTMLDivElement) => void) | undefined;
+  onMount(() => {
+    console.debug("tabRef", tabRef);
+  });
   return (
     <div
+      ref={tabRef}
       // props
       class={createClassList()}
       role="tablist"

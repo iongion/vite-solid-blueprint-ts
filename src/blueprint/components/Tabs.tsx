@@ -1,9 +1,11 @@
 import classNames from "classnames";
-import { mergeProps, splitProps, createMemo, createSignal, For } from "solid-js";
+import { mergeProps, splitProps, createMemo, createSignal, For, children } from "solid-js";
 import type { JSX } from "solid-js";
 
 import { DISPLAYNAME_PREFIX, Classes, Props } from "@blueprint/core";
 import type { UIComponent } from "@blueprint/core";
+// import { Key } from "@solid-primitives/keyed";
+
 import { Tab, TabId, TabProps } from "./Tab";
 import { TabTitle } from "./TabTitle";
 
@@ -25,7 +27,7 @@ interface ITabsProps extends Props {
 export type TabsProps = ITabsProps;
 
 export function isTabElement(child: any) {
-  console.debug("Check child", child.displayName, "is Tab", child.name, Object.getPrototypeOf(child).isPrototypeOf(Object.getPrototypeOf(Tabs)));
+  console.debug("Check child", child, "is Tab", child.name, Object.getPrototypeOf(child).isPrototypeOf(Object.getPrototypeOf(Tab)));
   return false;
 }
 
@@ -89,7 +91,7 @@ export const Tabs: UIComponent<TabsProps> = (userProps: TabsProps) => {
   });
   const onTabClick = () => {};
   const createTabTitles = createMemo(() => {
-    const resolved = props.children;
+    const resolved = children(() => props.children).toArray();
     const childrenList = Array.isArray(resolved) ? resolved : [resolved];
     console.debug("> childrenList", childrenList, resolved);
     // const titles = childrenList.map((c) => (c as any).props);
@@ -107,7 +109,7 @@ export const Tabs: UIComponent<TabsProps> = (userProps: TabsProps) => {
   });
   const createTabPanels = createMemo(() => {
     const children = Array.isArray(props.children) ? props.children : [props.children];
-    console.debug(">> createTabPanels children", children);
+    // console.debug(">> createTabPanels children", children);
     return (
       <For each={children}>
         {(child) => {
