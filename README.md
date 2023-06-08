@@ -6,4 +6,4 @@
 
 Sample integration of [blueprint](https://blueprintjs.com/) with solid
 
-[Edit on StackBlitz ⚡️](https://stackblitz.com/edit/solidjs-templates-gfcotu)
+[Demo on StackBlitz ⚡️](https://stackblitz.com/edit/solidjs-templates-gfcotu)
