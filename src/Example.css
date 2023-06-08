@@ -83,6 +83,10 @@
   vertical-align: middle;
 }
 
+.ExampleComponentCode pre {
+  font-size: 11px;
+}
+
 /* theme */
 .ExampleComponent {
   background: #ffffff;
