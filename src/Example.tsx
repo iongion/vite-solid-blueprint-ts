@@ -7,7 +7,7 @@ import * as y from "yup";
 import { useI18n } from "solid-i18n";
 
 import { Alignment, Boundary, Elevation, Intent, Layout, Position, Props } from "@blueprint/core";
-import { HTMLSelect, HTMLTable, Label, NonIdealStateIconSize, Switch, InputGroup } from "@blueprint/components";
+import { HTMLSelect, HTMLTable, Label, NonIdealStateIconSize, Switch, InputGroup, CodeBlock } from "@blueprint/components";
 import { IconSize } from "@blueprint/icons";
 
 import "./Example.css";
@@ -248,9 +248,10 @@ export interface ExampleProps<PropsSchema extends unknown = any> extends Props {
   example: string;
   schema?: y.ObjectSchema<any>;
   render?: (context: PropsSchema, setProperty: (name: string, val: any) => void) => JSX.Element;
+  code?: (context: PropsSchema) => JSX.Element;
 }
-export function Example<T extends Props = any>({ title, example, children, schema, render }: ExampleProps<T>) {
-  const [state, setState] = createStore(schema?.getDefault() || {});
+export function Example<T extends Props = any>(props: ExampleProps<T>) {
+  const [state, setState] = createStore(props.schema?.getDefault() || {});
   const context = createContext<T>();
   const onPropertyChange = (name: string, value: any) => {
     console.debug("Change context property", { name, value });
@@ -258,25 +259,33 @@ export function Example<T extends Props = any>({ title, example, children, schem
   };
   return (
     <context.Provider value={state}>
-      <div class="Example" data-example={example}>
+      <div class="Example" data-example={props.example}>
         <div class="ExampleContent">
           <div class="ExampleComponent">
-            <h2 class="ExampleComponentTitle">{example || title}</h2>
+            <h2 class="ExampleComponentTitle">{props.example || props.title}</h2>
             <div class="ExampleComponentPreview">
-              {render && schema
+              {props.render && props.schema
                 ? (() => {
                     const ctx = useContext(context);
                     // console.debug(">>> CTX", ctx);
-                    return ctx === undefined ? undefined : render(ctx, onPropertyChange);
+                    return ctx === undefined ? undefined : props.render(ctx, onPropertyChange);
                   })()
-                : children}
+                : props.children}
             </div>
+            {props.code ? (
+              <div class="ExampleComponentCode">
+                {(() => {
+                  const ctx = useContext(context);
+                  return ctx === undefined ? undefined : <CodeBlock>{props.code(ctx)}</CodeBlock>;
+                })()}
+              </div>
+            ) : undefined}
           </div>
-          {schema && context ? (
+          {props.schema && context ? (
             <div class="ExampleComponentProperties">
               {(() => {
                 const ctx = useContext(context);
-                return ctx === undefined ? undefined : <ExampleSchemaForm<T> example={example} schema={schema} props={ctx} onPropertyChange={onPropertyChange} />;
+                return ctx === undefined ? undefined : <ExampleSchemaForm<T> example={props.example} schema={props.schema} props={ctx} onPropertyChange={onPropertyChange} />;
               })()}
             </div>
           ) : null}

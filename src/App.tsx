@@ -145,6 +145,9 @@ const App: Component = () => {
             />
           );
         }}
+        code={(props) => {
+          return `<Button intent="${props.intent || Intent.SUCCESS}" ${props.loading ? "loading" : ""} ${props.large ? "large" : ""} />`;
+        }}
       />
 
       <Example<AnchorButtonProps>

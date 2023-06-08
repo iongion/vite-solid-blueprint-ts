@@ -145,7 +145,7 @@ export const ButtonPropsSchema: y.ObjectSchema<Omit<ButtonProps, "children" | "o
         "submit",
       ])
       .default("button"),
-    intent: IntentSchema,
+    intent: IntentSchema.default(Intent.SUCCESS),
     tabIndex: y.number().optional(),
   })
   .concat(PropsSchema);

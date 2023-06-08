@@ -82,21 +82,25 @@
   vertical-align: middle;
 }
 
+.ExampleComponentCode {
+  padding: 10px;
+}
+
 /* theme */
-.ExampleComponentTitle {
+.ExampleComponent {
   background: #ffffff;
 }
-.ExampleComponentPreview {
+.ExampleComponentTitle {
   background: #ffffff;
 }
 .ExampleComponentProperties {
   background-color: #edeff2;
 }
 
-.bp4-dark .ExampleComponentTitle {
+.bp4-dark .ExampleComponent {
   background: #252a31;
 }
-.bp4-dark .ExampleComponentPreview {
+.bp4-dark .ExampleComponentTitle {
   background: #252a31;
 }
 .bp4-dark .ExampleComponentProperties {
