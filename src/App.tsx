@@ -87,7 +87,7 @@ import {
   TextPropsSchema,
   TabsPropsSchema,
 } from "@blueprint/schema";
-import { Icon, IconName, IconProps } from "@blueprint/icons";
+import { Icon, IconName, IconProps, IconSize } from "@blueprint/icons";
 import { Example } from "./Example";
 import { ToolsList } from "./ToolsList";
 
@@ -142,6 +142,12 @@ const elevationMap = {
   [Elevation.TWO]: "Elevation.TWO",
   [Elevation.THREE]: "Elevation.THREE",
   [Elevation.FOUR]: "Elevation.FOUR",
+};
+const iconSizeMap = {
+  [IconSize.STANDARD]: "IconSize.STANDARD",
+  [IconSize.LARGE]: "IconSize.LARGE",
+  [IconSize.XL]: "IconSize.XL",
+  [IconSize.XXL]: "IconSize.XXL",
 };
 
 const App: Component = () => {
@@ -215,9 +221,11 @@ const App: Component = () => {
             "",
             // component
             "const App = () => {",
-            `  return <Button`,
-            `          ${componentPropsList.join("\n          ")}`,
-            `         />`,
+            `  return (`,
+            `    <Button `,
+            `     ${componentPropsList.join("\n     ")}`,
+            `    />`,
+            `  )`,
             "}",
           ];
           const html = (window as any).Prism.highlight(codeLines.join("\n"), (window as any).Prism.languages.typescript, "typescript");
@@ -238,6 +246,43 @@ const App: Component = () => {
               text={props.text || t("Duplicate this page")}
             />
           );
+        }}
+        code={(props) => {
+          const boolProps = ["disabled", "active", "fill", "large", "loading", "minimal", "outlined", "small"].filter((p) => !!props[p]);
+          const componentProps = {
+            // converted to code attributes
+            class: props.class ? `"${props.class}"` : undefined,
+            icon: iconsMap[props.icon || IconName.HAND_RIGHT],
+            rightIcon: iconsMap[props.rightIcon || IconName.HAND_RIGHT],
+            intent: intentMap[props.intent || Intent.SUCCESS],
+            alignText: alignmentMap[props.alignText || Alignment.LEFT],
+            text: props.text || `"${t("Count is {count}", { count: count() })}"`,
+            type: props.type && props.type !== "button" ? `"${props.type}"` : undefined,
+            tabIndex: props.tabIndex ? `"${props.tabIndex}"` : undefined,
+          };
+          const componentPropsList = Object.keys(componentProps)
+            .filter((prop) => !!componentProps[prop])
+            .map((prop) => {
+              return `${prop}={${componentProps[prop]}}`;
+            })
+            .concat(boolProps);
+          const codeLines = [
+            // import
+            `import { AnchorButton } from "@blueprint/components"`,
+            `import { Alignment, Intent } from "@blueprint/core"`,
+            `import { IconName } from "@blueprint/icons"`,
+            "",
+            // component
+            "const App = () => {",
+            `  return (`,
+            `    <AnchorButton `,
+            `     ${componentPropsList.join("\n     ")}`,
+            `    />`,
+            `  )`,
+            "}",
+          ];
+          const html = (window as any).Prism.highlight(codeLines.join("\n"), (window as any).Prism.languages.typescript, "typescript");
+          return html;
         }}
       />
 
@@ -275,14 +320,14 @@ const App: Component = () => {
             "",
             // component
             "const App = () => {",
-            `  return <ButtonGroup`,
-            `          ${componentPropsList.join("\n          ")}`,
-            `         >`,
-            `            <Button intent={Intent.DANGER} icon={IconName.DATABASE} text="Danger" />`,
-            `            <Button intent={Intent.SUCCESS} icon={IconName.FUNCTION} text="Success" />`,
-            `            <Button intent={Intent.PRIMARY} icon={IconName.REFRESH} text="Primary" />`,
-            `            <Button intent={Intent.NONE} icon={IconName.COG} text="None" />`,
-            `         </ButtonGroup>`,
+            `  return (`,
+            `    <ButtonGroup ${componentPropsList.join(" ")}>`,
+            `       <Button intent={Intent.DANGER} icon={IconName.DATABASE} text="Danger" />`,
+            `       <Button intent={Intent.SUCCESS} icon={IconName.FUNCTION} text="Success" />`,
+            `       <Button intent={Intent.PRIMARY} icon={IconName.REFRESH} text="Primary" />`,
+            `       <Button intent={Intent.NONE} icon={IconName.COG} text="None" />`,
+            `    </ButtonGroup>`,
+            `  )`,
             "}",
           ];
           const html = (window as any).Prism.highlight(codeLines.join("\n"), (window as any).Prism.languages.typescript, "typescript");
@@ -324,14 +369,14 @@ const App: Component = () => {
             "",
             // component
             "const App = () => {",
-            `  return <Callout`,
-            `          ${componentPropsList.join("\n          ")}`,
-            `         >`,
-            `            Long-form information about the important content.`,
-            `            This text is styled as <br />`,
-            `            <a href="#">Running text</a>, so it may contain `,
-            `            things like headers, links, lists, <Code>code</Code> etc.`,
-            `         </ButtonGroup>`,
+            `  return (`,
+            `    <Callout ${componentPropsList.join(" ")}>`,
+            `    Long-form information about the important content.`,
+            `    This text is styled as <br />`,
+            `    <a href="#">Running text</a>, so it may contain`,
+            `    things like headers, links, lists, <Code>code</Code> etc.`,
+            `    </Callout>`,
+            `  )`,
             "}",
           ];
           const html = (window as any).Prism.highlight(codeLines.join("\n"), (window as any).Prism.languages.typescript, "typescript");
@@ -350,7 +395,7 @@ const App: Component = () => {
           const componentProps = {
             // converted to code attributes
             class: props.class ? `"${props.class}"` : undefined,
-            elevationMap: elevationMap[props.elevation || Elevation.ZERO],
+            elevation: elevationMap[props.elevation || Elevation.ZERO],
           };
           const componentPropsList = Object.keys(componentProps)
             .filter((prop) => !!componentProps[prop])
@@ -365,9 +410,7 @@ const App: Component = () => {
             "",
             // component
             "const App = () => {",
-            `  return <Card`,
-            `          ${componentPropsList.join("\n          ")}`,
-            `         />`,
+            `  return <Card ${componentPropsList.join(" ")} />`,
             "}",
           ];
           const html = (window as any).Prism.highlight(codeLines.join("\n"), (window as any).Prism.languages.typescript, "typescript");
@@ -617,6 +660,35 @@ const App: Component = () => {
         render={(props) => {
           return <Icon {...props} />;
         }}
+        code={(props) => {
+          const boolProps = ["disabled"].filter((p) => !!props[p]);
+          const componentProps = {
+            // converted to code attributes
+            class: props.class ? `"${props.class}"` : undefined,
+            icon: iconsMap[props.icon || IconName.DOUBLE_CARET_VERTICAL],
+            intent: intentMap[props.intent || Intent.SUCCESS],
+            size: iconSizeMap[props.size || IconSize.STANDARD],
+          };
+          const componentPropsList = Object.keys(componentProps)
+            .filter((prop) => !!componentProps[prop])
+            .map((prop) => {
+              return `${prop}={${componentProps[prop]}}`;
+            })
+            .concat(boolProps);
+          const codeLines = [
+            // import
+            `import { Icon } from "@blueprint/components"`,
+            "",
+            // component
+            "const App = () => {",
+            `  return (`,
+            `    <Icon ${componentPropsList.join("\n     ")} />`,
+            `  )`,
+            "}",
+          ];
+          const html = (window as any).Prism.highlight(codeLines.join("\n"), (window as any).Prism.languages.typescript, "typescript");
+          return html;
+        }}
       />
 
       <Example<MenuProps>
@@ -683,6 +755,35 @@ const App: Component = () => {
         render={(props) => {
           return <ProgressBar {...props} />;
         }}
+        code={(props) => {
+          const boolProps = ["disabled", "animate", "stripes"].filter((p) => !!props[p]);
+          const componentProps = {
+            // converted to code attributes
+            class: props.class ? `"${props.class}"` : undefined,
+            value: props.value ? `"${props.value}"` : undefined,
+            intent: intentMap[props.intent || Intent.SUCCESS],
+          };
+          const componentPropsList = Object.keys(componentProps)
+            .filter((prop) => !!componentProps[prop])
+            .map((prop) => {
+              return `${prop}={${componentProps[prop]}}`;
+            })
+            .concat(boolProps);
+          const codeLines = [
+            // import
+            `import { ProgressBar } from "@blueprint/components"`,
+            "",
+            // component
+            "const App = () => {",
+            `  return (`,
+            `    <ProgressBar ${componentPropsList.join("\n     ")}`,
+            `    />`,
+            `  )`,
+            "}",
+          ];
+          const html = (window as any).Prism.highlight(codeLines.join("\n"), (window as any).Prism.languages.typescript, "typescript");
+          return html;
+        }}
       />
 
       <Example<SpinnerProps>
@@ -690,6 +791,37 @@ const App: Component = () => {
         schema={SpinnerPropsSchema}
         render={(props) => {
           return <Spinner {...props} aria-label={t("Loading...")} />;
+        }}
+        code={(props) => {
+          const boolProps = ["disabled", "animate", "stripes"].filter((p) => !!props[p]);
+          const componentProps = {
+            // converted to code attributes
+            class: props.class ? `"${props.class}"` : undefined,
+            intent: intentMap[props.intent || Intent.SUCCESS],
+            tagName: props.tagName ? `"${props.tagName}"` : undefined,
+            value: props.value ? `"${props.value}"` : undefined,
+            size: props.size ? `"${props.size}"` : undefined,
+          };
+          const componentPropsList = Object.keys(componentProps)
+            .filter((prop) => !!componentProps[prop])
+            .map((prop) => {
+              return `${prop}={${componentProps[prop]}}`;
+            })
+            .concat(boolProps);
+          const codeLines = [
+            // import
+            `import { Spinner } from "@blueprint/components"`,
+            "",
+            // component
+            "const App = () => {",
+            `  return (`,
+            `    <Spinner ${componentPropsList.join("\n     ")}`,
+            `    />`,
+            `  )`,
+            "}",
+          ];
+          const html = (window as any).Prism.highlight(codeLines.join("\n"), (window as any).Prism.languages.typescript, "typescript");
+          return html;
         }}
       />
 
@@ -706,6 +838,37 @@ const App: Component = () => {
               }}
             />
           );
+        }}
+        code={(props) => {
+          const boolProps = ["disabled", "inline", "large", "checked", "inlineLabelChecked"].filter((p) => !!props[p]);
+          const componentProps = {
+            // converted to code attributes
+            class: props.class ? `"${props.class}"` : undefined,
+            label: props.label ? `"${props.label}"` : undefined,
+            innerLabel: props.innerLabel ? `"${props.innerLabel}"` : undefined,
+            tagName: props.tagName ? `"${props.tagName}"` : undefined,
+            alignIndicator: alignmentMap[props.alignIndicator || Alignment.LEFT],
+          };
+          const componentPropsList = Object.keys(componentProps)
+            .filter((prop) => !!componentProps[prop])
+            .map((prop) => {
+              return `${prop}={${componentProps[prop]}}`;
+            })
+            .concat(boolProps);
+          const codeLines = [
+            // import
+            `import { Switch } from "@blueprint/components"`,
+            "",
+            // component
+            "const App = () => {",
+            `  return (`,
+            `    <Switch ${componentPropsList.join("\n     ")}`,
+            `    />`,
+            `  )`,
+            "}",
+          ];
+          const html = (window as any).Prism.highlight(codeLines.join("\n"), (window as any).Prism.languages.typescript, "typescript");
+          return html;
         }}
       />
 
