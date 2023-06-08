@@ -56,11 +56,12 @@ export const Icons = {
   [IconName.MOON]: Images.MOON.default,
   [IconName.FILTER]: Images.FILTER.default,
   [IconName.SMALL_CROSS]: Images.SMALL_CROSS.default,
+  [IconName.PLUS]: Images.PLUS.default,
 };
 
 export const IconsList = Object.keys(Icons);
 
-export type IconType = typeof IconsList[number];
+export type IconType = (typeof IconsList)[number];
 export const isIcon = (x: any): x is IconType => IconsList.includes(x);
 
 export interface IconProps extends IntentProps, Omit<Props, "children"> {

@@ -171,8 +171,8 @@ export const ButtonGroupPropsSchema: y.ObjectSchema<Omit<ButtonGroupProps, "chil
 export const CalloutPropsSchema: y.ObjectSchema<Omit<CalloutProps, "children">> = y
   .object({
     icon: IconSchema.default(IconName.SEARCH),
-    title: y.string().optional().nullable(),
-    intent: IntentSchema.default(Intent.SUCCESS),
+    title: y.string().default("Sample title"),
+    intent: IntentSchema.default(Intent.NONE),
   })
   .concat(PropsSchema);
 

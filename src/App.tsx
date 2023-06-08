@@ -101,6 +101,42 @@ const codeLines = [
   "[11:53:30] Finished 'sass-compile-blueprint' after 2.84 s",
 ];
 
+const iconsMap = {
+  [IconName.REFRESH]: "IconName.REFRESH",
+  [IconName.DUPLICATE]: "IconName.DUPLICATE",
+  [IconName.DATABASE]: "IconName.DATABASE",
+  [IconName.FUNCTION]: "IconName.FUNCTION",
+  [IconName.COG]: "IconName.COG",
+  [IconName.INFO_SIGN]: "IconName.INFO_SIGN",
+  [IconName.CARET_DOWN]: "IconName.CARET_DOWN",
+  [IconName.CARET_UP]: "IconName.CARET_UP",
+  [IconName.CARET_RIGHT]: "IconName.CARET_RIGHT",
+  [IconName.SEARCH]: "IconName.SEARCH",
+  [IconName.SHARE]: "IconName.SHARE",
+  [IconName.HAND_RIGHT]: "IconName.HAND_RIGHT",
+  [IconName.STACKBLITZ]: "IconName.STACKBLITZ",
+  [IconName.GITHUB]: "IconName.GITHUB",
+  [IconName.DOUBLE_CARET_VERTICAL]: "IconName.DOUBLE_CARET_VERTICAL",
+  [IconName.FLASH]: "IconName.FLASH",
+  [IconName.MOON]: "IconName.MOON",
+  [IconName.FILTER]: "IconName.FILTER",
+  [IconName.SMALL_CROSS]: "IconName.SMALL_CROSS",
+  [IconName.PLUS]: "IconName.PLUS",
+};
+const intentMap = {
+  // intents
+  [Intent.NONE]: "Intent.NONE",
+  [Intent.PRIMARY]: "Intent.PRIMARY",
+  [Intent.SUCCESS]: "Intent.SUCCESS",
+  [Intent.WARNING]: "Intent.WARNING",
+  [Intent.DANGER]: "Intent.DANGER",
+};
+const alignmentMap = {
+  [Alignment.CENTER]: "Alignment.CENTER",
+  [Alignment.LEFT]: "Alignment.LEFT",
+  [Alignment.RIGHT]: "Alignment.RIGHT",
+};
+
 const App: Component = () => {
   const { t } = useI18n();
   const [count, setCount] = createSignal(0);
@@ -146,7 +182,39 @@ const App: Component = () => {
           );
         }}
         code={(props) => {
-          return `<Button intent="${props.intent || Intent.SUCCESS}" ${props.loading ? "loading" : ""} ${props.large ? "large" : ""} />`;
+          const boolProps = ["disabled", "active", "fill", "large", "loading", "minimal", "outlined", "small"].filter((p) => !!props[p]);
+          const componentProps = {
+            // converted to code attributes
+            class: props.class ? `"${props.class}"` : undefined,
+            icon: iconsMap[props.icon || IconName.HAND_RIGHT],
+            rightIcon: iconsMap[props.rightIcon || IconName.HAND_RIGHT],
+            intent: intentMap[props.intent || Intent.SUCCESS],
+            alignText: alignmentMap[props.alignText || Alignment.LEFT],
+            text: props.text || `"${t("Count is {count}", { count: count() })}"`,
+            type: props.type && props.type !== "button" ? `"${props.type}"` : undefined,
+            tabIndex: props.tabIndex ? `"${props.tabIndex}"` : undefined,
+          };
+          const componentPropsList = Object.keys(componentProps)
+            .filter((prop) => !!componentProps[prop])
+            .map((prop) => {
+              return `${prop}={${componentProps[prop]}}`;
+            })
+            .concat(boolProps);
+          const codeLines = [
+            // import
+            `import { Button } from "@blueprint/components";`,
+            `import { Alignment, Intent } from "@blueprint/core";`,
+            `import { IconName } from "@blueprint/icons";`,
+            "",
+            // component
+            "const App = () => {",
+            `  return <Button`,
+            `          ${componentPropsList.join("\n          ")}`,
+            `         />`,
+            "}",
+          ];
+          const html = (window as any).Prism.highlight(codeLines.join("\n"), (window as any).Prism.languages.typescript, "typescript");
+          return html;
         }}
       />
 
@@ -179,6 +247,40 @@ const App: Component = () => {
             </ButtonGroup>
           );
         }}
+        code={(props) => {
+          const boolProps = ["disabled", "fill", "minimal", "large", "vertical"].filter((p) => !!props[p]);
+          const componentProps = {
+            class: props.class ? `"${props.class}"` : undefined,
+            // converted to code attributes
+            alignText: alignmentMap[props.alignText || Alignment.LEFT],
+          };
+          const componentPropsList = Object.keys(componentProps)
+            .filter((prop) => !!componentProps[prop])
+            .map((prop) => {
+              return `${prop}={${componentProps[prop]}}`;
+            })
+            .concat(boolProps);
+          const codeLines = [
+            // import
+            `import { ButtonGroup, Button } from "@blueprint/components";`,
+            `import { Alignment, Intent } from "@blueprint/core";`,
+            `import { IconName } from "@blueprint/icons";`,
+            "",
+            // component
+            "const App = () => {",
+            `  return <ButtonGroup`,
+            `          ${componentPropsList.join("\n          ")}`,
+            `         >`,
+            `            <Button intent={Intent.DANGER} icon={IconName.DATABASE} text="Danger" />`,
+            `            <Button intent={Intent.SUCCESS} icon={IconName.FUNCTION} text="Success" />`,
+            `            <Button intent={Intent.PRIMARY} icon={IconName.REFRESH} text="Primary" />`,
+            `            <Button intent={Intent.NONE} icon={IconName.COG} text="None" />`,
+            `         </ButtonGroup>`,
+            "}",
+          ];
+          const html = (window as any).Prism.highlight(codeLines.join("\n"), (window as any).Prism.languages.typescript, "typescript");
+          return html;
+        }}
       />
 
       <Example<CalloutProps>
@@ -191,6 +293,42 @@ const App: Component = () => {
               <a href="#">Running text</a>, so it may contain things like headers, links, lists, <Code>code</Code> etc.
             </Callout>
           );
+        }}
+        code={(props) => {
+          const boolProps = ["disabled"].filter((p) => !!props[p]);
+          const componentProps = {
+            class: props.class ? `"${props.class}"` : undefined,
+            // converted to code attributes
+            title: props.title ? `"${props.title}"` : undefined,
+            icon: iconsMap[(props.icon as IconName) || IconName.REFRESH],
+            intent: intentMap[props.intent || Intent.SUCCESS],
+          };
+          const componentPropsList = Object.keys(componentProps)
+            .filter((prop) => !!componentProps[prop])
+            .map((prop) => {
+              return `${prop}={${componentProps[prop]}}`;
+            })
+            .concat(boolProps);
+          const codeLines = [
+            // import
+            `import { Callout } from "@blueprint/components";`,
+            `import { Intent } from "@blueprint/core";`,
+            `import { IconName } from "@blueprint/icons";`,
+            "",
+            // component
+            "const App = () => {",
+            `  return <Callout`,
+            `          ${componentPropsList.join("\n          ")}`,
+            `         >`,
+            `            Long-form information about the important content.`,
+            `            This text is styled as <br />`,
+            `            <a href="#">Running text</a>, so it may contain `,
+            `            things like headers, links, lists, <Code>code</Code> etc.`,
+            `         </ButtonGroup>`,
+            "}",
+          ];
+          const html = (window as any).Prism.highlight(codeLines.join("\n"), (window as any).Prism.languages.typescript, "typescript");
+          return html;
         }}
       />
 

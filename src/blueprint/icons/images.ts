@@ -17,3 +17,4 @@ export * as FLASH from "./images/flash.svg?component-solid";
 export * as MOON from "./images/moon.svg?component-solid";
 export * as FILTER from "./images/filter.svg?component-solid";
 export * as SMALL_CROSS from "./images/small-cross.svg?component-solid";
+export * as PLUS from "./images/plus.svg?component-solid";

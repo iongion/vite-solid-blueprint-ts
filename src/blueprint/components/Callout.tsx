@@ -2,6 +2,7 @@ import classNames from "classnames";
 import { mergeProps, splitProps, createMemo, children } from "solid-js";
 
 import { DISPLAYNAME_PREFIX, Classes, Intent, MaybeElement, IntentProps, Props, intentClass } from "@blueprint/core";
+import { H5 } from "@blueprint/components";
 import type { UIComponent } from "@blueprint/core";
 import { Icon, IconName } from "@blueprint/icons";
 
@@ -43,6 +44,9 @@ export const Callout: UIComponent<CalloutProps> = (userProps: CalloutProps) => {
   const createIcon = createMemo(() => {
     return props.icon ? typeof props.icon === "string" ? <Icon icon={props.icon as IconName} /> : undefined : undefined;
   });
+  const createTitle = createMemo(() => {
+    return props.title ? <H5>{props.title}</H5> : undefined;
+  });
   const createChildren = children(() => props.children);
   return (
     <div
@@ -51,6 +55,7 @@ export const Callout: UIComponent<CalloutProps> = (userProps: CalloutProps) => {
       {...htmlProps}
     >
       {createIcon()}
+      {createTitle()}
       {createChildren()}
     </div>
   );

@@ -7,7 +7,7 @@ import * as y from "yup";
 import { useI18n } from "solid-i18n";
 
 import { Alignment, Boundary, Elevation, Intent, Layout, Position, Props } from "@blueprint/core";
-import { HTMLSelect, HTMLTable, Label, NonIdealStateIconSize, Switch, InputGroup, CodeBlock } from "@blueprint/components";
+import { HTMLSelect, HTMLTable, Label, NonIdealStateIconSize, Switch, InputGroup } from "@blueprint/components";
 import { IconSize } from "@blueprint/icons";
 
 import "./Example.css";
@@ -276,7 +276,7 @@ export function Example<T extends Props = any>(props: ExampleProps<T>) {
               <div class="ExampleComponentCode">
                 {(() => {
                   const ctx = useContext(context);
-                  return ctx === undefined ? undefined : <CodeBlock>{props.code(ctx)}</CodeBlock>;
+                  return ctx === undefined ? undefined : <pre class="language-typescript" innerHTML={props.code(ctx) as string}></pre>;
                 })()}
               </div>
             ) : undefined}
