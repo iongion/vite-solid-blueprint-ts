@@ -436,16 +436,16 @@ const App: Component = () => {
               return `${prop}={${componentProps[prop]}}`;
             })
             .concat(boolProps);
-          const codeLines = [
+          const source = [
             // import
             `import { Code } from "@blueprint/components"`,
             "",
             // component
             "const App = () => {",
-            `  return <Code ${componentPropsList.join(" ")}/>`,
+            `  return <Code ${componentPropsList.join(" ")}>${codeLines.join("\n")}</Code>`,
             "}",
           ];
-          const html = (window as any).Prism.highlight(codeLines.join("\n"), (window as any).Prism.languages.typescript, "typescript");
+          const html = (window as any).Prism.highlight(source.join("\n"), (window as any).Prism.languages.typescript, "typescript");
           return html;
         }}
       />
@@ -468,16 +468,16 @@ const App: Component = () => {
               return `${prop}={${componentProps[prop]}}`;
             })
             .concat(boolProps);
-          const codeLines = [
+          const source = [
             // import
             `import { CodeBlock } from "@blueprint/components"`,
             "",
             // component
             "const App = () => {",
-            `  return <CodeBlock ${componentPropsList.join(" ")}/>`,
+            `  return <CodeBlock ${componentPropsList.join(" ")}>${codeLines.join("\n")}</CodeBlock>`,
             "}",
           ];
-          const html = (window as any).Prism.highlight(codeLines.join("\n"), (window as any).Prism.languages.typescript, "typescript");
+          const html = (window as any).Prism.highlight(source.join("\n"), (window as any).Prism.languages.typescript, "typescript");
           return html;
         }}
       />
