@@ -75,15 +75,12 @@
   background: #1d2229;
   display: block;
   padding: 10px;
+  min-height: 200px;
 }
 
 .ExampleComponentProperties table tr th,
 .ExampleComponentProperties table tr td {
   vertical-align: middle;
-}
-
-.ExampleComponentCode {
-  padding: 10px;
 }
 
 /* theme */

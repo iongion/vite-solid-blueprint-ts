@@ -639,6 +639,42 @@ const App: Component = () => {
             </div>
           );
         }}
+        code={(props) => {
+          const boolProps = ["disabled", "animate", "large", "renderActiveTabOnly", "vertical", "fill"].filter((p) => !!props[p]);
+          const componentProps = {
+            class: props.class ? `"${props.class}"` : undefined,
+            // converted to code attributes
+            id: props.id ? `"${props.id}"` : undefined,
+            selectedTabId: props.selectedTabId ? `"${props.selectedTabId}"` : undefined,
+          };
+          const componentPropsList = Object.keys(componentProps)
+            .filter((prop) => !!componentProps[prop])
+            .map((prop) => {
+              return `${prop}={${componentProps[prop]}}`;
+            })
+            .concat(boolProps);
+          const codeLines = [
+            // import
+            `import { Tabs, Tab, H4 } from "@blueprint/components"`,
+            `import { Classes } from "@blueprint/core"`,
+            "",
+            // component
+            "const App = () => {",
+            `  return <Tabs`,
+            `          ${componentPropsList.join("\n          ")}`,
+            `         >`,
+            `             <Tab id="TabsExampleTabID1" title="Title tab 1"`,
+            `               panel={<div><H4>Tab 1 header</H4><p class={Classes.RUNNING_TEXT}>Tab 1 content</p></div>}`,
+            `             />`,
+            `             <Tab id="TabsExampleTabID2" title="Title tab 2"`,
+            `               panel={<div><H4>Tab 2 header</H4><p class={Classes.RUNNING_TEXT}>Tab 2 content</p></div>}`,
+            `             />`,
+            `         </Tabs>`,
+            "}",
+          ];
+          const html = (window as any).Prism.highlight(codeLines.join("\n"), (window as any).Prism.languages.typescript, "typescript");
+          return html;
+        }}
       />
     </div>
   );
