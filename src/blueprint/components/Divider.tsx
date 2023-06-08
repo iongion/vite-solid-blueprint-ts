@@ -5,6 +5,8 @@ import { Dynamic } from "solid-js/web";
 import { DISPLAYNAME_PREFIX, Classes, Layout, LayoutProps, Props } from "@blueprint/core";
 import type { UIComponent } from "@blueprint/core";
 
+import "./Divider.css";
+
 interface IDividerProps extends LayoutProps, Omit<Props, "children"> {
   tagName?: string | null;
 }

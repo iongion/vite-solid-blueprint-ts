@@ -254,7 +254,7 @@ export function Example<T extends Props = any>(props: ExampleProps<T>) {
   const [state, setState] = createStore(props.schema?.getDefault() || {});
   const context = createContext<T>();
   const onPropertyChange = (name: string, value: any) => {
-    console.debug("Change context property", { name, value });
+    // console.debug("Change context property", { name, value });
     setState(name, value);
   };
   return (

@@ -117,7 +117,7 @@ export const InteractivePropsSchema = y.object({
 export const IconPropsSchema: y.ObjectSchema<Omit<IconProps, "children">> = y
   .object({
     icon: IconSchema.default(IconName.HAND_RIGHT),
-    size: IconSizeSchema.default(IconSize.STANDARD),
+    size: IconSizeSchema.default(IconSize.XXL),
     intent: IntentSchema.default(Intent.NONE),
   })
   .concat(PropsSchema);
@@ -301,7 +301,6 @@ export const InputGroupPropsSchema: y.ObjectSchema<Omit<Props, "children"> & { t
 export const FileInputPropsSchema: y.ObjectSchema<Omit<Props, "children">> = y
   .object({
     fill: y.boolean().default(false),
-    readOnly: y.boolean().default(false),
     hasSelection: y.boolean().default(false),
     large: y.boolean().default(false),
     small: y.boolean().default(false),

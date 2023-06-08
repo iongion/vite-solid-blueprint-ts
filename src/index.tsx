@@ -1,6 +1,7 @@
 /* @refresh reload */
 import { render } from "solid-js/web";
 import { createI18n, I18nProvider } from "solid-i18n";
+import { MetaProvider } from "@solidjs/meta";
 
 // import "solid-devtools";
 
@@ -18,7 +19,9 @@ async function main() {
   render(
     () => (
       <I18nProvider i18n={i18n}>
-        <App />
+        <MetaProvider>
+          <App />
+        </MetaProvider>
       </I18nProvider>
     ),
     root!

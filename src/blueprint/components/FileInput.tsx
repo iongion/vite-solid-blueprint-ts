@@ -8,7 +8,6 @@ import "./FileInput.css";
 
 interface IFileInputProps extends Omit<JSX.SelectHTMLAttributes<HTMLLabelElement>, "children">, IntentProps, Omit<Props, "children"> {
   fill?: boolean;
-  readOnly?: boolean;
   hasSelection?: boolean;
   inputProps?: Omit<JSX.SelectHTMLAttributes<HTMLInputElement>, "children">;
   large?: boolean;
@@ -16,13 +15,13 @@ interface IFileInputProps extends Omit<JSX.SelectHTMLAttributes<HTMLLabelElement
   round?: boolean;
   text?: MaybeElement;
   buttonText?: string;
+  inputClassName?: string;
   // events
   onInputChange?: JSX.ChangeEventHandler<HTMLInputElement, Event>;
 }
 export type FileInputProps = IFileInputProps;
 export const FileInputPropsSchemaDefaults: FileInputProps = {
   fill: false,
-  readOnly: false,
   hasSelection: false,
   inputProps: undefined,
   large: false,
@@ -30,6 +29,7 @@ export const FileInputPropsSchemaDefaults: FileInputProps = {
   round: false,
   text: undefined,
   buttonText: undefined,
+  inputClassName: undefined,
   intent: Intent.NONE,
   onInputChange: undefined,
 };
@@ -37,7 +37,6 @@ export const FileInput: UIComponent<FileInputProps> = (userProps: FileInputProps
   const [props, htmlProps] = splitProps(mergeProps(FileInputPropsSchemaDefaults, userProps), [
     // props list
     "fill",
-    "readOnly",
     "hasSelection",
     "inputProps",
     "large",
@@ -45,6 +44,7 @@ export const FileInput: UIComponent<FileInputProps> = (userProps: FileInputProps
     "round",
     "text",
     "buttonText",
+    "inputClassName",
     "intent",
     "value",
     "onInputChange",
@@ -57,7 +57,6 @@ export const FileInput: UIComponent<FileInputProps> = (userProps: FileInputProps
       Classes.FILE_INPUT,
       {
         // from props
-        [Classes.READ_ONLY]: !!props.readOnly,
         [Classes.FILE_INPUT_HAS_SELECTION]: !!props.hasSelection,
         [Classes.LARGE]: !!props.large,
         [Classes.SMALL]: !!props.small,
@@ -75,9 +74,9 @@ export const FileInput: UIComponent<FileInputProps> = (userProps: FileInputProps
       <input
         // props
         {...props.inputProps}
+        class={props.inputClassName || props.inputProps?.class}
         type="file"
         disabled={props.disabled}
-        readonly={props.readOnly}
         value={props.value || ""}
         onChange={props.onInputChange}
       />

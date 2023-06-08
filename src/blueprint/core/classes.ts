@@ -14,6 +14,7 @@ export const ALIGN_LEFT = `${NS}-align-left`;
 export const ALIGN_RIGHT = `${NS}-align-right`;
 export const COMPACT = `${NS}-compact`;
 export const DARK = `${NS}-dark`;
+export const LIGHT = `${NS}-light`;
 export const DISABLED = `${NS}-disabled`;
 export const FILL = `${NS}-fill`;
 export const FIXED = `${NS}-fixed`;

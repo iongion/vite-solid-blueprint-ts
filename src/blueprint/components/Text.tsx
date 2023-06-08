@@ -51,7 +51,7 @@ export const Text: UIComponent<TextProps> = (userProps: TextProps) => {
       () => props.ellipsize,
       () => {
         if (textRef) {
-          console.debug(props.ellipsize, textRef.scrollWidth, textRef.clientWidth);
+          // console.debug(props.ellipsize, textRef.scrollWidth, textRef.clientWidth);
           setIsContentOverflowing(props.ellipsize! && textRef.scrollWidth > textRef.clientWidth);
           setTextContent(textRef.textContent);
         }
