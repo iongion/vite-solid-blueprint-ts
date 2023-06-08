@@ -60,7 +60,7 @@ export const ElevationPropsSchema = y.object({
   elevation: ElevationSchema,
 });
 
-export const LayouSchema = y
+export const LayoutSchema = y
   .string<Layout>()
   .oneOf([
     // enum
@@ -69,7 +69,7 @@ export const LayouSchema = y
   ])
   .optional();
 export const LayoutPropsSchema = y.object({
-  layout: LayouSchema,
+  layout: LayoutSchema,
 });
 
 const IconSchema = y
@@ -81,8 +81,8 @@ const IconSizeSchema = y.number<IconSize>().oneOf([
   //
   IconSize.STANDARD,
   IconSize.LARGE,
-  IconSize.XLARGE,
-  IconSize.XXLARGE,
+  IconSize.XL,
+  IconSize.XXL,
 ]);
 
 const NonIdealStateIconSizeSchema = y.number<NonIdealStateIconSize>().oneOf([
@@ -193,7 +193,7 @@ export const CollapsePropsSchema: y.ObjectSchema<Omit<CollapseProps, "children">
 export const DividerPropsSchema: y.ObjectSchema<Omit<DividerProps, "children" | "tagName"> & { tagName: string }> = y
   .object({
     tagName: y.string<keyof JSX.IntrinsicElements>().default("div"),
-    layout: LayouSchema.default(Layout.VERTICAL),
+    layout: LayoutSchema.default(Layout.VERTICAL),
   })
   .concat(PropsSchema);
 
@@ -234,7 +234,7 @@ export const NonIdealStatePropsSchema: y.ObjectSchema<Omit<NonIdealStateProps, "
     title: y.string().optional().nullable(),
     text: y.string().optional().nullable(),
     description: y.string().optional().nullable(),
-    layout: LayouSchema.default(NonIdealStatePropsDefaults.layout),
+    layout: LayoutSchema.default(NonIdealStatePropsDefaults.layout),
     iconSize: NonIdealStateIconSizeSchema.default(NonIdealStatePropsDefaults.iconSize),
     icon: IconSchema.default(IconName.SEARCH),
   })
@@ -345,11 +345,10 @@ export const TextPropsSchema: y.ObjectSchema<Omit<Props, "children">> = y
 export const TabsPropsSchema: y.ObjectSchema<Omit<Props, "children">> = y
   .object({
     animate: y.boolean().default(false),
-    defaultSelectedTabId: y.string().default("tab1"),
     id: y.string().default("Tabs"),
     large: y.boolean().default(false),
     renderActiveTabPanelOnly: y.boolean().default(false),
-    selectedTabId: y.string().default("tab1"),
+    selectedTabId: y.string().default("TabsExampleTabID2"),
     vertical: y.boolean().default(false),
     fill: y.boolean().default(false),
   })

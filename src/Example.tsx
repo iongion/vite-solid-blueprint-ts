@@ -56,8 +56,8 @@ const PositionLabels = {
 const IconSizeLabels = {
   [IconSize.STANDARD]: "STANDARD",
   [IconSize.LARGE]: "LARGE",
-  [IconSize.XLARGE]: "XLARGE",
-  [IconSize.XXLARGE]: "XXLARGE",
+  [IconSize.XL]: "XL",
+  [IconSize.XXL]: "XXL",
 };
 const NonIdealStateIconSizeLabels = {
   [NonIdealStateIconSize.STANDARD]: "STANDARD",

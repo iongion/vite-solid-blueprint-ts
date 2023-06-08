@@ -21,6 +21,9 @@ module.exports = {
     "import/no-unresolved": "error",
     "import/no-named-as-default": "off",
     "import/no-unused-modules": "off",
+    "solid/reactivity": "warn",
+    "solid/no-destructure": "warn",
+    "solid/jsx-no-undef": "error"
   },
   settings: {
     "import/parsers": {

@@ -1,0 +1,76 @@
+{
+    "editor.tabSize": 2,
+    "editor.formatOnSave": true,
+    "editor.suggestSelection": "first",
+    "editor.insertSpaces": true,
+    "editor.renderWhitespace": "all",
+    "search.followSymlinks": false,
+    "prettier.documentSelectors": [
+        "*.{tsx,ts}",
+        "*.{jsx,js}"
+    ],
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "files.eol": "\n",
+    "files.exclude": {
+        "**/__pycache__/**": true,
+        "**/.git/**": true,
+        "**/.cache/**": true,
+        "**/.docker/**": true,
+        "**/.venv/**": true,
+        "**/.DS_Store": true,
+        ".pytest_cache": true,
+        "**/dist/**": true
+    },
+    "files.watcherExclude": {
+        "**/__pycache__/**": true,
+        "**/.git/**": true,
+        "**/.cache/**": true,
+        "**/.certs/**": true,
+        "**/.docker/**": true,
+        "**/.venv/**": true,
+        "**/.DS_Store": true,
+        ".pytest_cache": true,
+        "**/dist/**": true
+    },
+    "files.associations": {
+        "*.env": "ini",
+        "*.env.local": "ini",
+        "*.env.container": "ini",
+        "*.env.container.local": "ini",
+        "*.env.native": "ini",
+        "*.env.native.local": "ini",
+        "*.env.runtime": "ini",
+        "*.runtime": "ini",
+        "*.mk": "makefile",
+        "*.j2": "django-html",
+        ".env": "ini",
+        ".env.*": "ini",
+        "requirements_*.txt": "pip-requirements",
+        "docker-compose.override.yml.template": "dockercompose"
+    },
+    "search.exclude": {
+        "**/__pycache__/**": true,
+        "**/.git/**": true,
+        "**/.cache/**": true,
+        "**/.certs/**": true,
+        "**/.venv/**": true,
+        "**/.DS_Store": true,
+        ".pytest_cache": true,
+        "**/dist/**": true,
+        "**/yarn.lock": true,
+        "node_modules": true
+    },
+    "cSpell.words": [
+        "ellipsize",
+        "popperjs",
+        "STACKBLITZ"
+    ],
+    "[html]": {
+        "editor.defaultFormatter": "j69.ejs-beautify"
+    },
+    "[typescriptreact]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "vitest.commandLine": "yarn test:watch --",
+    "typescript.preferences.importModuleSpecifier": "non-relative"
+}

@@ -1,0 +1,10 @@
+{
+    "recommendations": [
+        "dbaeumer.vscode-eslint",
+        "esbenp.prettier-vscode",
+        "csstools.postcss",
+        "editorconfig.editorconfig",
+        "j69.ejs-beautify",
+        "ZixuanChen.vitest-explorer"
+    ]
+}
