@@ -17,6 +17,8 @@
   flex-direction: column;
   min-height: 50px;
   width: 100%;
+  padding: 5px;
+  padding-top: 0;
 }
 .ExampleComponentTitle {
   padding: 5px;
@@ -83,8 +85,13 @@
   vertical-align: middle;
 }
 
+.ExampleComponentCode {
+  border: 1px solid #007eff;
+}
 .ExampleComponentCode pre {
   font-size: 11px;
+  background: #1f242c;
+  margin-bottom: 0;
 }
 
 /* theme */
