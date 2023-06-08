@@ -2,7 +2,7 @@ import { createSignal } from "solid-js";
 import type { Component } from "solid-js";
 import { useI18n } from "solid-i18n";
 import classNames from "classnames";
-import { Alignment, Classes, Intent, Props } from "@blueprint/core";
+import { Alignment, Classes, Elevation, Intent, Props } from "@blueprint/core";
 import {
   AnchorButtonProps,
   AnchorButton,
@@ -135,6 +135,13 @@ const alignmentMap = {
   [Alignment.CENTER]: "Alignment.CENTER",
   [Alignment.LEFT]: "Alignment.LEFT",
   [Alignment.RIGHT]: "Alignment.RIGHT",
+};
+const elevationMap = {
+  [Elevation.ZERO]: "Elevation.ZERO",
+  [Elevation.ONE]: "Elevation.ONE",
+  [Elevation.TWO]: "Elevation.TWO",
+  [Elevation.THREE]: "Elevation.THREE",
+  [Elevation.FOUR]: "Elevation.FOUR",
 };
 
 const App: Component = () => {
@@ -338,6 +345,34 @@ const App: Component = () => {
         render={(props) => {
           return <Card {...props}>We build products that make people better at their most important work.</Card>;
         }}
+        code={(props) => {
+          const boolProps = ["disabled", "interactive"].filter((p) => !!props[p]);
+          const componentProps = {
+            // converted to code attributes
+            class: props.class ? `"${props.class}"` : undefined,
+            elevationMap: elevationMap[props.elevation || Elevation.ZERO],
+          };
+          const componentPropsList = Object.keys(componentProps)
+            .filter((prop) => !!componentProps[prop])
+            .map((prop) => {
+              return `${prop}={${componentProps[prop]}}`;
+            })
+            .concat(boolProps);
+          const codeLines = [
+            // import
+            `import { Card } from "@blueprint/components"`,
+            `import { Elevation } from "@blueprint/core"`,
+            "",
+            // component
+            "const App = () => {",
+            `  return <Card`,
+            `          ${componentPropsList.join("\n          ")}`,
+            `         />`,
+            "}",
+          ];
+          const html = (window as any).Prism.highlight(codeLines.join("\n"), (window as any).Prism.languages.typescript, "typescript");
+          return html;
+        }}
       />
 
       <Example<CodeProps>
@@ -346,6 +381,30 @@ const App: Component = () => {
         render={(props) => {
           return <Code {...props}>{codeLines.join("\n")}</Code>;
         }}
+        code={(props) => {
+          const boolProps = ["disabled"].filter((p) => !!props[p]);
+          const componentProps = {
+            // converted to code attributes
+            class: props.class ? `"${props.class}"` : undefined,
+          };
+          const componentPropsList = Object.keys(componentProps)
+            .filter((prop) => !!componentProps[prop])
+            .map((prop) => {
+              return `${prop}={${componentProps[prop]}}`;
+            })
+            .concat(boolProps);
+          const codeLines = [
+            // import
+            `import { Code } from "@blueprint/components"`,
+            "",
+            // component
+            "const App = () => {",
+            `  return <Code ${componentPropsList.join(" ")}/>`,
+            "}",
+          ];
+          const html = (window as any).Prism.highlight(codeLines.join("\n"), (window as any).Prism.languages.typescript, "typescript");
+          return html;
+        }}
       />
 
       <Example<CodeBlockProps>
@@ -353,6 +412,30 @@ const App: Component = () => {
         schema={PropsSchema}
         render={(props) => {
           return <CodeBlock {...props}>{codeLines.join("\n")}</CodeBlock>;
+        }}
+        code={(props) => {
+          const boolProps = ["disabled"].filter((p) => !!props[p]);
+          const componentProps = {
+            // converted to code attributes
+            class: props.class ? `"${props.class}"` : undefined,
+          };
+          const componentPropsList = Object.keys(componentProps)
+            .filter((prop) => !!componentProps[prop])
+            .map((prop) => {
+              return `${prop}={${componentProps[prop]}}`;
+            })
+            .concat(boolProps);
+          const codeLines = [
+            // import
+            `import { CodeBlock } from "@blueprint/components"`,
+            "",
+            // component
+            "const App = () => {",
+            `  return <CodeBlock ${componentPropsList.join(" ")}/>`,
+            "}",
+          ];
+          const html = (window as any).Prism.highlight(codeLines.join("\n"), (window as any).Prism.languages.typescript, "typescript");
+          return html;
         }}
       />
 
@@ -376,6 +459,30 @@ const App: Component = () => {
               </Collapse>
             </>
           );
+        }}
+        code={(props) => {
+          const boolProps = ["disabled", "isOpen", "keepChildrenMounted"].filter((p) => !!props[p]);
+          const componentProps = {
+            // converted to code attributes
+            class: props.class ? `"${props.class}"` : undefined,
+          };
+          const componentPropsList = Object.keys(componentProps)
+            .filter((prop) => !!componentProps[prop])
+            .map((prop) => {
+              return `${prop}={${componentProps[prop]}}`;
+            })
+            .concat(boolProps);
+          const codeLines = [
+            // import
+            `import { Collapse } from "@blueprint/components"`,
+            "",
+            // component
+            "const App = () => {",
+            `  return <Collapse ${componentPropsList.join(" ")}/>`,
+            "}",
+          ];
+          const html = (window as any).Prism.highlight(codeLines.join("\n"), (window as any).Prism.languages.typescript, "typescript");
+          return html;
         }}
       />
 
@@ -433,6 +540,39 @@ const App: Component = () => {
               <option value="option.value.4">{t("Option label 4")}</option>
             </HTMLSelect>
           );
+        }}
+        code={(props) => {
+          const boolProps = ["disabled", "fill", "large", "minimal", "multiple"].filter((p) => !!props[p]);
+          const componentProps = {
+            // converted to code attributes
+            class: props.class ? `"${props.class}"` : undefined,
+            icon: iconsMap[props.iconName || IconName.DOUBLE_CARET_VERTICAL],
+            value: props.value ? `"${props.value}"` : undefined,
+          };
+          const componentPropsList = Object.keys(componentProps)
+            .filter((prop) => !!componentProps[prop])
+            .map((prop) => {
+              return `${prop}={${componentProps[prop]}}`;
+            })
+            .concat(boolProps);
+          const codeLines = [
+            // import
+            `import { HTMLSelect } from "@blueprint/components"`,
+            "",
+            // component
+            "const App = () => {",
+            `  return (`,
+            `    <HTMLSelect ${componentPropsList.join(" ")}>`,
+            `      <option value="option.value.1">Option label 1</option>`,
+            `      <option value="option.value.2">Option label 2</option>`,
+            `      <option value="option.value.3">Option label 3</option>`,
+            `      <option value="option.value.4">Option label 4</option>`,
+            `    </HTMLSelect>`,
+            `  )`,
+            "}",
+          ];
+          const html = (window as any).Prism.highlight(codeLines.join("\n"), (window as any).Prism.languages.typescript, "typescript");
+          return html;
         }}
       />
 
@@ -606,6 +746,39 @@ const App: Component = () => {
         render={(props) => {
           return <Tag {...props}>{t("London")}</Tag>;
         }}
+        code={(props) => {
+          const boolProps = ["disabled", "active", "fill", "inline", "large", "small", "minimal", "multiline", "round", "removable", "interactive"].filter((p) => !!props[p]);
+          const componentProps = {
+            // converted to code attributes
+            class: props.class ? `"${props.class}"` : undefined,
+            htmlTitle: props.htmlTitle ? `"${props.htmlTitle}"` : undefined,
+            inputClassName: props.inputClassName ? `"${props.inputClassName}"` : undefined,
+            intent: intentMap[props.intent || Intent.SUCCESS],
+            icon: iconsMap[props.icon || IconName.HAND_RIGHT],
+            rightIcon: iconsMap[(props.rightIcon as IconName) || IconName.HAND_RIGHT],
+            tabIndex: props.tabIndex ? `"${props.tabIndex}"` : undefined,
+          };
+          const componentPropsList = Object.keys(componentProps)
+            .filter((prop) => !!componentProps[prop])
+            .map((prop) => {
+              return `${prop}={${componentProps[prop]}}`;
+            })
+            .concat(boolProps);
+          const codeLines = [
+            // import
+            `import { HTMLSelect } from "@blueprint/components"`,
+            "",
+            // component
+            "const App = () => {",
+            `  return (`,
+            `    <Tag ${componentPropsList.join("\n     ")}`,
+            `    />`,
+            `  )`,
+            "}",
+          ];
+          const html = (window as any).Prism.highlight(codeLines.join("\n"), (window as any).Prism.languages.typescript, "typescript");
+          return html;
+        }}
       />
 
       <Example<TabsProps>
@@ -640,7 +813,7 @@ const App: Component = () => {
           );
         }}
         code={(props) => {
-          const boolProps = ["disabled", "animate", "large", "renderActiveTabOnly", "vertical", "fill"].filter((p) => !!props[p]);
+          const boolProps = ["disabled", "animate", "large", "renderActiveTabPanelOnly", "vertical", "fill"].filter((p) => !!props[p]);
           const componentProps = {
             class: props.class ? `"${props.class}"` : undefined,
             // converted to code attributes
@@ -660,16 +833,18 @@ const App: Component = () => {
             "",
             // component
             "const App = () => {",
-            `  return <Tabs`,
-            `          ${componentPropsList.join("\n          ")}`,
-            `         >`,
-            `             <Tab id="TabsExampleTabID1" title="Title tab 1"`,
-            `               panel={<div><H4>Tab 1 header</H4><p class={Classes.RUNNING_TEXT}>Tab 1 content</p></div>}`,
-            `             />`,
-            `             <Tab id="TabsExampleTabID2" title="Title tab 2"`,
-            `               panel={<div><H4>Tab 2 header</H4><p class={Classes.RUNNING_TEXT}>Tab 2 content</p></div>}`,
-            `             />`,
-            `         </Tabs>`,
+            `  return (`,
+            `    <Tabs ${componentPropsList.join(" ")}>`,
+            `      <Tab id="TabsExampleTabID1" title="Title tab 1">`,
+            `        <H4>Tab 1 header</H4>`,
+            `        <p class={Classes.RUNNING_TEXT}>Tab 1 content</p>`,
+            `      </Tab>`,
+            `      <Tab id="TabsExampleTabID2" title="Title tab 2">`,
+            `        <H4>Tab 2 header</H4>`,
+            `        <p class={Classes.RUNNING_TEXT}>Tab 2 content</p>`,
+            `      </Tab>`,
+            `    </Tabs>`,
+            `  )`,
             "}",
           ];
           const html = (window as any).Prism.highlight(codeLines.join("\n"), (window as any).Prism.languages.typescript, "typescript");
