@@ -202,9 +202,9 @@ const App: Component = () => {
             .concat(boolProps);
           const codeLines = [
             // import
-            `import { Button } from "@blueprint/components";`,
-            `import { Alignment, Intent } from "@blueprint/core";`,
-            `import { IconName } from "@blueprint/icons";`,
+            `import { Button } from "@blueprint/components"`,
+            `import { Alignment, Intent } from "@blueprint/core"`,
+            `import { IconName } from "@blueprint/icons"`,
             "",
             // component
             "const App = () => {",
@@ -262,9 +262,9 @@ const App: Component = () => {
             .concat(boolProps);
           const codeLines = [
             // import
-            `import { ButtonGroup, Button } from "@blueprint/components";`,
-            `import { Alignment, Intent } from "@blueprint/core";`,
-            `import { IconName } from "@blueprint/icons";`,
+            `import { ButtonGroup, Button } from "@blueprint/components"`,
+            `import { Alignment, Intent } from "@blueprint/core"`,
+            `import { IconName } from "@blueprint/icons"`,
             "",
             // component
             "const App = () => {",
@@ -311,9 +311,9 @@ const App: Component = () => {
             .concat(boolProps);
           const codeLines = [
             // import
-            `import { Callout } from "@blueprint/components";`,
-            `import { Intent } from "@blueprint/core";`,
-            `import { IconName } from "@blueprint/icons";`,
+            `import { Callout } from "@blueprint/components"`,
+            `import { Intent } from "@blueprint/core"`,
+            `import { IconName } from "@blueprint/icons"`,
             "",
             // component
             "const App = () => {",
