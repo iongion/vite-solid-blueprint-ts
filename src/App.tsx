@@ -159,6 +159,10 @@ const layoutMap = {
   [Layout.HORIZONTAL]: "Layout.HORIZONTAL",
 };
 
+const toCompPropsList = (propsList: any[]) => {
+  return propsList.length ? ` ${propsList.join(" ")}` : "";
+};
+
 const App: Component = () => {
   const { t } = useI18n();
   const [count, setCount] = createSignal(0);
@@ -330,7 +334,7 @@ const App: Component = () => {
             // component
             "const App = () => {",
             `  return (`,
-            `    <ButtonGroup ${componentPropsList.join(" ")}>`,
+            `    <ButtonGroup${toCompPropsList(componentPropsList)}>`,
             `       <Button intent={Intent.DANGER} icon={IconName.DATABASE} text="Danger" />`,
             `       <Button intent={Intent.SUCCESS} icon={IconName.FUNCTION} text="Success" />`,
             `       <Button intent={Intent.PRIMARY} icon={IconName.REFRESH} text="Primary" />`,
@@ -379,7 +383,7 @@ const App: Component = () => {
             // component
             "const App = () => {",
             `  return (`,
-            `    <Callout ${componentPropsList.join(" ")}>`,
+            `    <Callout${toCompPropsList(componentPropsList)}>`,
             `    Long-form information about the important content.`,
             `    This text is styled as <br />`,
             `    <a href="#">Running text</a>, so it may contain`,
@@ -420,7 +424,7 @@ const App: Component = () => {
             // component
             "const App = () => {",
             `  return (`,
-            `    <Card ${componentPropsList.join(" ")}>`,
+            `    <Card${toCompPropsList(componentPropsList)}>`,
             `      We build products that make people better at their most important work.`,
             `    </Card>`,
             `  )`,
@@ -456,7 +460,7 @@ const App: Component = () => {
             // component
             "const App = () => {",
             `  return (`,
-            `    <Code ${componentPropsList.join(" ")}>`,
+            `    <Code${toCompPropsList(componentPropsList)}>`,
             `    ${codeLines.join("\n    ")}`,
             `    </Code>`,
             `  )`,
@@ -492,7 +496,7 @@ const App: Component = () => {
             // component
             "const App = () => {",
             `  return (`,
-            `    <CodeBlock ${componentPropsList.join(" ")}>`,
+            `    <CodeBlock${toCompPropsList(componentPropsList)}>`,
             `    ${codeLines.join("\n    ")}`,
             `    </CodeBlock>`,
             `  )`,
@@ -543,7 +547,7 @@ const App: Component = () => {
             // component
             "const App = () => {",
             `  return (`,
-            `    <Collapse ${componentPropsList.join(" ")}>`,
+            `    <Collapse${toCompPropsList(componentPropsList)}>`,
             `      <Card>`,
             `        <CodeBlock>`,
             `          ${codeLines.join("\n          ")}`,
@@ -569,7 +573,7 @@ const App: Component = () => {
           const componentProps = {
             // converted to code attributes
             class: props.class ? `"${props.class}"` : undefined,
-            tagName: props.tagName ? `"${props.tagName}"` : undefined,
+            tagName: props.tagName && props.tagName !== "div" ? `"${props.tagName}"` : undefined,
             layout: layoutMap[props.layout || Layout.VERTICAL],
           };
           const componentPropsList = Object.keys(componentProps)
@@ -585,7 +589,7 @@ const App: Component = () => {
             "",
             // component
             "const App = () => {",
-            `  return <Divider ${componentPropsList.join(" ")} />`,
+            `  return <Divider${toCompPropsList(componentPropsList)} />`,
             "}",
           ];
           const html = (window as any).Prism.highlight(source.join("\n"), (window as any).Prism.languages.typescript, "typescript");
@@ -645,24 +649,24 @@ const App: Component = () => {
             "const App = () => {",
             `  return (`,
             `    <div>`,
-            `      <H1 ${componentPropsList.join(" ")}>H1 example</H1>`,
-            `      <H2 ${componentPropsList.join(" ")}>H2 example</H2>`,
-            `      <H3 ${componentPropsList.join(" ")}>H3 example</H3>`,
-            `      <H4 ${componentPropsList.join(" ")}>H4 example</H4>`,
-            `      <H5 ${componentPropsList.join(" ")}>H5 example</H5>`,
-            `      <H6 ${componentPropsList.join(" ")}>H6 example</H6>`,
-            `      <Blockquote ${componentPropsList.join(" ")}>Blockquote example with a long text</Blockquote>`,
-            `      <Label ${componentPropsList.join(" ")} for="spanLabelTarget">`,
+            `      <H1${toCompPropsList(componentPropsList)}>H1 example</H1>`,
+            `      <H2${toCompPropsList(componentPropsList)}>H2 example</H2>`,
+            `      <H3${toCompPropsList(componentPropsList)}>H3 example</H3>`,
+            `      <H4${toCompPropsList(componentPropsList)}>H4 example</H4>`,
+            `      <H5${toCompPropsList(componentPropsList)}>H5 example</H5>`,
+            `      <H6${toCompPropsList(componentPropsList)}>H6 example</H6>`,
+            `      <Blockquote${toCompPropsList(componentPropsList)}>Blockquote example with a long text</Blockquote>`,
+            `      <Label${toCompPropsList(componentPropsList)} for="spanLabelTarget">`,
             `        <span>Label example with a long text</span> &nbsp;`,
             `        <input type="text" id="spanLabelTarget" />`,
             `      </Label>`,
-            `      <UL ${componentPropsList.join(" ")}>`,
+            `      <UL${toCompPropsList(componentPropsList)}>`,
             `        <li>Item 1</li>`,
             `        <li>Item 2</li>`,
             `        <li>Item 3</li>`,
             `        <li>Item 4</li>`,
             `      </UL>`,
-            `      <OL ${componentPropsList.join(" ")}>`,
+            `      <OL${toCompPropsList(componentPropsList)}>`,
             `        <li>Item 1</li>`,
             `        <li>Item 2</li>`,
             `        <li>Item 3</li>`,
@@ -712,7 +716,7 @@ const App: Component = () => {
             // component
             "const App = () => {",
             `  return (`,
-            `    <HTMLSelect ${componentPropsList.join(" ")}>`,
+            `    <HTMLSelect${toCompPropsList(componentPropsList)}>`,
             `      <option value="option.value.1">Option label 1</option>`,
             `      <option value="option.value.2">Option label 2</option>`,
             `      <option value="option.value.3">Option label 3</option>`,
@@ -759,6 +763,57 @@ const App: Component = () => {
             </HTMLTable>
           );
         }}
+        code={(props) => {
+          const boolProps = ["disabled", "bordered", "compact", "striped", "interactive"].filter((p) => !!props[p]);
+          const componentProps = {
+            // converted to code attributes
+            class: props.class ? `"${props.class}"` : undefined,
+          };
+          const componentPropsList = Object.keys(componentProps)
+            .filter((prop) => !!componentProps[prop])
+            .map((prop) => {
+              return `${prop}={${componentProps[prop]}}`;
+            })
+            .concat(boolProps);
+          const source = [
+            // import
+            `import { HTMLTable } from "@blueprint/components"`,
+            "",
+            // component
+            "const App = () => {",
+            `  return (`,
+            `    <HTMLTable${toCompPropsList(componentPropsList)}>`,
+            `      <thead>`,
+            `        <tr>`,
+            `          <th>Table header</th>`,
+            `        </tr>`,
+            `      </thead>`,
+            `      <tbody>`,
+            `        <tr>`,
+            `          <td>Table row 1</td>`,
+            `        </tr>`,
+            `        <tr>`,
+            `          <td>Table row 2</td>`,
+            `        </tr>`,
+            `        <tr>`,
+            `          <td>Table row 3</td>`,
+            `        </tr>`,
+            `        <tr>`,
+            `          <td>Table row 4</td>`,
+            `        </tr>`,
+            `      </tbody>`,
+            `      <tfoot>`,
+            `        <tr>`,
+            `          <td>Table footer</td>`,
+            `        </tr>`,
+            `      </tfoot>`,
+            `    </HTMLTable>`,
+            `  )`,
+            "}",
+          ];
+          const html = (window as any).Prism.highlight(source.join("\n"), (window as any).Prism.languages.typescript, "typescript");
+          return html;
+        }}
       />
 
       <Example<IconProps>
@@ -789,8 +844,7 @@ const App: Component = () => {
             // component
             "const App = () => {",
             `  return (`,
-            `    <Icon ${componentPropsList.join("\n     ")}`,
-            `    />`,
+            `    <Icon${toCompPropsList(componentPropsList)}/>`,
             `  )`,
             "}",
           ];
@@ -814,6 +868,41 @@ const App: Component = () => {
             </Menu>
           );
         }}
+        code={(props) => {
+          const boolProps = ["disabled", "large"].filter((p) => !!props[p]);
+          const componentProps = {
+            // converted to code attributes
+            class: props.class ? `"${props.class}"` : undefined,
+          };
+          const componentPropsList = Object.keys(componentProps)
+            .filter((prop) => !!componentProps[prop])
+            .map((prop) => {
+              return `${prop}={${componentProps[prop]}}`;
+            })
+            .concat(boolProps);
+          const source = [
+            // import
+            `import { Menu } from "@blueprint/components"`,
+            `import { Intent } from "@blueprint/core"`,
+            `import { IconName } from "@blueprint/icons"`,
+            "",
+            // component
+            "const App = () => {",
+            `  return (`,
+            `    <Menu${toCompPropsList(componentPropsList)}>`,
+            `      <Menu.Item icon={IconName.DATABASE} text="Database"} />`,
+            `      <Menu.Divider />`,
+            `      <Menu.Item icon={IconName.COG} text="Settings"} />`,
+            `      <Menu.Item icon={IconName.INFO_SIGN} text="Alert"} />`,
+            `      <Menu.Divider />`,
+            `      <Menu.Item rightIcon={IconName.CARET_RIGHT} text="Help &amp; support"} />`,
+            `    </Menu>`,
+            `  )`,
+            "}",
+          ];
+          const html = (window as any).Prism.highlight(source.join("\n"), (window as any).Prism.languages.typescript, "typescript");
+          return html;
+        }}
       />
 
       <Example<NavbarProps>
@@ -832,6 +921,43 @@ const App: Component = () => {
               </Navbar.Group>
             </Navbar>
           );
+        }}
+        code={(props) => {
+          const boolProps = ["disabled", "fixedToTop"].filter((p) => !!props[p]);
+          const componentProps = {
+            // converted to code attributes
+            class: props.class ? `"${props.class}"` : undefined,
+          };
+          const componentPropsList = Object.keys(componentProps)
+            .filter((prop) => !!componentProps[prop])
+            .map((prop) => {
+              return `${prop}={${componentProps[prop]}}`;
+            })
+            .concat(boolProps);
+          const source = [
+            // import
+            `import { Navbar } from "@blueprint/components"`,
+            `import { Alignment, Intent } from "@blueprint/core"`,
+            `import { IconName } from "@blueprint/icons"`,
+            "",
+            // component
+            "const App = () => {",
+            `  return (`,
+            `    <Navbar${toCompPropsList(componentPropsList)}>`,
+            `      <Navbar.Group align={Alignment.LEFT}>`,
+            `        <Navbar.Heading>Navbar heading</Navbar.Heading>`,
+            `      </Navbar.Group>`,
+            `      <Navbar.Group align={Alignment.RIGHT}>`,
+            `        <Button intent={Intent.PRIMARY} minimal icon={IconName.COG} text="Settings"} />`,
+            `        <Navbar.Divider />`,
+            `        <Button intent={Intent.SUCCESS} minimal icon={IconName.INFO_SIGN} text="Help"} />`,
+            `      </Navbar.Group>`,
+            `    </Navbar>`,
+            `  )`,
+            "}",
+          ];
+          const html = (window as any).Prism.highlight(source.join("\n"), (window as any).Prism.languages.typescript, "typescript");
+          return html;
         }}
       />
 
@@ -921,10 +1047,7 @@ const App: Component = () => {
             "",
             // component
             "const App = () => {",
-            `  return (`,
-            `    <ProgressBar ${componentPropsList.join("\n     ")}`,
-            `    />`,
-            `  )`,
+            `  return <ProgressBar${toCompPropsList(componentPropsList)}/>`,
             "}",
           ];
           const html = (window as any).Prism.highlight(codeLines.join("\n"), (window as any).Prism.languages.typescript, "typescript");
@@ -944,7 +1067,7 @@ const App: Component = () => {
             // converted to code attributes
             class: props.class ? `"${props.class}"` : undefined,
             intent: intentMap[props.intent || Intent.SUCCESS],
-            tagName: props.tagName ? `"${props.tagName}"` : undefined,
+            tagName: props.tagName && props.tagName !== "div" ? `"${props.tagName}"` : undefined,
             value: props.value ? `"${props.value}"` : undefined,
             size: props.size ? `"${props.size}"` : undefined,
           };
@@ -961,10 +1084,7 @@ const App: Component = () => {
             "",
             // component
             "const App = () => {",
-            `  return (`,
-            `    <Spinner ${componentPropsList.join("\n     ")}`,
-            `    />`,
-            `  )`,
+            `  return <Spinner${toCompPropsList(componentPropsList)}/>`,
             "}",
           ];
           const html = (window as any).Prism.highlight(codeLines.join("\n"), (window as any).Prism.languages.typescript, "typescript");
@@ -993,7 +1113,7 @@ const App: Component = () => {
             class: props.class ? `"${props.class}"` : undefined,
             label: props.label ? `"${props.label}"` : undefined,
             innerLabel: props.innerLabel ? `"${props.innerLabel}"` : undefined,
-            tagName: props.tagName ? `"${props.tagName}"` : undefined,
+            tagName: props.tagName && props.tagName !== "div" ? `"${props.tagName}"` : undefined,
             alignIndicator: alignmentMap[props.alignIndicator || Alignment.LEFT],
           };
           const componentPropsList = Object.keys(componentProps)
@@ -1048,6 +1168,40 @@ const App: Component = () => {
               </Text>
             </div>
           );
+        }}
+        code={(props) => {
+          const boolProps = ["disabled", "ellipsize"].filter((p) => !!props[p]);
+          const componentProps = {
+            // converted to code attributes
+            class: props.class ? `"${props.class}"` : undefined,
+            tagName: props.tagName && props.tagName !== "div" ? `"${props.tagName}"` : undefined,
+            title: props.title ? `"${props.title}"` : undefined,
+          };
+          const componentPropsList = Object.keys(componentProps)
+            .filter((prop) => !!componentProps[prop])
+            .map((prop) => {
+              return `${prop}={${componentProps[prop]}}`;
+            })
+            .concat(boolProps);
+          const source = [
+            // import
+            `import { Text } from "@blueprint/components"`,
+            `import { Intent } from "@blueprint/core"`,
+            "",
+            // component
+            "const App = () => {",
+            `  return (`,
+            `    <Text${toCompPropsList(componentPropsList)}>`,
+            `      You can change the text in the input below.`,
+            `      Hover to see full text. If the text is long enough,`,
+            `      then the content will overflow. This is done by `,
+            `      setting ellipsize to true.`,
+            `    </Text>`,
+            `  )`,
+            "}",
+          ];
+          const html = (window as any).Prism.highlight(source.join("\n"), (window as any).Prism.languages.typescript, "typescript");
+          return html;
         }}
       />
 
@@ -1145,7 +1299,7 @@ const App: Component = () => {
             // component
             "const App = () => {",
             `  return (`,
-            `    <Tabs ${componentPropsList.join(" ")}>`,
+            `    <Tabs${toCompPropsList(componentPropsList)}>`,
             `      <Tab id="TabsExampleTabID1" title="Title tab 1">`,
             `        <H4>Tab 1 header</H4>`,
             `        <p class={Classes.RUNNING_TEXT}>Tab 1 content</p>`,
