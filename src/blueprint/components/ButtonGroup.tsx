@@ -11,7 +11,7 @@ interface IButtonGroupProps extends Props {
   minimal?: boolean;
   large?: boolean;
   vertical?: boolean;
-  dataProvider?: () => ButtonProps[];
+  dataProvider?: ButtonProps[] | (() => ButtonProps[]);
 }
 
 export type ButtonGroupProps = IButtonGroupProps;
@@ -54,7 +54,12 @@ export const ButtonGroup: UIComponent<ButtonGroupProps> = (userProps: ButtonGrou
   );
   const createChildren = children(() => props.children);
   const createDataProvider = createMemo(() => {
-    return props.dataProvider ? props.dataProvider().map((buttonProps) => <Button {...buttonProps} />) : undefined;
+    if (Array.isArray(props.dataProvider)) {
+      return props.dataProvider.map((itemProps) => <Button {...itemProps} />);
+    } else if (typeof props.dataProvider === "function") {
+      return props.dataProvider().map((itemProps) => <Button {...itemProps} />);
+    }
+    return [];
   });
   return (
     <div

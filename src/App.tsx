@@ -308,7 +308,7 @@ const App: Component = () => {
             }}
           />
         </Tab>
-        <Tab id="ExampleButtonGroupDP" title={t("ButtonGroup with Data Provider")}>
+        <Tab id="ExampleButtonGroupDP" title={t("ButtonGroup with data provider")}>
           <Example<ButtonGroupProps>
             example="ButtonGroup"
             schema={ButtonGroupPropsSchema}
@@ -640,6 +640,51 @@ const App: Component = () => {
                 `      <option value="option.value.3">Option label 3</option>`,
                 `      <option value="option.value.4">Option label 4</option>`,
                 `    </HTMLSelect>`,
+                `  )`,
+                "}",
+              ];
+              return highlight(sourceLines);
+            }}
+          />
+        </Tab>
+        <Tab id="ExampleHTMLSelectDP" title={t("HTMLSelect with data provider")}>
+          <Example<HTMLSelectProps>
+            example="HTMLSelect"
+            schema={HTMLSelectPropsSchema}
+            render={(props) => {
+              return (
+                <HTMLSelect
+                  {...props}
+                  dataProvider={() => {
+                    return [
+                      { value: "option.value.1", children: t("Option label 1") },
+                      { value: "option.value.2", children: t("Option label 2") },
+                      { value: "option.value.3", children: t("Option label 3") },
+                      { value: "option.value.4", children: t("Option label 4") },
+                    ];
+                  }}
+                />
+              );
+            }}
+            code={(props, schema) => {
+              const sourceLines = [
+                // import
+                `import { HTMLSelect } from "@blueprint/components"`,
+                `import { IconName } from "@blueprint/icons"`,
+                "",
+                // component
+                "const App = () => {",
+                `  return (`,
+                `    <HTMLSelect${toCompPropsListFromSchema(props, schema)}`,
+                `      dataProvider={() => {`,
+                `        return [`,
+                `          { value: "option.value.1", label: "Option label 1" },`,
+                `          { value: "option.value.2", label: "Option label 2" },`,
+                `          { value: "option.value.3", label: "Option label 3" },`,
+                `          { value: "option.value.4", label: "Option label 4" },`,
+                `        ];`,
+                `      }}`,
+                `    />`,
                 `  )`,
                 "}",
               ];

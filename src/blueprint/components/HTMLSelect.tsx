@@ -17,6 +17,7 @@ interface IHTMLSelectProps extends Omit<JSX.SelectHTMLAttributes<HTMLSelectEleme
   iconProps?: IconProps;
   value?: string | number;
   options?: ReadonlyArray<string | number | OptionProps>;
+  dataProvider?: OptionProps[] | (() => OptionProps[]);
 }
 export type HTMLSelectProps = IHTMLSelectProps;
 export const HTMLSelectPropsSchemaDefaults: HTMLSelectProps = {
@@ -37,6 +38,7 @@ export const HTMLSelect: UIComponent<HTMLSelectProps> = (userProps: HTMLSelectPr
     "iconName",
     "iconProps",
     "options",
+    "dataProvider",
     "children",
     "class",
     "disabled",
@@ -78,6 +80,14 @@ export const HTMLSelect: UIComponent<HTMLSelectProps> = (userProps: HTMLSelectPr
     );
   });
   const createChildren = children(() => props.children);
+  const createDataProvider = createMemo(() => {
+    if (Array.isArray(props.dataProvider)) {
+      return props.dataProvider.map((itemProps) => <option {...itemProps} />);
+    } else if (typeof props.dataProvider === "function") {
+      return props.dataProvider().map((itemProps) => <option {...itemProps} />);
+    }
+    return [];
+  });
   return (
     <div
       // props
@@ -86,6 +96,7 @@ export const HTMLSelect: UIComponent<HTMLSelectProps> = (userProps: HTMLSelectPr
       <select disabled={props.disabled} value={props.value} multiple={props.multiple} {...htmlProps}>
         {createOptionChildren()}
         {createChildren()}
+        {createDataProvider()}
       </select>
       {createIcon()}
     </div>
