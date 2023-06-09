@@ -3,6 +3,7 @@ import { mergeProps, splitProps, children, createMemo } from "solid-js";
 
 import { DISPLAYNAME_PREFIX, Alignment, Classes, Props } from "@blueprint/core";
 import type { UIComponent } from "@blueprint/core";
+import { Button, ButtonProps } from "./Button";
 
 interface IButtonGroupProps extends Props {
   alignText?: Alignment;
@@ -10,6 +11,7 @@ interface IButtonGroupProps extends Props {
   minimal?: boolean;
   large?: boolean;
   vertical?: boolean;
+  dataProvider?: () => ButtonProps[];
 }
 
 export type ButtonGroupProps = IButtonGroupProps;
@@ -29,6 +31,7 @@ export const ButtonGroup: UIComponent<ButtonGroupProps> = (userProps: ButtonGrou
     "minimal",
     "large",
     "vertical",
+    "dataProvider",
     "children",
     "class",
     "disabled",
@@ -50,6 +53,9 @@ export const ButtonGroup: UIComponent<ButtonGroupProps> = (userProps: ButtonGrou
     )
   );
   const createChildren = children(() => props.children);
+  const createDataProvider = createMemo(() => {
+    return props.dataProvider ? props.dataProvider().map((buttonProps) => <Button {...buttonProps} />) : undefined;
+  });
   return (
     <div
       // props
@@ -57,6 +63,7 @@ export const ButtonGroup: UIComponent<ButtonGroupProps> = (userProps: ButtonGrou
       {...htmlProps}
     >
       {createChildren()}
+      {createDataProvider()}
     </div>
   );
 };

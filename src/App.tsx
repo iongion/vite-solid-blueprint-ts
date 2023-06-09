@@ -308,6 +308,54 @@ const App: Component = () => {
             }}
           />
         </Tab>
+        <Tab id="ExampleButtonGroupDP" title={t("ButtonGroup with Data Provider")}>
+          <Example<ButtonGroupProps>
+            example="ButtonGroup"
+            schema={ButtonGroupPropsSchema}
+            render={(props) => {
+              return (
+                <ButtonGroup
+                  {...props}
+                  dataProvider={() => {
+                    return [
+                      // items
+                      { intent: Intent.DANGER, icon: IconName.DATABASE, text: t("Danger") },
+                      { intent: Intent.SUCCESS, icon: IconName.FUNCTION, text: t("Success") },
+                      { intent: Intent.PRIMARY, icon: IconName.REFRESH, text: t("Primary") },
+                      { intent: Intent.NONE, icon: IconName.COG, text: t("None") },
+                    ];
+                  }}
+                />
+              );
+            }}
+            code={(props, schema) => {
+              const sourceLines = [
+                // import
+                `import { ButtonGroup, Button } from "@blueprint/components"`,
+                `import { Alignment, Intent } from "@blueprint/core"`,
+                `import { IconName } from "@blueprint/icons"`,
+                "",
+                // component
+                "const App = () => {",
+                `  return (`,
+                `    <ButtonGroup${toCompPropsListFromSchema(props, schema)}`,
+                `      dataProvider={() => {`,
+                `        return [`,
+                `          // items`,
+                `          { intent: Intent.DANGER, icon: IconName.DATABASE, text: "Danger" },`,
+                `          { intent: Intent.SUCCESS, icon: IconName.FUNCTION, text: "Success" },`,
+                `          { intent: Intent.PRIMARY, icon: IconName.REFRESH, text: "Primary" },`,
+                `          { intent: Intent.NONE, icon: IconName.COG, text: "None" },`,
+                `        ];`,
+                `      }}`,
+                `    >`,
+                `  )`,
+                "}",
+              ];
+              return highlight(sourceLines);
+            }}
+          />
+        </Tab>
         <Tab id="ExampleCallout" title={t("Callout")}>
           <Example<CalloutProps>
             example="Callout"

@@ -234,7 +234,7 @@ export const AnchorButtonPropsSchema: y.ObjectSchema<Partial<Omit<AnchorButtonPr
   .concat(ButtonPropsSchema)
   .concat(PropsSchema);
 
-export const ButtonGroupPropsSchema: y.ObjectSchema<Omit<ButtonGroupProps, "children">> = y
+export const ButtonGroupPropsSchema: y.ObjectSchema<Omit<ButtonGroupProps, "children" | "dataProvider">> = y
   .object({
     alignText: AlignmentSchema.default(Alignment.LEFT),
     fill: y.boolean().default(false),
