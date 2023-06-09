@@ -34,7 +34,9 @@ export const createConfig = ({ mode }) => {
     //   },
     // }),
     solidPlugin(),
-    solidSvg(),
+    solidSvg({
+      defaultAsComponent: true,
+    }),
     checker({
       typescript: true,
     }),
