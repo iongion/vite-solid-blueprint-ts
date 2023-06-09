@@ -6,6 +6,6 @@
 
 Sample integration of [Blueprint](https://blueprintjs.com/) with Solid & friends
 
-- [Demo on CodeSandbox](https://61ce0o-5173.csb.app/)
+- [Demo on CodeSandbox](https://zygm2n-5173.csb.app/)
 - [Edit on CodeSandbox ☐](https://codesandbox.io/p/github/iongion/vite-solid-blueprint-ts/main)
 - [Edit on StackBlitz ⚡️](https://stackblitz.com/edit/solidjs-templates-gfcotu)
