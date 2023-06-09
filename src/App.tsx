@@ -306,29 +306,7 @@ const App: Component = () => {
               ];
               return highlight(sourceLines);
             }}
-          />
-        </Tab>
-        <Tab id="ExampleButtonGroupDP" title={t("ButtonGroup with data provider")}>
-          <Example<ButtonGroupProps>
-            example="ButtonGroup"
-            schema={ButtonGroupPropsSchema}
-            render={(props) => {
-              return (
-                <ButtonGroup
-                  {...props}
-                  dataProvider={() => {
-                    return [
-                      // items
-                      { intent: Intent.DANGER, icon: IconName.DATABASE, text: t("Danger") },
-                      { intent: Intent.SUCCESS, icon: IconName.FUNCTION, text: t("Success") },
-                      { intent: Intent.PRIMARY, icon: IconName.REFRESH, text: t("Primary") },
-                      { intent: Intent.NONE, icon: IconName.COG, text: t("None") },
-                    ];
-                  }}
-                />
-              );
-            }}
-            code={(props, schema) => {
+            dataProviderCode={(props, schema) => {
               const sourceLines = [
                 // import
                 `import { ButtonGroup, Button } from "@blueprint/components"`,
@@ -645,28 +623,7 @@ const App: Component = () => {
               ];
               return highlight(sourceLines);
             }}
-          />
-        </Tab>
-        <Tab id="ExampleHTMLSelectDP" title={t("HTMLSelect with data provider")}>
-          <Example<HTMLSelectProps>
-            example="HTMLSelect"
-            schema={HTMLSelectPropsSchema}
-            render={(props) => {
-              return (
-                <HTMLSelect
-                  {...props}
-                  dataProvider={() => {
-                    return [
-                      { value: "option.value.1", children: t("Option label 1") },
-                      { value: "option.value.2", children: t("Option label 2") },
-                      { value: "option.value.3", children: t("Option label 3") },
-                      { value: "option.value.4", children: t("Option label 4") },
-                    ];
-                  }}
-                />
-              );
-            }}
-            code={(props, schema) => {
+            dataProviderCode={(props, schema) => {
               const sourceLines = [
                 // import
                 `import { HTMLSelect } from "@blueprint/components"`,

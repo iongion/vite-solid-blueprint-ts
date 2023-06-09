@@ -96,6 +96,15 @@
   margin: 0 !important;
   padding: 5px !important;
 }
+.ExampleComponentHeader {
+  position: relative;
+}
+.ExampleComponentDataProviderToggle {
+  position: absolute;
+  right: 5px;
+  top: 6px;
+  user-select: none;
+}
 
 /* theme */
 .ExampleComponent {

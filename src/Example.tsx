@@ -1,4 +1,4 @@
-import { createContext, useContext, createUniqueId, createMemo } from "solid-js";
+import { createContext, useContext, createUniqueId, createMemo, createSignal, Show } from "solid-js";
 import type { JSX } from "solid-js";
 import { createStore } from "solid-js/store";
 import { Key } from "@solid-primitives/keyed";
@@ -190,8 +190,10 @@ export interface ExampleProps<PropsSchema extends unknown = any> extends Props {
   schema?: y.ObjectSchema<any>;
   render?: (context: PropsSchema, setProperty: (name: string, val: any) => void) => JSX.Element;
   code?: (context: PropsSchema, schema?: y.ObjectSchema<any>) => JSX.Element;
+  dataProviderCode?: (context: PropsSchema, schema?: y.ObjectSchema<any>) => JSX.Element;
 }
 export function Example<T extends Props = any>(props: ExampleProps<T>) {
+  const [useDataProvider, setUseDataProvider] = createSignal(false);
   const [state, setState] = createStore(props.schema?.getDefault() || {});
   const context = createContext<T>();
   const onPropertyChange = (name: string, value: any) => {
@@ -203,7 +205,21 @@ export function Example<T extends Props = any>(props: ExampleProps<T>) {
       <div class="Example" data-example={props.example}>
         <div class="ExampleContent">
           <div class="ExampleComponent">
-            <h2 class="ExampleComponentTitle">{props.example || props.title}</h2>
+            <div class="ExampleComponentHeader">
+              <h2 class="ExampleComponentTitle">{props.example || props.title}</h2>
+              <Switch
+                class="ExampleComponentDataProviderToggle"
+                innerLabel="off"
+                innerLabelChecked="on"
+                disabled={props.dataProviderCode === undefined}
+                checked={useDataProvider()}
+                label="dataProvider"
+                title="This component accepts a function or an array of objects as data provider"
+                onChange={(e) => {
+                  setUseDataProvider(e.currentTarget.checked);
+                }}
+              />
+            </div>
             <div class="ExampleComponentPreview">
               {props.render && props.schema
                 ? (() => {
@@ -213,14 +229,27 @@ export function Example<T extends Props = any>(props: ExampleProps<T>) {
                   })()
                 : props.children}
             </div>
-            {props.code ? (
-              <div class="ExampleComponentCode">
+            <div class="ExampleComponentCode">
+              <Show when={useDataProvider()}>
                 {(() => {
                   const ctx = useContext(context);
-                  return ctx === undefined ? undefined : <pre class="language-typescript" innerHTML={props.code(ctx, props.schema) as string}></pre>;
+                  if (ctx === undefined) return;
+                  const renderer = props.dataProviderCode || props.code;
+                  if (renderer) {
+                    return <pre class="language-typescript" innerHTML={renderer(ctx, props.schema) as string}></pre>;
+                  }
                 })()}
-              </div>
-            ) : undefined}
+              </Show>
+              <Show when={!useDataProvider()}>
+                {(() => {
+                  const ctx = useContext(context);
+                  if (ctx === undefined) return;
+                  if (props.code) {
+                    return <pre class="language-typescript" innerHTML={props.code(ctx, props.schema) as string}></pre>;
+                  }
+                })()}
+              </Show>
+            </div>
           </div>
           {props.schema && context ? (
             <div class="ExampleComponentProperties">
