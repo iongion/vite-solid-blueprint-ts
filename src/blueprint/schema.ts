@@ -26,6 +26,84 @@ import {
 } from "@blueprint/components";
 import { IconsList, IconSize, IconProps } from "@blueprint/icons";
 
+//
+const AlignmentLabels = {
+  [Alignment.LEFT]: "Alignment.LEFT",
+  [Alignment.CENTER]: "Alignment.CENTER",
+  [Alignment.RIGHT]: "Alignment.RIGHT",
+};
+// const BoundaryLabels = {
+//   [Boundary.START]: "Boundary.START",
+//   [Boundary.END]: "Boundary.END",
+// };
+const ElevationLabels = {
+  [Elevation.ZERO]: "Elevation.ZERO",
+  [Elevation.ONE]: "Elevation.ONE",
+  [Elevation.TWO]: "Elevation.TWO",
+  [Elevation.THREE]: "Elevation.THREE",
+  [Elevation.FOUR]: "Elevation.FOUR",
+};
+const IntentLabels = {
+  [Intent.NONE]: "Intent.NONE",
+  [Intent.PRIMARY]: "Intent.PRIMARY",
+  [Intent.SUCCESS]: "Intent.SUCCESS",
+  [Intent.WARNING]: "Intent.WARNING",
+  [Intent.DANGER]: "Intent.DANGER",
+};
+const LayoutLabels = {
+  [Layout.HORIZONTAL]: "Layout.HORIZONTAL",
+  [Layout.VERTICAL]: "Layout.VERTICAL",
+};
+// const PositionLabels = {
+//   [Position.BOTTOM]: "Position.BOTTOM",
+//   [Position.BOTTOM_LEFT]: "Position.BOTTOM_LEFT",
+//   [Position.BOTTOM_RIGHT]: "Position.BOTTOM_RIGHT",
+//   [Position.LEFT]: "Position.LEFT",
+//   [Position.LEFT_BOTTOM]: "Position.LEFT_BOTTOM",
+//   [Position.LEFT_TOP]: "Position.LEFT_TOP",
+//   [Position.RIGHT]: "Position.RIGHT",
+//   [Position.RIGHT_BOTTOM]: "Position.RIGHT_BOTTOM",
+//   [Position.RIGHT_TOP]: "Position.RIGHT_TOP",
+//   [Position.TOP]: "Position.TOP",
+//   [Position.TOP_LEFT]: "Position.TOP_LEFT",
+//   [Position.TOP_RIGHT]: "Position.TOP_RIGHT",
+// };
+const IconSizeLabels = {
+  [IconSize.STANDARD]: "IconSize.STANDARD",
+  [IconSize.LARGE]: "IconSize.LARGE",
+  [IconSize.XL]: "IconSize.XL",
+  [IconSize.XXL]: "IconSize.XXL",
+};
+const IconLabels = {
+  [IconName.REFRESH]: "IconName.REFRESH",
+  [IconName.DUPLICATE]: "IconName.DUPLICATE",
+  [IconName.DATABASE]: "IconName.DATABASE",
+  [IconName.FUNCTION]: "IconName.FUNCTION",
+  [IconName.COG]: "IconName.COG",
+  [IconName.INFO_SIGN]: "IconName.INFO_SIGN",
+  [IconName.CARET_DOWN]: "IconName.CARET_DOWN",
+  [IconName.CARET_UP]: "IconName.CARET_UP",
+  [IconName.CARET_RIGHT]: "IconName.CARET_RIGHT",
+  [IconName.SEARCH]: "IconName.SEARCH",
+  [IconName.SHARE]: "IconName.SHARE",
+  [IconName.HAND_RIGHT]: "IconName.HAND_RIGHT",
+  [IconName.STACKBLITZ]: "IconName.STACKBLITZ",
+  [IconName.GITHUB]: "IconName.GITHUB",
+  [IconName.DOUBLE_CARET_VERTICAL]: "IconName.DOUBLE_CARET_VERTICAL",
+  [IconName.FLASH]: "IconName.FLASH",
+  [IconName.MOON]: "IconName.MOON",
+  [IconName.FILTER]: "IconName.FILTER",
+  [IconName.SMALL_CROSS]: "IconName.SMALL_CROSS",
+  [IconName.PLUS]: "IconName.PLUS",
+};
+const NonIdealStateIconSizeLabels = {
+  [NonIdealStateIconSize.STANDARD]: "NonIdealStateIconSize.STANDARD",
+  [NonIdealStateIconSize.SMALL]: "NonIdealStateIconSize.SMALL",
+  [NonIdealStateIconSize.EXTRA_SMALL]: "NonIdealStateIconSize.EXTRA_SMALL",
+};
+
+//
+
 export const PropsSchema: y.ObjectSchema<Omit<Props, "children">> = y.object({
   disabled: y.boolean().default(false),
   class: y.string().optional(),
@@ -33,13 +111,12 @@ export const PropsSchema: y.ObjectSchema<Omit<Props, "children">> = y.object({
 
 export const AlignmentSchema = y
   .string<Alignment>()
-  .oneOf([
-    // enum
-    Alignment.LEFT,
-    Alignment.CENTER,
-    Alignment.RIGHT,
-  ])
-  .optional();
+  .oneOf(Object.keys(AlignmentLabels) as unknown as Alignment[])
+  .optional()
+  .meta({
+    defaultValue: Alignment.LEFT,
+    labelsMap: AlignmentLabels,
+  });
 
 export const AlignmentPropsSchema = y.object({
   alignment: AlignmentSchema,
@@ -47,27 +124,24 @@ export const AlignmentPropsSchema = y.object({
 
 export const ElevationSchema = y
   .number<Elevation>()
-  .oneOf([
-    // enum
-    Elevation.ZERO,
-    Elevation.ONE,
-    Elevation.TWO,
-    Elevation.THREE,
-    Elevation.FOUR,
-  ])
-  .optional();
+  .oneOf(Object.keys(ElevationLabels) as unknown as Elevation[])
+  .optional()
+  .meta({
+    defaultValue: Elevation.ZERO,
+    labelsMap: ElevationLabels,
+  });
 export const ElevationPropsSchema = y.object({
   elevation: ElevationSchema,
 });
 
 export const LayoutSchema = y
   .string<Layout>()
-  .oneOf([
-    // enum
-    Layout.VERTICAL,
-    Layout.HORIZONTAL,
-  ])
-  .optional();
+  .oneOf(Object.keys(LayoutLabels) as unknown as Layout[])
+  .optional()
+  .meta({
+    defaultValue: Elevation.ZERO,
+    labelsMap: LayoutLabels,
+  });
 export const LayoutPropsSchema = y.object({
   layout: LayoutSchema,
 });
@@ -75,39 +149,41 @@ export const LayoutPropsSchema = y.object({
 const IconSchema = y
   .string<IconName>()
   .oneOf(IconsList as IconName[])
-  .defined();
+  .meta({
+    defaultIcon: IconName.ADD,
+    labelsMap: IconLabels,
+  });
 
-const IconSizeSchema = y.number<IconSize>().oneOf([
-  //
-  IconSize.STANDARD,
-  IconSize.LARGE,
-  IconSize.XL,
-  IconSize.XXL,
-]);
+const IconSizeSchema = y
+  .number<IconSize>()
+  .oneOf(Object.keys(IconSizeLabels) as unknown as IconSize[])
+  .meta({
+    defaultValue: IconSize.STANDARD,
+    labelsMap: IconSizeLabels,
+  });
 
-const NonIdealStateIconSizeSchema = y.number<NonIdealStateIconSize>().oneOf([
-  //
-  NonIdealStateIconSize.STANDARD,
-  NonIdealStateIconSize.SMALL,
-  NonIdealStateIconSize.EXTRA_SMALL,
-]);
+const NonIdealStateIconSizeSchema = y
+  .number<NonIdealStateIconSize>()
+  .oneOf(Object.keys(NonIdealStateIconSizeLabels) as unknown as NonIdealStateIconSize[])
+  .meta({
+    defaultValue: NonIdealStateIconSize.STANDARD,
+    labelsMap: NonIdealStateIconSizeLabels,
+  });
 
 const IntentSchema = y
   .string<Intent>()
-  .oneOf([
-    // enum
-    Intent.NONE,
-    Intent.PRIMARY,
-    Intent.SUCCESS,
-    Intent.DANGER,
-    Intent.WARNING,
-  ])
-  .optional();
+  .oneOf(Object.keys(IntentLabels) as unknown as Intent[])
+  .optional()
+  .meta({
+    defaultValue: Intent.NONE,
+    labelsMap: IntentLabels,
+  });
 export const IntentPropsSchema = y.object({
   intent: IntentSchema,
 });
 
 const InteractiveSchema = y.boolean().default(false);
+
 export const InteractivePropsSchema = y.object({
   interactive: InteractiveSchema,
 });
@@ -125,8 +201,8 @@ export const IconPropsSchema: y.ObjectSchema<Omit<IconProps, "children">> = y
 // Components
 export const ButtonPropsSchema: y.ObjectSchema<Omit<ButtonProps, "children" | "onClick" | "onFocus">> = y
   .object({
-    icon: IconSchema,
-    rightIcon: IconSchema,
+    icon: IconSchema.meta({ defaultValue: IconName.HAND_RIGHT }),
+    rightIcon: IconSchema.meta({ defaultValue: IconName.PLUS }),
     alignText: AlignmentSchema.default(Alignment.LEFT),
     active: y.boolean().default(false),
     fill: y.boolean().default(false),

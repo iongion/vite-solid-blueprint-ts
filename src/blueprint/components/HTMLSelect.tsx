@@ -71,8 +71,8 @@ export const HTMLSelect: UIComponent<HTMLSelectProps> = (userProps: HTMLSelectPr
       >
         {(optionAccessor) => {
           const option = optionAccessor();
-          const props: OptionProps = typeof option === "object" ? option : { value: option };
-          return <option {...props} children={props.label || props.value} />;
+          const optionProps: OptionProps = typeof option === "object" ? option : { value: option };
+          return <option {...optionProps} selected={optionProps.value === props.value} />;
         }}
       </Key>
     );

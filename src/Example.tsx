@@ -6,84 +6,10 @@ import { destructure } from "@solid-primitives/destructure";
 import * as y from "yup";
 import { useI18n } from "solid-i18n";
 
-import { Alignment, Boundary, Elevation, Intent, Layout, Position, Props } from "@blueprint/core";
-import { HTMLSelect, HTMLTable, Label, NonIdealStateIconSize, Switch, InputGroup } from "@blueprint/components";
-import { IconSize } from "@blueprint/icons";
+import { Props } from "@blueprint/core";
+import { HTMLSelect, HTMLTable, Label, Switch, InputGroup } from "@blueprint/components";
 
 import "./Example.css";
-
-const AlignmentLabels = {
-  [Alignment.LEFT]: "LEFT",
-  [Alignment.CENTER]: "CENTER",
-  [Alignment.RIGHT]: "RIGHT",
-};
-const BoundaryLabels = {
-  [Boundary.START]: "START",
-  [Boundary.END]: "END",
-};
-const ElevationLabels = {
-  [Elevation.ZERO]: "ZERO",
-  [Elevation.ONE]: "ONE",
-  [Elevation.TWO]: "TWO",
-  [Elevation.THREE]: "THREE",
-  [Elevation.FOUR]: "FOUR",
-};
-const IntentLabels = {
-  [Intent.NONE]: "NONE",
-  [Intent.PRIMARY]: "PRIMARY",
-  [Intent.SUCCESS]: "SUCCESS",
-  [Intent.WARNING]: "WARNING",
-  [Intent.DANGER]: "DANGER",
-};
-const LayoutLabels = {
-  [Layout.HORIZONTAL]: "HORIZONTAL",
-  [Layout.VERTICAL]: "VERTICAL",
-};
-const PositionLabels = {
-  [Position.BOTTOM]: "BOTTOM",
-  [Position.BOTTOM_LEFT]: "BOTTOM_LEFT",
-  [Position.BOTTOM_RIGHT]: "BOTTOM_RIGHT",
-  [Position.LEFT]: "LEFT",
-  [Position.LEFT_BOTTOM]: "LEFT_BOTTOM",
-  [Position.LEFT_TOP]: "LEFT_TOP",
-  [Position.RIGHT]: "RIGHT",
-  [Position.RIGHT_BOTTOM]: "RIGHT_BOTTOM",
-  [Position.RIGHT_TOP]: "RIGHT_TOP",
-  [Position.TOP]: "TOP",
-  [Position.TOP_LEFT]: "TOP_LEFT",
-  [Position.TOP_RIGHT]: "TOP_RIGHT",
-};
-const IconSizeLabels = {
-  [IconSize.STANDARD]: "STANDARD",
-  [IconSize.LARGE]: "LARGE",
-  [IconSize.XL]: "XL",
-  [IconSize.XXL]: "XXL",
-};
-const NonIdealStateIconSizeLabels = {
-  [NonIdealStateIconSize.STANDARD]: "STANDARD",
-  [NonIdealStateIconSize.SMALL]: "SMALL",
-  [NonIdealStateIconSize.EXTRA_SMALL]: "EXTRA_SMALL",
-};
-
-const PropsLabels = {
-  align: AlignmentLabels,
-  alignText: AlignmentLabels,
-  alignIndicator: AlignmentLabels,
-  boundary: BoundaryLabels,
-  intent: IntentLabels,
-  elevation: ElevationLabels,
-  layout: LayoutLabels,
-  position: PositionLabels,
-  iconSize: IconSizeLabels,
-};
-const ExampleComponentPropsLabels = {
-  NonIdealState: {
-    iconSize: NonIdealStateIconSizeLabels,
-  },
-  Icon: {
-    size: IconSizeLabels,
-  },
-};
 
 function ExampleSchemaForm<T>({
   example,
@@ -100,7 +26,7 @@ function ExampleSchemaForm<T>({
   const guid = createUniqueId();
   // console.debug("context", { schema, props, setProperty });
   return (
-    <form class="ExampleSchemaForm">
+    <form class="ExampleSchemaForm" data-example={example}>
       <HTMLTable striped interactive>
         <thead>
           <tr>
@@ -113,9 +39,14 @@ function ExampleSchemaForm<T>({
               const name = fieldName();
               const field = schema.fields[name];
               const desc = field.describe();
+              // console.debug(name, (desc as any).meta);
               const properties = destructure(props || { [name]: (desc as any).default });
               const isFlag = desc.type === "boolean";
-              const value = createMemo(() => properties[name]() as any);
+              const value = createMemo(() => {
+                const decoded = properties[name]() as any;
+                const defaultValue = (desc as any).meta?.defaultValue;
+                return decoded || defaultValue;
+              });
               const checked = createMemo(() => properties[name]() as boolean);
               let widget: JSX.Element | null;
               const items: string[] = (desc as any).oneOf || [];
@@ -124,7 +55,7 @@ function ExampleSchemaForm<T>({
                 name: `${name}-${guid}`,
               };
               const getValueLabel = (it: string) => {
-                const label = ExampleComponentPropsLabels[example]?.[name]?.[it as any] || PropsLabels[name]?.[it as any] || it;
+                const label = it as any;
                 return label;
               };
               switch (desc.type) {
@@ -173,13 +104,18 @@ function ExampleSchemaForm<T>({
                       <HTMLSelect
                         fill
                         {...identityProps}
+                        data-value={value()}
                         value={value()}
                         onChange={(e) => {
                           onPropertyChange(name, Number(e.currentTarget.value));
                         }}
                       >
                         {items.map((it) => {
-                          return <option value={it}>{getValueLabel(it)}</option>;
+                          return (
+                            <option selected={it === value()} value={it}>
+                              {getValueLabel(it)}
+                            </option>
+                          );
                         })}
                       </HTMLSelect>
                     );
@@ -191,12 +127,17 @@ function ExampleSchemaForm<T>({
                         fill
                         {...identityProps}
                         value={value()}
+                        data-value={value()}
                         onChange={(e) => {
                           onPropertyChange(name, e.currentTarget.value);
                         }}
                       >
                         {items.map((it) => {
-                          return <option value={it}>{getValueLabel(it)}</option>;
+                          return (
+                            <option selected={it === value()} value={it}>
+                              {getValueLabel(it)}
+                            </option>
+                          );
                         })}
                       </HTMLSelect>
                     );
@@ -248,7 +189,7 @@ export interface ExampleProps<PropsSchema extends unknown = any> extends Props {
   example: string;
   schema?: y.ObjectSchema<any>;
   render?: (context: PropsSchema, setProperty: (name: string, val: any) => void) => JSX.Element;
-  code?: (context: PropsSchema) => JSX.Element;
+  code?: (context: PropsSchema, schema?: y.ObjectSchema<any>) => JSX.Element;
 }
 export function Example<T extends Props = any>(props: ExampleProps<T>) {
   const [state, setState] = createStore(props.schema?.getDefault() || {});
@@ -276,7 +217,7 @@ export function Example<T extends Props = any>(props: ExampleProps<T>) {
               <div class="ExampleComponentCode">
                 {(() => {
                   const ctx = useContext(context);
-                  return ctx === undefined ? undefined : <pre class="language-typescript" innerHTML={props.code(ctx) as string}></pre>;
+                  return ctx === undefined ? undefined : <pre class="language-typescript" innerHTML={props.code(ctx, props.schema) as string}></pre>;
                 })()}
               </div>
             ) : undefined}
