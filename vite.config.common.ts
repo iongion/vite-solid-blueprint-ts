@@ -1,11 +1,10 @@
 import dotenv from "dotenv";
-import tsconfigPaths from "vite-tsconfig-paths";
-import { ViteEjsPlugin } from "vite-plugin-ejs";
-import { checker } from "vite-plugin-checker";
-import solidPlugin from "vite-plugin-solid";
-import devtools from "solid-devtools/vite";
-import solidSvg from "vite-plugin-solid-svg";
 import { fileURLToPath } from "url";
+import { checker } from "vite-plugin-checker";
+import { ViteEjsPlugin } from "vite-plugin-ejs";
+import solidPlugin from "vite-plugin-solid";
+import solidSvg from "vite-plugin-solid-svg";
+import tsconfigPaths from "vite-tsconfig-paths";
 
 // eslint-disable-next-line
 import project from "./package.json";
@@ -70,7 +69,6 @@ export const createConfig = ({ mode }) => {
         },
         input: {
           appMain: fileURLToPath(new URL("./index.html", import.meta.url)),
-          appMaintenance: fileURLToPath(new URL("./maintenance.html", import.meta.url)),
         },
       },
     },
