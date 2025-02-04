@@ -1,9 +1,13 @@
 {
   "recommendations": [
-    "dbaeumer.vscode-eslint",
-    "esbenp.prettier-vscode",
-    "csstools.postcss",
+    "biomejs.biome",
     "editorconfig.editorconfig",
-    "j69.ejs-beautify"
+    "j69.ejs-beautify",
+    "streetsidesoftware.code-spell-checker",
+    "VisualStudioExptTeam.vscodeintellicode",
+    "davidanson.vscode-markdownlint",
+    "timonwong.shellcheck",
+    "redhat.vscode-yaml",
+    "wix.vscode-import-cost"
   ]
 }
