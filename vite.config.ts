@@ -1,6 +1,6 @@
-import { defineConfig } from 'vite';
+import { defineConfig } from "vite";
 
-import { createConfig } from './vite.config.common';
+import { createConfig } from "./vite.config.common";
 
 /** @type {import('vite').UserConfig} */
 // eslint-disable-next-line import/no-unused-modules
@@ -12,5 +12,8 @@ export default ({ mode }) => {
     publicDir,
     build,
     resolve,
+    server: {
+      allowedHosts: ["87pfxz-5173.csb.app"],
+    },
   });
 };
