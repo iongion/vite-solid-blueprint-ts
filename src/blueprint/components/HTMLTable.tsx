@@ -33,7 +33,7 @@ export const HTMLTable: UIComponent<HTMLTableProps> = (userProps: HTMLTableProps
       Classes.HTML_TABLE,
       {
         // from props
-        [Classes.HTML_TABLE_CONDENSED]: props.compact,
+        [Classes.COMPACT]: props.compact,
         [Classes.HTML_TABLE_BORDERED]: !!props.bordered,
         [Classes.HTML_TABLE_STRIPED]: !!props.striped,
         [Classes.INTERACTIVE]: !!props.interactive,

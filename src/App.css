@@ -54,17 +54,17 @@ ul.Tools li a .logo.vanilla:hover {
 body {
   background-color: #f6f7f9;
 }
-body.bp4-dark {
+body.bp5-dark {
   background-color: #172742;
 }
-body.bp4-dark .AppHeaderTitle {
+body.bp5-dark .AppHeaderTitle {
   color: #fff;
 }
-body.bp4-dark .read-the-docs span:first-child {
+body.bp5-dark .read-the-docs span:first-child {
   color: #aaa;
 }
 
-.ComponentNavigatorTabs .bp4-tab-panel {
+.ComponentNavigatorTabs .bp5-tab-panel {
   width: 100%;
   height: 100%;
 }
